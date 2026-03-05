@@ -1,0 +1,145 @@
+🔥 Let's go ! Je te fais une version avec 2 sections : Accueil (fil d'actualité) et Chat 🐱.
+
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>ARAKFORUM - Politique Anonyme</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #1a1a1a;
+      color: #fff;
+      margin: 0;
+      padding: 0;
+    }
+    .container {
+      max-width: 800px;
+      margin: auto;
+      padding: 20px;
+    }
+    .nav {
+      display: flex;
+      gap: 20px;
+      margin-bottom: 20px;
+    }
+    .nav a {
+      color: #4CAF50;
+      text-decoration: none;
+      cursor: pointer;
+    }
+    .nav a.active {
+      font-weight: bold;
+      border-bottom: 2px solid #4CAF50;
+    }
+    .section {
+      display: none;
+    }
+    .section.active {
+      display: block;
+    }
+    .post {
+      background: #333;
+      padding: 15px;
+      margin: 10px 0;
+      border-radius: 5px;
+    }
+    .pseudo {
+      color: #4CAF50;
+      font-weight: bold;
+    }
+    input, textarea {
+      width: 100%;
+      padding: 10px;
+      margin: 5px 0;
+      background: #444;
+      border: none;
+      color: #fff;
+    }
+    button {
+      padding: 10px 20px;
+      background: #4CAF50;
+      border: none;
+      color: #fff;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>ARAKFORUM - Politique</h1>
+    <p>Discutez anonymement de politique (Afrique & Monde)</p>
+
+    <!-- Navigation -->
+    <div class="nav">
+      <a onclick="showSection('accueil')">Accueil</a>
+      <a onclick="showSection('chat')">Chat 🐱</a>
+    </div>
+
+    <!-- Sections -->
+    <div id="accueil" class="section active">
+      <h2>Fil d'actualité</h2>
+      <textarea id="newPostAccueil" placeholder="Écris un post..."></textarea>
+      <button onclick="addPost('accueil')">Poster</button>
+      <div id="postsAccueil"></div>
+    </div>
+
+    <div id="chat" class="section">
+      <h2>Chat 🐱</h2>
+      <input id="newMsgChat" placeholder="Écris un message...">
+      <button onclick="addPost('chat')">Envoyer</button>
+      <div id="postsChat"></div>
+    </div>
+  </div>
+
+  <script>
+    // Génère un pseudo aléatoire
+    function getPseudo() {
+      const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+      let pseudo = '';
+      for (let i = 0; i < 8; i++) {
+        pseudo += chars.charAt(Math.floor(Math.random() * chars.length));
+      }
+      return pseudo;
+    }
+
+    // Affiche une section
+    function showSection(id) {
+      document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+      document.querySelectorAll('.nav a').forEach(a => a.classList.remove('active'));
+      document.getElementById(id).classList.add('active');
+      document.querySelector(`.nav a[onclick*="${id}"]`).classList.add('active');
+    }
+
+    // Ajoute un post
+    function addPost(type) {
+      const input = type === 'accueil' ? 'newPostAccueil' : 'newMsgChat';
+      const postsDiv = type === 'accueil' ? 'postsAccueil' : 'postsChat';
+      const text = document.getElementById(input).value;
+      if (text.trim() === '') return;
+      const pseudo = getPseudo();
+      const post = `
+        <div class="post">
+          <span class="pseudo">${pseudo}</span>: ${text}
+        </div>
+      `;
+      document.getElementById(postsDiv).innerHTML += post;
+      document.getElementById(input).value = '';
+    }
+  </script>
+</body>
+</html>
+
+
+Comment ça marche ?
+- Accueil : fil d'actualité (posts).
+- Chat 🐱 : messages courts.
+- Les pseudos sont aléatoires.
+- Pas de sauvegarde (reset si rafraîchissement).
+
+Tu veux :
+- Sauvegarder les posts (localStorage) ?
+- Ajouter des réponses aux posts ?
+- Un truc pour voir les nouveaux messages en temps réel ?
+
+Prêt à tester sur ZeroNet ! 😊
