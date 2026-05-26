@@ -77,6 +77,8 @@
                 <a href="#/accueil" class="nav-link hover:text-purple-400 transition-colors">Accueil</a>
                 <a href="#/categories" class="nav-link hover:text-purple-400 transition-colors">Catégories</a>
                 <a href="#/formations" class="nav-link hover:text-purple-400 transition-colors">Formations</a>
+                <a href="#/services" class="nav-link hover:text-purple-400 transition-colors">Services</a>
+                <a href="#/formateur" class="nav-link hover:text-purple-400 transition-colors">Devenir Formateur</a>
                 <a href="#/contact" class="nav-link hover:text-purple-400 transition-colors">Contact</a>
             </div>
             <button class="hidden md:block bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-500 hover:to-indigo-500 text-white px-5 py-2 rounded-full text-sm font-semibold shadow-lg shadow-purple-500/20 transition-all duration-300 transform hover:-translate-y-0.5">
@@ -88,6 +90,8 @@
             <a href="#/accueil" class="nav-link hover:text-purple-400 transition-colors pt-4">Accueil</a>
             <a href="#/categories" class="nav-link hover:text-purple-400 transition-colors">Catégories</a>
             <a href="#/formations" class="nav-link hover:text-purple-400 transition-colors">Formations</a>
+            <a href="#/services" class="nav-link hover:text-purple-400 transition-colors">Services</a>
+            <a href="#/formateur" class="nav-link hover:text-purple-400 transition-colors">Devenir Formateur</a>
             <a href="#/contact" class="nav-link hover:text-purple-400 transition-colors">Contact</a>
         </div>
     </nav>
@@ -176,6 +180,31 @@
                     Maîtrisez les outils d'IA générative (ChatGPT, Claude, Gemini) pour coder, designer et automatiser votre business.
                 </p>
                 <span class="text-xs font-semibold text-purple-500">25 Tutoriels &bull; 12 Formations</span>
+            </div>
+        </div>
+    </section>
+
+    <section id="services" class="page-section pt-32 pb-20 px-6 max-w-7xl mx-auto">
+        <div class="text-center mb-14">
+            <h2 class="text-3xl font-bold mb-4">Nos Services Premium</h2>
+            <p class="text-gray-400">Des solutions sur mesure pour accélérer votre croissance technologique et business.</p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <div class="glass-card p-8 rounded-2xl border border-white/5 hover:border-purple-500/30 transition-all">
+                <div class="text-3xl text-purple-400 mb-6"><i class="fas fa-brain"></i></div>
+                <h3 class="text-xl font-bold mb-4">Consultation IA</h3>
+                <p class="text-gray-400 text-sm leading-relaxed">Intégrez l'intelligence artificielle dans vos processus métier pour gagner en productivité et en efficacité.</p>
+            </div>
+            <div class="glass-card p-8 rounded-2xl border border-white/5 hover:border-blue-500/30 transition-all">
+                <div class="text-3xl text-blue-400 mb-6"><i class="fas fa-code-branch"></i></div>
+                <h3 class="text-xl font-bold mb-4">Développement Web & Mobile</h3>
+                <p class="text-gray-400 text-sm leading-relaxed">Conception d'applications robustes, scalables et centrées sur l'utilisateur avec les dernières technologies.</p>
+            </div>
+            <div class="glass-card p-8 rounded-2xl border border-white/5 hover:border-green-500/30 transition-all">
+                <div class="text-3xl text-green-400 mb-6"><i class="fas fa-bullhorn"></i></div>
+                <h3 class="text-xl font-bold mb-4">Stratégie Digitale</h3>
+                <p class="text-gray-400 text-sm leading-relaxed">Accompagnement dans votre visibilité en ligne, acquisition de leads et monétisation de vos réseaux sociaux.</p>
             </div>
         </div>
     </section>
@@ -538,6 +567,71 @@
         </div>
     </section>
 
+    <section id="formateur" class="page-section pt-32 pb-20 px-6 max-w-4xl mx-auto">
+        <div class="glass-card rounded-3xl p-8 md:p-12 border border-white/10">
+            <div class="text-center mb-10">
+                <h2 class="text-3xl font-bold mb-4">Rejoignez l'Empire en tant que Formateur</h2>
+                <p class="text-gray-400">Partagez votre expertise et monétisez vos connaissances avec notre communauté mondiale.</p>
+            </div>
+
+            <form id="formateur-form" class="space-y-6">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div>
+                        <label class="block text-xs font-semibold text-purple-400 uppercase mb-2">Nom</label>
+                        <input type="text" name="nom" required class="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 focus:outline-none focus:border-purple-500 transition-colors text-sm">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-semibold text-purple-400 uppercase mb-2">Prénom</label>
+                        <input type="text" name="prenom" required class="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 focus:outline-none focus:border-purple-500 transition-colors text-sm">
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div>
+                        <label class="block text-xs font-semibold text-purple-400 uppercase mb-2">Numéro WhatsApp</label>
+                        <input type="tel" name="whatsapp" required placeholder="+229..." class="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 focus:outline-none focus:border-purple-500 transition-colors text-sm">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-semibold text-purple-400 uppercase mb-2">Email</label>
+                        <input type="email" name="email" required class="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 focus:outline-none focus:border-purple-500 transition-colors text-sm">
+                    </div>
+                </div>
+
+                <div>
+                    <label class="block text-xs font-semibold text-purple-400 uppercase mb-2">Domaine d'activité</label>
+                    <input type="text" name="domaine" required placeholder="Ex: Développement Web, IA, Trading..." class="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 focus:outline-none focus:border-purple-500 transition-colors text-sm">
+                </div>
+
+                <div>
+                    <label class="block text-xs font-semibold text-purple-400 uppercase mb-2">Niveau d'expertise</label>
+                    <div class="grid grid-cols-3 gap-4">
+                        <label class="cursor-pointer">
+                            <input type="radio" name="niveau" value="Débutant" checked class="hidden peer">
+                            <div class="bg-white/5 border border-white/10 rounded-xl py-3 text-center text-sm peer-checked:bg-purple-600 peer-checked:border-purple-500 transition-all hover:bg-white/10">Débutant</div>
+                        </label>
+                        <label class="cursor-pointer">
+                            <input type="radio" name="niveau" value="Moyen" class="hidden peer">
+                            <div class="bg-white/5 border border-white/10 rounded-xl py-3 text-center text-sm peer-checked:bg-purple-600 peer-checked:border-purple-500 transition-all hover:bg-white/10">Moyen</div>
+                        </label>
+                        <label class="cursor-pointer">
+                            <input type="radio" name="niveau" value="Professionnel" class="hidden peer">
+                            <div class="bg-white/5 border border-white/10 rounded-xl py-3 text-center text-sm peer-checked:bg-purple-600 peer-checked:border-purple-500 transition-all hover:bg-white/10">Professionnel</div>
+                        </label>
+                    </div>
+                </div>
+
+                <div>
+                    <label class="block text-xs font-semibold text-purple-400 uppercase mb-2">Ce que vous souhaitez apporter</label>
+                    <textarea name="apport" required rows="4" placeholder="Décrivez les formations ou tutoriels que vous souhaitez proposer..." class="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 focus:outline-none focus:border-purple-500 transition-colors text-sm"></textarea>
+                </div>
+
+                <button type="submit" class="w-full bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-500 hover:to-indigo-500 text-white font-bold py-4 rounded-xl shadow-lg shadow-purple-600/20 transition-all transform hover:-translate-y-1">
+                    Soumettre ma candidature via WhatsApp
+                </button>
+            </form>
+        </div>
+    </section>
+
     <section id="contact" class="page-section pt-32 pb-20 px-6 max-w-7xl mx-auto">
         <div class="glass-card rounded-2xl p-12 flex flex-col md:flex-row justify-between items-center gap-6">
             <div class="text-center md:text-left">
@@ -677,6 +771,30 @@
         chatInput.addEventListener('keypress', (e) => {
             if (e.key === 'Enter') handleChat();
         });
+
+        // Form Submission to WhatsApp
+        const formateurForm = document.getElementById('formateur-form');
+        if (formateurForm) {
+            formateurForm.addEventListener('submit', (e) => {
+                e.preventDefault();
+                const formData = new FormData(formateurForm);
+                const data = Object.fromEntries(formData.entries());
+
+                const message = `*Nouvelle Candidature Formateur - Ronald Empire*\n\n` +
+                                `*Nom:* ${data.nom}\n` +
+                                `*Prénom:* ${data.prenom}\n` +
+                                `*WhatsApp:* ${data.whatsapp}\n` +
+                                `*Email:* ${data.email}\n` +
+                                `*Domaine:* ${data.domaine}\n` +
+                                `*Niveau:* ${data.niveau}\n\n` +
+                                `*Message:* ${data.apport}`;
+
+                const encodedMessage = encodeURIComponent(message);
+                const whatsappUrl = `https://wa.me/2290198905311?text=${encodedMessage}`;
+
+                window.open(whatsappUrl, '_blank');
+            });
+        }
     </script>
 </body>
 </html>
