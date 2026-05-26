@@ -73,10 +73,11 @@
             <button id="menu-toggle" class="md:hidden text-2xl text-purple-400">
                 <i class="fas fa-bars"></i>
             </button>
-            <div id="nav-links" class="hidden md:flex space-x-8 text-sm font-medium">
+            <div id="nav-links" class="hidden lg:flex space-x-6 text-xs font-medium">
                 <a href="#/accueil" class="nav-link hover:text-purple-400 transition-colors">Accueil</a>
                 <a href="#/categories" class="nav-link hover:text-purple-400 transition-colors">Catégories</a>
                 <a href="#/formations" class="nav-link hover:text-purple-400 transition-colors">Formations</a>
+                <a href="#/boost" class="nav-link text-yellow-400 hover:text-yellow-300 font-bold"><i class="fas fa-rocket mr-1"></i>Boost</a>
                 <a href="#/services" class="nav-link hover:text-purple-400 transition-colors">Services</a>
                 <a href="#/formateur" class="nav-link hover:text-purple-400 transition-colors">Devenir Formateur</a>
                 <a href="#/contact" class="nav-link hover:text-purple-400 transition-colors">Contact</a>
@@ -86,10 +87,11 @@
             </button>
         </div>
         <!-- Mobile Dropdown -->
-        <div id="mobile-menu" class="hidden flex-col space-y-4 mt-4 pb-4 md:hidden border-t border-white/5">
+        <div id="mobile-menu" class="hidden flex-col space-y-4 mt-4 pb-4 lg:hidden border-t border-white/5">
             <a href="#/accueil" class="nav-link hover:text-purple-400 transition-colors pt-4">Accueil</a>
             <a href="#/categories" class="nav-link hover:text-purple-400 transition-colors">Catégories</a>
             <a href="#/formations" class="nav-link hover:text-purple-400 transition-colors">Formations</a>
+            <a href="#/boost" class="nav-link text-yellow-400 font-bold">Boost</a>
             <a href="#/services" class="nav-link hover:text-purple-400 transition-colors">Services</a>
             <a href="#/formateur" class="nav-link hover:text-purple-400 transition-colors">Devenir Formateur</a>
             <a href="#/contact" class="nav-link hover:text-purple-400 transition-colors">Contact</a>
@@ -181,6 +183,90 @@
                 </p>
                 <span class="text-xs font-semibold text-purple-500">25 Tutoriels &bull; 12 Formations</span>
             </div>
+        </div>
+    </section>
+
+    <section id="boost" class="page-section pt-32 pb-20 px-6 max-w-2xl mx-auto">
+        <div class="glass-card rounded-3xl p-6 md:p-10 border border-white/10 shadow-2xl relative overflow-hidden">
+            <!-- Social Icons Header -->
+            <div class="grid grid-cols-4 gap-4 mb-8">
+                <div class="bg-white/5 rounded-2xl p-4 flex flex-col items-center border border-white/5 hover:border-blue-500/50 transition-all cursor-pointer group">
+                    <i class="fab fa-facebook text-3xl text-[#1877F2] mb-2 group-hover:scale-110 transition-transform"></i>
+                    <span class="text-[10px] font-semibold text-gray-400">Facebook</span>
+                </div>
+                <div class="bg-white/5 rounded-2xl p-4 flex flex-col items-center border border-white/5 hover:border-pink-500/50 transition-all cursor-pointer group">
+                    <i class="fab fa-tiktok text-3xl text-white mb-2 group-hover:scale-110 transition-transform"></i>
+                    <span class="text-[10px] font-semibold text-gray-400">TikTok</span>
+                </div>
+                <div class="bg-white/5 rounded-2xl p-4 flex flex-col items-center border border-white/5 hover:border-orange-500/50 transition-all cursor-pointer group">
+                    <i class="fab fa-instagram text-3xl text-[#E4405F] mb-2 group-hover:scale-110 transition-transform"></i>
+                    <span class="text-[10px] font-semibold text-gray-400">Instagram</span>
+                </div>
+                <div class="bg-white/5 rounded-2xl p-4 flex flex-col items-center border border-white/5 hover:border-red-500/50 transition-all cursor-pointer group">
+                    <i class="fab fa-youtube text-3xl text-[#FF0000] mb-2 group-hover:scale-110 transition-transform"></i>
+                    <span class="text-[10px] font-semibold text-gray-400">YouTube</span>
+                </div>
+            </div>
+
+            <div class="text-center mb-8">
+                <p class="text-purple-400 text-xs font-bold tracking-widest uppercase mb-2">Social Media Marketing</p>
+                <h2 class="text-2xl font-bold">Booster votre visibilité</h2>
+            </div>
+
+            <form id="boost-form" class="space-y-6">
+                <!-- Type de service -->
+                <div>
+                    <label class="flex items-center gap-2 text-xs font-semibold text-gray-400 mb-3">
+                        <i class="fas fa-folder text-yellow-500"></i> Type de service
+                    </label>
+                    <select id="boost-type" class="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3.5 focus:outline-none focus:border-purple-500 transition-colors text-sm appearance-none cursor-pointer">
+                        <option value="" class="bg-[#090514]">Choisir un type de service...</option>
+                        <option value="facebook" class="bg-[#090514]">Facebook - Followers / Likes</option>
+                        <option value="tiktok" class="bg-[#090514]">TikTok - Vues / Abonnés</option>
+                        <option value="instagram" class="bg-[#090514]">Instagram - Followers / Likes</option>
+                        <option value="youtube" class="bg-[#090514]">YouTube - Vues / Watchtime</option>
+                    </select>
+                </div>
+
+                <!-- Qualité & Offre -->
+                <div>
+                    <label class="flex items-center gap-2 text-xs font-semibold text-gray-400 mb-3">
+                        <i class="fas fa-clipboard-list text-orange-400"></i> Qualité & offre
+                    </label>
+                    <select id="boost-offer" class="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3.5 focus:outline-none focus:border-purple-500 transition-colors text-sm appearance-none cursor-pointer">
+                        <option value="" class="bg-[#090514]">Choisir une offre...</option>
+                    </select>
+                </div>
+
+                <!-- Lien -->
+                <div>
+                    <label class="flex items-center gap-2 text-xs font-semibold text-gray-400 mb-3">
+                        <i class="fas fa-link text-blue-400"></i> Lien du profil / post / page
+                    </label>
+                    <input type="url" id="boost-link" placeholder="https://.com/your_id" class="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3.5 focus:outline-none focus:border-purple-500 transition-colors text-sm">
+                </div>
+
+                <!-- Quantité -->
+                <div class="relative">
+                    <label class="flex items-center gap-2 text-xs font-semibold text-gray-400 mb-3">
+                        <i class="fas fa-chart-bar text-green-400"></i> Quantité
+                    </label>
+                    <input type="number" id="boost-quantity" placeholder="0" class="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3.5 focus:outline-none focus:border-purple-500 transition-colors text-sm">
+                    <div class="absolute bottom-3 right-4 w-8 h-8 bg-indigo-900/50 rounded-full flex items-center justify-center text-indigo-300">
+                        <i class="far fa-lightbulb"></i>
+                    </div>
+                </div>
+
+                <!-- Total -->
+                <div class="bg-white/5 rounded-2xl p-6 flex justify-between items-center border border-white/5 mt-8">
+                    <span class="text-gray-400 text-sm font-medium">Total estimé</span>
+                    <span id="boost-total" class="text-2xl font-bold text-purple-400">0 FCFA</span>
+                </div>
+
+                <button type="submit" class="w-full bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-500 hover:to-indigo-500 text-white font-bold py-4 rounded-xl shadow-lg shadow-purple-600/20 transition-all transform hover:-translate-y-1 flex items-center justify-center gap-2">
+                    <i class="fab fa-whatsapp text-xl"></i> Passer la commande
+                </button>
+            </form>
         </div>
     </section>
 
@@ -291,7 +377,7 @@
                     <h4 class="text-lg font-bold mb-2 hover:text-purple-400 cursor-pointer transition-colors">HTML5 Ultime : De Zéro à Expert</h4>
                     <p class="text-gray-400 text-xs mb-4 line-clamp-2">Bâtissez des sites web modernes et découvrez les secrets du référencement naturel et de la structure sémantique.</p>
                     <div class="mt-auto flex justify-between items-center pt-4 border-t border-white/5">
-                        <span class="text-xl font-bold text-white">19.99 €</span>
+                        <span class="text-xl font-bold text-white">13 000 FCFA</span>
                         <button class="bg-white/5 hover:bg-white/10 text-white px-4 py-2 rounded-lg text-xs font-semibold border border-white/10 transition-colors">
                             Acheter
                         </button>
@@ -308,7 +394,7 @@
                     <h4 class="text-lg font-bold mb-2 hover:text-purple-400 cursor-pointer transition-colors">Tailwind CSS & Glassmorphism Masterclass</h4>
                     <p class="text-gray-400 text-xs mb-4 line-clamp-2">Créez des interfaces au design futuriste, totalement responsives et hautement personnalisées.</p>
                     <div class="mt-auto flex justify-between items-center pt-4 border-t border-white/5">
-                        <span class="text-xl font-bold text-white">29.99 €</span>
+                        <span class="text-xl font-bold text-white">20 000 FCFA</span>
                         <button class="bg-white/5 hover:bg-white/10 text-white px-4 py-2 rounded-lg text-xs font-semibold border border-white/10 transition-colors">
                             Acheter
                         </button>
@@ -325,7 +411,7 @@
                     <h4 class="text-lg font-bold mb-2 hover:text-purple-400 cursor-pointer transition-colors">Java POO : Architecture & Algorithmes</h4>
                     <p class="text-gray-400 text-xs mb-4 line-clamp-2">Maîtrisez la logique de programmation orientée objet, la gestion des bases de données et la création d'apps complexes.</p>
                     <div class="mt-auto flex justify-between items-center pt-4 border-t border-white/5">
-                        <span class="text-xl font-bold text-white">49.99 €</span>
+                        <span class="text-xl font-bold text-white">33 000 FCFA</span>
                         <button class="bg-white/5 hover:bg-white/10 text-white px-4 py-2 rounded-lg text-xs font-semibold border border-white/10 transition-colors">
                             Acheter
                         </button>
@@ -343,7 +429,7 @@
                     <h4 class="text-lg font-bold mb-2 hover:text-green-400 cursor-pointer transition-colors">Tiktok : Création & Monétisation</h4>
                     <p class="text-gray-400 text-xs mb-4 line-clamp-2">Apprenez à créer un compte éligible et maîtrisez les stratégies pour monétiser votre contenu rapidement.</p>
                     <div class="mt-auto flex justify-between items-center pt-4 border-t border-white/5">
-                        <span class="text-xl font-bold text-white">14.99 €</span>
+                        <span class="text-xl font-bold text-white">10 000 FCFA</span>
                         <button class="bg-white/5 hover:bg-white/10 text-white px-4 py-2 rounded-lg text-xs font-semibold border border-white/10 transition-colors">
                             Acheter
                         </button>
@@ -360,7 +446,7 @@
                     <h4 class="text-lg font-bold mb-2 hover:text-green-400 cursor-pointer transition-colors">Facebook : Compte Pro & Monétisation</h4>
                     <p class="text-gray-400 text-xs mb-4 line-clamp-2">Guide complet pour configurer un compte Facebook prêt pour la monétisation et générer des revenus.</p>
                     <div class="mt-auto flex justify-between items-center pt-4 border-t border-white/5">
-                        <span class="text-xl font-bold text-white">14.99 €</span>
+                        <span class="text-xl font-bold text-white">10 000 FCFA</span>
                         <button class="bg-white/5 hover:bg-white/10 text-white px-4 py-2 rounded-lg text-xs font-semibold border border-white/10 transition-colors">
                             Acheter
                         </button>
@@ -377,7 +463,7 @@
                     <h4 class="text-lg font-bold mb-2 hover:text-green-400 cursor-pointer transition-colors">Paypal en Afrique : Création & Utilisation</h4>
                     <p class="text-gray-400 text-xs mb-4 line-clamp-2">Découvrez comment créer et valider un compte Paypal fonctionnel en Afrique pour recevoir vos paiements.</p>
                     <div class="mt-auto flex justify-between items-center pt-4 border-t border-white/5">
-                        <span class="text-xl font-bold text-white">19.99 €</span>
+                        <span class="text-xl font-bold text-white">13 000 FCFA</span>
                         <button class="bg-white/5 hover:bg-white/10 text-white px-4 py-2 rounded-lg text-xs font-semibold border border-white/10 transition-colors">
                             Acheter
                         </button>
@@ -395,7 +481,7 @@
                     <h4 class="text-lg font-bold mb-2 hover:text-purple-400 cursor-pointer transition-colors">Masterclass Gemini CLI</h4>
                     <p class="text-gray-400 text-xs mb-4 line-clamp-2">Devancez le marché et maîtrisez la nouvelle ère de l'IA en pilotant Gemini directement depuis votre terminal.</p>
                     <div class="mt-auto flex justify-between items-center pt-4 border-t border-white/5">
-                        <span class="text-xl font-bold text-white">34.99 €</span>
+                        <span class="text-xl font-bold text-white">23 000 FCFA</span>
                         <button class="bg-white/5 hover:bg-white/10 text-white px-4 py-2 rounded-lg text-xs font-semibold border border-white/10 transition-colors">Acheter</button>
                     </div>
                 </div>
@@ -410,7 +496,7 @@
                     <h4 class="text-lg font-bold mb-2 hover:text-purple-400 cursor-pointer transition-colors">IA Sans Limites</h4>
                     <p class="text-gray-400 text-xs mb-4 line-clamp-2">Libérez la puissance totale de la création sans censure. Maîtrisez les modèles open-source sans restrictions.</p>
                     <div class="mt-auto flex justify-between items-center pt-4 border-t border-white/5">
-                        <span class="text-xl font-bold text-white">44.99 €</span>
+                        <span class="text-xl font-bold text-white">30 000 FCFA</span>
                         <button class="bg-white/5 hover:bg-white/10 text-white px-4 py-2 rounded-lg text-xs font-semibold border border-white/10 transition-colors">Acheter</button>
                     </div>
                 </div>
@@ -425,7 +511,7 @@
                     <h4 class="text-lg font-bold mb-2 hover:text-green-400 cursor-pointer transition-colors">Feed Rentable : A à Z</h4>
                     <p class="text-gray-400 text-xs mb-4 line-clamp-2">La formation complète pour monétiser tes réseaux et signer tes premiers partenariats lucratifs.</p>
                     <div class="mt-auto flex justify-between items-center pt-4 border-t border-white/5">
-                        <span class="text-xl font-bold text-white">29.99 €</span>
+                        <span class="text-xl font-bold text-white">20 000 FCFA</span>
                         <button class="bg-white/5 hover:bg-white/10 text-white px-4 py-2 rounded-lg text-xs font-semibold border border-white/10 transition-colors">Acheter</button>
                     </div>
                 </div>
@@ -440,7 +526,7 @@
                     <h4 class="text-lg font-bold mb-2 hover:text-pink-400 cursor-pointer transition-colors">Dominer l'Algorithme TikTok</h4>
                     <p class="text-gray-400 text-xs mb-4 line-clamp-2">Les stratégies pros pour exploser le compteur de vues et devenir viral de manière prédictible.</p>
                     <div class="mt-auto flex justify-between items-center pt-4 border-t border-white/5">
-                        <span class="text-xl font-bold text-white">24.99 €</span>
+                        <span class="text-xl font-bold text-white">16 500 FCFA</span>
                         <button class="bg-white/5 hover:bg-white/10 text-white px-4 py-2 rounded-lg text-xs font-semibold border border-white/10 transition-colors">Acheter</button>
                     </div>
                 </div>
@@ -455,7 +541,7 @@
                     <h4 class="text-lg font-bold mb-2 hover:text-indigo-400 cursor-pointer transition-colors">Cartes Virtuelles & Paiements</h4>
                     <p class="text-gray-400 text-xs mb-4 line-clamp-2">Le guide pour débloquer votre business international et payer partout sans blocages.</p>
                     <div class="mt-auto flex justify-between items-center pt-4 border-t border-white/5">
-                        <span class="text-xl font-bold text-white">19.99 €</span>
+                        <span class="text-xl font-bold text-white">13 000 FCFA</span>
                         <button class="bg-white/5 hover:bg-white/10 text-white px-4 py-2 rounded-lg text-xs font-semibold border border-white/10 transition-colors">Acheter</button>
                     </div>
                 </div>
@@ -470,7 +556,7 @@
                     <h4 class="text-lg font-bold mb-2 hover:text-purple-400 cursor-pointer transition-colors">Empire Vidéo IA</h4>
                     <p class="text-gray-400 text-xs mb-4 line-clamp-2">Générez du contenu professionnel et gratuit en illimité grâce aux derniers outils d'IA vidéo.</p>
                     <div class="mt-auto flex justify-between items-center pt-4 border-t border-white/5">
-                        <span class="text-xl font-bold text-white">39.99 €</span>
+                        <span class="text-xl font-bold text-white">26 000 FCFA</span>
                         <button class="bg-white/5 hover:bg-white/10 text-white px-4 py-2 rounded-lg text-xs font-semibold border border-white/10 transition-colors">Acheter</button>
                     </div>
                 </div>
@@ -485,7 +571,7 @@
                     <h4 class="text-lg font-bold mb-2 hover:text-green-400 cursor-pointer transition-colors">TikTok Partenaire : La Méthode</h4>
                     <p class="text-gray-400 text-xs mb-4 line-clamp-2">La méthode exacte pour générer des revenus sans aucune audience et sans montrer son visage.</p>
                     <div class="mt-auto flex justify-between items-center pt-4 border-t border-white/5">
-                        <span class="text-xl font-bold text-white">49.99 €</span>
+                        <span class="text-xl font-bold text-white">33 000 FCFA</span>
                         <button class="bg-white/5 hover:bg-white/10 text-white px-4 py-2 rounded-lg text-xs font-semibold border border-white/10 transition-colors">Acheter</button>
                     </div>
                 </div>
@@ -500,7 +586,7 @@
                     <h4 class="text-lg font-bold mb-2 hover:text-purple-400 cursor-pointer transition-colors">Cinéma & IA : Claude Vidéo</h4>
                     <p class="text-gray-400 text-xs mb-4 line-clamp-2">Maîtrisez Claude pour générer des vidéos professionnelles prêtes à l'emploi avec une esthétique cinématographique.</p>
                     <div class="mt-auto flex justify-between items-center pt-4 border-t border-white/5">
-                        <span class="text-xl font-bold text-white">59.99 €</span>
+                        <span class="text-xl font-bold text-white">40 000 FCFA</span>
                         <button class="bg-white/5 hover:bg-white/10 text-white px-4 py-2 rounded-lg text-xs font-semibold border border-white/10 transition-colors">Acheter</button>
                     </div>
                 </div>
@@ -515,7 +601,7 @@
                     <h4 class="text-lg font-bold mb-2 hover:text-purple-400 cursor-pointer transition-colors">L'Arsenal Secret de ChatGPT</h4>
                     <p class="text-gray-400 text-xs mb-4 line-clamp-2">Maîtrisez les invites (prompts) puissantes pour décupler votre productivité et automatiser vos tâches.</p>
                     <div class="mt-auto flex justify-between items-center pt-4 border-t border-white/5">
-                        <span class="text-xl font-bold text-white">19.99 €</span>
+                        <span class="text-xl font-bold text-white">13 000 FCFA</span>
                         <button class="bg-white/5 hover:bg-white/10 text-white px-4 py-2 rounded-lg text-xs font-semibold border border-white/10 transition-colors">Acheter</button>
                     </div>
                 </div>
@@ -530,7 +616,7 @@
                     <h4 class="text-lg font-bold mb-2 hover:text-purple-400 cursor-pointer transition-colors">Copywriting & Personal Branding</h4>
                     <p class="text-gray-400 text-xs mb-4 line-clamp-2">Humanisez l'IA pour dominer vos réseaux, captiver votre audience et construire un empire personnel.</p>
                     <div class="mt-auto flex justify-between items-center pt-4 border-t border-white/5">
-                        <span class="text-xl font-bold text-white">49.99 €</span>
+                        <span class="text-xl font-bold text-white">33 000 FCFA</span>
                         <button class="bg-white/5 hover:bg-white/10 text-white px-4 py-2 rounded-lg text-xs font-semibold border border-white/10 transition-colors">Acheter</button>
                     </div>
                 </div>
@@ -545,7 +631,7 @@
                     <h4 class="text-lg font-bold mb-2 hover:text-blue-400 cursor-pointer transition-colors">OpenCode Remplace Claude</h4>
                     <p class="text-gray-400 text-xs mb-4 line-clamp-2">Arrêtez d'être l'ouvrier. Laissez votre Allié IA porter le code pendant que vous gardez le pilotage.</p>
                     <div class="mt-auto flex justify-between items-center pt-4 border-t border-white/5">
-                        <span class="text-xl font-bold text-white">69.99 €</span>
+                        <span class="text-xl font-bold text-white">46 000 FCFA</span>
                         <button class="bg-white/5 hover:bg-white/10 text-white px-4 py-2 rounded-lg text-xs font-semibold border border-white/10 transition-colors">Acheter</button>
                     </div>
                 </div>
@@ -560,7 +646,7 @@
                     <h4 class="text-lg font-bold mb-2 hover:text-red-400 cursor-pointer transition-colors">L’IA Tue Ton Design</h4>
                     <p class="text-gray-400 text-xs mb-4 line-clamp-2">L'IA pose les blocs, mais c'est à vous de fixer le standard. Restez l'architecte du design futuriste.</p>
                     <div class="mt-auto flex justify-between items-center pt-4 border-t border-white/5">
-                        <span class="text-xl font-bold text-white">29.99 €</span>
+                        <span class="text-xl font-bold text-white">20 000 FCFA</span>
                         <button class="bg-white/5 hover:bg-white/10 text-white px-4 py-2 rounded-lg text-xs font-semibold border border-white/10 transition-colors">Acheter</button>
                     </div>
                 </div>
@@ -575,7 +661,7 @@
                     <h4 class="text-lg font-bold mb-2 hover:text-green-400 cursor-pointer transition-colors">Agent IA WhatsApp</h4>
                     <p class="text-gray-400 text-xs mb-4 line-clamp-2">Restez le cerveau sans être l'ouvrier. Automatisez votre business sur WhatsApp avec des agents IA autonomes.</p>
                     <div class="mt-auto flex justify-between items-center pt-4 border-t border-white/5">
-                        <span class="text-xl font-bold text-white">89.99 €</span>
+                        <span class="text-xl font-bold text-white">60 000 FCFA</span>
                         <button class="bg-white/5 hover:bg-white/10 text-white px-4 py-2 rounded-lg text-xs font-semibold border border-white/10 transition-colors">Acheter</button>
                     </div>
                 </div>
@@ -590,7 +676,7 @@
                     <h4 class="text-lg font-bold mb-2 hover:text-blue-400 cursor-pointer transition-colors">4 Pubs Meta en 1 Minute</h4>
                     <p class="text-gray-400 text-xs mb-4 line-clamp-2">Générez des pubs qui cartonnent en 1 minute. Un prompt, des visuels prêts, l'IA fait tout le job.</p>
                     <div class="mt-auto flex justify-between items-center pt-4 border-t border-white/5">
-                        <span class="text-xl font-bold text-white">24.99 €</span>
+                        <span class="text-xl font-bold text-white">16 500 FCFA</span>
                         <button class="bg-white/5 hover:bg-white/10 text-white px-4 py-2 rounded-lg text-xs font-semibold border border-white/10 transition-colors">Acheter</button>
                     </div>
                 </div>
@@ -605,7 +691,7 @@
                     <h4 class="text-lg font-bold mb-2 hover:text-purple-400 cursor-pointer transition-colors">Réseau Social des IA</h4>
                     <p class="text-gray-400 text-xs mb-4 line-clamp-2">Découvrez Moltbook, le réseau social réservé aux agents IA, et générez des leads grâce au buzz.</p>
                     <div class="mt-auto flex justify-between items-center pt-4 border-t border-white/5">
-                        <span class="text-xl font-bold text-white">19.99 €</span>
+                        <span class="text-xl font-bold text-white">13 000 FCFA</span>
                         <button class="bg-white/5 hover:bg-white/10 text-white px-4 py-2 rounded-lg text-xs font-semibold border border-white/10 transition-colors">Acheter</button>
                     </div>
                 </div>
@@ -620,7 +706,7 @@
                     <h4 class="text-lg font-bold mb-2 hover:text-blue-400 cursor-pointer transition-colors">IA Code & Teste Seule</h4>
                     <p class="text-gray-400 text-xs mb-4 line-clamp-2">Faites coder et tester votre application par plusieurs IA en simultané avec Antigravity.</p>
                     <div class="mt-auto flex justify-between items-center pt-4 border-t border-white/5">
-                        <span class="text-xl font-bold text-white">99.99 €</span>
+                        <span class="text-xl font-bold text-white">66 000 FCFA</span>
                         <button class="bg-white/5 hover:bg-white/10 text-white px-4 py-2 rounded-lg text-xs font-semibold border border-white/10 transition-colors">Acheter</button>
                     </div>
                 </div>
@@ -807,15 +893,15 @@
                 const input = text.toLowerCase();
 
                 if (input.includes('prix') || input.includes('tarif')) {
-                    response = "Nos formations commencent à partir de 14.99€. Vous pouvez consulter le détail dans la section 'Formations'.";
+                    response = "Nos formations commencent à partir de 10 000 FCFA. Vous pouvez consulter le détail dans la section 'Formations'.";
                 } else if (input.includes('html')) {
-                    response = "Notre formation HTML5 Ultime est parfaite pour débuter. Elle coûte 19.99€.";
+                    response = "Notre formation HTML5 Ultime est parfaite pour débuter. Elle coûte 13 000 FCFA.";
                 } else if (input.includes('java')) {
-                    response = "Nous proposons un cours Java POO Avancé pour 49.99€.";
+                    response = "Nous proposons un cours Java POO Avancé pour 33 000 FCFA.";
                 } else if (input.includes('tiktok') || input.includes('monétiser')) {
-                    response = "Nous avons des formations pour monétiser Tiktok et Facebook à partir de 14.99€ !";
+                    response = "Nous avons des formations pour monétiser Tiktok et Facebook à partir de 10 000 FCFA !";
                 } else if (input.includes('paypal')) {
-                    response = "Le guide pour créer un compte Paypal en Afrique est disponible pour 19.99€.";
+                    response = "Le guide pour créer un compte Paypal en Afrique est disponible pour 13 000 FCFA.";
                 } else if (input.includes('ia') || input.includes('ai') || input.includes('chatgpt') || input.includes('gemini')) {
                     response = "Nous sommes leaders sur l'IA ! Découvrez nos Masterclass Gemini, IA Sans Limites, ou nos agents WhatsApp IA.";
                 } else if (input.includes('claude') || input.includes('opencode')) {
@@ -832,6 +918,89 @@
         chatInput.addEventListener('keypress', (e) => {
             if (e.key === 'Enter') handleChat();
         });
+
+        // Boost Page Logic
+        const boostData = {
+            facebook: [
+                { name: "Likes de Page (Haute Qualité)", price: 15 },
+                { name: "Followers de Profil", price: 12 },
+                { name: "Vues de Vidéo", price: 5 }
+            ],
+            tiktok: [
+                { name: "Abonnés TikTok (Réels)", price: 10 },
+                { name: "Vues TikTok (Viral)", price: 2 },
+                { name: "Likes TikTok", price: 5 }
+            ],
+            instagram: [
+                { name: "Followers Instagram (Garantis)", price: 8 },
+                { name: "Likes Instagram", price: 4 },
+                { name: "Vues Reels", price: 3 }
+            ],
+            youtube: [
+                { name: "Vues YouTube (Monétisables)", price: 20 },
+                { name: "Abonnés YouTube", price: 50 },
+                { name: "Watchtime 4000h (Pack)", price: 25000, isFixed: true }
+            ]
+        };
+
+        const boostType = document.getElementById('boost-type');
+        const boostOffer = document.getElementById('boost-offer');
+        const boostQuantity = document.getElementById('boost-quantity');
+        const boostTotal = document.getElementById('boost-total');
+        const boostForm = document.getElementById('boost-form');
+
+        boostType.addEventListener('change', () => {
+            const selected = boostType.value;
+            boostOffer.innerHTML = '<option value="">Choisir une offre...</option>';
+
+            if (selected && boostData[selected]) {
+                boostData[selected].forEach((offer, index) => {
+                    const opt = document.createElement('option');
+                    opt.value = index;
+                    opt.textContent = `${offer.name} - ${offer.isFixed ? offer.price : offer.price + ' FCFA / unité'}`;
+                    opt.className = "bg-[#090514]";
+                    boostOffer.appendChild(opt);
+                });
+            }
+            calculateBoostTotal();
+        });
+
+        function calculateBoostTotal() {
+            const type = boostType.value;
+            const offerIndex = boostOffer.value;
+            const qty = parseInt(boostQuantity.value) || 0;
+
+            if (type && offerIndex !== "" && boostData[type][offerIndex]) {
+                const offer = boostData[type][offerIndex];
+                const total = offer.isFixed ? offer.price : offer.price * qty;
+                boostTotal.textContent = `${total.toLocaleString()} FCFA`;
+            } else {
+                boostTotal.textContent = "0 FCFA";
+            }
+        }
+
+        boostOffer.addEventListener('change', calculateBoostTotal);
+        boostQuantity.addEventListener('input', calculateBoostTotal);
+
+        if (boostForm) {
+            boostForm.addEventListener('submit', (e) => {
+                e.preventDefault();
+                const type = boostType.options[boostType.selectedIndex].text;
+                const offer = boostOffer.options[boostOffer.selectedIndex].text;
+                const link = document.getElementById('boost-link').value;
+                const qty = boostQuantity.value;
+                const total = boostTotal.textContent;
+
+                const message = `*Nouvelle Commande Boost - Ronald Empire*\n\n` +
+                                `*Réseau:* ${type}\n` +
+                                `*Offre:* ${offer}\n` +
+                                `*Lien:* ${link}\n` +
+                                `*Quantité:* ${qty}\n` +
+                                `*Total:* ${total}`;
+
+                window.open(`https://wa.me/2290198905311?text=${encodeURIComponent(message)}`, '_blank');
+            });
+        }
 
         // Form Submission to WhatsApp
         const formateurForm = document.getElementById('formateur-form');
