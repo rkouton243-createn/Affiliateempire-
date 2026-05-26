@@ -4,247 +4,193 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>RONALD EMPIRE - Formations & Tutoriels</title>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
     <style>
-        :root {
-            --primary-color: #2c3e50;
-            --secondary-color: #e74c3c;
-            --accent-color: #3498db;
-            --bg-color: #f4f7f6;
-            --text-color: #333;
-            --white: #ffffff;
-        }
-
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            line-height: 1.6;
-            color: var(--text-color);
-            background-color: var(--bg-color);
+            font-family: 'Poppins', sans-serif;
+            background: radial-gradient(circle at top right, #1e1b4b, #090514);
         }
-
-        header {
-            background: var(--primary-color);
-            color: var(--white);
-            padding: 2rem 0;
-            text-align: center;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        /* Effet Glassmorphism */
+        .glass-card {
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
         }
-
-        header h1 {
-            font-size: 3rem;
-            letter-spacing: 2px;
-            text-transform: uppercase;
-        }
-
-        .hero {
-            padding: 4rem 2rem;
-            text-align: center;
-            background: linear-gradient(rgba(44, 62, 80, 0.8), rgba(44, 62, 80, 0.8)), url('https://images.unsplash.com/photo-1516321318423-f06f85e504b3?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');
-            background-size: cover;
-            background-position: center;
-            color: var(--white);
-        }
-
-        .hero p {
-            font-size: 1.2rem;
-            max-width: 800px;
-            margin: 1rem auto;
-        }
-
-        .container {
-            max-width: 1200px;
-            margin: 2rem auto;
-            padding: 0 1rem;
-        }
-
-        .categories {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
-            margin-top: 3rem;
-        }
-
-        .category-card {
-            background: var(--white);
-            border-radius: 8px;
-            overflow: hidden;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-            transition: transform 0.3s ease;
-        }
-
-        .category-card:hover {
-            transform: translateY(-10px);
-        }
-
-        .category-header {
-            padding: 1.5rem;
-            color: var(--white);
-            text-align: center;
-        }
-
-        .html-cat { background-color: #e34c26; }
-        .css-cat { background-color: #264de4; }
-        .java-cat { background-color: #f89820; }
-
-        .category-body {
-            padding: 1.5rem;
-        }
-
-        .category-body h3 {
-            margin-bottom: 1rem;
-            color: var(--primary-color);
-        }
-
-        .course-list {
-            list-style: none;
-        }
-
-        .course-item {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 0.8rem 0;
-            border-bottom: 1px solid #eee;
-        }
-
-        .course-item:last-child {
-            border-bottom: none;
-        }
-
-        .price {
-            font-weight: bold;
-            color: var(--secondary-color);
-        }
-
-        .btn {
-            display: inline-block;
-            background: var(--accent-color);
-            color: var(--white);
-            padding: 0.5rem 1rem;
-            text-decoration: none;
-            border-radius: 4px;
-            margin-top: 1rem;
-            transition: background 0.3s ease;
-        }
-
-        .btn:hover {
-            background: #2980b9;
-        }
-
-        footer {
-            text-align: center;
-            padding: 2rem;
-            background: var(--primary-color);
-            color: var(--white);
-            margin-top: 4rem;
-        }
-
-        @media (max-width: 768px) {
-            header h1 {
-                font-size: 2rem;
-            }
+        .glass-nav {
+            background: rgba(9, 5, 20, 0.7);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
         }
     </style>
 </head>
-<body>
+<body class="text-gray-200 min-h-screen antialiased selection:bg-purple-500 selection:text-white">
 
-    <header>
-        <h1>RONALD EMPIRE</h1>
-    </header>
+    <nav class="glass-nav fixed top-0 left-0 w-full z-50 px-6 py-4 transition-all duration-300">
+        <div class="max-w-7xl mx-auto flex justify-between items-center">
+            <a href="#" class="text-2xl font-bold tracking-wider text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-indigo-400">
+                RONALD EMPIRE
+            </a>
+            <div class="hidden md:flex space-x-8 text-sm font-medium">
+                <a href="#accueil" class="hover:text-purple-400 transition-colors">Accueil</a>
+                <a href="#categories" class="hover:text-purple-400 transition-colors">Catégories</a>
+                <a href="#formations" class="hover:text-purple-400 transition-colors">Formations</a>
+                <a href="#contact" class="hover:text-purple-400 transition-colors">Contact</a>
+            </div>
+            <button class="bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-500 hover:to-indigo-500 text-white px-5 py-2 rounded-full text-sm font-semibold shadow-lg shadow-purple-500/20 transition-all duration-300 transform hover:-translate-y-0.5">
+                Espace Membre
+            </button>
+        </div>
+    </nav>
 
-    <section class="hero">
-        <h2>Excellence en Formation Digitale</h2>
-        <p>Propulsez votre carrière avec nos tutoriels et formations premium sur les technologies du web et du développement logiciel.</p>
+    <section id="accueil" class="pt-32 pb-20 px-6 max-w-7xl mx-auto flex flex-col items-center text-center">
+        <span class="text-xs font-semibold tracking-widest text-purple-400 uppercase bg-purple-500/10 px-4 py-1.5 rounded-full mb-6 border border-purple-500/20">
+            Passez à la vitesse supérieure
+        </span>
+        <h1 class="text-4xl md:text-6xl font-extrabold tracking-tight mb-6">
+            Maîtrisez le Développement avec <br>
+            <span class="text-transparent bg-clip-text bg-gradient-to-r from-purple-400 via-pink-400 to-indigo-400">
+                RONALD EMPIRE
+            </span>
+        </h1>
+        <p class="text-gray-400 max-w-2xl text-base md:text-lg mb-10 leading-relaxed">
+            Propulsez vos compétences tech grâce à nos formations premium et tutoriels exclusifs. Apprenez à votre rythme avec des projets concrets.
+        </p>
+        <div class="flex flex-col sm:flex-row gap-4">
+            <a href="#formations" class="bg-purple-600 hover:bg-purple-500 text-white px-8 py-3.5 rounded-xl font-semibold shadow-lg shadow-purple-600/20 transition-all text-center">
+                Découvrir les cours
+            </a>
+            <a href="#categories" class="glass-card hover:bg-white/5 text-white px-8 py-3.5 rounded-xl font-semibold border border-white/10 transition-all text-center">
+                Explorer les catégories
+            </a>
+        </div>
     </section>
 
-    <div class="container">
-        <h2 style="text-align: center; margin-bottom: 2rem;">Nos Formations par Catégorie</h2>
+    <section id="categories" class="py-20 px-6 max-w-7xl mx-auto">
+        <div class="text-center mb-14">
+            <h2 class="text-3xl font-bold mb-4">Nos Domaines d'Apprentissage</h2>
+            <p class="text-gray-400">Des programmes structurés pour tous les niveaux, du débutant à l'expert.</p>
+        </div>
 
-        <div class="categories">
-            <!-- HTML Category -->
-            <div class="category-card">
-                <div class="category-header html-cat">
-                    <h2>HTML</h2>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <div class="glass-card p-8 rounded-2xl group hover:border-orange-500/30 transition-all duration-300 transform hover:-translate-y-1">
+                <div class="w-14 h-14 bg-orange-500/10 text-orange-500 rounded-xl flex items-center justify-center text-2xl mb-6 group-hover:scale-110 transition-transform">
+                    <i class="fab fa-html5"></i>
                 </div>
-                <div class="category-body">
-                    <h3>Maîtrisez la structure du web</h3>
-                    <ul class="course-list">
-                        <li class="course-item">
-                            <span>HTML5 Fondamentaux</span>
-                            <span class="price">29€</span>
-                        </li>
-                        <li class="course-item">
-                            <span>Accessibilité Web</span>
-                            <span class="price">45€</span>
-                        </li>
-                        <li class="course-item">
-                            <span>SEO & Sémantique</span>
-                            <span class="price">39€</span>
-                        </li>
-                    </ul>
-                    <a href="#" class="btn">Voir tout</a>
+                <h3 class="text-xl font-bold mb-3 text-orange-400">HTML5 / Structure</h3>
+                <p class="text-gray-400 text-sm leading-relaxed mb-6">
+                    Apprenez à bâtir des structures web solides, sémantiques et optimisées pour le SEO. La base indispensable du web.
+                </p>
+                <span class="text-xs font-semibold text-orange-500">12 Tutoriels &bull; 2 Formations</span>
+            </div>
+
+            <div class="glass-card p-8 rounded-2xl group hover:border-blue-500/30 transition-all duration-300 transform hover:-translate-y-1">
+                <div class="w-14 h-14 bg-blue-500/10 text-blue-500 rounded-xl flex items-center justify-center text-2xl mb-6 group-hover:scale-110 transition-transform">
+                    <i class="fab fa-css3-alt"></i>
+                </div>
+                <h3 class="text-xl font-bold mb-3 text-blue-400">CSS3 / Design & Frameworks</h3>
+                <p class="text-gray-400 text-sm leading-relaxed mb-6">
+                    Maîtrisez le Flexbox, Grid, les animations et les frameworks modernes comme Tailwind CSS pour créer des interfaces éblouissantes.
+                </p>
+                <span class="text-xs font-semibold text-blue-500">18 Tutoriels &bull; 3 Formations</span>
+            </div>
+
+            <div class="glass-card p-8 rounded-2xl group hover:border-red-500/30 transition-all duration-300 transform hover:-translate-y-1">
+                <div class="w-14 h-14 bg-red-500/10 text-red-500 rounded-xl flex items-center justify-center text-2xl mb-6 group-hover:scale-110 transition-transform">
+                    <i class="fab fa-java"></i>
+                </div>
+                <h3 class="text-xl font-bold mb-3 text-red-400">Java / Programmation</h3>
+                <p class="text-gray-400 text-sm leading-relaxed mb-6">
+                    Plongez dans la Programmation Orientée Objet (POO). Du développement d'applications robustes jusqu'à la logique algorithmique.
+                </p>
+                <span class="text-xs font-semibold text-red-500">15 Tutoriels &bull; 4 Formations</span>
+            </div>
+        </div>
+    </section>
+
+    <section id="formations" class="py-20 px-6 max-w-7xl mx-auto border-t border-white/5">
+        <div class="flex flex-col md:flex-row justify-between items-start md:items-end mb-14 gap-4">
+            <div>
+                <h2 class="text-3xl font-bold mb-3">Formations à la Une</h2>
+                <p class="text-gray-400">Rejoignez nos sessions les plus demandées et commencez à coder immédiatement.</p>
+            </div>
+            <a href="#" class="text-sm font-semibold text-purple-400 hover:text-purple-300 transition-colors flex items-center gap-2 group">
+                Voir tout le catalogue <i class="fas fa-arrow-right text-xs group-hover:translate-x-1 transition-transform"></i>
+            </a>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <div class="glass-card rounded-2xl overflow-hidden flex flex-col">
+                <div class="h-48 bg-gradient-to-br from-orange-600/30 to-purple-900/40 relative flex items-center justify-center border-b border-white/5">
+                    <i class="fab fa-html5 text-7xl text-orange-500/40"></i>
+                    <span class="absolute top-4 left-4 bg-orange-500 text-xs font-bold uppercase px-3 py-1 rounded-md">Débutant</span>
+                </div>
+                <div class="p-6 flex-1 flex flex-col">
+                    <h4 class="text-lg font-bold mb-2 hover:text-purple-400 cursor-pointer transition-colors">HTML5 Ultime : De Zéro à Expert</h4>
+                    <p class="text-gray-400 text-xs mb-4 line-clamp-2">Bâtissez des sites web modernes et découvrez les secrets du référencement naturel et de la structure sémantique.</p>
+                    <div class="mt-auto flex justify-between items-center pt-4 border-t border-white/5">
+                        <span class="text-xl font-bold text-white">19.99 €</span>
+                        <button class="bg-white/5 hover:bg-white/10 text-white px-4 py-2 rounded-lg text-xs font-semibold border border-white/10 transition-colors">
+                            Acheter
+                        </button>
+                    </div>
                 </div>
             </div>
 
-            <!-- CSS Category -->
-            <div class="category-card">
-                <div class="category-header css-cat">
-                    <h2>CSS</h2>
+            <div class="glass-card rounded-2xl overflow-hidden flex flex-col">
+                <div class="h-48 bg-gradient-to-br from-blue-600/30 to-purple-900/40 relative flex items-center justify-center border-b border-white/5">
+                    <i class="fab fa-css3-alt text-7xl text-blue-500/40"></i>
+                    <span class="absolute top-4 left-4 bg-blue-500 text-xs font-bold uppercase px-3 py-1 rounded-md">Intermédiaire</span>
                 </div>
-                <div class="category-body">
-                    <h3>L'art du design moderne</h3>
-                    <ul class="course-list">
-                        <li class="course-item">
-                            <span>Flexbox & Grid Masterclass</span>
-                            <span class="price">49€</span>
-                        </li>
-                        <li class="course-item">
-                            <span>Animations CSS Avancées</span>
-                            <span class="price">59€</span>
-                        </li>
-                        <li class="course-item">
-                            <span>Responsive Design</span>
-                            <span class="price">35€</span>
-                        </li>
-                    </ul>
-                    <a href="#" class="btn">Voir tout</a>
+                <div class="p-6 flex-1 flex flex-col">
+                    <h4 class="text-lg font-bold mb-2 hover:text-purple-400 cursor-pointer transition-colors">Tailwind CSS & Glassmorphism Masterclass</h4>
+                    <p class="text-gray-400 text-xs mb-4 line-clamp-2">Créez des interfaces au design futuriste, totalement responsives et hautement personnalisées.</p>
+                    <div class="mt-auto flex justify-between items-center pt-4 border-t border-white/5">
+                        <span class="text-xl font-bold text-white">29.99 €</span>
+                        <button class="bg-white/5 hover:bg-white/10 text-white px-4 py-2 rounded-lg text-xs font-semibold border border-white/10 transition-colors">
+                            Acheter
+                        </button>
+                    </div>
                 </div>
             </div>
 
-            <!-- Java Category -->
-            <div class="category-card">
-                <div class="category-header java-cat">
-                    <h2>JAVA</h2>
+            <div class="glass-card rounded-2xl overflow-hidden flex flex-col">
+                <div class="h-48 bg-gradient-to-br from-red-600/30 to-purple-900/40 relative flex items-center justify-center border-b border-white/5">
+                    <i class="fab fa-java text-7xl text-red-500/40"></i>
+                    <span class="absolute top-4 left-4 bg-red-500 text-xs font-bold uppercase px-3 py-1 rounded-md">Avancé</span>
                 </div>
-                <div class="category-body">
-                    <h3>Programmation Robuste</h3>
-                    <ul class="course-list">
-                        <li class="course-item">
-                            <span>Java pour Débutants</span>
-                            <span class="price">79€</span>
-                        </li>
-                        <li class="course-item">
-                            <span>Spring Boot Mastery</span>
-                            <span class="price">129€</span>
-                        </li>
-                        <li class="course-item">
-                            <span>Architecture Microservices</span>
-                            <span class="price">149€</span>
-                        </li>
-                    </ul>
-                    <a href="#" class="btn">Voir tout</a>
+                <div class="p-6 flex-1 flex flex-col">
+                    <h4 class="text-lg font-bold mb-2 hover:text-purple-400 cursor-pointer transition-colors">Java POO : Architecture & Algorithmes</h4>
+                    <p class="text-gray-400 text-xs mb-4 line-clamp-2">Maîtrisez la logique de programmation orientée objet, la gestion des bases de données et la création d'apps complexes.</p>
+                    <div class="mt-auto flex justify-between items-center pt-4 border-t border-white/5">
+                        <span class="text-xl font-bold text-white">49.99 €</span>
+                        <button class="bg-white/5 hover:bg-white/10 text-white px-4 py-2 rounded-lg text-xs font-semibold border border-white/10 transition-colors">
+                            Acheter
+                        </button>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
+    </section>
 
-    <footer>
-        <p>&copy; 2023 RONALD EMPIRE. Tous droits réservés.</p>
+    <footer id="contact" class="glass-card border-t border-white/5 mt-20">
+        <div class="max-w-7xl mx-auto px-6 py-12 flex flex-col md:flex-row justify-between items-center gap-6">
+            <div class="text-center md:text-left">
+                <h3 class="text-xl font-bold tracking-wider text-white mb-2">RONALD EMPIRE</h3>
+                <p class="text-gray-400 text-xs">L'excellence de l'apprentissage du code à portée de main.</p>
+            </div>
+            <div class="flex space-x-6 text-gray-400 text-lg">
+                <a href="#" class="hover:text-purple-400 transition-colors"><i class="fab fa-youtube"></i></a>
+                <a href="#" class="hover:text-purple-400 transition-colors"><i class="fab fa-facebook"></i></a>
+                <a href="#" class="hover:text-purple-400 transition-colors"><i class="fab fa-telegram"></i></a>
+                <a href="#" class="hover:text-purple-400 transition-colors"><i class="fab fa-whatsapp"></i></a>
+            </div>
+            <p class="text-gray-500 text-xs">&copy; 2026 RONALD EMPIRE. Tous droits réservés.</p>
+        </div>
     </footer>
 
 </body>
