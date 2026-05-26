@@ -12,6 +12,7 @@
         body {
             font-family: 'Poppins', sans-serif;
             background: radial-gradient(circle at top right, #1e1b4b, #090514);
+            min-height: 100vh;
         }
         /* Effet Glassmorphism */
         .glass-card {
@@ -26,28 +27,73 @@
             -webkit-backdrop-filter: blur(20px);
             border-bottom: 1px solid rgba(255, 255, 255, 0.05);
         }
+        .page-section {
+            display: none;
+            animation: fadeIn 0.5s ease-out forwards;
+        }
+        .page-section.active {
+            display: block;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        /* Chatbot Styles */
+        #chatbot-window {
+            display: none;
+            bottom: 80px;
+            right: 20px;
+            width: 320px;
+            height: 450px;
+            z-index: 1000;
+        }
+        #chatbot-window.active {
+            display: flex;
+        }
+        .chat-message {
+            max-width: 80%;
+            padding: 8px 12px;
+            border-radius: 12px;
+            margin-bottom: 8px;
+            font-size: 0.85rem;
+        }
+        .bot-msg { background: rgba(124, 58, 237, 0.2); align-self: flex-start; }
+        .user-msg { background: rgba(255, 255, 255, 0.1); align-self: flex-end; }
     </style>
 </head>
 <body class="text-gray-200 min-h-screen antialiased selection:bg-purple-500 selection:text-white">
 
+    <!-- Menu Navigation -->
     <nav class="glass-nav fixed top-0 left-0 w-full z-50 px-6 py-4 transition-all duration-300">
         <div class="max-w-7xl mx-auto flex justify-between items-center">
-            <a href="#" class="text-2xl font-bold tracking-wider text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-indigo-400">
+            <a href="#/accueil" class="text-2xl font-bold tracking-wider text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-indigo-400">
                 RONALD EMPIRE
             </a>
-            <div class="hidden md:flex space-x-8 text-sm font-medium">
-                <a href="#accueil" class="hover:text-purple-400 transition-colors">Accueil</a>
-                <a href="#categories" class="hover:text-purple-400 transition-colors">Catégories</a>
-                <a href="#formations" class="hover:text-purple-400 transition-colors">Formations</a>
-                <a href="#contact" class="hover:text-purple-400 transition-colors">Contact</a>
+            <!-- Mobile Menu Toggle -->
+            <button id="menu-toggle" class="md:hidden text-2xl text-purple-400">
+                <i class="fas fa-bars"></i>
+            </button>
+            <div id="nav-links" class="hidden md:flex space-x-8 text-sm font-medium">
+                <a href="#/accueil" class="nav-link hover:text-purple-400 transition-colors">Accueil</a>
+                <a href="#/categories" class="nav-link hover:text-purple-400 transition-colors">Catégories</a>
+                <a href="#/formations" class="nav-link hover:text-purple-400 transition-colors">Formations</a>
+                <a href="#/contact" class="nav-link hover:text-purple-400 transition-colors">Contact</a>
             </div>
-            <button class="bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-500 hover:to-indigo-500 text-white px-5 py-2 rounded-full text-sm font-semibold shadow-lg shadow-purple-500/20 transition-all duration-300 transform hover:-translate-y-0.5">
+            <button class="hidden md:block bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-500 hover:to-indigo-500 text-white px-5 py-2 rounded-full text-sm font-semibold shadow-lg shadow-purple-500/20 transition-all duration-300 transform hover:-translate-y-0.5">
                 Espace Membre
             </button>
         </div>
+        <!-- Mobile Dropdown -->
+        <div id="mobile-menu" class="hidden flex-col space-y-4 mt-4 pb-4 md:hidden border-t border-white/5">
+            <a href="#/accueil" class="nav-link hover:text-purple-400 transition-colors pt-4">Accueil</a>
+            <a href="#/categories" class="nav-link hover:text-purple-400 transition-colors">Catégories</a>
+            <a href="#/formations" class="nav-link hover:text-purple-400 transition-colors">Formations</a>
+            <a href="#/contact" class="nav-link hover:text-purple-400 transition-colors">Contact</a>
+        </div>
     </nav>
 
-    <section id="accueil" class="pt-32 pb-20 px-6 max-w-7xl mx-auto flex flex-col items-center text-center">
+    <main class="min-h-screen">
+    <section id="accueil" class="page-section pt-32 pb-20 px-6 max-w-7xl mx-auto flex flex-col items-center text-center">
         <span class="text-xs font-semibold tracking-widest text-purple-400 uppercase bg-purple-500/10 px-4 py-1.5 rounded-full mb-6 border border-purple-500/20">
             Passez à la vitesse supérieure
         </span>
@@ -61,16 +107,16 @@
             Propulsez vos compétences tech grâce à nos formations premium et tutoriels exclusifs. Apprenez à votre rythme avec des projets concrets.
         </p>
         <div class="flex flex-col sm:flex-row gap-4">
-            <a href="#formations" class="bg-purple-600 hover:bg-purple-500 text-white px-8 py-3.5 rounded-xl font-semibold shadow-lg shadow-purple-600/20 transition-all text-center">
+            <a href="#/formations" class="bg-purple-600 hover:bg-purple-500 text-white px-8 py-3.5 rounded-xl font-semibold shadow-lg shadow-purple-600/20 transition-all text-center">
                 Découvrir les cours
             </a>
-            <a href="#categories" class="glass-card hover:bg-white/5 text-white px-8 py-3.5 rounded-xl font-semibold border border-white/10 transition-all text-center">
+            <a href="#/categories" class="glass-card hover:bg-white/5 text-white px-8 py-3.5 rounded-xl font-semibold border border-white/10 transition-all text-center">
                 Explorer les catégories
             </a>
         </div>
     </section>
 
-    <section id="categories" class="py-20 px-6 max-w-7xl mx-auto">
+    <section id="categories" class="page-section pt-32 pb-20 px-6 max-w-7xl mx-auto">
         <div class="text-center mb-14">
             <h2 class="text-3xl font-bold mb-4">Nos Domaines d'Apprentissage</h2>
             <p class="text-gray-400">Des programmes structurés pour tous les niveaux, du débutant à l'expert.</p>
@@ -112,7 +158,7 @@
         </div>
     </section>
 
-    <section id="formations" class="py-20 px-6 max-w-7xl mx-auto border-t border-white/5">
+    <section id="formations" class="page-section pt-32 pb-20 px-6 max-w-7xl mx-auto border-t border-white/5">
         <div class="flex flex-col md:flex-row justify-between items-start md:items-end mb-14 gap-4">
             <div>
                 <h2 class="text-3xl font-bold mb-3">Formations à la Une</h2>
@@ -177,8 +223,8 @@
         </div>
     </section>
 
-    <footer id="contact" class="glass-card border-t border-white/5 mt-20">
-        <div class="max-w-7xl mx-auto px-6 py-12 flex flex-col md:flex-row justify-between items-center gap-6">
+    <section id="contact" class="page-section pt-32 pb-20 px-6 max-w-7xl mx-auto">
+        <div class="glass-card rounded-2xl p-12 flex flex-col md:flex-row justify-between items-center gap-6">
             <div class="text-center md:text-left">
                 <h3 class="text-xl font-bold tracking-wider text-white mb-2">RONALD EMPIRE</h3>
                 <p class="text-gray-400 text-xs">L'excellence de l'apprentissage du code à portée de main.</p>
@@ -191,7 +237,123 @@
             </div>
             <p class="text-gray-500 text-xs">&copy; 2026 RONALD EMPIRE. Tous droits réservés.</p>
         </div>
-    </footer>
+    </section>
+    </main>
 
+    <!-- Chatbot Widget -->
+    <button id="chatbot-toggle" class="fixed bottom-6 right-6 w-14 h-14 bg-purple-600 rounded-full shadow-2xl flex items-center justify-center text-white text-2xl hover:bg-purple-500 transition-all z-[1001] active:scale-95">
+        <i class="fas fa-comment-dots"></i>
+    </button>
+
+    <div id="chatbot-window" class="fixed glass-card rounded-2xl flex-col shadow-2xl overflow-hidden border border-white/10">
+        <div class="bg-purple-600/20 px-4 py-3 border-b border-white/5 flex justify-between items-center">
+            <div class="flex items-center gap-2">
+                <div class="w-2 h-2 bg-green-500 rounded-full animate-pulse"></div>
+                <span class="text-sm font-semibold">Assistant Ronald Empire</span>
+            </div>
+            <button id="close-chat" class="text-gray-400 hover:text-white"><i class="fas fa-times"></i></button>
+        </div>
+        <div id="chat-content" class="flex-1 p-4 overflow-y-auto flex flex-col gap-2">
+            <div class="chat-message bot-msg">Bonjour ! Je suis l'assistant de Ronald Empire. Comment puis-je vous aider aujourd'hui ?</div>
+        </div>
+        <div class="p-4 border-t border-white/5 flex gap-2">
+            <input type="text" id="chat-input" placeholder="Posez votre question..." class="flex-1 bg-white/5 border border-white/10 rounded-lg px-3 py-2 text-xs focus:outline-none focus:border-purple-500 transition-colors">
+            <button id="send-chat" class="bg-purple-600 px-3 py-2 rounded-lg text-xs hover:bg-purple-500 transition-colors"><i class="fas fa-paper-plane"></i></button>
+        </div>
+    </div>
+
+    <script>
+        // Router SPA simple
+        function navigate() {
+            const hash = window.location.hash || '#/accueil';
+            const route = hash.replace('#/', '');
+
+            // Masquer toutes les sections
+            document.querySelectorAll('.page-section').forEach(section => {
+                section.classList.remove('active');
+            });
+
+            // Afficher la section correspondante
+            const target = document.getElementById(route);
+            if (target) {
+                target.classList.add('active');
+            }
+
+            // Mettre à jour l'état actif du menu
+            document.querySelectorAll('.nav-link').forEach(link => {
+                if (link.getAttribute('href') === hash) {
+                    link.classList.add('text-purple-400');
+                } else {
+                    link.classList.remove('text-purple-400');
+                }
+            });
+
+            // Fermer le menu mobile lors de la navigation
+            document.getElementById('mobile-menu').classList.add('hidden');
+        }
+
+        window.addEventListener('hashchange', navigate);
+        window.addEventListener('load', navigate);
+
+        // Menu Mobile
+        document.getElementById('menu-toggle').addEventListener('click', () => {
+            document.getElementById('mobile-menu').classList.toggle('hidden');
+        });
+
+        // Chatbot Logic
+        const chatbotToggle = document.getElementById('chatbot-toggle');
+        const chatbotWindow = document.getElementById('chatbot-window');
+        const closeChat = document.getElementById('close-chat');
+        const chatInput = document.getElementById('chat-input');
+        const sendChat = document.getElementById('send-chat');
+        const chatContent = document.getElementById('chat-content');
+
+        chatbotToggle.addEventListener('click', () => {
+            chatbotWindow.classList.toggle('active');
+        });
+
+        closeChat.addEventListener('click', () => {
+            chatbotWindow.classList.remove('active');
+        });
+
+        function addMessage(text, type) {
+            const msg = document.createElement('div');
+            msg.className = `chat-message ${type === 'bot' ? 'bot-msg' : 'user-msg'}`;
+            msg.textContent = text;
+            chatContent.appendChild(msg);
+            chatContent.scrollTop = chatContent.scrollHeight;
+        }
+
+        function handleChat() {
+            const text = chatInput.value.trim();
+            if (!text) return;
+
+            addMessage(text, 'user');
+            chatInput.value = '';
+
+            // Simulation de réponse
+            setTimeout(() => {
+                let response = "Désolé, je n'ai pas compris votre demande. Pourriez-vous préciser ?";
+                const input = text.toLowerCase();
+
+                if (input.includes('prix') || input.includes('tarif')) {
+                    response = "Nos formations commencent à partir de 19.99€. Vous pouvez consulter le détail dans la section 'Formations'.";
+                } else if (input.includes('html')) {
+                    response = "Notre formation HTML5 Ultime est parfaite pour débuter. Elle coûte 19.99€.";
+                } else if (input.includes('java')) {
+                    response = "Nous proposons un cours Java POO Avancé pour 49.99€.";
+                } else if (input.includes('salut') || input.includes('bonjour')) {
+                    response = "Bonjour ! Quel cours vous intéresse aujourd'hui ? HTML, CSS ou Java ?";
+                }
+
+                addMessage(response, 'bot');
+            }, 600);
+        }
+
+        sendChat.addEventListener('click', handleChat);
+        chatInput.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') handleChat();
+        });
+    </script>
 </body>
 </html>
