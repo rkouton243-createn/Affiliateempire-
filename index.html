@@ -73,25 +73,53 @@
             <button id="menu-toggle" class="md:hidden text-2xl text-purple-400">
                 <i class="fas fa-bars"></i>
             </button>
-            <div id="nav-links" class="hidden lg:flex space-x-6 text-xs font-medium">
+            <div id="nav-links" class="hidden lg:flex space-x-4 text-[10px] xl:text-xs font-medium">
                 <a href="#/accueil" class="nav-link hover:text-purple-400 transition-colors">Accueil</a>
                 <a href="#/categories" class="nav-link hover:text-purple-400 transition-colors">Catégories</a>
                 <a href="#/formations" class="nav-link hover:text-purple-400 transition-colors">Formations</a>
                 <a href="#/boost" class="nav-link text-yellow-400 hover:text-yellow-300 font-bold"><i class="fas fa-rocket mr-1"></i>Boost</a>
+                <a href="#/comptes" class="nav-link hover:text-purple-400 transition-colors">Comptes</a>
                 <a href="#/services" class="nav-link hover:text-purple-400 transition-colors">Services</a>
                 <a href="#/formateur" class="nav-link hover:text-purple-400 transition-colors">Devenir Formateur</a>
                 <a href="#/contact" class="nav-link hover:text-purple-400 transition-colors">Contact</a>
             </div>
-            <button class="hidden md:block bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-500 hover:to-indigo-500 text-white px-5 py-2 rounded-full text-sm font-semibold shadow-lg shadow-purple-500/20 transition-all duration-300 transform hover:-translate-y-0.5">
-                Espace Membre
-            </button>
+            <div class="flex items-center gap-4">
+                <select id="lang-selector" class="hidden xl:block bg-white/5 border border-white/10 rounded-lg px-2 py-1 text-[10px] focus:outline-none cursor-pointer">
+                    <option value="fr">🇫🇷 FR</option>
+                    <option value="wo">🇸🇳 Wolof</option>
+                    <option value="sw">🇰🇪 Swahili</option>
+                    <option value="ln">🇨🇩 Lingala</option>
+                    <option value="yo">🇳🇬 Yoruba</option>
+                    <option value="zu">🇿🇦 Zulu</option>
+                    <option value="bm">🇲🇱 Bambara</option>
+                    <option value="ha">🇳🇬 Hausa</option>
+                    <option value="ar">🇲🇦 Arabe</option>
+                </select>
+                <button class="hidden md:block bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-500 hover:to-indigo-500 text-white px-5 py-2 rounded-full text-sm font-semibold shadow-lg shadow-purple-500/20 transition-all duration-300 transform hover:-translate-y-0.5">
+                    Espace Membre
+                </button>
+            </div>
         </div>
         <!-- Mobile Dropdown -->
         <div id="mobile-menu" class="hidden flex-col space-y-4 mt-4 pb-4 lg:hidden border-t border-white/5">
+            <div class="pt-4 px-2">
+                <select id="lang-selector-mobile" class="w-full bg-white/5 border border-white/10 rounded-lg px-3 py-2 text-xs focus:outline-none">
+                    <option value="fr">🇫🇷 Français</option>
+                    <option value="wo">🇸🇳 Wolof</option>
+                    <option value="sw">🇰🇪 Swahili</option>
+                    <option value="ln">🇨🇩 Lingala</option>
+                    <option value="yo">🇳🇬 Yoruba</option>
+                    <option value="zu">🇿🇦 Zulu</option>
+                    <option value="bm">🇲🇱 Bambara</option>
+                    <option value="ha">🇳🇬 Hausa</option>
+                    <option value="ar">🇲🇦 Arabe</option>
+                </select>
+            </div>
             <a href="#/accueil" class="nav-link hover:text-purple-400 transition-colors pt-4">Accueil</a>
             <a href="#/categories" class="nav-link hover:text-purple-400 transition-colors">Catégories</a>
             <a href="#/formations" class="nav-link hover:text-purple-400 transition-colors">Formations</a>
             <a href="#/boost" class="nav-link text-yellow-400 font-bold">Boost</a>
+            <a href="#/comptes" class="nav-link hover:text-purple-400 transition-colors">Comptes</a>
             <a href="#/services" class="nav-link hover:text-purple-400 transition-colors">Services</a>
             <a href="#/formateur" class="nav-link hover:text-purple-400 transition-colors">Devenir Formateur</a>
             <a href="#/contact" class="nav-link hover:text-purple-400 transition-colors">Contact</a>
@@ -725,6 +753,26 @@
         </div>
     </section>
 
+    <section id="comptes" class="page-section pt-32 pb-20 px-6 max-w-7xl mx-auto">
+        <div class="text-center mb-14">
+            <h2 class="text-3xl font-bold mb-4">Achat de Comptes Certifiés</h2>
+            <p class="text-gray-400">Boostez votre présence immédiatement avec des comptes pré-chauffés et sécurisés.</p>
+        </div>
+
+        <!-- Platform Selector -->
+        <div class="max-w-xs mx-auto mb-12">
+            <select id="platform-filter" class="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 focus:outline-none focus:border-purple-500 transition-all text-sm appearance-none cursor-pointer">
+                <option value="instagram" class="bg-[#090514]">Instagram</option>
+                <option value="facebook" class="bg-[#090514]">Facebook</option>
+                <option value="tiktok" class="bg-[#090514]">TikTok</option>
+            </select>
+        </div>
+
+        <div id="accounts-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+            <!-- Les comptes seront injectés ici via JS -->
+        </div>
+    </section>
+
     <section id="formateur" class="page-section pt-32 pb-20 px-6 max-w-4xl mx-auto">
         <div class="glass-card rounded-3xl p-8 md:p-12 border border-white/10">
             <div class="text-center mb-10">
@@ -1012,6 +1060,186 @@
                 window.open(`https://wa.me/2290198905311?text=${encodeURIComponent(message)}`, '_blank');
             });
         }
+
+        // Accounts Logic
+        const instagramAccounts = [
+            { desc: "Comptes Instagram anciens (2011-2020) | Accès email inclus | Profils variés | Adresses IP variées", price: 5.99 },
+            { desc: "Comptes Instagram créés manuellement | Adresses IP européennes | Adresse e-mail vérifiée + accès à l'e-mail", price: 1.1 },
+            { desc: "Compte Instagram avec 1000 abonnés | Changement complet des données | Garanti", price: 4.38 },
+            { desc: "Compte pour un démarrage rapide | Inscription manuelle | Haute qualité | avec e-mail", price: 1.1 },
+            { desc: "Comptes Instagram | Adresse IP américaine | Adresse e-mail vérifiée", price: 4.4 },
+            { desc: "Comptes Instagram | 1 000 abonnés | Publications authentiques | Adresse IP américaine", price: 25.3 },
+            { desc: "Anciens comptes Instagram | Enregistrés en 2013 | Changement complet des données | Garanti", price: 11.0 },
+            { desc: "Ancien compte Instagram (2021-2024) avec accès à la messagerie", price: 2.2 },
+            { desc: "Ancien compte Instagram (2016-2020) avec accès à la messagerie", price: 2.31 },
+            { desc: "Compte Instagram bleu vérifié | Accès complet | Nom au choix | Compte personnel", price: 200.2 },
+            { desc: "Compte Instagram créé il y a quelques années | Livraison rapide", price: 19.8 },
+            { desc: "Compte Instagram avec 50 000 abonnés | Données entièrement modifiées", price: 52.8 },
+            { desc: "Compte Instagram avec 20 000 abonnés | Changement complet des données | Garanti", price: 22.0 },
+            { desc: "Compte Instagram 500 abonnés | 2024 | Accès complet", price: 7.7 },
+            { desc: "Instagram USA 2024 (Ancien) | Données entièrement mises à jour", price: 25.96 },
+            { desc: "Compte Instagram ancien | Enregistré en 2012-2013 | Accès complet | 12-14 ans", price: 7.25 },
+            { desc: "Compte Instagram ancien | Enregistré en 2014-2015 | Accès complet | 10-12 ans", price: 7.25 },
+            { desc: "Comptes Instagram | Adresse e-mail incluse | Vérification SMS | IP US", price: 6.93 },
+            { desc: "Comptes Instagram | 250+ abonnés | Email inclus | GMX original", price: 6.6 },
+            { desc: "Compte Instagram 1k | 1000 abonnés | Accès complet | Données modifiables", price: 4.4 },
+            { desc: "Compte Instagram 500+ abonnés | Accès complet | Données modifiables", price: 3.3 },
+            { desc: "5K Compte Instagram 2020-2025 | 5 000 abonnés | Email inclus", price: 55.0 },
+            { desc: "10K Compte Instagram 2020-2025 | 10 000 abonnés | Email inclus", price: 110.0 },
+            { desc: "Comptes Instagram | Enregistrés en 2017 | Email Outlook/Hotmail", price: 13.2 },
+            { desc: "Comptes Instagram | Enregistrés en 2016 | Email Outlook/Hotmail", price: 14.3 },
+            { desc: "Femme Instagram Ac | 2FA MIX IP | Haute Qualité", price: 1.1 },
+            { desc: "USA Instagram Ac (2FA) | Livraison rapide", price: 1.1 },
+            { desc: "Anciens Comptes Instagram | 2005-2013 | Courriel accessible | Garanti", price: 10.89 },
+            { desc: "Ancien compte Instagram 2013 | 1000+ vrais abonnés | Accès complet", price: 20.9 },
+            { desc: "Compte Instagram + 1000 abonnés | Rapide et sécurisé | Garanti", price: 7.7 },
+            { desc: "Compte Instagram 14 800 abonnés | Croissance organique | Vrais abonnés", price: 95.7 },
+            { desc: "Compte Instagram 2026 | 2FA inclus | Livraison instantanée", price: 2.2 },
+            { desc: "Compte Instagram 173 abonnés | 2016 | USA | 2FA inclus", price: 6.93 },
+            { desc: "Compte Instagram USA HQ Handmade | Vérifié par email", price: 3.28 },
+            { desc: "Instagram Account (1000+) Followers | Full Data Change | Guaranteed", price: 13.09 },
+            { desc: "Instagram USA | 100 subscribers | Confirmed by SMS", price: 1.58 },
+            { desc: "Instagram Account | 1K Followers | Random Posts (2FA)", price: 8.8 },
+            { desc: "Instagram Account | 1K Followers | Email/2FA Access | High Quality", price: 7.7 },
+            { desc: "Meta Verified Account | Blue Badge | High Security | Trusted", price: 38.5 },
+            { desc: "Instagram Account (1K+ Followers) | 70% OFF", price: 22.0 }
+        ];
+
+        function renderAccounts() {
+            const grid = document.getElementById('accounts-grid');
+            const platform = document.getElementById('platform-filter').value;
+            grid.innerHTML = '';
+
+            if (platform === 'instagram') {
+                instagramAccounts.forEach(acc => {
+                    const priceFCFA = Math.round((acc.price + 2) * 655);
+                    const card = document.createElement('div');
+                    card.className = "glass-card p-6 rounded-2xl border border-white/5 flex flex-col hover:border-purple-500/30 transition-all";
+                    card.innerHTML = `
+                        <div class="flex items-center gap-3 mb-4">
+                            <div class="w-10 h-10 bg-gradient-to-tr from-purple-600 to-pink-600 rounded-lg flex items-center justify-center text-xl">
+                                <i class="fab fa-instagram"></i>
+                            </div>
+                            <span class="text-[10px] font-bold uppercase tracking-wider text-gray-400">Instagram</span>
+                        </div>
+                        <p class="text-xs text-gray-300 leading-relaxed mb-6 flex-1">${acc.desc}</p>
+                        <div class="pt-4 border-t border-white/5 flex items-center justify-between">
+                            <span class="text-lg font-bold text-white">${priceFCFA.toLocaleString()} FCFA</span>
+                            <a href="https://wa.me/2290198905311?text=${encodeURIComponent('Bonjour Ronald Empire, je souhaite acheter ce compte Instagram : ' + acc.desc)}" target="_blank" class="bg-purple-600 hover:bg-purple-500 text-white text-[10px] font-bold px-4 py-2 rounded-lg transition-colors">Commander</a>
+                        </div>
+                    `;
+                    grid.appendChild(card);
+                });
+            } else {
+                grid.innerHTML = '<div class="col-span-full text-center py-20 text-gray-500 italic">Bientôt disponible...</div>';
+            }
+        }
+
+        document.getElementById('platform-filter').addEventListener('change', renderAccounts);
+        window.addEventListener('load', renderAccounts);
+
+        // Multi-language Logic
+        const translations = {
+            fr: {
+                welcome: "Maîtrisez le Développement avec",
+                start: "Passez à la vitesse supérieure",
+                nav: ["Accueil", "Catégories", "Formations", "Boost", "Comptes", "Services", "Devenir Formateur", "Contact"],
+                cta_courses: "Découvrir les cours",
+                cta_cats: "Explorer les catégories"
+            },
+            wo: {
+                welcome: "Maitriser xarala ak",
+                start: "Duggal ci biir xarala yu bees",
+                nav: ["Kër", "Wàll", "Njàng", "Boost", "Kónt", "Sarwiis", "Nekk Jàngalekat", "Jokko"],
+                cta_courses: "Xool njàng mi",
+                cta_cats: "Xool wàll yi"
+            },
+            sw: {
+                welcome: "Bobea Maendeleo na",
+                start: "Nenda kwenye kiwango kinachofuata",
+                nav: ["Nyumbani", "Jamii", "Mafunzo", "Boost", "Akaunti", "Huduma", "Kuwa Mkufunzi", "Wasiliana"],
+                cta_courses: "Gundua kozi",
+                cta_cats: "Gundua kategoria"
+            },
+            ln: {
+                welcome: "Koma mayele na botongi na",
+                start: "Kende na nivo ya sika",
+                nav: ["Ndako", "Katégori", "Formasyo", "Boost", "Bakónti", "Misala", "Koma Moteyi", "Contact"],
+                cta_courses: "Luka bakonzi",
+                cta_cats: "Luka bakatégori"
+            },
+            yo: {
+                welcome: "Gba idagbasoke pẹlu",
+                start: "Lọ si ipele ti n bọ",
+                nav: ["Ile", "Awọn ẹka", "Ikẹkọ", "Boost", "Awọn iroyin", "Awọn iṣẹ", "Di Olukọni", "Olubasọrọ"],
+                cta_courses: "Ṣawari awọn ikẹkọ",
+                cta_cats: "Ṣawari awọn ẹka"
+            },
+            zu: {
+                welcome: "Yiba yingcweti ekuthuthukisweni nge",
+                start: "Iya ezingeni elilandelayo",
+                nav: ["Ikhaya", "Izigaba", "Izifundo", "Boost", "Ama-akhawunti", "Izinsizakalo", "Yiba ngumfundisi", "Oxhumana naye"],
+                cta_courses: "Thola izifundo",
+                cta_cats: "Hlola izigaba"
+            },
+            bm: {
+                welcome: "Yiriwali kulu ni",
+                start: "Taga n'yɛ gbe kura la",
+                nav: ["So", "Sira", "Kalan", "Boost", "Kóntiw", "Baara", "Kalanmogo", "Jumu"],
+                cta_courses: "Kalanw fɛsɛfɛsɛ",
+                cta_cats: "Siraw fɛsɛfɛsɛ"
+            },
+            ha: {
+                welcome: "Kware a fannin ci gaba tare da",
+                start: "Je zuwa mataki na gaba",
+                nav: ["Gida", "Rukunoni", "Horaswa", "Boost", "Asusu", "Ayyuka", "Zama Mai Koyarwa", "Tuntuɓi"],
+                cta_courses: "Gano darussa",
+                cta_cats: "Bincika rukunoni"
+            },
+            ar: {
+                welcome: "أتقن التطوير مع",
+                start: "انتقل إلى المستوى التالي",
+                nav: ["الرئيسية", "الفئات", "الدورات", "تعزيز", "الحسابات", "الخدمات", "كن مدرباً", "اتصل بنا"],
+                cta_courses: "اكتشف الدورات",
+                cta_cats: "استكشف الفئات"
+            }
+        };
+
+        function changeLanguage(lang) {
+            const welcomeText = document.querySelector('h1 span').previousSibling;
+            const startBadge = document.querySelector('#accueil span');
+            const ctaCourses = document.querySelector('a[href="#/formations"]');
+            const ctaCats = document.querySelector('a[href="#/categories"]');
+
+            if (translations[lang]) {
+                if (welcomeText && welcomeText.nodeType === Node.TEXT_NODE) {
+                    welcomeText.textContent = translations[lang].welcome + " ";
+                } else {
+                    const h1 = document.querySelector('h1');
+                    if (h1) h1.childNodes[0].textContent = translations[lang].welcome + " ";
+                }
+                if (startBadge) startBadge.textContent = translations[lang].start;
+                if (ctaCourses && ctaCourses.closest('#accueil')) ctaCourses.textContent = translations[lang].cta_courses;
+                if (ctaCats && ctaCats.closest('#accueil')) ctaCats.textContent = translations[lang].cta_cats;
+
+                // Mettre à jour le menu
+                const navLinks = document.querySelectorAll('.nav-link');
+                navLinks.forEach((link, index) => {
+                    const transIndex = index % translations[lang].nav.length;
+                    const icon = link.querySelector('i');
+                    if (icon) {
+                        link.innerHTML = '';
+                        link.appendChild(icon);
+                        link.appendChild(document.createTextNode(" " + translations[lang].nav[transIndex]));
+                    } else {
+                        link.textContent = translations[lang].nav[transIndex];
+                    }
+                });
+            }
+        }
+
+        document.getElementById('lang-selector').addEventListener('change', (e) => changeLanguage(e.target.value));
+        document.getElementById('lang-selector-mobile').addEventListener('change', (e) => changeLanguage(e.target.value));
 
         // Form Submission to WhatsApp
         const formateurForm = document.getElementById('formateur-form');
