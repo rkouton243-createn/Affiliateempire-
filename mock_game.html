@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Thimbles Game Mockup</title>
+    <style>
+        .thimbles-game {
+            display: flex;
+            justify-content: space-around;
+            padding: 50px;
+            background: #222;
+        }
+        .thimbles-game__thimble {
+            width: 100px;
+            height: 120px;
+            background: orange;
+            border-radius: 50px 50px 10px 10px;
+            position: relative;
+        }
+        .thimbles-game__ball {
+            width: 30px;
+            height: 30px;
+            background: red;
+            border-radius: 50%;
+            position: absolute;
+            bottom: -40px;
+            left: 35px;
+        }
+    </style>
+</head>
+<body>
+    <div class="thimbles-game">
+        <div class="thimbles-game__thimble"></div>
+        <div class="thimbles-game__thimble">
+            <div class="thimbles-game__ball"></div>
+        </div>
+        <div class="thimbles-game__thimble"></div>
+    </div>
+    <button id="add-thimble" onclick="addNewThimble()">Add Thimble</button>
+
+    <script>
+        function addNewThimble() {
+            const container = document.querySelector('.thimbles-game');
+            const div = document.createElement('div');
+            div.className = 'thimbles-game__thimble';
+            container.appendChild(div);
+        }
+    </script>
+</body>
+</html>

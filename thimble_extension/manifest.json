@@ -1,0 +1,16 @@
+{
+  "manifest_version": 3,
+  "name": "1xBet Thimbles Transparency Hack",
+  "version": "1.0",
+  "description": "Rend les dés à coudre transparents pour voir la balle.",
+  "permissions": ["activeTab", "scripting"],
+  "content_scripts": [
+    {
+      "matches": [
+        "*://*.1xbet.com/*",
+        "*://ind.1xbet.com/*"
+      ],
+      "js": ["content.js"]
+    }
+  ]
+}
