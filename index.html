@@ -5,13 +5,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>RONALD EMPIRE - Formations & Tutoriels</title>
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&family=Playfair+Display:ital,wght@0,700;1,700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
     <style>
         body {
             font-family: 'Poppins', sans-serif;
             background: #000000;
+            background-image:
+                linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+            background-size: 80px 80px;
             min-height: 100vh;
         }
         /* Effet Glassmorphism */
@@ -34,9 +38,55 @@
         .page-section.active {
             display: block;
         }
+        .nav-link {
+            padding: 8px 16px;
+            border-radius: 9999px;
+            transition: all 0.3s ease;
+        }
+        .nav-link.active-capsule {
+            background: #0e4b6b;
+            color: white !important;
+            box-shadow: 0 4px 12px rgba(14, 75, 107, 0.3);
+        }
         @keyframes fadeIn {
             from { opacity: 0; transform: translateY(10px); }
             to { opacity: 1; transform: translateY(0); }
+        }
+        .hero-title {
+            font-family: 'Playfair Display', serif;
+        }
+        .arch-frame {
+            border-radius: 160px 160px 20px 20px;
+            border: 8px solid white;
+            position: relative;
+            overflow: visible;
+        }
+        .arch-frame::before {
+            content: '';
+            position: absolute;
+            inset: -12px;
+            border-radius: 168px 168px 28px 28px;
+            background: linear-gradient(45deg, #00f2fe, #4facfe, #f093fb, #f5576c);
+            z-index: -1;
+            filter: blur(10px);
+            opacity: 0.7;
+        }
+        .starburst {
+            position: absolute;
+            bottom: -20px;
+            right: -20px;
+            width: 80px;
+            height: 80px;
+            background: #4facfe;
+            clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            font-size: 14px;
+            transform: rotate(-15deg);
+            box-shadow: 0 4px 15px rgba(79, 172, 254, 0.4);
         }
         /* Chatbot Styles */
         #chatbot-window {
@@ -73,15 +123,16 @@
             <button id="menu-toggle" class="md:hidden text-2xl text-purple-400">
                 <i class="fas fa-bars"></i>
             </button>
-            <div id="nav-links" class="hidden lg:flex space-x-4 text-[10px] xl:text-xs font-medium">
-                <a href="#/accueil" class="nav-link hover:text-purple-400 transition-colors">Accueil</a>
-                <a href="#/categories" class="nav-link hover:text-purple-400 transition-colors">Catégories</a>
-                <a href="#/formations" class="nav-link hover:text-purple-400 transition-colors">Formations</a>
+            <div id="nav-links" class="hidden lg:flex space-x-2 text-[10px] xl:text-xs font-medium items-center">
+                <a href="#/accueil" class="nav-link hover:text-purple-400">Accueil</a>
+                <a href="#/categories" class="nav-link hover:text-purple-400">Catégories</a>
+                <a href="#/formations" class="nav-link hover:text-purple-400">Formations</a>
+                <a href="#/code-dev" class="nav-link hover:text-purple-400">Code Dev</a>
                 <a href="#/boost" class="nav-link text-yellow-400 hover:text-yellow-300 font-bold"><i class="fas fa-rocket mr-1"></i>Boost</a>
-                <a href="#/comptes" class="nav-link hover:text-purple-400 transition-colors">Comptes</a>
-                <a href="#/services" class="nav-link hover:text-purple-400 transition-colors">Services</a>
-                <a href="#/formateur" class="nav-link hover:text-purple-400 transition-colors">Devenir Formateur</a>
-                <a href="#/contact" class="nav-link hover:text-purple-400 transition-colors">Contact</a>
+                <a href="#/comptes" class="nav-link hover:text-purple-400">Comptes</a>
+                <a href="#/services" class="nav-link hover:text-purple-400">Services</a>
+                <a href="#/formateur" class="nav-link hover:text-purple-400">Devenir Formateur</a>
+                <a href="#/contact" class="nav-link hover:text-purple-400">Contact</a>
             </div>
             <div class="flex items-center gap-4">
                 <select id="lang-selector" class="hidden xl:block bg-black border border-white/10 rounded-lg px-2 py-1 text-[10px] focus:outline-none cursor-pointer">
@@ -115,49 +166,82 @@
                     <option value="ar">🇲🇦 Arabe</option>
                 </select>
             </div>
-            <a href="#/accueil" class="nav-link hover:text-purple-400 transition-colors pt-4">Accueil</a>
-            <a href="#/categories" class="nav-link hover:text-purple-400 transition-colors">Catégories</a>
-            <a href="#/formations" class="nav-link hover:text-purple-400 transition-colors">Formations</a>
+            <a href="#/accueil" class="nav-link hover:text-purple-400 pt-4">Accueil</a>
+            <a href="#/categories" class="nav-link hover:text-purple-400">Catégories</a>
+            <a href="#/formations" class="nav-link hover:text-purple-400">Formations</a>
+            <a href="#/code-dev" class="nav-link hover:text-purple-400">Code Dev</a>
             <a href="#/boost" class="nav-link text-yellow-400 font-bold">Boost</a>
-            <a href="#/comptes" class="nav-link hover:text-purple-400 transition-colors">Comptes</a>
-            <a href="#/services" class="nav-link hover:text-purple-400 transition-colors">Services</a>
-            <a href="#/formateur" class="nav-link hover:text-purple-400 transition-colors">Devenir Formateur</a>
-            <a href="#/contact" class="nav-link hover:text-purple-400 transition-colors">Contact</a>
+            <a href="#/comptes" class="nav-link hover:text-purple-400">Comptes</a>
+            <a href="#/services" class="nav-link hover:text-purple-400">Services</a>
+            <a href="#/formateur" class="nav-link hover:text-purple-400">Devenir Formateur</a>
+            <a href="#/contact" class="nav-link hover:text-purple-400">Contact</a>
         </div>
     </nav>
 
     <main class="min-h-screen">
-    <section id="accueil" class="page-section pt-32 pb-20 px-6 max-w-7xl mx-auto flex flex-col items-center text-center">
-        <!-- Photo de profil Fondateur -->
-        <div class="relative mb-8 group">
-            <div class="absolute -inset-1.5 bg-gradient-to-r from-purple-600 to-indigo-600 rounded-full blur opacity-40 group-hover:opacity-75 transition duration-1000 group-hover:duration-200"></div>
-            <div class="relative w-28 h-28 md:w-32 md:h-32 rounded-full border-2 border-white/10 overflow-hidden shadow-2xl">
-                <img src="https://i.postimg.cc/G2rmDzYN/86ae27bb-bc3d-4d80-aa76-6ddd7c7f147f.jpg" alt="Ronald Empire" class="w-full h-full object-cover">
+    <section id="accueil" class="page-section pt-40 pb-20 px-6 max-w-7xl mx-auto">
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+            <!-- Left Side: Visual -->
+            <div class="lg:col-span-5 flex justify-center lg:justify-start order-2 lg:order-1">
+                <div class="arch-frame w-[300px] h-[450px] md:w-[350px] md:h-[500px] bg-[#1a1a1a] relative">
+                    <div class="absolute -top-4 -left-4 bg-white text-black px-4 py-1 rounded-full text-[10px] font-bold tracking-widest z-10 shadow-xl border border-black/10">FONDATEUR</div>
+                    <img src="https://i.postimg.cc/G2rmDzYN/86ae27bb-bc3d-4d80-aa76-6ddd7c7f147f.jpg" alt="Ronald Empire" class="w-full h-full object-cover" style="border-radius: 152px 152px 12px 12px;">
+                    <div class="starburst">
+                        <span class="transform rotate-15">40% <br> off</span>
+                    </div>
+                </div>
             </div>
-            <div class="absolute -bottom-2 left-1/2 -translate-x-1/2 bg-gradient-to-r from-purple-600 to-indigo-600 text-[10px] font-bold tracking-widest uppercase px-3 py-1 rounded-full border border-white/20 shadow-lg">
-                Fondateur
+
+            <!-- Right Side: Content -->
+            <div class="lg:col-span-7 text-left order-1 lg:order-2">
+                <p class="text-xs md:text-sm font-bold tracking-[0.3em] text-white uppercase mb-6 opacity-80">
+                    BIG SAVINGS ON THIS SALE
+                </p>
+                <h1 class="hero-title text-5xl md:text-8xl font-bold text-white mb-8 leading-tight">
+                    Ronald <span class="italic font-normal text-transparent bg-clip-text bg-gradient-to-r from-pink-300 to-indigo-200">Empire</span> <br>
+                    <span class="text-4xl md:text-6xl block mt-2">Event</span>
+                </h1>
+                <p class="text-gray-400 max-w-lg text-sm md:text-base mb-10 leading-relaxed font-light">
+                    Maîtrisez le développement et l'IA avec les meilleures formations du marché. Profitez de nos offres exclusives pour propulser votre carrière digitale dès aujourd'hui.
+                </p>
+                <div class="flex flex-wrap gap-6">
+                    <a href="#/formations" class="bg-gradient-to-r from-blue-400 to-purple-500 hover:scale-105 text-white px-10 py-4 rounded-xl font-bold shadow-xl transition-all flex items-center gap-2" style="background: linear-gradient(90deg, #4facfe 0%, #f093fb 100%);">
+                        Follow Us <i class="fas fa-arrow-right text-xs"></i>
+                    </a>
+                    <a href="#/categories" class="flex items-center gap-2 text-white font-bold hover:text-purple-400 transition-colors group">
+                        Explorer les cours <i class="fas fa-play-circle text-2xl group-hover:scale-110 transition-transform"></i>
+                    </a>
+                </div>
             </div>
         </div>
+    </section>
 
-        <span class="text-xs font-semibold tracking-widest text-purple-400 uppercase bg-purple-500/10 px-4 py-1.5 rounded-full mb-6 border border-purple-500/20">
-            Passez à la vitesse supérieure
-        </span>
-        <h1 class="text-4xl md:text-6xl font-extrabold tracking-tight mb-6">
-            Maîtrisez le Développement avec <br>
-            <span class="text-transparent bg-clip-text bg-gradient-to-r from-purple-400 via-pink-400 to-indigo-400">
-                RONALD EMPIRE
-            </span>
-        </h1>
-        <p class="text-gray-400 max-w-2xl text-base md:text-lg mb-10 leading-relaxed">
-            Propulsez vos compétences tech grâce à nos formations premium et tutoriels exclusifs. Apprenez à votre rythme avec des projets concrets.
-        </p>
-        <div class="flex flex-col sm:flex-row gap-4">
-            <a href="#/formations" class="bg-purple-600 hover:bg-purple-500 text-white px-8 py-3.5 rounded-xl font-semibold shadow-lg shadow-purple-600/20 transition-all text-center">
-                Découvrir les cours
-            </a>
-            <a href="#/categories" class="glass-card hover:bg-black text-white px-8 py-3.5 rounded-xl font-semibold border border-white/10 transition-all text-center">
-                Explorer les catégories
-            </a>
+    <section id="code-dev" class="page-section pt-40 pb-20 px-6 max-w-7xl mx-auto">
+        <div class="text-center py-20">
+            <div class="inline-block p-4 rounded-full bg-blue-500/10 text-blue-500 text-5xl mb-8">
+                <i class="fas fa-code"></i>
+            </div>
+            <h2 class="hero-title text-4xl md:text-6xl font-bold text-white mb-6">Code Dev</h2>
+            <p class="text-gray-400 max-w-2xl mx-auto text-lg italic">
+                "L'art de transformer le café en code."
+            </p>
+            <div class="mt-12 grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="glass-card p-10 rounded-3xl border border-white/5 opacity-50">
+                    <div class="text-2xl mb-4"><i class="fas fa-tools"></i></div>
+                    <h3 class="font-bold mb-2">Projets Open Source</h3>
+                    <p class="text-xs">Bientôt disponible</p>
+                </div>
+                <div class="glass-card p-10 rounded-3xl border border-white/5 opacity-50">
+                    <div class="text-2xl mb-4"><i class="fas fa-book"></i></div>
+                    <h3 class="font-bold mb-2">Documentation</h3>
+                    <p class="text-xs">Bientôt disponible</p>
+                </div>
+                <div class="glass-card p-10 rounded-3xl border border-white/5 opacity-50">
+                    <div class="text-2xl mb-4"><i class="fas fa-terminal"></i></div>
+                    <h3 class="font-bold mb-2">Snippets & Gists</h3>
+                    <p class="text-xs">Bientôt disponible</p>
+                </div>
+            </div>
         </div>
     </section>
 
@@ -897,9 +981,11 @@
             // Mettre à jour l'état actif du menu
             document.querySelectorAll('.nav-link').forEach(link => {
                 if (link.getAttribute('href') === hash) {
-                    link.classList.add('text-purple-400');
+                    link.classList.add('active-capsule');
+                    link.classList.remove('hover:text-purple-400');
                 } else {
-                    link.classList.remove('text-purple-400');
+                    link.classList.remove('active-capsule');
+                    link.classList.add('hover:text-purple-400');
                 }
             });
 
@@ -1175,63 +1261,63 @@
             fr: {
                 welcome: "Maîtrisez le Développement avec",
                 start: "Passez à la vitesse supérieure",
-                nav: ["Accueil", "Catégories", "Formations", "Boost", "Comptes", "Services", "Devenir Formateur", "Contact"],
+                nav: ["Accueil", "Catégories", "Formations", "Code Dev", "Boost", "Comptes", "Services", "Devenir Formateur", "Contact"],
                 cta_courses: "Découvrir les cours",
                 cta_cats: "Explorer les catégories"
             },
             wo: {
                 welcome: "Maitriser xarala ak",
                 start: "Duggal ci biir xarala yu bees",
-                nav: ["Kër", "Wàll", "Njàng", "Boost", "Kónt", "Sarwiis", "Nekk Jàngalekat", "Jokko"],
+                nav: ["Kër", "Wàll", "Njàng", "Xarala Dev", "Boost", "Kónt", "Sarwiis", "Nekk Jàngalekat", "Jokko"],
                 cta_courses: "Xool njàng mi",
                 cta_cats: "Xool wàll yi"
             },
             sw: {
                 welcome: "Bobea Maendeleo na",
                 start: "Nenda kwenye kiwango kinachofuata",
-                nav: ["Nyumbani", "Jamii", "Mafunzo", "Boost", "Akaunti", "Huduma", "Kuwa Mkufunzi", "Wasiliana"],
+                nav: ["Nyumbani", "Jamii", "Mafunzo", "Code Dev", "Boost", "Akaunti", "Huduma", "Kuwa Mkufunzi", "Wasiliana"],
                 cta_courses: "Gundua kozi",
                 cta_cats: "Gundua kategoria"
             },
             ln: {
                 welcome: "Koma mayele na botongi na",
                 start: "Kende na nivo ya sika",
-                nav: ["Ndako", "Katégori", "Formasyo", "Boost", "Bakónti", "Misala", "Koma Moteyi", "Contact"],
+                nav: ["Ndako", "Katégori", "Formasyo", "Code Dev", "Boost", "Bakónti", "Misala", "Koma Moteyi", "Contact"],
                 cta_courses: "Luka bakonzi",
                 cta_cats: "Luka bakatégori"
             },
             yo: {
                 welcome: "Gba idagbasoke pẹlu",
                 start: "Lọ si ipele ti n bọ",
-                nav: ["Ile", "Awọn ẹka", "Ikẹkọ", "Boost", "Awọn iroyin", "Awọn iṣẹ", "Di Olukọni", "Olubasọrọ"],
+                nav: ["Ile", "Awọn ẹka", "Ikẹkọ", "Code Dev", "Boost", "Awọn iroyin", "Awọn iṣẹ", "Di Olukọni", "Olubasọrọ"],
                 cta_courses: "Ṣawari awọn ikẹkọ",
                 cta_cats: "Ṣawari awọn ẹka"
             },
             zu: {
                 welcome: "Yiba yingcweti ekuthuthukisweni nge",
                 start: "Iya ezingeni elilandelayo",
-                nav: ["Ikhaya", "Izigaba", "Izifundo", "Boost", "Ama-akhawunti", "Izinsizakalo", "Yiba ngumfundisi", "Oxhumana naye"],
+                nav: ["Ikhaya", "Izigaba", "Izifundo", "Code Dev", "Boost", "Ama-akhawunti", "Izinsizakalo", "Yiba ngumfundisi", "Oxhumana naye"],
                 cta_courses: "Thola izifundo",
                 cta_cats: "Hlola izigaba"
             },
             bm: {
                 welcome: "Yiriwali kulu ni",
                 start: "Taga n'yɛ gbe kura la",
-                nav: ["So", "Sira", "Kalan", "Boost", "Kóntiw", "Baara", "Kalanmogo", "Jumu"],
+                nav: ["So", "Sira", "Kalan", "Code Dev", "Boost", "Kóntiw", "Baara", "Kalanmogo", "Jumu"],
                 cta_courses: "Kalanw fɛsɛfɛsɛ",
                 cta_cats: "Siraw fɛsɛfɛsɛ"
             },
             ha: {
                 welcome: "Kware a fannin ci gaba tare da",
                 start: "Je zuwa mataki na gaba",
-                nav: ["Gida", "Rukunoni", "Horaswa", "Boost", "Asusu", "Ayyuka", "Zama Mai Koyarwa", "Tuntuɓi"],
+                nav: ["Gida", "Rukunoni", "Horaswa", "Code Dev", "Boost", "Asusu", "Ayyuka", "Zama Mai Koyarwa", "Tuntuɓi"],
                 cta_courses: "Gano darussa",
                 cta_cats: "Bincika rukunoni"
             },
             ar: {
                 welcome: "أتقن التطوير مع",
                 start: "انتقل إلى المستوى التالي",
-                nav: ["الرئيسية", "الفئات", "الدورات", "تعزيز", "الحسابات", "الخدمات", "كن مدرباً", "اتصل بنا"],
+                nav: ["الرئيسية", "الفئات", "الدورات", "كود ديف", "تعزيز", "الحسابات", "الخدمات", "كن مدرباً", "اتصل بنا"],
                 cta_courses: "اكتشف الدورات",
                 cta_cats: "استكشف الفئات"
             }
