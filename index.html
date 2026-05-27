@@ -7,7 +7,9 @@
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&family=Playfair+Display:ital,wght@0,700;1,700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <script src="https://accounts.google.com/gsi/client" async defer></script>
+    <!-- GSAP for v2.0 Animations -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
 
     <style>
         body {
@@ -34,7 +36,7 @@
         }
         .page-section {
             display: none;
-            animation: fadeIn 0.5s ease-out forwards;
+            opacity: 0;
         }
         .page-section.active {
             display: block;
@@ -195,17 +197,6 @@
                     <option value="ha">🇳🇬 Hausa</option>
                     <option value="ar">🇲🇦 Arabe</option>
                 </select>
-                <!-- Container for Login Button / User Profile -->
-                <div id="auth-container" class="hidden md:block">
-                    <button id="login-btn" class="bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-500 hover:to-indigo-500 text-white px-5 py-2 rounded-full text-sm font-semibold shadow-lg shadow-purple-500/20 transition-all duration-300 transform hover:-translate-y-0.5">
-                        Espace Membre
-                    </button>
-                    <div id="user-profile" class="hidden items-center gap-3">
-                        <img id="user-photo" src="" alt="Profile" class="w-8 h-8 rounded-full border border-purple-500">
-                        <span id="user-name" class="text-xs font-semibold text-purple-300"></span>
-                        <button id="logout-btn" class="text-gray-400 hover:text-red-400 text-[10px] uppercase font-bold transition-colors">Déconnexion</button>
-                    </div>
-                </div>
             </div>
         </div>
         <!-- Mobile Dropdown -->
@@ -242,7 +233,7 @@
             <div class="lg:col-span-5 flex justify-center lg:justify-start order-2 lg:order-1">
                 <div class="arch-frame led-effect w-[300px] h-[450px] md:w-[350px] md:h-[500px] bg-[#1a1a1a] relative">
                     <div class="absolute -top-4 -left-4 bg-white text-black px-4 py-1 rounded-full text-[10px] font-bold tracking-widest z-10 shadow-xl border border-black/10">FONDATEUR</div>
-                    <img src="founder.png" alt="RONALD EMPIRE" class="w-full h-full object-cover" style="border-radius: 152px 152px 12px 12px;">
+                    <img src="https://kommodo.ai/i/WMZsobVjpBXsC930cn09" alt="RONALD EMPIRE" class="w-full h-full object-cover" style="border-radius: 152px 152px 12px 12px;">
                     <div class="starburst">
                         <span class="transform rotate-15">40% <br> off</span>
                     </div>
@@ -255,8 +246,8 @@
                     BIG SAVINGS ON THIS SALE
                 </p>
                 <h1 class="hero-title text-5xl md:text-8xl font-bold text-white mb-8 leading-tight">
-                    RONALD <span class="italic font-normal text-transparent bg-clip-text bg-gradient-to-r from-pink-300 to-indigo-200">EMPIRE</span> <br>
-                    <span class="text-4xl md:text-6xl block mt-2">Event</span>
+                    <span id="welcome-prefix">RONALD</span> <span class="italic font-normal text-transparent bg-clip-text bg-gradient-to-r from-pink-300 to-indigo-200">EMPIRE</span> <br>
+                    <span id="event-badge" class="text-4xl md:text-6xl block mt-2">Event</span>
                 </h1>
                 <p class="text-gray-400 max-w-lg text-sm md:text-base mb-10 leading-relaxed font-light">
                     Maîtrisez le développement et l'IA avec les meilleures formations du marché. Profitez de nos offres exclusives pour propulser votre carrière digitale dès aujourd'hui.
@@ -1019,6 +1010,43 @@
     </div>
 
     <script>
+        // --- GSAP Registration ---
+        gsap.registerPlugin(ScrollTrigger);
+
+        // --- Audio Logic (v2.0) ---
+        let audioCtx = null;
+        const playClickSound = () => {
+            try {
+                if (!audioCtx) {
+                    audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+                }
+                const oscillator = audioCtx.createOscillator();
+                const gainNode = audioCtx.createGain();
+
+                oscillator.type = 'sine';
+                oscillator.frequency.setValueAtTime(800, audioCtx.currentTime);
+                oscillator.frequency.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + 0.1);
+
+                gainNode.gain.setValueAtTime(0.05, audioCtx.currentTime);
+                gainNode.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + 0.1);
+
+                oscillator.connect(gainNode);
+                gainNode.connect(audioCtx.destination);
+
+                oscillator.start();
+                oscillator.stop(audioCtx.currentTime + 0.1);
+            } catch (e) {
+                console.log("Audio non supporté ou bloqué");
+            }
+        };
+
+        document.addEventListener('click', (e) => {
+            const target = e.target.closest('a, button, select, input[type="submit"], .cursor-pointer');
+            if (target) {
+                playClickSound();
+            }
+        });
+
         // Router SPA simple
         function navigate() {
             const hash = window.location.hash || '#/accueil';
@@ -1027,12 +1055,23 @@
             // Masquer toutes les sections
             document.querySelectorAll('.page-section').forEach(section => {
                 section.classList.remove('active');
+                gsap.set(section, { display: 'none', opacity: 0 });
             });
 
             // Afficher la section correspondante
             const target = document.getElementById(route);
             if (target) {
                 target.classList.add('active');
+                gsap.set(target, { display: 'block' });
+
+                // Entrance Animation
+                gsap.fromTo(target,
+                    { opacity: 0, y: 30 },
+                    { opacity: 1, y: 0, duration: 0.8, ease: "power3.out" }
+                );
+
+                // Section specific animations
+                animateSection(route);
             }
 
             // Mettre à jour l'état actif du menu
@@ -1052,6 +1091,31 @@
 
         window.addEventListener('hashchange', navigate);
         window.addEventListener('load', navigate);
+
+        function animateSection(route) {
+            // Cards stagger animation
+            const cards = document.querySelectorAll(`#${route} .glass-card`);
+            if (cards.length > 0) {
+                gsap.from(cards, {
+                    y: 50,
+                    opacity: 0,
+                    duration: 0.8,
+                    stagger: 0.1,
+                    ease: "back.out(1.7)",
+                    scrollTrigger: {
+                        trigger: `#${route}`,
+                        start: "top 80%"
+                    }
+                });
+            }
+
+            // Hero content specific
+            if (route === 'accueil') {
+                gsap.from(".hero-title", { x: -100, opacity: 0, duration: 1, ease: "power4.out", delay: 0.2 });
+                gsap.from(".arch-frame", { scale: 0.8, opacity: 0, duration: 1.2, ease: "elastic.out(1, 0.3)", delay: 0.4 });
+                gsap.from("#accueil p", { y: 20, opacity: 0, duration: 0.8, stagger: 0.2, delay: 0.6 });
+            }
+        }
 
         // Menu Mobile
         document.getElementById('menu-toggle').addEventListener('click', () => {
@@ -1381,19 +1445,15 @@
         };
 
         function changeLanguage(lang) {
-            const welcomeText = document.querySelector('h1 span').previousSibling;
-            const startBadge = document.querySelector('#accueil span');
+            const welcomePrefix = document.getElementById('welcome-prefix');
+            const eventBadge = document.getElementById('event-badge');
+            const startBadge = document.querySelector('#accueil p.tracking-\\[0\\.3em\\]');
             const ctaCourses = document.querySelector('a[href="#/formations"]');
             const ctaCats = document.querySelector('a[href="#/categories"]');
 
             if (translations[lang]) {
-                if (welcomeText && welcomeText.nodeType === Node.TEXT_NODE) {
-                    welcomeText.textContent = translations[lang].welcome + " ";
-                } else {
-                    const h1 = document.querySelector('h1');
-                    if (h1) h1.childNodes[0].textContent = translations[lang].welcome + " ";
-                }
-                if (startBadge) startBadge.textContent = translations[lang].start;
+                if (welcomePrefix) welcomePrefix.textContent = translations[lang].welcome;
+                if (eventBadge) eventBadge.textContent = translations[lang].start;
                 if (ctaCourses && ctaCourses.closest('#accueil')) ctaCourses.textContent = translations[lang].cta_courses;
                 if (ctaCats && ctaCats.closest('#accueil')) ctaCats.textContent = translations[lang].cta_cats;
 
@@ -1415,78 +1475,6 @@
 
         document.getElementById('lang-selector').addEventListener('change', (e) => changeLanguage(e.target.value));
         document.getElementById('lang-selector-mobile').addEventListener('change', (e) => changeLanguage(e.target.value));
-
-        // --- Google Login & Auth Logic ---
-        const loginBtn = document.getElementById('login-btn');
-        const logoutBtn = document.getElementById('logout-btn');
-        const userProfile = document.getElementById('user-profile');
-        const userPhoto = document.getElementById('user-photo');
-        const userName = document.getElementById('user-name');
-
-        function handleCredentialResponse(response) {
-            // Decode the JWT token to get user info
-            const responsePayload = decodeJwtResponse(response.credential);
-
-            const userData = {
-                name: responsePayload.name,
-                picture: responsePayload.picture,
-                email: responsePayload.email
-            };
-
-            localStorage.setItem('user', JSON.stringify(userData));
-            updateAuthUI(userData);
-        }
-
-        function decodeJwtResponse(token) {
-            let base64Url = token.split('.')[1];
-            let base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
-            let jsonPayload = decodeURIComponent(window.atob(base64).split('').map(function(c) {
-                return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
-            }).join(''));
-            return JSON.parse(jsonPayload);
-        }
-
-        function updateAuthUI(user) {
-            if (user) {
-                loginBtn.classList.add('hidden');
-                userProfile.classList.remove('hidden');
-                userProfile.classList.add('flex');
-                userPhoto.src = user.picture;
-                userName.textContent = user.name;
-            } else {
-                loginBtn.classList.remove('hidden');
-                userProfile.classList.add('hidden');
-                userProfile.classList.remove('flex');
-            }
-        }
-
-        window.onload = function () {
-            google.accounts.id.initialize({
-                client_id: "75549065636-h7isrv2ndunpquge8m1m0i80p0oql3m2.apps.googleusercontent.com", // Replace with a real Client ID if needed
-                callback: handleCredentialResponse
-            });
-
-            loginBtn.onclick = () => {
-                google.accounts.id.prompt(); // Maintient l'UX Google Native
-                // Alternativement, on peut utiliser renderButton
-                google.accounts.id.renderButton(
-                    document.getElementById("login-btn"),
-                    { theme: "outline", size: "large" }
-                );
-            };
-
-            // Check if user already logged in
-            const savedUser = localStorage.getItem('user');
-            if (savedUser) {
-                updateAuthUI(JSON.parse(savedUser));
-            }
-        }
-
-        logoutBtn.onclick = () => {
-            localStorage.removeItem('user');
-            updateAuthUI(null);
-            location.reload();
-        };
 
         // Form Submission to WhatsApp
         const formateurForm = document.getElementById('formateur-form');
