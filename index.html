@@ -11,21 +11,21 @@
     <style>
         body {
             font-family: 'Poppins', sans-serif;
-            background: radial-gradient(circle at top right, #1e1b4b, #090514);
+            background: #000000;
             min-height: 100vh;
         }
         /* Effet Glassmorphism */
         .glass-card {
-            background: rgba(255, 255, 255, 0.03);
+            background: rgba(15, 15, 15, 0.6);
             backdrop-filter: blur(12px);
             -webkit-backdrop-filter: blur(12px);
             border: 1px solid rgba(255, 255, 255, 0.08);
         }
         .glass-nav {
-            background: rgba(9, 5, 20, 0.7);
+            background: rgba(0, 0, 0, 0.85);
             backdrop-filter: blur(20px);
             -webkit-backdrop-filter: blur(20px);
-            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
         }
         .page-section {
             display: none;
@@ -84,7 +84,7 @@
                 <a href="#/contact" class="nav-link hover:text-purple-400 transition-colors">Contact</a>
             </div>
             <div class="flex items-center gap-4">
-                <select id="lang-selector" class="hidden xl:block bg-white/5 border border-white/10 rounded-lg px-2 py-1 text-[10px] focus:outline-none cursor-pointer">
+                <select id="lang-selector" class="hidden xl:block bg-black border border-white/10 rounded-lg px-2 py-1 text-[10px] focus:outline-none cursor-pointer">
                     <option value="fr">🇫🇷 FR</option>
                     <option value="wo">🇸🇳 Wolof</option>
                     <option value="sw">🇰🇪 Swahili</option>
@@ -103,7 +103,7 @@
         <!-- Mobile Dropdown -->
         <div id="mobile-menu" class="hidden flex-col space-y-4 mt-4 pb-4 lg:hidden border-t border-white/5">
             <div class="pt-4 px-2">
-                <select id="lang-selector-mobile" class="w-full bg-white/5 border border-white/10 rounded-lg px-3 py-2 text-xs focus:outline-none">
+                <select id="lang-selector-mobile" class="w-full bg-black border border-white/10 rounded-lg px-3 py-2 text-xs focus:outline-none">
                     <option value="fr">🇫🇷 Français</option>
                     <option value="wo">🇸🇳 Wolof</option>
                     <option value="sw">🇰🇪 Swahili</option>
@@ -155,7 +155,7 @@
             <a href="#/formations" class="bg-purple-600 hover:bg-purple-500 text-white px-8 py-3.5 rounded-xl font-semibold shadow-lg shadow-purple-600/20 transition-all text-center">
                 Découvrir les cours
             </a>
-            <a href="#/categories" class="glass-card hover:bg-white/5 text-white px-8 py-3.5 rounded-xl font-semibold border border-white/10 transition-all text-center">
+            <a href="#/categories" class="glass-card hover:bg-black text-white px-8 py-3.5 rounded-xl font-semibold border border-white/10 transition-all text-center">
                 Explorer les catégories
             </a>
         </div>
@@ -229,19 +229,19 @@
         <div class="glass-card rounded-3xl p-6 md:p-10 border border-white/10 shadow-2xl relative overflow-hidden">
             <!-- Social Icons Header -->
             <div class="grid grid-cols-4 gap-4 mb-8">
-                <div class="bg-white/5 rounded-2xl p-4 flex flex-col items-center border border-white/5 hover:border-blue-500/50 transition-all cursor-pointer group">
+                <div class="bg-black rounded-2xl p-4 flex flex-col items-center border border-white/5 hover:border-blue-500/50 transition-all cursor-pointer group">
                     <i class="fab fa-facebook text-3xl text-[#1877F2] mb-2 group-hover:scale-110 transition-transform"></i>
                     <span class="text-[10px] font-semibold text-gray-400">Facebook</span>
                 </div>
-                <div class="bg-white/5 rounded-2xl p-4 flex flex-col items-center border border-white/5 hover:border-pink-500/50 transition-all cursor-pointer group">
+                <div class="bg-black rounded-2xl p-4 flex flex-col items-center border border-white/5 hover:border-pink-500/50 transition-all cursor-pointer group">
                     <i class="fab fa-tiktok text-3xl text-white mb-2 group-hover:scale-110 transition-transform"></i>
                     <span class="text-[10px] font-semibold text-gray-400">TikTok</span>
                 </div>
-                <div class="bg-white/5 rounded-2xl p-4 flex flex-col items-center border border-white/5 hover:border-orange-500/50 transition-all cursor-pointer group">
+                <div class="bg-black rounded-2xl p-4 flex flex-col items-center border border-white/5 hover:border-orange-500/50 transition-all cursor-pointer group">
                     <i class="fab fa-instagram text-3xl text-[#E4405F] mb-2 group-hover:scale-110 transition-transform"></i>
                     <span class="text-[10px] font-semibold text-gray-400">Instagram</span>
                 </div>
-                <div class="bg-white/5 rounded-2xl p-4 flex flex-col items-center border border-white/5 hover:border-red-500/50 transition-all cursor-pointer group">
+                <div class="bg-black rounded-2xl p-4 flex flex-col items-center border border-white/5 hover:border-red-500/50 transition-all cursor-pointer group">
                     <i class="fab fa-youtube text-3xl text-[#FF0000] mb-2 group-hover:scale-110 transition-transform"></i>
                     <span class="text-[10px] font-semibold text-gray-400">YouTube</span>
                 </div>
@@ -258,12 +258,12 @@
                     <label class="flex items-center gap-2 text-xs font-semibold text-gray-400 mb-3">
                         <i class="fas fa-folder text-yellow-500"></i> Type de service
                     </label>
-                    <select id="boost-type" class="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3.5 focus:outline-none focus:border-purple-500 transition-colors text-sm appearance-none cursor-pointer">
-                        <option value="" class="bg-[#090514]">Choisir un type de service...</option>
-                        <option value="facebook" class="bg-[#090514]">Facebook - Followers / Likes</option>
-                        <option value="tiktok" class="bg-[#090514]">TikTok - Vues / Abonnés</option>
-                        <option value="instagram" class="bg-[#090514]">Instagram - Followers / Likes</option>
-                        <option value="youtube" class="bg-[#090514]">YouTube - Vues / Watchtime</option>
+                    <select id="boost-type" class="w-full bg-black border border-white/10 rounded-xl px-4 py-3.5 focus:outline-none focus:border-purple-500 transition-colors text-sm appearance-none cursor-pointer">
+                        <option value="" class="bg-black">Choisir un type de service...</option>
+                        <option value="facebook" class="bg-black">Facebook - Followers / Likes</option>
+                        <option value="tiktok" class="bg-black">TikTok - Vues / Abonnés</option>
+                        <option value="instagram" class="bg-black">Instagram - Followers / Likes</option>
+                        <option value="youtube" class="bg-black">YouTube - Vues / Watchtime</option>
                     </select>
                 </div>
 
@@ -272,8 +272,8 @@
                     <label class="flex items-center gap-2 text-xs font-semibold text-gray-400 mb-3">
                         <i class="fas fa-clipboard-list text-orange-400"></i> Qualité & offre
                     </label>
-                    <select id="boost-offer" class="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3.5 focus:outline-none focus:border-purple-500 transition-colors text-sm appearance-none cursor-pointer">
-                        <option value="" class="bg-[#090514]">Choisir une offre...</option>
+                    <select id="boost-offer" class="w-full bg-black border border-white/10 rounded-xl px-4 py-3.5 focus:outline-none focus:border-purple-500 transition-colors text-sm appearance-none cursor-pointer">
+                        <option value="" class="bg-black">Choisir une offre...</option>
                     </select>
                 </div>
 
@@ -282,7 +282,7 @@
                     <label class="flex items-center gap-2 text-xs font-semibold text-gray-400 mb-3">
                         <i class="fas fa-link text-blue-400"></i> Lien du profil / post / page
                     </label>
-                    <input type="url" id="boost-link" placeholder="https://.com/your_id" class="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3.5 focus:outline-none focus:border-purple-500 transition-colors text-sm">
+                    <input type="url" id="boost-link" placeholder="https://.com/your_id" class="w-full bg-black border border-white/10 rounded-xl px-4 py-3.5 focus:outline-none focus:border-purple-500 transition-colors text-sm">
                 </div>
 
                 <!-- Quantité -->
@@ -290,14 +290,14 @@
                     <label class="flex items-center gap-2 text-xs font-semibold text-gray-400 mb-3">
                         <i class="fas fa-chart-bar text-green-400"></i> Quantité
                     </label>
-                    <input type="number" id="boost-quantity" placeholder="0" class="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3.5 focus:outline-none focus:border-purple-500 transition-colors text-sm">
+                    <input type="number" id="boost-quantity" placeholder="0" class="w-full bg-black border border-white/10 rounded-xl px-4 py-3.5 focus:outline-none focus:border-purple-500 transition-colors text-sm">
                     <div class="absolute bottom-3 right-4 w-8 h-8 bg-indigo-900/50 rounded-full flex items-center justify-center text-indigo-300">
                         <i class="far fa-lightbulb"></i>
                     </div>
                 </div>
 
                 <!-- Total -->
-                <div class="bg-white/5 rounded-2xl p-6 flex justify-between items-center border border-white/5 mt-8">
+                <div class="bg-black rounded-2xl p-6 flex justify-between items-center border border-white/5 mt-8">
                     <span class="text-gray-400 text-sm font-medium">Total estimé</span>
                     <span id="boost-total" class="text-2xl font-bold text-purple-400">0 FCFA</span>
                 </div>
@@ -417,7 +417,7 @@
                     <p class="text-gray-400 text-xs mb-4 line-clamp-2">Bâtissez des sites web modernes et découvrez les secrets du référencement naturel et de la structure sémantique.</p>
                     <div class="mt-auto flex justify-between items-center pt-4 border-t border-white/5">
                         <span class="text-xl font-bold text-white">13 000 FCFA</span>
-                        <button class="bg-white/5 hover:bg-white/10 text-white px-4 py-2 rounded-lg text-xs font-semibold border border-white/10 transition-colors">
+                        <button class="bg-black hover:bg-white/10 text-white px-4 py-2 rounded-lg text-xs font-semibold border border-white/10 transition-colors">
                             Acheter
                         </button>
                     </div>
@@ -434,7 +434,7 @@
                     <p class="text-gray-400 text-xs mb-4 line-clamp-2">Créez des interfaces au design futuriste, totalement responsives et hautement personnalisées.</p>
                     <div class="mt-auto flex justify-between items-center pt-4 border-t border-white/5">
                         <span class="text-xl font-bold text-white">20 000 FCFA</span>
-                        <button class="bg-white/5 hover:bg-white/10 text-white px-4 py-2 rounded-lg text-xs font-semibold border border-white/10 transition-colors">
+                        <button class="bg-black hover:bg-white/10 text-white px-4 py-2 rounded-lg text-xs font-semibold border border-white/10 transition-colors">
                             Acheter
                         </button>
                     </div>
@@ -451,7 +451,7 @@
                     <p class="text-gray-400 text-xs mb-4 line-clamp-2">Maîtrisez la logique de programmation orientée objet, la gestion des bases de données et la création d'apps complexes.</p>
                     <div class="mt-auto flex justify-between items-center pt-4 border-t border-white/5">
                         <span class="text-xl font-bold text-white">33 000 FCFA</span>
-                        <button class="bg-white/5 hover:bg-white/10 text-white px-4 py-2 rounded-lg text-xs font-semibold border border-white/10 transition-colors">
+                        <button class="bg-black hover:bg-white/10 text-white px-4 py-2 rounded-lg text-xs font-semibold border border-white/10 transition-colors">
                             Acheter
                         </button>
                     </div>
@@ -469,7 +469,7 @@
                     <p class="text-gray-400 text-xs mb-4 line-clamp-2">Apprenez à créer un compte éligible et maîtrisez les stratégies pour monétiser votre contenu rapidement.</p>
                     <div class="mt-auto flex justify-between items-center pt-4 border-t border-white/5">
                         <span class="text-xl font-bold text-white">10 000 FCFA</span>
-                        <button class="bg-white/5 hover:bg-white/10 text-white px-4 py-2 rounded-lg text-xs font-semibold border border-white/10 transition-colors">
+                        <button class="bg-black hover:bg-white/10 text-white px-4 py-2 rounded-lg text-xs font-semibold border border-white/10 transition-colors">
                             Acheter
                         </button>
                     </div>
@@ -486,7 +486,7 @@
                     <p class="text-gray-400 text-xs mb-4 line-clamp-2">Guide complet pour configurer un compte Facebook prêt pour la monétisation et générer des revenus.</p>
                     <div class="mt-auto flex justify-between items-center pt-4 border-t border-white/5">
                         <span class="text-xl font-bold text-white">10 000 FCFA</span>
-                        <button class="bg-white/5 hover:bg-white/10 text-white px-4 py-2 rounded-lg text-xs font-semibold border border-white/10 transition-colors">
+                        <button class="bg-black hover:bg-white/10 text-white px-4 py-2 rounded-lg text-xs font-semibold border border-white/10 transition-colors">
                             Acheter
                         </button>
                     </div>
@@ -503,7 +503,7 @@
                     <p class="text-gray-400 text-xs mb-4 line-clamp-2">Découvrez comment créer et valider un compte Paypal fonctionnel en Afrique pour recevoir vos paiements.</p>
                     <div class="mt-auto flex justify-between items-center pt-4 border-t border-white/5">
                         <span class="text-xl font-bold text-white">13 000 FCFA</span>
-                        <button class="bg-white/5 hover:bg-white/10 text-white px-4 py-2 rounded-lg text-xs font-semibold border border-white/10 transition-colors">
+                        <button class="bg-black hover:bg-white/10 text-white px-4 py-2 rounded-lg text-xs font-semibold border border-white/10 transition-colors">
                             Acheter
                         </button>
                     </div>
@@ -521,7 +521,7 @@
                     <p class="text-gray-400 text-xs mb-4 line-clamp-2">Devancez le marché et maîtrisez la nouvelle ère de l'IA en pilotant Gemini directement depuis votre terminal.</p>
                     <div class="mt-auto flex justify-between items-center pt-4 border-t border-white/5">
                         <span class="text-xl font-bold text-white">23 000 FCFA</span>
-                        <button class="bg-white/5 hover:bg-white/10 text-white px-4 py-2 rounded-lg text-xs font-semibold border border-white/10 transition-colors">Acheter</button>
+                        <button class="bg-black hover:bg-white/10 text-white px-4 py-2 rounded-lg text-xs font-semibold border border-white/10 transition-colors">Acheter</button>
                     </div>
                 </div>
             </div>
@@ -536,7 +536,7 @@
                     <p class="text-gray-400 text-xs mb-4 line-clamp-2">Libérez la puissance totale de la création sans censure. Maîtrisez les modèles open-source sans restrictions.</p>
                     <div class="mt-auto flex justify-between items-center pt-4 border-t border-white/5">
                         <span class="text-xl font-bold text-white">30 000 FCFA</span>
-                        <button class="bg-white/5 hover:bg-white/10 text-white px-4 py-2 rounded-lg text-xs font-semibold border border-white/10 transition-colors">Acheter</button>
+                        <button class="bg-black hover:bg-white/10 text-white px-4 py-2 rounded-lg text-xs font-semibold border border-white/10 transition-colors">Acheter</button>
                     </div>
                 </div>
             </div>
@@ -551,7 +551,7 @@
                     <p class="text-gray-400 text-xs mb-4 line-clamp-2">La formation complète pour monétiser tes réseaux et signer tes premiers partenariats lucratifs.</p>
                     <div class="mt-auto flex justify-between items-center pt-4 border-t border-white/5">
                         <span class="text-xl font-bold text-white">20 000 FCFA</span>
-                        <button class="bg-white/5 hover:bg-white/10 text-white px-4 py-2 rounded-lg text-xs font-semibold border border-white/10 transition-colors">Acheter</button>
+                        <button class="bg-black hover:bg-white/10 text-white px-4 py-2 rounded-lg text-xs font-semibold border border-white/10 transition-colors">Acheter</button>
                     </div>
                 </div>
             </div>
@@ -566,7 +566,7 @@
                     <p class="text-gray-400 text-xs mb-4 line-clamp-2">Les stratégies pros pour exploser le compteur de vues et devenir viral de manière prédictible.</p>
                     <div class="mt-auto flex justify-between items-center pt-4 border-t border-white/5">
                         <span class="text-xl font-bold text-white">16 500 FCFA</span>
-                        <button class="bg-white/5 hover:bg-white/10 text-white px-4 py-2 rounded-lg text-xs font-semibold border border-white/10 transition-colors">Acheter</button>
+                        <button class="bg-black hover:bg-white/10 text-white px-4 py-2 rounded-lg text-xs font-semibold border border-white/10 transition-colors">Acheter</button>
                     </div>
                 </div>
             </div>
@@ -581,7 +581,7 @@
                     <p class="text-gray-400 text-xs mb-4 line-clamp-2">Le guide pour débloquer votre business international et payer partout sans blocages.</p>
                     <div class="mt-auto flex justify-between items-center pt-4 border-t border-white/5">
                         <span class="text-xl font-bold text-white">13 000 FCFA</span>
-                        <button class="bg-white/5 hover:bg-white/10 text-white px-4 py-2 rounded-lg text-xs font-semibold border border-white/10 transition-colors">Acheter</button>
+                        <button class="bg-black hover:bg-white/10 text-white px-4 py-2 rounded-lg text-xs font-semibold border border-white/10 transition-colors">Acheter</button>
                     </div>
                 </div>
             </div>
@@ -596,7 +596,7 @@
                     <p class="text-gray-400 text-xs mb-4 line-clamp-2">Générez du contenu professionnel et gratuit en illimité grâce aux derniers outils d'IA vidéo.</p>
                     <div class="mt-auto flex justify-between items-center pt-4 border-t border-white/5">
                         <span class="text-xl font-bold text-white">26 000 FCFA</span>
-                        <button class="bg-white/5 hover:bg-white/10 text-white px-4 py-2 rounded-lg text-xs font-semibold border border-white/10 transition-colors">Acheter</button>
+                        <button class="bg-black hover:bg-white/10 text-white px-4 py-2 rounded-lg text-xs font-semibold border border-white/10 transition-colors">Acheter</button>
                     </div>
                 </div>
             </div>
@@ -611,7 +611,7 @@
                     <p class="text-gray-400 text-xs mb-4 line-clamp-2">La méthode exacte pour générer des revenus sans aucune audience et sans montrer son visage.</p>
                     <div class="mt-auto flex justify-between items-center pt-4 border-t border-white/5">
                         <span class="text-xl font-bold text-white">33 000 FCFA</span>
-                        <button class="bg-white/5 hover:bg-white/10 text-white px-4 py-2 rounded-lg text-xs font-semibold border border-white/10 transition-colors">Acheter</button>
+                        <button class="bg-black hover:bg-white/10 text-white px-4 py-2 rounded-lg text-xs font-semibold border border-white/10 transition-colors">Acheter</button>
                     </div>
                 </div>
             </div>
@@ -626,7 +626,7 @@
                     <p class="text-gray-400 text-xs mb-4 line-clamp-2">Maîtrisez Claude pour générer des vidéos professionnelles prêtes à l'emploi avec une esthétique cinématographique.</p>
                     <div class="mt-auto flex justify-between items-center pt-4 border-t border-white/5">
                         <span class="text-xl font-bold text-white">40 000 FCFA</span>
-                        <button class="bg-white/5 hover:bg-white/10 text-white px-4 py-2 rounded-lg text-xs font-semibold border border-white/10 transition-colors">Acheter</button>
+                        <button class="bg-black hover:bg-white/10 text-white px-4 py-2 rounded-lg text-xs font-semibold border border-white/10 transition-colors">Acheter</button>
                     </div>
                 </div>
             </div>
@@ -641,7 +641,7 @@
                     <p class="text-gray-400 text-xs mb-4 line-clamp-2">Maîtrisez les invites (prompts) puissantes pour décupler votre productivité et automatiser vos tâches.</p>
                     <div class="mt-auto flex justify-between items-center pt-4 border-t border-white/5">
                         <span class="text-xl font-bold text-white">13 000 FCFA</span>
-                        <button class="bg-white/5 hover:bg-white/10 text-white px-4 py-2 rounded-lg text-xs font-semibold border border-white/10 transition-colors">Acheter</button>
+                        <button class="bg-black hover:bg-white/10 text-white px-4 py-2 rounded-lg text-xs font-semibold border border-white/10 transition-colors">Acheter</button>
                     </div>
                 </div>
             </div>
@@ -656,7 +656,7 @@
                     <p class="text-gray-400 text-xs mb-4 line-clamp-2">Humanisez l'IA pour dominer vos réseaux, captiver votre audience et construire un empire personnel.</p>
                     <div class="mt-auto flex justify-between items-center pt-4 border-t border-white/5">
                         <span class="text-xl font-bold text-white">33 000 FCFA</span>
-                        <button class="bg-white/5 hover:bg-white/10 text-white px-4 py-2 rounded-lg text-xs font-semibold border border-white/10 transition-colors">Acheter</button>
+                        <button class="bg-black hover:bg-white/10 text-white px-4 py-2 rounded-lg text-xs font-semibold border border-white/10 transition-colors">Acheter</button>
                     </div>
                 </div>
             </div>
@@ -671,7 +671,7 @@
                     <p class="text-gray-400 text-xs mb-4 line-clamp-2">Arrêtez d'être l'ouvrier. Laissez votre Allié IA porter le code pendant que vous gardez le pilotage.</p>
                     <div class="mt-auto flex justify-between items-center pt-4 border-t border-white/5">
                         <span class="text-xl font-bold text-white">46 000 FCFA</span>
-                        <button class="bg-white/5 hover:bg-white/10 text-white px-4 py-2 rounded-lg text-xs font-semibold border border-white/10 transition-colors">Acheter</button>
+                        <button class="bg-black hover:bg-white/10 text-white px-4 py-2 rounded-lg text-xs font-semibold border border-white/10 transition-colors">Acheter</button>
                     </div>
                 </div>
             </div>
@@ -686,7 +686,7 @@
                     <p class="text-gray-400 text-xs mb-4 line-clamp-2">L'IA pose les blocs, mais c'est à vous de fixer le standard. Restez l'architecte du design futuriste.</p>
                     <div class="mt-auto flex justify-between items-center pt-4 border-t border-white/5">
                         <span class="text-xl font-bold text-white">20 000 FCFA</span>
-                        <button class="bg-white/5 hover:bg-white/10 text-white px-4 py-2 rounded-lg text-xs font-semibold border border-white/10 transition-colors">Acheter</button>
+                        <button class="bg-black hover:bg-white/10 text-white px-4 py-2 rounded-lg text-xs font-semibold border border-white/10 transition-colors">Acheter</button>
                     </div>
                 </div>
             </div>
@@ -701,7 +701,7 @@
                     <p class="text-gray-400 text-xs mb-4 line-clamp-2">Restez le cerveau sans être l'ouvrier. Automatisez votre business sur WhatsApp avec des agents IA autonomes.</p>
                     <div class="mt-auto flex justify-between items-center pt-4 border-t border-white/5">
                         <span class="text-xl font-bold text-white">60 000 FCFA</span>
-                        <button class="bg-white/5 hover:bg-white/10 text-white px-4 py-2 rounded-lg text-xs font-semibold border border-white/10 transition-colors">Acheter</button>
+                        <button class="bg-black hover:bg-white/10 text-white px-4 py-2 rounded-lg text-xs font-semibold border border-white/10 transition-colors">Acheter</button>
                     </div>
                 </div>
             </div>
@@ -716,7 +716,7 @@
                     <p class="text-gray-400 text-xs mb-4 line-clamp-2">Générez des pubs qui cartonnent en 1 minute. Un prompt, des visuels prêts, l'IA fait tout le job.</p>
                     <div class="mt-auto flex justify-between items-center pt-4 border-t border-white/5">
                         <span class="text-xl font-bold text-white">16 500 FCFA</span>
-                        <button class="bg-white/5 hover:bg-white/10 text-white px-4 py-2 rounded-lg text-xs font-semibold border border-white/10 transition-colors">Acheter</button>
+                        <button class="bg-black hover:bg-white/10 text-white px-4 py-2 rounded-lg text-xs font-semibold border border-white/10 transition-colors">Acheter</button>
                     </div>
                 </div>
             </div>
@@ -731,7 +731,7 @@
                     <p class="text-gray-400 text-xs mb-4 line-clamp-2">Découvrez Moltbook, le réseau social réservé aux agents IA, et générez des leads grâce au buzz.</p>
                     <div class="mt-auto flex justify-between items-center pt-4 border-t border-white/5">
                         <span class="text-xl font-bold text-white">13 000 FCFA</span>
-                        <button class="bg-white/5 hover:bg-white/10 text-white px-4 py-2 rounded-lg text-xs font-semibold border border-white/10 transition-colors">Acheter</button>
+                        <button class="bg-black hover:bg-white/10 text-white px-4 py-2 rounded-lg text-xs font-semibold border border-white/10 transition-colors">Acheter</button>
                     </div>
                 </div>
             </div>
@@ -746,7 +746,7 @@
                     <p class="text-gray-400 text-xs mb-4 line-clamp-2">Faites coder et tester votre application par plusieurs IA en simultané avec Antigravity.</p>
                     <div class="mt-auto flex justify-between items-center pt-4 border-t border-white/5">
                         <span class="text-xl font-bold text-white">66 000 FCFA</span>
-                        <button class="bg-white/5 hover:bg-white/10 text-white px-4 py-2 rounded-lg text-xs font-semibold border border-white/10 transition-colors">Acheter</button>
+                        <button class="bg-black hover:bg-white/10 text-white px-4 py-2 rounded-lg text-xs font-semibold border border-white/10 transition-colors">Acheter</button>
                     </div>
                 </div>
             </div>
@@ -761,10 +761,10 @@
 
         <!-- Platform Selector -->
         <div class="max-w-xs mx-auto mb-12">
-            <select id="platform-filter" class="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 focus:outline-none focus:border-purple-500 transition-all text-sm appearance-none cursor-pointer">
-                <option value="instagram" class="bg-[#090514]">Instagram</option>
-                <option value="facebook" class="bg-[#090514]">Facebook</option>
-                <option value="tiktok" class="bg-[#090514]">TikTok</option>
+            <select id="platform-filter" class="w-full bg-black border border-white/10 rounded-xl px-4 py-3 focus:outline-none focus:border-purple-500 transition-all text-sm appearance-none cursor-pointer">
+                <option value="instagram" class="bg-black">Instagram</option>
+                <option value="facebook" class="bg-black">Facebook</option>
+                <option value="tiktok" class="bg-black">TikTok</option>
             </select>
         </div>
 
@@ -784,28 +784,28 @@
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <div>
                         <label class="block text-xs font-semibold text-purple-400 uppercase mb-2">Nom</label>
-                        <input type="text" name="nom" required class="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 focus:outline-none focus:border-purple-500 transition-colors text-sm">
+                        <input type="text" name="nom" required class="w-full bg-black border border-white/10 rounded-xl px-4 py-3 focus:outline-none focus:border-purple-500 transition-colors text-sm">
                     </div>
                     <div>
                         <label class="block text-xs font-semibold text-purple-400 uppercase mb-2">Prénom</label>
-                        <input type="text" name="prenom" required class="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 focus:outline-none focus:border-purple-500 transition-colors text-sm">
+                        <input type="text" name="prenom" required class="w-full bg-black border border-white/10 rounded-xl px-4 py-3 focus:outline-none focus:border-purple-500 transition-colors text-sm">
                     </div>
                 </div>
 
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <div>
                         <label class="block text-xs font-semibold text-purple-400 uppercase mb-2">Numéro WhatsApp</label>
-                        <input type="tel" name="whatsapp" required placeholder="+229..." class="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 focus:outline-none focus:border-purple-500 transition-colors text-sm">
+                        <input type="tel" name="whatsapp" required placeholder="+229..." class="w-full bg-black border border-white/10 rounded-xl px-4 py-3 focus:outline-none focus:border-purple-500 transition-colors text-sm">
                     </div>
                     <div>
                         <label class="block text-xs font-semibold text-purple-400 uppercase mb-2">Email</label>
-                        <input type="email" name="email" required class="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 focus:outline-none focus:border-purple-500 transition-colors text-sm">
+                        <input type="email" name="email" required class="w-full bg-black border border-white/10 rounded-xl px-4 py-3 focus:outline-none focus:border-purple-500 transition-colors text-sm">
                     </div>
                 </div>
 
                 <div>
                     <label class="block text-xs font-semibold text-purple-400 uppercase mb-2">Domaine d'activité</label>
-                    <input type="text" name="domaine" required placeholder="Ex: Développement Web, IA, Trading..." class="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 focus:outline-none focus:border-purple-500 transition-colors text-sm">
+                    <input type="text" name="domaine" required placeholder="Ex: Développement Web, IA, Trading..." class="w-full bg-black border border-white/10 rounded-xl px-4 py-3 focus:outline-none focus:border-purple-500 transition-colors text-sm">
                 </div>
 
                 <div>
@@ -813,22 +813,22 @@
                     <div class="grid grid-cols-3 gap-4">
                         <label class="cursor-pointer">
                             <input type="radio" name="niveau" value="Débutant" checked class="hidden peer">
-                            <div class="bg-white/5 border border-white/10 rounded-xl py-3 text-center text-sm peer-checked:bg-purple-600 peer-checked:border-purple-500 transition-all hover:bg-white/10">Débutant</div>
+                            <div class="bg-black border border-white/10 rounded-xl py-3 text-center text-sm peer-checked:bg-purple-600 peer-checked:border-purple-500 transition-all hover:bg-white/10">Débutant</div>
                         </label>
                         <label class="cursor-pointer">
                             <input type="radio" name="niveau" value="Moyen" class="hidden peer">
-                            <div class="bg-white/5 border border-white/10 rounded-xl py-3 text-center text-sm peer-checked:bg-purple-600 peer-checked:border-purple-500 transition-all hover:bg-white/10">Moyen</div>
+                            <div class="bg-black border border-white/10 rounded-xl py-3 text-center text-sm peer-checked:bg-purple-600 peer-checked:border-purple-500 transition-all hover:bg-white/10">Moyen</div>
                         </label>
                         <label class="cursor-pointer">
                             <input type="radio" name="niveau" value="Professionnel" class="hidden peer">
-                            <div class="bg-white/5 border border-white/10 rounded-xl py-3 text-center text-sm peer-checked:bg-purple-600 peer-checked:border-purple-500 transition-all hover:bg-white/10">Professionnel</div>
+                            <div class="bg-black border border-white/10 rounded-xl py-3 text-center text-sm peer-checked:bg-purple-600 peer-checked:border-purple-500 transition-all hover:bg-white/10">Professionnel</div>
                         </label>
                     </div>
                 </div>
 
                 <div>
                     <label class="block text-xs font-semibold text-purple-400 uppercase mb-2">Ce que vous souhaitez apporter</label>
-                    <textarea name="apport" required rows="4" placeholder="Décrivez les formations ou tutoriels que vous souhaitez proposer..." class="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 focus:outline-none focus:border-purple-500 transition-colors text-sm"></textarea>
+                    <textarea name="apport" required rows="4" placeholder="Décrivez les formations ou tutoriels que vous souhaitez proposer..." class="w-full bg-black border border-white/10 rounded-xl px-4 py-3 focus:outline-none focus:border-purple-500 transition-colors text-sm"></textarea>
                 </div>
 
                 <button type="submit" class="w-full bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-500 hover:to-indigo-500 text-white font-bold py-4 rounded-xl shadow-lg shadow-purple-600/20 transition-all transform hover:-translate-y-1">
@@ -872,7 +872,7 @@
             <div class="chat-message bot-msg">Bonjour ! Je suis l'assistant de Ronald Empire. Comment puis-je vous aider aujourd'hui ?</div>
         </div>
         <div class="p-4 border-t border-white/5 flex gap-2">
-            <input type="text" id="chat-input" placeholder="Posez votre question..." class="flex-1 bg-white/5 border border-white/10 rounded-lg px-3 py-2 text-xs focus:outline-none focus:border-purple-500 transition-colors">
+            <input type="text" id="chat-input" placeholder="Posez votre question..." class="flex-1 bg-black border border-white/10 rounded-lg px-3 py-2 text-xs focus:outline-none focus:border-purple-500 transition-colors">
             <button id="send-chat" class="bg-purple-600 px-3 py-2 rounded-lg text-xs hover:bg-purple-500 transition-colors"><i class="fas fa-paper-plane"></i></button>
         </div>
     </div>
@@ -931,46 +931,78 @@
             chatbotWindow.classList.remove('active');
         });
 
+        const API_KEY = "YOUR_API_KEY_HERE"; // Remplacez par votre clé API
+
         function addMessage(text, type) {
             const msg = document.createElement('div');
-            msg.className = `chat-message ${type === 'bot' ? 'bot-msg' : 'user-msg'}`;
+            msg.className = `chat-message ${type === 'bot' ? 'bot-msg' : 'user-msg'} ${type === 'loading' ? 'animate-pulse opacity-50' : ''}`;
             msg.textContent = text;
             chatContent.appendChild(msg);
             chatContent.scrollTop = chatContent.scrollHeight;
+            return msg;
         }
 
-        function handleChat() {
+        async function handleChat() {
             const text = chatInput.value.trim();
             if (!text) return;
 
             addMessage(text, 'user');
             chatInput.value = '';
 
-            // Simulation de réponse
-            setTimeout(() => {
-                let response = "Désolé, je n'ai pas compris votre demande. Pourriez-vous préciser ?";
-                const input = text.toLowerCase();
+            const loadingMsg = addMessage("Ronald Empire réfléchit...", "loading");
 
-                if (input.includes('prix') || input.includes('tarif')) {
-                    response = "Nos formations commencent à partir de 10 000 FCFA. Vous pouvez consulter le détail dans la section 'Formations'.";
-                } else if (input.includes('html')) {
-                    response = "Notre formation HTML5 Ultime est parfaite pour débuter. Elle coûte 13 000 FCFA.";
-                } else if (input.includes('java')) {
-                    response = "Nous proposons un cours Java POO Avancé pour 33 000 FCFA.";
-                } else if (input.includes('tiktok') || input.includes('monétiser')) {
-                    response = "Nous avons des formations pour monétiser Tiktok et Facebook à partir de 10 000 FCFA !";
-                } else if (input.includes('paypal')) {
-                    response = "Le guide pour créer un compte Paypal en Afrique est disponible pour 13 000 FCFA.";
-                } else if (input.includes('ia') || input.includes('ai') || input.includes('chatgpt') || input.includes('gemini')) {
-                    response = "Nous sommes leaders sur l'IA ! Découvrez nos Masterclass Gemini, IA Sans Limites, ou nos agents WhatsApp IA.";
-                } else if (input.includes('claude') || input.includes('opencode')) {
-                    response = "Découvrez comment OpenCode et Claude peuvent révolutionner votre manière de coder.";
-                } else if (input.includes('salut') || input.includes('bonjour')) {
-                    response = "Bonjour ! Quel domaine vous intéresse : Développement, Business/Monétisation ou Intelligence Artificielle ?";
+            try {
+                // Si la clé API est configurée
+                if (API_KEY !== "YOUR_API_KEY_HERE") {
+                    const response = await fetch('https://api.openai.com/v1/chat/completions', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'Authorization': `Bearer ${API_KEY}`
+                        },
+                        body: JSON.stringify({
+                            model: "gpt-3.5-turbo",
+                            messages: [
+                                { role: "system", content: "Tu es l'assistant de Ronald Empire, une plateforme de formation tech, IA et business. Réponds de manière professionnelle et concise en français." },
+                                { role: "user", content: text }
+                            ]
+                        })
+                    });
+                    const data = await response.json();
+                    loadingMsg.remove();
+                    addMessage(data.choices[0].message.content, 'bot');
+                } else {
+                    // Fallback sur la logique mock si pas de clé
+                    setTimeout(() => {
+                        loadingMsg.remove();
+                        let response = "Désolé, je n'ai pas compris votre demande. Pourriez-vous préciser ?";
+                        const input = text.toLowerCase();
+
+                        if (input.includes('prix') || input.includes('tarif')) {
+                            response = "Nos formations commencent à partir de 10 000 FCFA. Vous pouvez consulter le détail dans la section 'Formations'.";
+                        } else if (input.includes('html')) {
+                            response = "Notre formation HTML5 Ultime est parfaite pour débuter. Elle coûte 13 000 FCFA.";
+                        } else if (input.includes('java')) {
+                            response = "Nous proposons un cours Java POO Avancé pour 33 000 FCFA.";
+                        } else if (input.includes('tiktok') || input.includes('monétiser')) {
+                            response = "Nous avons des formations pour monétiser Tiktok et Facebook à partir de 10 000 FCFA !";
+                        } else if (input.includes('paypal')) {
+                            response = "Le guide pour créer un compte Paypal en Afrique est disponible pour 13 000 FCFA.";
+                        } else if (input.includes('ia') || input.includes('ai') || input.includes('chatgpt') || input.includes('gemini')) {
+                            response = "Nous sommes leaders sur l'IA ! Découvrez nos Masterclass Gemini, IA Sans Limites, ou nos agents WhatsApp IA.";
+                        } else if (input.includes('claude') || input.includes('opencode')) {
+                            response = "Découvrez comment OpenCode et Claude peuvent révolutionner votre manière de coder.";
+                        } else if (input.includes('salut') || input.includes('bonjour')) {
+                            response = "Bonjour ! Quel domaine vous intéresse : Développement, Business/Monétisation ou Intelligence Artificielle ?";
+                        }
+
+                        addMessage(response, 'bot');
+                    }, 800);
                 }
-
-                addMessage(response, 'bot');
-            }, 600);
+            } catch (error) {
+                loadingMsg.remove();
+                addMessage("Une erreur est survenue lors de la connexion à l'IA. Veuillez réessayer plus tard.", "bot");
+            }
         }
 
         sendChat.addEventListener('click', handleChat);
@@ -1017,7 +1049,7 @@
                     const opt = document.createElement('option');
                     opt.value = index;
                     opt.textContent = `${offer.name} - ${offer.isFixed ? offer.price : offer.price + ' FCFA / unité'}`;
-                    opt.className = "bg-[#090514]";
+                    opt.className = "bg-black";
                     boostOffer.appendChild(opt);
                 });
             }
