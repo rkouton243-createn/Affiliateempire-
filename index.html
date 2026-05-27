@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>RONALD EMPIRE - Formations & Tutoriels</title>
+    <title>Skills Mentor - Formations & Tutoriels</title>
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&family=Playfair+Display:ital,wght@0,700;1,700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -106,39 +106,6 @@
         .hero-title {
             font-family: 'Playfair Display', serif;
         }
-        .arch-frame {
-            border-radius: 160px 160px 20px 20px;
-            border: 8px solid white;
-            position: relative;
-            overflow: visible;
-        }
-        .arch-frame::before {
-            content: '';
-            position: absolute;
-            inset: -12px;
-            border-radius: 168px 168px 28px 28px;
-            background: linear-gradient(45deg, #00f2fe, #4facfe, #f093fb, #f5576c);
-            z-index: -1;
-            filter: blur(10px);
-            opacity: 0.7;
-        }
-        .starburst {
-            position: absolute;
-            bottom: -20px;
-            right: -20px;
-            width: 80px;
-            height: 80px;
-            background: #4facfe;
-            clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-weight: bold;
-            font-size: 14px;
-            transform: rotate(-15deg);
-            box-shadow: 0 4px 15px rgba(79, 172, 254, 0.4);
-        }
         /* Chatbot Styles */
         #chatbot-window {
             display: none;
@@ -168,7 +135,7 @@
     <nav class="glass-nav fixed top-0 left-0 w-full z-50 px-6 py-4 transition-all duration-300">
         <div class="max-w-7xl mx-auto flex justify-between items-center">
             <a href="#/accueil" class="text-2xl font-bold tracking-wider text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-indigo-400">
-                RONALD EMPIRE
+                Skills Mentor
             </a>
             <!-- Mobile Menu Toggle -->
             <button id="menu-toggle" class="md:hidden text-2xl text-purple-400">
@@ -176,7 +143,6 @@
             </button>
             <div id="nav-links" class="hidden lg:flex space-x-2 text-[10px] xl:text-xs font-medium items-center">
                 <a href="#/accueil" class="nav-link hover:text-purple-400">Accueil</a>
-                <a href="#/categories" class="nav-link hover:text-purple-400">Catégories</a>
                 <a href="#/formations" class="nav-link hover:text-purple-400">Formations</a>
                 <a href="#/code-dev" class="nav-link hover:text-purple-400">Code Dev</a>
                 <a href="#/boost" class="nav-link text-yellow-400 hover:text-yellow-300 font-bold"><i class="fas fa-rocket mr-1"></i>Boost</a>
@@ -215,7 +181,6 @@
                 </select>
             </div>
             <a href="#/accueil" class="nav-link hover:text-purple-400 pt-4">Accueil</a>
-            <a href="#/categories" class="nav-link hover:text-purple-400">Catégories</a>
             <a href="#/formations" class="nav-link hover:text-purple-400">Formations</a>
             <a href="#/code-dev" class="nav-link hover:text-purple-400">Code Dev</a>
             <a href="#/boost" class="nav-link text-yellow-400 font-bold">Boost</a>
@@ -228,35 +193,24 @@
 
     <main class="min-h-screen">
     <section id="accueil" class="page-section pt-40 pb-20 px-6 max-w-7xl mx-auto">
-        <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
-            <!-- Left Side: Visual -->
-            <div class="lg:col-span-5 flex justify-center lg:justify-start order-2 lg:order-1">
-                <div class="arch-frame led-effect w-[300px] h-[450px] md:w-[350px] md:h-[500px] bg-[#1a1a1a] relative">
-                    <div class="absolute -top-4 -left-4 bg-white text-black px-4 py-1 rounded-full text-[10px] font-bold tracking-widest z-10 shadow-xl border border-black/10">FONDATEUR</div>
-                    <img src="https://kommodo.ai/i/WMZsobVjpBXsC930cn09" alt="RONALD EMPIRE" class="w-full h-full object-cover" style="border-radius: 152px 152px 12px 12px;">
-                    <div class="starburst">
-                        <span class="transform rotate-15">40% <br> off</span>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Right Side: Content -->
-            <div class="lg:col-span-7 text-left order-1 lg:order-2">
+        <div class="flex flex-col items-center text-center">
+            <!-- Content -->
+            <div class="max-w-4xl mx-auto">
                 <p class="text-xs md:text-sm font-bold tracking-[0.3em] text-white uppercase mb-6 opacity-80">
                     BIG SAVINGS ON THIS SALE
                 </p>
                 <h1 class="hero-title text-5xl md:text-8xl font-bold text-white mb-8 leading-tight">
-                    <span id="welcome-prefix">RONALD</span> <span class="italic font-normal text-transparent bg-clip-text bg-gradient-to-r from-pink-300 to-indigo-200">EMPIRE</span> <br>
+                    <span id="welcome-prefix">Skills</span> <span class="italic font-normal text-transparent bg-clip-text bg-gradient-to-r from-pink-300 to-indigo-200">Mentor</span> <br>
                     <span id="event-badge" class="text-4xl md:text-6xl block mt-2">Event</span>
                 </h1>
                 <p class="text-gray-400 max-w-lg text-sm md:text-base mb-10 leading-relaxed font-light">
                     Maîtrisez le développement et l'IA avec les meilleures formations du marché. Profitez de nos offres exclusives pour propulser votre carrière digitale dès aujourd'hui.
                 </p>
-                <div class="flex flex-wrap gap-6">
+                <div class="flex flex-wrap justify-center gap-6">
                     <a href="#/formations" class="bg-gradient-to-r from-blue-400 to-purple-500 hover:scale-105 text-white px-10 py-4 rounded-xl font-bold shadow-xl transition-all flex items-center gap-2" style="background: linear-gradient(90deg, #4facfe 0%, #f093fb 100%);">
                         Follow Us <i class="fas fa-arrow-right text-xs"></i>
                     </a>
-                    <a href="#/categories" class="flex items-center gap-2 text-white font-bold hover:text-purple-400 transition-colors group">
+                    <a href="#/formations" class="flex items-center gap-2 text-white font-bold hover:text-purple-400 transition-colors group">
                         Explorer les cours <i class="fas fa-play-circle text-2xl group-hover:scale-110 transition-transform"></i>
                     </a>
                 </div>
@@ -293,69 +247,6 @@
         </div>
     </section>
 
-    <section id="categories" class="page-section pt-32 pb-20 px-6 max-w-7xl mx-auto">
-        <div class="text-center mb-14">
-            <h2 class="text-3xl font-bold mb-4">Nos Domaines d'Apprentissage</h2>
-            <p class="text-gray-400">Des programmes structurés pour tous les niveaux, du débutant à l'expert.</p>
-        </div>
-
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-8">
-            <div class="glass-card hover-led p-8 rounded-2xl group hover:border-orange-500/30 transition-all duration-300 transform hover:-translate-y-1">
-                <div class="w-14 h-14 bg-orange-500/10 text-orange-500 rounded-xl flex items-center justify-center text-2xl mb-6 group-hover:scale-110 transition-transform">
-                    <i class="fab fa-html5"></i>
-                </div>
-                <h3 class="text-xl font-bold mb-3 text-orange-400">HTML5 / Structure</h3>
-                <p class="text-gray-400 text-sm leading-relaxed mb-6">
-                    Apprenez à bâtir des structures web solides, sémantiques et optimisées pour le SEO. La base indispensable du web.
-                </p>
-                <span class="text-xs font-semibold text-orange-500">12 Tutoriels &bull; 2 Formations</span>
-            </div>
-
-            <div class="glass-card hover-led p-8 rounded-2xl group hover:border-blue-500/30 transition-all duration-300 transform hover:-translate-y-1">
-                <div class="w-14 h-14 bg-blue-500/10 text-blue-500 rounded-xl flex items-center justify-center text-2xl mb-6 group-hover:scale-110 transition-transform">
-                    <i class="fab fa-css3-alt"></i>
-                </div>
-                <h3 class="text-xl font-bold mb-3 text-blue-400">CSS3 / Design & Frameworks</h3>
-                <p class="text-gray-400 text-sm leading-relaxed mb-6">
-                    Maîtrisez le Flexbox, Grid, les animations et les frameworks modernes comme Tailwind CSS pour créer des interfaces éblouissantes.
-                </p>
-                <span class="text-xs font-semibold text-blue-500">18 Tutoriels &bull; 3 Formations</span>
-            </div>
-
-            <div class="glass-card hover-led p-8 rounded-2xl group hover:border-red-500/30 transition-all duration-300 transform hover:-translate-y-1">
-                <div class="w-14 h-14 bg-red-500/10 text-red-500 rounded-xl flex items-center justify-center text-2xl mb-6 group-hover:scale-110 transition-transform">
-                    <i class="fab fa-java"></i>
-                </div>
-                <h3 class="text-xl font-bold mb-3 text-red-400">Java / Programmation</h3>
-                <p class="text-gray-400 text-sm leading-relaxed mb-6">
-                    Plongez dans la Programmation Orientée Objet (POO). Du développement d'applications robustes jusqu'à la logique algorithmique.
-                </p>
-                <span class="text-xs font-semibold text-red-500">15 Tutoriels &bull; 4 Formations</span>
-            </div>
-
-            <div class="glass-card hover-led p-8 rounded-2xl group hover:border-green-500/30 transition-all duration-300 transform hover:-translate-y-1">
-                <div class="w-14 h-14 bg-green-500/10 text-green-500 rounded-xl flex items-center justify-center text-2xl mb-6 group-hover:scale-110 transition-transform">
-                    <i class="fas fa-chart-line"></i>
-                </div>
-                <h3 class="text-xl font-bold mb-3 text-green-400">Monétisation & Business</h3>
-                <p class="text-gray-400 text-sm leading-relaxed mb-6">
-                    Optimisez vos réseaux sociaux et vos moyens de paiement. Stratégies de monétisation Tiktok, Facebook et solutions de paiement.
-                </p>
-                <span class="text-xs font-semibold text-green-500">10 Tutoriels &bull; 3 Formations</span>
-            </div>
-
-            <div class="glass-card hover-led p-8 rounded-2xl group hover:border-purple-500/30 transition-all duration-300 transform hover:-translate-y-1">
-                <div class="w-14 h-14 bg-purple-500/10 text-purple-500 rounded-xl flex items-center justify-center text-2xl mb-6 group-hover:scale-110 transition-transform">
-                    <i class="fas fa-robot"></i>
-                </div>
-                <h3 class="text-xl font-bold mb-3 text-purple-400">Intelligence Artificielle</h3>
-                <p class="text-gray-400 text-sm leading-relaxed mb-6">
-                    Maîtrisez les outils d'IA générative (ChatGPT, Claude, Gemini) pour coder, designer et automatiser votre business.
-                </p>
-                <span class="text-xs font-semibold text-purple-500">25 Tutoriels &bull; 12 Formations</span>
-            </div>
-        </div>
-    </section>
 
     <section id="boost" class="page-section pt-32 pb-20 px-6 max-w-2xl mx-auto">
         <div class="glass-card rounded-3xl p-6 md:p-10 border border-white/10 shadow-2xl relative overflow-hidden">
@@ -453,19 +344,19 @@
                 <div class="text-3xl text-purple-400 mb-6"><i class="fas fa-brain"></i></div>
                 <h3 class="text-xl font-bold mb-4">Consultation IA</h3>
                 <p class="text-gray-400 text-sm leading-relaxed mb-6">Intégrez l'intelligence artificielle dans vos processus métier pour gagner en productivité et en efficacité.</p>
-                <a href="https://wa.me/2290198905311?text=Bonjour%20Ronald%20Empire%2C%20je%20souhaite%20commander%20le%20service%20%3A%20Consultation%20IA" target="_blank" class="mt-auto block text-center bg-purple-600/20 hover:bg-purple-600 text-purple-400 hover:text-white py-2 rounded-lg border border-purple-500/30 transition-all font-semibold">Commander</a>
+                <a href="https://wa.me/2290198905311?text=Bonjour%20Skills%20Mentor%2C%20je%20souhaite%20commander%20le%20service%20%3A%20Consultation%20IA" target="_blank" class="mt-auto block text-center bg-purple-600/20 hover:bg-purple-600 text-purple-400 hover:text-white py-2 rounded-lg border border-purple-500/30 transition-all font-semibold">Commander</a>
             </div>
             <div class="glass-card p-8 rounded-2xl border border-white/5 hover:border-blue-500/30 transition-all flex flex-col">
                 <div class="text-3xl text-blue-400 mb-6"><i class="fas fa-code-branch"></i></div>
                 <h3 class="text-xl font-bold mb-4">Développement Web & Mobile</h3>
                 <p class="text-gray-400 text-sm leading-relaxed mb-6">Conception d'applications robustes, scalables et centrées sur l'utilisateur avec les dernières technologies.</p>
-                <a href="https://wa.me/2290198905311?text=Bonjour%20Ronald%20Empire%2C%20je%20souhaite%20commander%20le%20service%20%3A%20Développement%20Web%20%26%20Mobile" target="_blank" class="mt-auto block text-center bg-blue-600/20 hover:bg-blue-600 text-blue-400 hover:text-white py-2 rounded-lg border border-blue-500/30 transition-all font-semibold">Commander</a>
+                <a href="https://wa.me/2290198905311?text=Bonjour%20Skills%20Mentor%2C%20je%20souhaite%20commander%20le%20service%20%3A%20Développement%20Web%20%26%20Mobile" target="_blank" class="mt-auto block text-center bg-blue-600/20 hover:bg-blue-600 text-blue-400 hover:text-white py-2 rounded-lg border border-blue-500/30 transition-all font-semibold">Commander</a>
             </div>
             <div class="glass-card p-8 rounded-2xl border border-white/5 hover:border-green-500/30 transition-all flex flex-col">
                 <div class="text-3xl text-green-400 mb-6"><i class="fas fa-bullhorn"></i></div>
                 <h3 class="text-xl font-bold mb-4">Stratégie Digitale</h3>
                 <p class="text-gray-400 text-sm leading-relaxed mb-6">Accompagnement dans votre visibilité en ligne, acquisition de leads et monétisation de vos réseaux sociaux.</p>
-                <a href="https://wa.me/2290198905311?text=Bonjour%20Ronald%20Empire%2C%20je%20souhaite%20commander%20le%20service%20%3A%20Stratégie%20Digitale" target="_blank" class="mt-auto block text-center bg-green-600/20 hover:bg-green-600 text-green-400 hover:text-white py-2 rounded-lg border border-green-500/30 transition-all font-semibold">Commander</a>
+                <a href="https://wa.me/2290198905311?text=Bonjour%20Skills%20Mentor%2C%20je%20souhaite%20commander%20le%20service%20%3A%20Stratégie%20Digitale" target="_blank" class="mt-auto block text-center bg-green-600/20 hover:bg-green-600 text-green-400 hover:text-white py-2 rounded-lg border border-green-500/30 transition-all font-semibold">Commander</a>
             </div>
 
             <!-- Nouveaux Services -->
@@ -473,56 +364,56 @@
                 <div class="text-3xl text-orange-400 mb-6"><i class="fas fa-tv"></i></div>
                 <h3 class="text-xl font-bold mb-4">Abonnements IPTV Premium</h3>
                 <p class="text-gray-400 text-sm leading-relaxed mb-6">Accès à des milliers de chaînes internationales, films et séries, notamment pour les grands événements sportifs.</p>
-                <a href="https://wa.me/2290198905311?text=Bonjour%20Ronald%20Empire%2C%20je%20souhaite%20commander%20le%20service%20%3A%20Abonnements%20IPTV%20Premium" target="_blank" class="mt-auto block text-center bg-orange-600/20 hover:bg-orange-600 text-orange-400 hover:text-white py-2 rounded-lg border border-orange-500/30 transition-all font-semibold">Commander</a>
+                <a href="https://wa.me/2290198905311?text=Bonjour%20Skills%20Mentor%2C%20je%20souhaite%20commander%20le%20service%20%3A%20Abonnements%20IPTV%20Premium" target="_blank" class="mt-auto block text-center bg-orange-600/20 hover:bg-orange-600 text-orange-400 hover:text-white py-2 rounded-lg border border-orange-500/30 transition-all font-semibold">Commander</a>
             </div>
 
             <div class="glass-card p-8 rounded-2xl border border-white/5 hover:border-indigo-500/30 transition-all flex flex-col">
                 <div class="text-3xl text-indigo-400 mb-6"><i class="fas fa-shield-halved"></i></div>
                 <h3 class="text-xl font-bold mb-4">Services VPN Sécurisés</h3>
                 <p class="text-gray-400 text-sm leading-relaxed mb-6">Sécurisez votre connexion, changez de localisation (utile pour les comptes étrangers) ou contournez les restrictions.</p>
-                <a href="https://wa.me/2290198905311?text=Bonjour%20Ronald%20Empire%2C%20je%20souhaite%20commander%20le%20service%20%3A%20VPN%20Sécurisés" target="_blank" class="mt-auto block text-center bg-indigo-600/20 hover:bg-indigo-600 text-indigo-400 hover:text-white py-2 rounded-lg border border-indigo-500/30 transition-all font-semibold">Commander</a>
+                <a href="https://wa.me/2290198905311?text=Bonjour%20Skills%20Mentor%2C%20je%20souhaite%20commander%20le%20service%20%3A%20VPN%20Sécurisés" target="_blank" class="mt-auto block text-center bg-indigo-600/20 hover:bg-indigo-600 text-indigo-400 hover:text-white py-2 rounded-lg border border-indigo-500/30 transition-all font-semibold">Commander</a>
             </div>
 
             <div class="glass-card p-8 rounded-2xl border border-white/5 hover:border-teal-500/30 transition-all flex flex-col">
                 <div class="text-3xl text-teal-400 mb-6"><i class="fas fa-robot"></i></div>
                 <h3 class="text-xl font-bold mb-4">Création de Bots Clé en Main</h3>
                 <p class="text-gray-400 text-sm leading-relaxed mb-6">Proposez des bots WhatsApp ou Telegram automatisés pour gérer le service client ou automatiser les ventes.</p>
-                <a href="https://wa.me/2290198905311?text=Bonjour%20Ronald%20Empire%2C%20je%20souhaite%20commander%20le%20service%20%3A%20Bots%20Clé%20en%20Main" target="_blank" class="mt-auto block text-center bg-teal-600/20 hover:bg-teal-600 text-teal-400 hover:text-white py-2 rounded-lg border border-teal-500/30 transition-all font-semibold">Commander</a>
+                <a href="https://wa.me/2290198905311?text=Bonjour%20Skills%20Mentor%2C%20je%20souhaite%20commander%20le%20service%20%3A%20Bots%20Clé%20en%20Main" target="_blank" class="mt-auto block text-center bg-teal-600/20 hover:bg-teal-600 text-teal-400 hover:text-white py-2 rounded-lg border border-teal-500/30 transition-all font-semibold">Commander</a>
             </div>
 
             <div class="glass-card p-8 rounded-2xl border border-white/5 hover:border-red-500/30 transition-all flex flex-col">
                 <div class="text-3xl text-red-400 mb-6"><i class="fas fa-comment-sms"></i></div>
                 <h3 class="text-xl font-bold mb-4">Réception SMS / Vérification</h3>
                 <p class="text-gray-400 text-sm leading-relaxed mb-6">Location de numéros virtuels temporaires pour aider à valider et vérifier des comptes sur diverses plateformes.</p>
-                <a href="https://wa.me/2290198905311?text=Bonjour%20Ronald%20Empire%2C%20je%20souhaite%20commander%20le%20service%20%3A%20Réception%20SMS%20%2F%20Vérification" target="_blank" class="mt-auto block text-center bg-red-600/20 hover:bg-red-600 text-red-400 hover:text-white py-2 rounded-lg border border-red-500/30 transition-all font-semibold">Commander</a>
+                <a href="https://wa.me/2290198905311?text=Bonjour%20Skills%20Mentor%2C%20je%20souhaite%20commander%20le%20service%20%3A%20Réception%20SMS%20%2F%20Vérification" target="_blank" class="mt-auto block text-center bg-red-600/20 hover:bg-red-600 text-red-400 hover:text-white py-2 rounded-lg border border-red-500/30 transition-all font-semibold">Commander</a>
             </div>
 
             <div class="glass-card p-8 rounded-2xl border border-white/5 hover:border-pink-500/30 transition-all flex flex-col">
                 <div class="text-3xl text-pink-400 mb-6"><i class="fas fa-layer-group"></i></div>
                 <h3 class="text-xl font-bold mb-4">Des Packs Combinés</h3>
                 <p class="text-gray-400 text-sm leading-relaxed mb-6">Pack Lancement (1 compte TikTok monétisable + 5 000 vues + 1 accès VPN pour gérer le compte).</p>
-                <a href="https://wa.me/2290198905311?text=Bonjour%20Ronald%20Empire%2C%20je%20souhaite%20commander%20un%20Pack%20Combiné" target="_blank" class="mt-auto block text-center bg-pink-600/20 hover:bg-pink-600 text-pink-400 hover:text-white py-2 rounded-lg border border-pink-500/30 transition-all font-semibold">Commander</a>
+                <a href="https://wa.me/2290198905311?text=Bonjour%20Skills%20Mentor%2C%20je%20souhaite%20commander%20un%20Pack%20Combiné" target="_blank" class="mt-auto block text-center bg-pink-600/20 hover:bg-pink-600 text-pink-400 hover:text-white py-2 rounded-lg border border-pink-500/30 transition-all font-semibold">Commander</a>
             </div>
 
             <div class="glass-card p-8 rounded-2xl border border-white/5 hover:border-blue-400/30 transition-all flex flex-col">
                 <div class="text-3xl text-blue-300 mb-6"><i class="fas fa-users-gear"></i></div>
                 <h3 class="text-xl font-bold mb-4">Comptes "Chauffés" Pros</h3>
                 <p class="text-gray-400 text-sm leading-relaxed mb-6">Vente de pages Facebook, comptes Instagram ou chaînes YouTube déjà anciens pour éviter les blocages.</p>
-                <a href="https://wa.me/2290198905311?text=Bonjour%20Ronald%20Empire%2C%20je%20souhaite%20commander%20des%20Comptes%20Chauffés" target="_blank" class="mt-auto block text-center bg-blue-500/20 hover:bg-blue-500 text-blue-300 hover:text-white py-2 rounded-lg border border-blue-400/30 transition-all font-semibold">Commander</a>
+                <a href="https://wa.me/2290198905311?text=Bonjour%20Skills%20Mentor%2C%20je%20souhaite%20commander%20des%20Comptes%20Chauffés" target="_blank" class="mt-auto block text-center bg-blue-500/20 hover:bg-blue-500 text-blue-300 hover:text-white py-2 rounded-lg border border-blue-400/30 transition-all font-semibold">Commander</a>
             </div>
 
             <div class="glass-card p-8 rounded-2xl border border-white/5 hover:border-purple-400/30 transition-all flex flex-col">
                 <div class="text-3xl text-purple-300 mb-6"><i class="fab fa-tiktok"></i></div>
                 <h3 class="text-xl font-bold mb-4">TikTok Monétisables (EU/USA)</h3>
                 <p class="text-gray-400 text-sm leading-relaxed mb-6">Comptes créés en zone éligible avec le programme de monétisation (Beta) déjà accessible.</p>
-                <a href="https://wa.me/2290198905311?text=Bonjour%20Ronald%20Empire%2C%20je%20souhaite%20commander%20un%20Compte%20TikTok%20Monétisable" target="_blank" class="mt-auto block text-center bg-purple-500/20 hover:bg-purple-500 text-purple-300 hover:text-white py-2 rounded-lg border border-purple-400/30 transition-all font-semibold">Commander</a>
+                <a href="https://wa.me/2290198905311?text=Bonjour%20Skills%20Mentor%2C%20je%20souhaite%20commander%20un%20Compte%20TikTok%20Monétisable" target="_blank" class="mt-auto block text-center bg-purple-500/20 hover:bg-purple-500 text-purple-300 hover:text-white py-2 rounded-lg border border-purple-400/30 transition-all font-semibold">Commander</a>
             </div>
 
             <div class="glass-card p-8 rounded-2xl border border-white/5 hover:border-white/20 transition-all flex flex-col">
                 <div class="text-3xl text-white mb-6"><i class="fas fa-wand-magic-sparkles"></i></div>
                 <h3 class="text-xl font-bold mb-4">Un site moderne</h3>
                 <p class="text-gray-400 text-sm leading-relaxed mb-6">Interface épurée, visuelle (Glassmorphism) et mode sombre impeccable qui inspire confiance.</p>
-                <a href="https://wa.me/2290198905311?text=Bonjour%20Ronald%20Empire%2C%20je%20souhaite%20commander%20la%20création%20d'un%20Site%20Moderne" target="_blank" class="mt-auto block text-center bg-white/10 hover:bg-white/20 text-white py-2 rounded-lg border border-white/20 transition-all font-semibold">Commander</a>
+                <a href="https://wa.me/2290198905311?text=Bonjour%20Skills%20Mentor%2C%20je%20souhaite%20commander%20la%20création%20d'un%20Site%20Moderne" target="_blank" class="mt-auto block text-center bg-white/10 hover:bg-white/20 text-white py-2 rounded-lg border border-white/20 transition-all font-semibold">Commander</a>
             </div>
         </div>
     </section>
@@ -724,7 +615,7 @@
                     <span class="absolute top-4 left-4 bg-blue-500 text-xs font-bold uppercase px-3 py-1 rounded-md">Vidéo</span>
                 </div>
                 <div class="p-6 flex-1 flex flex-col">
-                    <h4 class="text-lg font-bold mb-2 hover:text-purple-400 cursor-pointer transition-colors">Empire Vidéo IA</h4>
+                    <h4 class="text-lg font-bold mb-2 hover:text-purple-400 cursor-pointer transition-colors">Mentor Vidéo IA</h4>
                     <p class="text-gray-400 text-xs mb-4 line-clamp-2">Générez du contenu professionnel et gratuit en illimité grâce aux derniers outils d'IA vidéo.</p>
                     <div class="mt-auto flex justify-between items-center pt-4 border-t border-white/5">
                         <span class="text-xl font-bold text-white">26 000 FCFA</span>
@@ -785,7 +676,7 @@
                 </div>
                 <div class="p-6 flex-1 flex flex-col">
                     <h4 class="text-lg font-bold mb-2 hover:text-purple-400 cursor-pointer transition-colors">Copywriting & Personal Branding</h4>
-                    <p class="text-gray-400 text-xs mb-4 line-clamp-2">Humanisez l'IA pour dominer vos réseaux, captiver votre audience et construire un empire personnel.</p>
+                    <p class="text-gray-400 text-xs mb-4 line-clamp-2">Humanisez l'IA pour dominer vos réseaux, captiver votre audience et construire une réussite personnelle.</p>
                     <div class="mt-auto flex justify-between items-center pt-4 border-t border-white/5">
                         <span class="text-xl font-bold text-white">33 000 FCFA</span>
                         <button class="bg-black hover:bg-white/10 text-white px-4 py-2 rounded-lg text-xs font-semibold border border-white/10 transition-colors">Acheter</button>
@@ -908,7 +799,7 @@
     <section id="formateur" class="page-section pt-32 pb-20 px-6 max-w-4xl mx-auto">
         <div class="glass-card rounded-3xl p-8 md:p-12 border border-white/10">
             <div class="text-center mb-10">
-                <h2 class="text-3xl font-bold mb-4">Rejoignez l'Empire en tant que Formateur</h2>
+                <h2 class="text-3xl font-bold mb-4">Rejoignez Skills Mentor en tant que Formateur</h2>
                 <p class="text-gray-400">Partagez votre expertise et monétisez vos connaissances avec notre communauté mondiale.</p>
             </div>
 
@@ -973,7 +864,7 @@
     <section id="contact" class="page-section pt-32 pb-20 px-6 max-w-7xl mx-auto">
         <div class="glass-card rounded-2xl p-12 flex flex-col md:flex-row justify-between items-center gap-6">
             <div class="text-center md:text-left">
-                <h3 class="text-xl font-bold tracking-wider text-white mb-2">RONALD EMPIRE</h3>
+                <h3 class="text-xl font-bold tracking-wider text-white mb-2">Skills Mentor</h3>
                 <p class="text-gray-400 text-xs">L'excellence de l'apprentissage du code à portée de main.</p>
             </div>
             <div class="flex space-x-6 text-gray-400 text-lg">
@@ -982,7 +873,7 @@
                 <a href="#" class="hover:text-purple-400 transition-colors"><i class="fab fa-telegram"></i></a>
                 <a href="#" class="hover:text-purple-400 transition-colors"><i class="fab fa-whatsapp"></i></a>
             </div>
-            <p class="text-gray-500 text-xs">&copy; 2026 RONALD EMPIRE. Tous droits réservés.</p>
+            <p class="text-gray-500 text-xs">&copy; 2026 Skills Mentor. Tous droits réservés.</p>
         </div>
     </section>
     </main>
@@ -996,12 +887,12 @@
         <div class="bg-purple-600/20 px-4 py-3 border-b border-white/5 flex justify-between items-center">
             <div class="flex items-center gap-2">
                 <div class="w-2 h-2 bg-green-500 rounded-full animate-pulse"></div>
-                <span class="text-sm font-semibold">Assistant RONALD EMPIRE</span>
+                <span class="text-sm font-semibold">Assistant Skills Mentor</span>
             </div>
             <button id="close-chat" class="text-gray-400 hover:text-white"><i class="fas fa-times"></i></button>
         </div>
         <div id="chat-content" class="flex-1 p-4 overflow-y-auto flex flex-col gap-2">
-            <div class="chat-message bot-msg">Bonjour ! Je suis l'assistant de RONALD EMPIRE. Comment puis-je vous aider aujourd'hui ?</div>
+            <div class="chat-message bot-msg">Bonjour ! Je suis l'assistant de Skills Mentor. Comment puis-je vous aider aujourd'hui ?</div>
         </div>
         <div class="p-4 border-t border-white/5 flex gap-2">
             <input type="text" id="chat-input" placeholder="Posez votre question..." class="flex-1 bg-black border border-white/10 rounded-lg px-3 py-2 text-xs focus:outline-none focus:border-purple-500 transition-colors">
@@ -1111,8 +1002,7 @@
 
             // Hero content specific
             if (route === 'accueil') {
-                gsap.from(".hero-title", { x: -100, opacity: 0, duration: 1, ease: "power4.out", delay: 0.2 });
-                gsap.from(".arch-frame", { scale: 0.8, opacity: 0, duration: 1.2, ease: "elastic.out(1, 0.3)", delay: 0.4 });
+                gsap.from(".hero-title", { y: 30, opacity: 0, duration: 1, ease: "power4.out", delay: 0.2 });
                 gsap.from("#accueil p", { y: 20, opacity: 0, duration: 0.8, stagger: 0.2, delay: 0.6 });
             }
         }
@@ -1156,7 +1046,7 @@
             addMessage(text, 'user');
             chatInput.value = '';
 
-            const loadingMsg = addMessage("RONALD EMPIRE réfléchit...", "loading");
+            const loadingMsg = addMessage("Skills Mentor réfléchit...", "loading");
 
             try {
                 // Si la clé API est configurée
@@ -1170,7 +1060,7 @@
                         body: JSON.stringify({
                             model: "gpt-3.5-turbo",
                             messages: [
-                                { role: "system", content: "Tu es l'assistant de RONALD EMPIRE, une plateforme de formation tech, IA et business. Réponds de manière professionnelle et concise en français." },
+                                { role: "system", content: "Tu es l'assistant de Skills Mentor, une plateforme de formation tech, IA et business. Réponds de manière professionnelle et concise en français." },
                                 { role: "user", content: text }
                             ]
                         })
@@ -1289,7 +1179,7 @@
                 const qty = boostQuantity.value;
                 const total = boostTotal.textContent;
 
-                const message = `*Nouvelle Commande Boost - RONALD EMPIRE*\n\n` +
+                const message = `*Nouvelle Commande Boost - Skills Mentor*\n\n` +
                                 `*Réseau:* ${type}\n` +
                                 `*Offre:* ${offer}\n` +
                                 `*Lien:* ${link}\n` +
@@ -1364,7 +1254,7 @@
                         <p class="text-xs text-gray-300 leading-relaxed mb-6 flex-1">${acc.desc}</p>
                         <div class="pt-4 border-t border-white/5 flex items-center justify-between">
                             <span class="text-lg font-bold text-white">${priceFCFA.toLocaleString()} FCFA</span>
-                            <a href="https://wa.me/2290198905311?text=${encodeURIComponent('Bonjour RONALD EMPIRE, je souhaite acheter ce compte Instagram : ' + acc.desc)}" target="_blank" class="bg-purple-600 hover:bg-purple-500 text-white text-[10px] font-bold px-4 py-2 rounded-lg transition-colors">Commander</a>
+                            <a href="https://wa.me/2290198905311?text=${encodeURIComponent('Bonjour Skills Mentor, je souhaite acheter ce compte Instagram : ' + acc.desc)}" target="_blank" class="bg-purple-600 hover:bg-purple-500 text-white text-[10px] font-bold px-4 py-2 rounded-lg transition-colors">Commander</a>
                         </div>
                     `;
                     grid.appendChild(card);
@@ -1382,65 +1272,65 @@
             fr: {
                 welcome: "Maîtrisez le Développement avec",
                 start: "Passez à la vitesse supérieure",
-                nav: ["Accueil", "Catégories", "Formations", "Code Dev", "Boost", "Comptes", "Services", "Devenir Formateur", "Contact"],
+                nav: ["Accueil", "Formations", "Code Dev", "Boost", "Comptes", "Services", "Devenir Formateur", "Contact"],
                 cta_courses: "Découvrir les cours",
-                cta_cats: "Explorer les catégories"
+                cta_cats: "Découvrir les cours"
             },
             wo: {
                 welcome: "Maitriser xarala ak",
                 start: "Duggal ci biir xarala yu bees",
-                nav: ["Kër", "Wàll", "Njàng", "Xarala Dev", "Boost", "Kónt", "Sarwiis", "Nekk Jàngalekat", "Jokko"],
+                nav: ["Kër", "Njàng", "Xarala Dev", "Boost", "Kónt", "Sarwiis", "Nekk Jàngalekat", "Jokko"],
                 cta_courses: "Xool njàng mi",
-                cta_cats: "Xool wàll yi"
+                cta_cats: "Xool njàng mi"
             },
             sw: {
                 welcome: "Bobea Maendeleo na",
                 start: "Nenda kwenye kiwango kinachofuata",
-                nav: ["Nyumbani", "Jamii", "Mafunzo", "Code Dev", "Boost", "Akaunti", "Huduma", "Kuwa Mkufunzi", "Wasiliana"],
+                nav: ["Nyumbani", "Mafunzo", "Code Dev", "Boost", "Akaunti", "Huduma", "Kuwa Mkufunzi", "Wasiliana"],
                 cta_courses: "Gundua kozi",
-                cta_cats: "Gundua kategoria"
+                cta_cats: "Gundua kozi"
             },
             ln: {
                 welcome: "Koma mayele na botongi na",
                 start: "Kende na nivo ya sika",
-                nav: ["Ndako", "Katégori", "Formasyo", "Code Dev", "Boost", "Bakónti", "Misala", "Koma Moteyi", "Contact"],
+                nav: ["Ndako", "Formasyo", "Code Dev", "Boost", "Bakónti", "Misala", "Koma Moteyi", "Contact"],
                 cta_courses: "Luka bakonzi",
-                cta_cats: "Luka bakatégori"
+                cta_cats: "Luka bakonzi"
             },
             yo: {
                 welcome: "Gba idagbasoke pẹlu",
                 start: "Lọ si ipele ti n bọ",
-                nav: ["Ile", "Awọn ẹka", "Ikẹkọ", "Code Dev", "Boost", "Awọn iroyin", "Awọn iṣẹ", "Di Olukọni", "Olubasọrọ"],
+                nav: ["Ile", "Ikẹkọ", "Code Dev", "Boost", "Awọn iroyin", "Awọn iṣẹ", "Di Olukọni", "Olubasọrọ"],
                 cta_courses: "Ṣawari awọn ikẹkọ",
-                cta_cats: "Ṣawari awọn ẹka"
+                cta_cats: "Ṣawari awọn ikẹkọ"
             },
             zu: {
                 welcome: "Yiba yingcweti ekuthuthukisweni nge",
                 start: "Iya ezingeni elilandelayo",
-                nav: ["Ikhaya", "Izigaba", "Izifundo", "Code Dev", "Boost", "Ama-akhawunti", "Izinsizakalo", "Yiba ngumfundisi", "Oxhumana naye"],
+                nav: ["Ikhaya", "Izifundo", "Code Dev", "Boost", "Ama-akhawunti", "Izinsizakalo", "Yiba ngumfundisi", "Oxhumana naye"],
                 cta_courses: "Thola izifundo",
-                cta_cats: "Hlola izigaba"
+                cta_cats: "Thola izifundo"
             },
             bm: {
                 welcome: "Yiriwali kulu ni",
                 start: "Taga n'yɛ gbe kura la",
-                nav: ["So", "Sira", "Kalan", "Code Dev", "Boost", "Kóntiw", "Baara", "Kalanmogo", "Jumu"],
+                nav: ["So", "Kalan", "Code Dev", "Boost", "Kóntiw", "Baara", "Kalanmogo", "Jumu"],
                 cta_courses: "Kalanw fɛsɛfɛsɛ",
-                cta_cats: "Siraw fɛsɛfɛsɛ"
+                cta_cats: "Kalanw fɛsɛfɛsɛ"
             },
             ha: {
                 welcome: "Kware a fannin ci gaba tare da",
                 start: "Je zuwa mataki na gaba",
-                nav: ["Gida", "Rukunoni", "Horaswa", "Code Dev", "Boost", "Asusu", "Ayyuka", "Zama Mai Koyarwa", "Tuntuɓi"],
+                nav: ["Gida", "Horaswa", "Code Dev", "Boost", "Asusu", "Ayyuka", "Zama Mai Koyarwa", "Tuntuɓi"],
                 cta_courses: "Gano darussa",
-                cta_cats: "Bincika rukunoni"
+                cta_cats: "Gano darussa"
             },
             ar: {
                 welcome: "أتقن التطوير مع",
                 start: "انتقل إلى المستوى التالي",
-                nav: ["الرئيسية", "الفئات", "الدورات", "كود ديف", "تعزيز", "الحسابات", "الخدمات", "كن مدرباً", "اتصل بنا"],
+                nav: ["الرئيسية", "الدورات", "كود ديف", "تعزيز", "الحسابات", "الخدمات", "كن مدرباً", "اتصل بنا"],
                 cta_courses: "اكتشف الدورات",
-                cta_cats: "استكشف الفئات"
+                cta_cats: "اكتشف الدورات"
             }
         };
 
@@ -1449,13 +1339,18 @@
             const eventBadge = document.getElementById('event-badge');
             const startBadge = document.querySelector('#accueil p.tracking-\\[0\\.3em\\]');
             const ctaCourses = document.querySelector('a[href="#/formations"]');
-            const ctaCats = document.querySelector('a[href="#/categories"]');
 
             if (translations[lang]) {
                 if (welcomePrefix) welcomePrefix.textContent = translations[lang].welcome;
                 if (eventBadge) eventBadge.textContent = translations[lang].start;
-                if (ctaCourses && ctaCourses.closest('#accueil')) ctaCourses.textContent = translations[lang].cta_courses;
-                if (ctaCats && ctaCats.closest('#accueil')) ctaCats.textContent = translations[lang].cta_cats;
+                if (ctaCourses && ctaCourses.closest('#accueil')) {
+                    // Update all buttons in hero
+                    document.querySelectorAll('#accueil a').forEach(btn => {
+                        if (btn.textContent.includes('cours')) {
+                            btn.textContent = translations[lang].cta_courses;
+                        }
+                    });
+                }
 
                 // Mettre à jour le menu
                 const navLinks = document.querySelectorAll('.nav-link');
@@ -1484,7 +1379,7 @@
                 const formData = new FormData(formateurForm);
                 const data = Object.fromEntries(formData.entries());
 
-                const message = `*Nouvelle Candidature Formateur - RONALD EMPIRE*\n\n` +
+                const message = `*Nouvelle Candidature Formateur - Skills Mentor*\n\n` +
                                 `*Nom:* ${data.nom}\n` +
                                 `*Prénom:* ${data.prenom}\n` +
                                 `*WhatsApp:* ${data.whatsapp}\n` +
