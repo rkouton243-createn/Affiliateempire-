@@ -26,6 +26,7 @@
             --cat-streaming: #ef4444;
             --cat-business: #10b981;
             --cat-services: #a855f7;
+            --cat-section: #ec4899;
 
             --transition: all 0.3s ease;
         }
@@ -266,6 +267,7 @@
         .badge-streaming { background-color: var(--cat-streaming); color: white; }
         .badge-business { background-color: var(--cat-business); color: white; }
         .badge-services { background-color: var(--cat-services); color: white; }
+        .badge-section { background-color: var(--cat-section); color: white; }
 
         .card-date {
             font-size: 0.85rem;
@@ -428,6 +430,7 @@
                     <a href="#" onclick="filterBy('streaming')">Streaming</a>
                     <a href="#" onclick="filterBy('business')">Business</a>
                     <a href="#" onclick="filterBy('services')">Services</a>
+                    <a href="#" onclick="filterBy('section')">Section</a>
                 </nav>
 
                 <button class="burger" id="burger-menu">
@@ -456,6 +459,7 @@
                 <button class="filter-btn" onclick="filterBy('streaming')">Streaming</button>
                 <button class="filter-btn" onclick="filterBy('business')">Business</button>
                 <button class="filter-btn" onclick="filterBy('services')">Services</button>
+                <button class="filter-btn" onclick="filterBy('section')">Section</button>
             </div>
 
             <div class="article-grid" id="article-grid">
