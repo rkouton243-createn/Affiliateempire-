@@ -25,6 +25,7 @@
             --cat-crypto: #f59e0b;
             --cat-streaming: #ef4444;
             --cat-business: #10b981;
+            --cat-services: #a855f7;
 
             --transition: all 0.3s ease;
         }
@@ -264,6 +265,7 @@
         .badge-crypto { background-color: var(--cat-crypto); color: white; }
         .badge-streaming { background-color: var(--cat-streaming); color: white; }
         .badge-business { background-color: var(--cat-business); color: white; }
+        .badge-services { background-color: var(--cat-services); color: white; }
 
         .card-date {
             font-size: 0.85rem;
@@ -425,6 +427,7 @@
                     <a href="#" onclick="filterBy('crypto')">Crypto</a>
                     <a href="#" onclick="filterBy('streaming')">Streaming</a>
                     <a href="#" onclick="filterBy('business')">Business</a>
+                    <a href="#" onclick="filterBy('services')">Services</a>
                 </nav>
 
                 <button class="burger" id="burger-menu">
@@ -452,6 +455,7 @@
                 <button class="filter-btn" onclick="filterBy('crypto')">Crypto</button>
                 <button class="filter-btn" onclick="filterBy('streaming')">Streaming</button>
                 <button class="filter-btn" onclick="filterBy('business')">Business</button>
+                <button class="filter-btn" onclick="filterBy('services')">Services</button>
             </div>
 
             <div class="article-grid" id="article-grid">
@@ -487,83 +491,7 @@
 
     <script>
         /* --- DATA --- */
-        const articles = [
-            {
-                id: 1,
-                titre: "Comment utiliser ChatGPT pour automatiser vos tâches",
-                categorie: "ia",
-                date: "2026-05-20",
-                resume: "Découvrez comment gagner du temps avec l'IA en créant des workflows automatisés avec ChatGPT et Zapier.",
-                image: "https://images.unsplash.com/photo-1677442136019-21780ecad995?auto=format&fit=crop&w=800&q=80",
-                contenu: `
-                    <h2>Introduction</h2>
-                    <p>L'intelligence artificielle n'est plus une curiosité technologique, c'est un levier de productivité massif. Dans ce tutoriel, nous allons voir comment automatiser vos processus quotidiens.</p>
-                    <h2>Étape 1 : Identifier les tâches répétitives</h2>
-                    <p>La première étape consiste à lister tout ce que vous faites plus de 3 fois par jour. Rédaction d'emails, tri de données, synthèse de réunions...</p>
-                    <h2>Étape 2 : Configurer un Prompt Efficace</h2>
-                    <p>Pour que ChatGPT travaille pour vous, il lui faut des instructions claires.</p>
-                    <pre><code>Exemple de prompt : "Agis en tant qu'assistant exécutif. Résume cet email et suggère 3 réponses possibles en tenant compte de mon ton habituel..."</code></pre>
-                    <h2>Conclusion</h2>
-                    <p>En couplant ces prompts avec des outils comme Make ou Zapier, vous pouvez créer de véritables agents autonomes.</p>
-                `
-            },
-            {
-                id: 2,
-                titre: "Introduction à la DeFi : Comprendre les protocoles de prêt",
-                categorie: "crypto",
-                date: "2026-05-18",
-                resume: "Tout savoir sur la finance décentralisée et comment générer des intérêts sur vos stablecoins en toute sécurité.",
-                image: "https://images.unsplash.com/photo-1639762681485-074b7f938ba0?auto=format&fit=crop&w=800&q=80",
-                contenu: `
-                    <h2>Qu'est-ce que la DeFi ?</h2>
-                    <p>La finance décentralisée (DeFi) utilise la blockchain pour supprimer les intermédiaires bancaires classiques.</p>
-                    <h2>Fonctionnement d'Aave et Compound</h2>
-                    <p>Ces protocoles permettent de prêter vos actifs à d'autres utilisateurs en échange d'un taux d'intérêt calculé algorithmiquement.</p>
-                    <pre><code>// Concept de Smart Contract simplifié
-if (collateral > loanValue) {
-    executeLoan();
-}</code></pre>
-                    <h2>Les Risques</h2>
-                    <p>N'oubliez jamais les risques de smart contracts et la volatilité du marché.</p>
-                `
-            },
-            {
-                id: 3,
-                titre: "Optimiser OBS pour un stream 4K sans latence",
-                categorie: "streaming",
-                date: "2026-05-15",
-                resume: "Les meilleurs réglages pour OBS Studio en 2026 afin d'obtenir une qualité d'image parfaite sur Twitch et YouTube.",
-                image: "https://images.unsplash.com/photo-1593305841991-05c297ba4575?auto=format&fit=crop&w=800&q=80",
-                contenu: `
-                    <h2>Le Bitrate est la clé</h2>
-                    <p>Pour streamer en 4K, vous aurez besoin d'une connexion fibre solide et d'un bitrate d'au moins 20 Mbps.</p>
-                    <h2>Encodeur Hardware vs Software</h2>
-                    <p>Utilisez toujours l'encodeur NVENC si vous avez une carte NVIDIA pour soulager votre processeur.</p>
-                    <h2>Réglages Recommandés</h2>
-                    <ul>
-                        <li>Résolution : 3840x2160</li>
-                        <li>FPS : 60</li>
-                        <li>Profil : High</li>
-                    </ul>
-                `
-            },
-            {
-                id: 4,
-                titre: "5 Niches de Freelance qui vont exploser cette année",
-                categorie: "business",
-                date: "2026-05-10",
-                resume: "Analyse du marché du travail en ligne : où se trouvent les opportunités les plus lucratives pour les indépendants.",
-                image: "https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&w=800&q=80",
-                contenu: `
-                    <h2>1. IA Prompt Engineer</h2>
-                    <p>Aider les entreprises à intégrer l'IA dans leur workflow est une compétence extrêmement recherchée.</p>
-                    <h2>2. Montage Vidéo Short-form</h2>
-                    <p>Avec l'essor de TikTok et des Reels, la demande pour des monteurs rapides et créatifs ne faiblit pas.</p>
-                    <h2>Conclusion</h2>
-                    <p>Choisissez une niche, formez-vous pendant 30 jours et lancez votre offre sur Malt ou Upwork.</p>
-                `
-            }
-        ];
+        const articles = [];
 
         /* --- STATE --- */
         let currentFilter = 'all';
