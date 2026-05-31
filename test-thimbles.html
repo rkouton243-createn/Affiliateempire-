@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>1xBet Thimbles Mockup</title>
+    <style>
+        body {
+            background: #1a1a2e;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+            font-family: sans-serif;
+            color: white;
+        }
+        .game-container {
+            position: relative;
+            width: 600px;
+            height: 300px;
+            background: #16213e;
+            border-radius: 10px;
+            display: flex;
+            justify-content: space-around;
+            align-items: flex-end;
+            padding-bottom: 50px;
+            border: 2px solid #0f3460;
+        }
+        .thimble {
+            width: 100px;
+            height: 150px;
+            background: #e94560;
+            border-radius: 50px 50px 10px 10px;
+            position: relative;
+            z-index: 10;
+            cursor: pointer;
+            transition: transform 0.3s;
+        }
+        .thimble:hover {
+            transform: translateY(-10px);
+        }
+        .ball {
+            width: 30px;
+            height: 30px;
+            background: #fff;
+            border-radius: 50%;
+            position: absolute;
+            bottom: 60px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 5;
+            box-shadow: 0 0 10px #fff;
+        }
+        .cup-wrapper {
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        h1 { margin-bottom: 50px; }
+    </style>
+</head>
+<body>
+    <h1>Jeu des Gobelets (Mockup pour Test)</h1>
+    <div class="game-container">
+        <div class="cup-wrapper">
+            <div class="thimble"></div>
+        </div>
+        <div class="cup-wrapper">
+            <div class="thimble"></div>
+            <div class="ball"></div>
+        </div>
+        <div class="cup-wrapper">
+            <div class="thimble"></div>
+        </div>
+    </div>
+    <p>Utilisez l'extension pour rendre les "thimbles" (gobelets rouges) transparents et voir la balle blanche.</p>
+</body>
+</html>
