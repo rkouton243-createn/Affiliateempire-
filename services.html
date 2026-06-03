@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="fr" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Commander — CAPLAN & GOLD</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+
+<div class="cursor" id="cursor"></div>
+<div class="cursor-ring" id="cursorRing"></div>
+
+<!-- NAV -->
+<nav>
+  <a href="index.html" class="logo">CAPLAN <span>&</span> GOLD</a>
+  <ul class="nav-links">
+    <li><a href="about.html">À propos</a></li>
+    <li><a href="services.html">Commander</a></li>
+    <li><a href="process.html">Processus</a></li>
+    <li><a href="testimonials.html">Clients</a></li>
+  </ul>
+  <div class="nav-right">
+    <div class="theme-toggle" id="themeToggle" title="Basculer le thème">
+      <div class="toggle-icons"><span>🌙</span><span>☀️</span></div>
+    </div>
+    <a href="services.html" class="nav-cta">Commander</a>
+  </div>
+</nav>
+
+<!-- SERVICES CONFIGURATOR -->
+<section id="services" style="padding-top: 140px;">
+  <div class="services-top">
+    <div>
+      <div class="section-tag reveal">Commande personnalisée</div>
+      <h2 class="reveal reveal-delay-1">Configurez votre<br><em>contenu</em> idéal.</h2>
+    </div>
+  </div>
+
+  <div class="configurator reveal">
+    <div class="config-header">
+      <h3>🛠️ Créateur de contenu sur-mesure</h3>
+      <span>Prix calculé en temps réel</span>
+    </div>
+    <div class="config-body">
+      <!-- LEFT: Configurator -->
+      <div>
+        <!-- STEP 1: Platforms -->
+        <div class="config-step-label"><div class="step-badge">1</div>Choisissez vos réseaux sociaux</div>
+        <div class="config-section-title">Sur quelles plateformes ?</div>
+        <div class="network-chips" id="networkChips">
+          <div class="chip" data-network="tiktok" data-price="3500"><span class="chip-icon">🎵</span>TikTok</div>
+          <div class="chip" data-network="instagram" data-price="3000"><span class="chip-icon">📸</span>Instagram</div>
+          <div class="chip" data-network="facebook" data-price="2500"><span class="chip-icon">👥</span>Facebook</div>
+          <div class="chip" data-network="youtube" data-price="5000"><span class="chip-icon">▶️</span>YouTube</div>
+        </div>
+
+        <!-- STEP 2: Content type -->
+        <div class="config-step-label"><div class="step-badge">2</div>Type de contenu</div>
+        <div class="config-section-title">Quel format ?</div>
+        <div class="content-types" id="contentTypes">
+          <div class="content-type-card" data-type="video" data-mult="1.0">
+            <div class="ct-check">✓</div>
+            <div class="ct-icon">🎬</div>
+            <div class="ct-name">Vidéo / Reels</div>
+            <div class="ct-desc">Contenu vidéo dynamique</div>
+          </div>
+          <div class="content-type-card" data-type="photo" data-mult="0.6">
+            <div class="ct-check">✓</div>
+            <div class="ct-icon">📷</div>
+            <div class="ct-name">Photo / Carrousel</div>
+            <div class="ct-desc">Posts visuels percutants</div>
+          </div>
+          <div class="content-type-card" data-type="story" data-mult="0.5">
+            <div class="ct-check">✓</div>
+            <div class="ct-icon">⚡</div>
+            <div class="ct-name">Stories</div>
+            <div class="ct-desc">Contenu éphémère engageant</div>
+          </div>
+          <div class="content-type-card" data-type="live" data-mult="1.4">
+            <div class="ct-check">✓</div>
+            <div class="ct-icon">🔴</div>
+            <div class="ct-name">Live / Podcast</div>
+            <div class="ct-desc">Contenu en direct ou long</div>
+          </div>
+        </div>
+
+        <!-- STEP 3: Niche -->
+        <div class="config-step-label"><div class="step-badge">3</div>Votre niche</div>
+        <div class="config-section-title">Dans quel secteur ?</div>
+        <select class="niche-select" id="nicheSelect">
+          <option value="">— Sélectionnez votre niche —</option>
+          <option value="mode">👗 Mode & Lifestyle</option>
+          <option value="food">🍽️ Food & Restauration</option>
+          <option value="beaute">💄 Beauté & Bien-être</option>
+          <option value="business">💼 Business & Finance</option>
+          <option value="sport">⚽ Sport & Fitness</option>
+          <option value="tech">💻 Tech & Innovation</option>
+          <option value="education">📚 Éducation & Formation</option>
+          <option value="immobilier">🏠 Immobilier</option>
+          <option value="voyage">✈️ Voyage & Tourisme</option>
+          <option value="musique">🎵 Musique & Entertainment</option>
+          <option value="autre">🌟 Autre / Général</option>
+        </select>
+
+        <!-- STEP 4: Duration -->
+        <div class="config-step-label"><div class="step-badge">4</div>Durée des vidéos</div>
+        <div class="config-section-title">Quelle longueur ?</div>
+        <div class="duration-section">
+          <div class="duration-header">
+            <div><span class="duration-val" id="durVal">30</span> <span class="duration-unit">secondes</span></div>
+            <div id="durCategory" style="font-size:0.75rem;color:var(--gold);font-weight:500;">Court format</div>
+          </div>
+          <input type="range" id="durationSlider" min="15" max="600" step="15" value="30">
+          <div class="duration-labels">
+            <span>15s</span><span>1min</span><span>3min</span><span>5min</span><span>10min</span>
+          </div>
+        </div>
+
+        <!-- STEP 5: Quantity -->
+        <div class="config-step-label"><div class="step-badge">5</div>Nombre de posts / mois</div>
+        <div class="config-section-title">Quelle fréquence ?</div>
+        <div class="qty-control">
+          <button class="qty-btn" id="qtyMinus">−</button>
+          <span class="qty-display" id="qtyVal">4</span>
+          <button class="qty-btn" id="qtyPlus">+</button>
+          <span class="qty-label">posts par mois</span>
+        </div>
+      </div>
+
+      <!-- RIGHT: Summary -->
+      <div>
+        <div class="config-summary">
+          <div class="summary-title">📋 Récapitulatif de commande</div>
+
+          <div class="summary-row">
+            <span class="label">Plateformes</span>
+            <div id="summaryNetworks"><span style="font-size:0.78rem;color:var(--grey);font-style:italic;">Aucune sélectionnée</span></div>
+          </div>
+          <div class="summary-row">
+            <span class="label">Type de contenu</span>
+            <span class="value" id="summaryType">—</span>
+          </div>
+          <div class="summary-row">
+            <span class="label">Niche</span>
+            <span class="value" id="summaryNiche">—</span>
+          </div>
+          <div class="summary-row">
+            <span class="label">Durée vidéo</span>
+            <span class="value" id="summaryDur">30 secondes</span>
+          </div>
+          <div class="summary-row">
+            <span class="label">Fréquence</span>
+            <span class="value" id="summaryQty">4 posts / mois</span>
+          </div>
+
+          <div class="summary-divider"></div>
+
+          <div class="summary-price-block">
+            <div class="price-label">Prix total estimé</div>
+            <div class="price-amount" id="totalPrice"><span class="price-currency">—</span></div>
+            <div class="price-breakdown" id="priceBreak">Sélectionnez au moins un réseau et un type de contenu</div>
+          </div>
+
+          <div class="summary-divider"></div>
+
+          <div class="summary-row" style="font-size:0.78rem;">
+            <span class="label">Prix de base / plateforme</span>
+            <span style="color:var(--grey)" id="baseRange">2 500 – 5 000 FCFA</span>
+          </div>
+          <div class="summary-row" style="font-size:0.78rem;">
+            <span class="label">Modificateur durée</span>
+            <span style="color:var(--gold)" id="durMult">×1.0</span>
+          </div>
+          <div class="summary-row" style="font-size:0.78rem;">
+            <span class="label">Modificateur type</span>
+            <span style="color:var(--gold)" id="typeMult">×1.0</span>
+          </div>
+
+          <button class="order-btn" id="orderBtn" disabled>Passer la commande →</button>
+          <p class="config-notice">✅ Premier brief gratuit · Paiement à la livraison</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-brand">
+    <span class="logo">CAPLAN <span style="color:var(--gold)">&</span> GOLD</span>
+    <p>Agence de création de contenu pour les réseaux sociaux. TikTok, Instagram, Facebook, YouTube — votre présence, notre expertise.</p>
+  </div>
+  <div class="footer-col"><h4>Plateformes</h4><ul><li><a href="#">TikTok</a></li><li><a href="#">Instagram</a></li><li><a href="#">Facebook</a></li><li><a href="#">YouTube</a></li></ul></div>
+  <div class="footer-col"><h4>Entreprise</h4><ul><li><a href="about.html">À propos</a></li><li><a href="#">Notre équipe</a></li><li><a href="#">Portfolio</a></li><li><a href="#">Carrières</a></li></ul></div>
+  <div class="footer-col"><h4>Contact</h4><ul><li><a href="mailto:contact@caplan-gold.com">contact@caplan-gold.com</a></li><li><a href="tel:+22900000000">+229 00 00 00 00</a></li><li><a href="#">Porto-Novo, Bénin</a></li></ul></div>
+</footer>
+<div class="footer-bottom">
+  <p>© 2024 CAPLAN & GOLD. Tous droits réservés.</p>
+  <div class="social-links">
+    <a href="#" class="social-link">in</a>
+    <a href="#" class="social-link">ig</a>
+    <a href="#" class="social-link">tk</a>
+    <a href="#" class="social-link">fb</a>
+  </div>
+</div>
+
+<!-- ORDER MODAL -->
+<div class="modal-overlay" id="modalOverlay">
+  <div class="modal">
+    <button class="modal-close" id="modalClose">×</button>
+    <div class="modal-icon">🎉</div>
+    <h3>Commande reçue !</h3>
+    <p>Merci pour votre confiance. Notre équipe vous contactera sous <strong>24h</strong> pour finaliser votre brief de contenu.</p>
+    <div class="modal-detail" id="modalDetail"></div>
+    <a href="mailto:contact@caplan-gold.com" class="btn-primary" style="display:block;text-align:center;">Nous écrire directement →</a>
+  </div>
+</div>
+
+<script src="assets/js/main.js"></script>
+<script src="assets/js/configurator.js"></script>
+</body>
+</html>

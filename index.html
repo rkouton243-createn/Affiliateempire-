@@ -1,145 +1,102 @@
-🔥 Let's go ! Je te fais une version avec 2 sections : Accueil (fil d'actualité) et Chat 🐱.
-
 <!DOCTYPE html>
-<html lang="fr">
+<html lang="fr" data-theme="dark">
 <head>
-  <meta charset="UTF-8">
-  <title>ARAKFORUM - Politique Anonyme</title>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      background: #1a1a1a;
-      color: #fff;
-      margin: 0;
-      padding: 0;
-    }
-    .container {
-      max-width: 800px;
-      margin: auto;
-      padding: 20px;
-    }
-    .nav {
-      display: flex;
-      gap: 20px;
-      margin-bottom: 20px;
-    }
-    .nav a {
-      color: #4CAF50;
-      text-decoration: none;
-      cursor: pointer;
-    }
-    .nav a.active {
-      font-weight: bold;
-      border-bottom: 2px solid #4CAF50;
-    }
-    .section {
-      display: none;
-    }
-    .section.active {
-      display: block;
-    }
-    .post {
-      background: #333;
-      padding: 15px;
-      margin: 10px 0;
-      border-radius: 5px;
-    }
-    .pseudo {
-      color: #4CAF50;
-      font-weight: bold;
-    }
-    input, textarea {
-      width: 100%;
-      padding: 10px;
-      margin: 5px 0;
-      background: #444;
-      border: none;
-      color: #fff;
-    }
-    button {
-      padding: 10px 20px;
-      background: #4CAF50;
-      border: none;
-      color: #fff;
-      cursor: pointer;
-    }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CAPLAN & GOLD — Gestion des Réseaux Sociaux</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/style.css">
 </head>
 <body>
-  <div class="container">
-    <h1>ARAKFORUM - Politique</h1>
-    <p>Discutez anonymement de politique (Afrique & Monde)</p>
 
-    <!-- Navigation -->
-    <div class="nav">
-      <a onclick="showSection('accueil')">Accueil</a>
-      <a onclick="showSection('chat')">Chat 🐱</a>
+<div class="cursor" id="cursor"></div>
+<div class="cursor-ring" id="cursorRing"></div>
+
+<!-- NAV -->
+<nav>
+  <div class="logo">CAPLAN <span>&</span> GOLD</div>
+  <ul class="nav-links">
+    <li><a href="about.html">À propos</a></li>
+    <li><a href="services.html">Commander</a></li>
+    <li><a href="process.html">Processus</a></li>
+    <li><a href="testimonials.html">Clients</a></li>
+  </ul>
+  <div class="nav-right">
+    <div class="theme-toggle" id="themeToggle" title="Basculer le thème">
+      <div class="toggle-icons"><span>🌙</span><span>☀️</span></div>
     </div>
+    <a href="services.html" class="nav-cta">Commander</a>
+  </div>
+</nav>
 
-    <!-- Sections -->
-    <div id="accueil" class="section active">
-      <h2>Fil d'actualité</h2>
-      <textarea id="newPostAccueil" placeholder="Écris un post..."></textarea>
-      <button onclick="addPost('accueil')">Poster</button>
-      <div id="postsAccueil"></div>
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-left">
+    <div class="hero-eyebrow">Agence digitale premium</div>
+    <h1>Votre contenu<br>social, <em>créé</em><br>sur-mesure.</h1>
+    <p class="hero-desc">CAPLAN & GOLD crée du contenu premium pour TikTok, Instagram, Facebook et YouTube — adapté à votre niche, livré avec précision.</p>
+    <div class="hero-actions">
+      <a href="services.html" class="btn-primary">Configurer ma commande</a>
+      <a href="process.html" class="btn-ghost">↓ Comment ça marche</a>
     </div>
-
-    <div id="chat" class="section">
-      <h2>Chat 🐱</h2>
-      <input id="newMsgChat" placeholder="Écris un message...">
-      <button onclick="addPost('chat')">Envoyer</button>
-      <div id="postsChat"></div>
+    <div class="hero-stats">
+      <div><div class="stat-val">250+</div><div class="stat-label">Clients actifs</div></div>
+      <div><div class="stat-val">98%</div><div class="stat-label">Satisfaction</div></div>
+      <div><div class="stat-val">8M+</div><div class="stat-label">Portée mensuelle</div></div>
     </div>
   </div>
+  <div class="hero-right">
+    <div class="hero-visual">
+      <div class="hero-visual-grid">
+        <div class="grid-cell"><div class="cell-icon">📱</div><div class="cell-bar"></div></div>
+        <div class="grid-cell"><div class="cell-icon">🎬</div><div class="cell-bar"></div></div>
+        <div class="grid-cell"><div class="cell-icon">✨</div><div class="cell-bar"></div></div>
+        <div class="grid-cell"><div class="cell-icon">🎯</div><div class="cell-bar"></div></div>
+        <div class="grid-cell"><div class="cell-icon">💎</div><div class="cell-bar"></div></div>
+        <div class="grid-cell"><div class="cell-icon">📊</div><div class="cell-bar"></div></div>
+        <div class="grid-cell"><div class="cell-icon">🔥</div><div class="cell-bar"></div></div>
+        <div class="grid-cell"><div class="cell-icon">🎨</div><div class="cell-bar"></div></div>
+        <div class="grid-cell"><div class="cell-icon">📈</div><div class="cell-bar"></div></div>
+        <div class="grid-cell"><div class="cell-icon">🌟</div><div class="cell-bar"></div></div>
+        <div class="grid-cell"><div class="cell-icon">🎵</div><div class="cell-bar"></div></div>
+        <div class="grid-cell"><div class="cell-icon">🏆</div><div class="cell-bar"></div></div>
+      </div>
+    </div>
+    <div class="gold-line"></div>
+  </div>
+</section>
 
-  <script>
-    // Génère un pseudo aléatoire
-    function getPseudo() {
-      const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
-      let pseudo = '';
-      for (let i = 0; i < 8; i++) {
-        pseudo += chars.charAt(Math.floor(Math.random() * chars.length));
-      }
-      return pseudo;
-    }
+<!-- CTA (Part of the flow of home) -->
+<section id="cta">
+  <div class="cta-eyebrow reveal">Prêt à vous lancer ?</div>
+  <h2 class="reveal reveal-delay-1">Élevons votre marque<br>vers l'<em>excellence</em>.</h2>
+  <p class="reveal reveal-delay-2">Rejoignez plus de 250 entreprises qui font confiance à CAPLAN & GOLD. Premier brief gratuit, sans engagement.</p>
+  <div class="cta-buttons reveal reveal-delay-3">
+    <a href="services.html" class="btn-primary">Configurer ma commande</a>
+    <a href="mailto:contact@caplan-gold.com" class="btn-outline">Nous contacter</a>
+  </div>
+</section>
 
-    // Affiche une section
-    function showSection(id) {
-      document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
-      document.querySelectorAll('.nav a').forEach(a => a.classList.remove('active'));
-      document.getElementById(id).classList.add('active');
-      document.querySelector(`.nav a[onclick*="${id}"]`).classList.add('active');
-    }
+<!-- FOOTER -->
+<footer>
+  <div class="footer-brand">
+    <span class="logo">CAPLAN <span style="color:var(--gold)">&</span> GOLD</span>
+    <p>Agence de création de contenu pour les réseaux sociaux. TikTok, Instagram, Facebook, YouTube — votre présence, notre expertise.</p>
+  </div>
+  <div class="footer-col"><h4>Plateformes</h4><ul><li><a href="#">TikTok</a></li><li><a href="#">Instagram</a></li><li><a href="#">Facebook</a></li><li><a href="#">YouTube</a></li></ul></div>
+  <div class="footer-col"><h4>Entreprise</h4><ul><li><a href="about.html">À propos</a></li><li><a href="#">Notre équipe</a></li><li><a href="#">Portfolio</a></li><li><a href="#">Carrières</a></li></ul></div>
+  <div class="footer-col"><h4>Contact</h4><ul><li><a href="mailto:contact@caplan-gold.com">contact@caplan-gold.com</a></li><li><a href="tel:+22900000000">+229 00 00 00 00</a></li><li><a href="#">Porto-Novo, Bénin</a></li></ul></div>
+</footer>
+<div class="footer-bottom">
+  <p>© 2024 CAPLAN & GOLD. Tous droits réservés.</p>
+  <div class="social-links">
+    <a href="#" class="social-link">in</a>
+    <a href="#" class="social-link">ig</a>
+    <a href="#" class="social-link">tk</a>
+    <a href="#" class="social-link">fb</a>
+  </div>
+</div>
 
-    // Ajoute un post
-    function addPost(type) {
-      const input = type === 'accueil' ? 'newPostAccueil' : 'newMsgChat';
-      const postsDiv = type === 'accueil' ? 'postsAccueil' : 'postsChat';
-      const text = document.getElementById(input).value;
-      if (text.trim() === '') return;
-      const pseudo = getPseudo();
-      const post = `
-        <div class="post">
-          <span class="pseudo">${pseudo}</span>: ${text}
-        </div>
-      `;
-      document.getElementById(postsDiv).innerHTML += post;
-      document.getElementById(input).value = '';
-    }
-  </script>
+<script src="assets/js/main.js"></script>
 </body>
 </html>
-
-
-Comment ça marche ?
-- Accueil : fil d'actualité (posts).
-- Chat 🐱 : messages courts.
-- Les pseudos sont aléatoires.
-- Pas de sauvegarde (reset si rafraîchissement).
-
-Tu veux :
-- Sauvegarder les posts (localStorage) ?
-- Ajouter des réponses aux posts ?
-- Un truc pour voir les nouveaux messages en temps réel ?
-
-Prêt à tester sur ZeroNet ! 😊
