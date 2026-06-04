@@ -418,6 +418,16 @@
   .modal-detail { background:var(--surface2);padding:20px;margin-bottom:24px;font-size:0.85rem;line-height:1.8; }
   .modal-detail strong { color:var(--gold); }
 
+  /* ===== MUSIC TOGGLE ===== */
+  .music-control {
+    position:fixed; bottom:30px; left:30px; z-index:100;
+    width:44px; height:44px; background:var(--surface); border:1px solid var(--border-gold);
+    display:flex; align-items:center; justify-content:center; cursor:pointer;
+    transition:transform .3s, background .3s;
+  }
+  .music-control:hover { transform:scale(1.1); background:var(--surface2); }
+  .music-icon { font-size:1.2rem; color:var(--gold); }
+
   /* ===== ANIMATIONS ===== */
   @keyframes fadeUp { to{opacity:1;transform:translateY(0)} }
   @keyframes cellReveal { to{opacity:1} }
@@ -433,6 +443,14 @@
 
 <div class="cursor" id="cursor"></div>
 <div class="cursor-ring" id="cursorRing"></div>
+
+<!-- MUSIC CONTROL -->
+<div class="music-control" id="musicToggle" title="Activer/Désactiver la musique">
+  <span class="music-icon" id="musicIcon">🔇</span>
+</div>
+<audio id="bgMusic" loop>
+  <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg">
+</audio>
 
 <!-- NAV -->
 <nav>
@@ -864,6 +882,33 @@ if (toggle) {
 const saved = localStorage.getItem('cg-theme');
 if (saved) html.dataset.theme = saved;
 
+// ===== BACKGROUND MUSIC =====
+const bgMusic = document.getElementById('bgMusic');
+const musicToggle = document.getElementById('musicToggle');
+const musicIcon = document.getElementById('musicIcon');
+let isMusicPlaying = false;
+
+if (musicToggle) {
+  musicToggle.addEventListener('click', () => {
+    if (isMusicPlaying) {
+      bgMusic.pause();
+      musicIcon.textContent = '🔇';
+    } else {
+      bgMusic.play().catch(e => console.log("Audio play blocked by browser"));
+      musicIcon.textContent = '🔊';
+    }
+    isMusicPlaying = !isMusicPlaying;
+  });
+}
+
+// Start music on first interaction
+document.addEventListener('click', () => {
+  if (!isMusicPlaying && bgMusic.paused) {
+    // We don't force play here to avoid annoying users,
+    // but the interaction allows future play() calls to succeed.
+  }
+}, { once: true });
+
 // ===== CUSTOM CURSOR =====
 const cursor = document.getElementById('cursor');
 const ring = document.getElementById('cursorRing');
@@ -923,7 +968,7 @@ function orderProduct(name, price) {
 
 const SERVICES_CONFIG = {
   youtube: {
-    name: "YouTube", icon: "🎬", price: 15000,
+    name: "YouTube", icon: "🎬", price: 5000,
     fields: [
       { id: "channelName", label: "Nom de la chaîne", type: "text", required: true },
       { id: "niche", label: "Niche / Thématique", type: "text", required: true },
@@ -933,7 +978,7 @@ const SERVICES_CONFIG = {
     ]
   },
   ads: {
-    name: "Campagne Pub", icon: "📢", price: 25000,
+    name: "Campagne Pub", icon: "📢", price: 4500,
     fields: [
       { id: "platforms", label: "Plateforme(s)", type: "check", options: ["Facebook", "Instagram", "TikTok", "Google"], required: true },
       { id: "goal", label: "Objectif", type: "radio", options: ["Ventes", "Notoriété", "Abonnés"], required: true },
@@ -943,7 +988,7 @@ const SERVICES_CONFIG = {
     ]
   },
   cm: {
-    name: "Community Manager", icon: "💬", price: 45000,
+    name: "Community Manager", icon: "💬", price: 4000,
     fields: [
       { id: "networks", label: "Réseaux à gérer", type: "check", options: ["FB", "IG", "TikTok", "X", "LinkedIn"], required: true },
       { id: "freq", label: "Fréquence souhaitée", type: "radio", options: ["Quotidien", "3x/semaine", "Week-end"], required: true },
@@ -952,7 +997,7 @@ const SERVICES_CONFIG = {
     ]
   },
   facebook: {
-    name: "Page Facebook", icon: "📘", price: 10000,
+    name: "Page Facebook", icon: "📘", price: 2500,
     fields: [
       { id: "pageName", label: "Nom de la page", type: "text", required: true },
       { id: "category", label: "Catégorie", type: "text", required: true },
@@ -962,7 +1007,7 @@ const SERVICES_CONFIG = {
     ]
   },
   boost: {
-    name: "Boosting YouTube", icon: "🚀", price: 20000,
+    name: "Boosting YouTube", icon: "🚀", price: 3500,
     fields: [
       { id: "videoLink", label: "Lien de la vidéo", type: "text", required: true },
       { id: "goal", label: "Objectif du boost", type: "radio", options: ["Vues", "Likes", "Abonnés"], required: true },
@@ -972,7 +1017,7 @@ const SERVICES_CONFIG = {
     ]
   },
   shopify: {
-    name: "Shopify", icon: "🛒", price: 150000,
+    name: "Shopify", icon: "🛒", price: 5000,
     fields: [
       { id: "storeName", label: "Nom de la boutique", type: "text", required: true },
       { id: "prodType", label: "Type de produits", type: "text", required: true },
