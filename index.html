@@ -274,6 +274,34 @@
   .qty-display { font-family:'Playfair Display',serif;font-size:1.4rem;font-weight:700;color:var(--gold);min-width:36px;text-align:center; }
   .qty-label { font-size:0.78rem;color:var(--grey); }
 
+  /* SERVICE GRID */
+  .service-grid { display:grid; grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); gap:12px; margin-bottom:40px; }
+  .service-chip { background:var(--surface2); border:1.5px solid var(--border); padding:20px 10px; text-align:center; cursor:pointer; transition:all .25s; }
+  .service-chip:hover { border-color:var(--gold); }
+  .service-chip.selected { border-color:var(--gold); background:rgba(201,168,76,0.1); }
+  .service-icon { font-size:1.8rem; margin-bottom:8px; }
+  .service-name { font-size:0.75rem; font-weight:500; letter-spacing:0.05em; text-transform:uppercase; color:var(--grey); }
+  .service-chip.selected .service-name { color:var(--gold); }
+
+  /* DETAILS PANEL */
+  .details-panel { display:none; margin-top:20px; border-top:1px solid var(--border); padding-top:40px; }
+  .details-panel.active { display:block; animation:fadeIn .5s forwards; }
+  .dynamic-fields { display:grid; grid-template-columns:1fr; gap:20px; }
+
+  .field-group { display:flex; flex-direction:column; gap:8px; }
+  .field-label { font-size:0.75rem; text-transform:uppercase; letter-spacing:0.1em; color:var(--grey); }
+  .field-label span { color: #ff4444; margin-left:4px; }
+  .field-input { width:100%; padding:12px 16px; background:var(--input-bg); border:1.5px solid var(--border); color:var(--text); font-family:inherit; font-size:0.9rem; transition:border-color .2s; }
+  .field-input:focus { outline:none; border-color:var(--gold); }
+  .field-input.error { border-color: #ff4444; }
+
+  /* Custom Radio/Check */
+  .custom-options { display:flex; flex-wrap:wrap; gap:10px; }
+  .custom-opt { padding:10px 16px; background:var(--surface2); border:1.5px solid var(--border); font-size:0.85rem; cursor:pointer; transition:all .2s; }
+  .custom-opt.selected { border-color:var(--gold); background:rgba(201,168,76,0.15); color:var(--gold); }
+
+  @keyframes fadeIn { from{opacity:0; transform:translateY(10px)} to{opacity:1; transform:translateY(0)} }
+
   /* RIGHT PANEL — Summary */
   .config-summary {
     background: var(--surface2);
@@ -483,86 +511,43 @@
       <div class="config-body">
         <!-- LEFT: Configurator -->
         <div>
-          <!-- STEP 1: Platforms -->
-          <div class="config-step-label"><div class="step-badge">1</div>Choisissez vos réseaux sociaux</div>
-          <div class="config-section-title">Sur quelles plateformes ?</div>
-          <div class="network-chips" id="networkChips">
-            <div class="chip" data-network="tiktok" data-price="3500"><span class="chip-icon">🎵</span>TikTok</div>
-            <div class="chip" data-network="instagram" data-price="3000"><span class="chip-icon">📸</span>Instagram</div>
-            <div class="chip" data-network="facebook" data-price="2500"><span class="chip-icon">👥</span>Facebook</div>
-            <div class="chip" data-network="youtube" data-price="5000"><span class="chip-icon">▶️</span>YouTube</div>
-          </div>
-
-          <!-- STEP 2: Content type -->
-          <div class="config-step-label"><div class="step-badge">2</div>Type de contenu</div>
-          <div class="config-section-title">Quel format ?</div>
-          <div class="content-types" id="contentTypes">
-            <div class="content-type-card" data-type="video" data-mult="1.0">
-              <div class="ct-check">✓</div>
-              <div class="ct-icon">🎬</div>
-              <div class="ct-name">Vidéo / Reels</div>
-              <div class="ct-desc">Contenu vidéo dynamique</div>
+          <!-- STEP 1: Service Selection -->
+          <div class="config-step-label"><div class="step-badge">1</div>Sélectionnez un service</div>
+          <div class="config-section-title">Quel type de prestation ?</div>
+          <div class="service-grid" id="serviceGrid">
+            <div class="service-chip" data-service="youtube">
+              <div class="service-icon">🎬</div>
+              <div class="service-name">YouTube</div>
             </div>
-            <div class="content-type-card" data-type="photo" data-mult="0.6">
-              <div class="ct-check">✓</div>
-              <div class="ct-icon">📷</div>
-              <div class="ct-name">Photo / Carrousel</div>
-              <div class="ct-desc">Posts visuels percutants</div>
+            <div class="service-chip" data-service="ads">
+              <div class="service-icon">📢</div>
+              <div class="service-name">Campagne Pub</div>
             </div>
-            <div class="content-type-card" data-type="story" data-mult="0.5">
-              <div class="ct-check">✓</div>
-              <div class="ct-icon">⚡</div>
-              <div class="ct-name">Stories</div>
-              <div class="ct-desc">Contenu éphémère engageant</div>
+            <div class="service-chip" data-service="cm">
+              <div class="service-icon">💬</div>
+              <div class="service-name">Community Manager</div>
             </div>
-            <div class="content-type-card" data-type="live" data-mult="1.4">
-              <div class="ct-check">✓</div>
-              <div class="ct-icon">🔴</div>
-              <div class="ct-name">Live / Podcast</div>
-              <div class="ct-desc">Contenu en direct ou long</div>
+            <div class="service-chip" data-service="facebook">
+              <div class="service-icon">📘</div>
+              <div class="service-name">Page Facebook</div>
+            </div>
+            <div class="service-chip" data-service="boost">
+              <div class="service-icon">🚀</div>
+              <div class="service-name">Boosting YouTube</div>
+            </div>
+            <div class="service-chip" data-service="shopify">
+              <div class="service-icon">🛒</div>
+              <div class="service-name">Shopify</div>
             </div>
           </div>
 
-          <!-- STEP 3: Niche -->
-          <div class="config-step-label"><div class="step-badge">3</div>Votre niche</div>
-          <div class="config-section-title">Dans quel secteur ?</div>
-          <select class="niche-select" id="nicheSelect">
-            <option value="">— Sélectionnez votre niche —</option>
-            <option value="mode">👗 Mode & Lifestyle</option>
-            <option value="food">🍽️ Food & Restauration</option>
-            <option value="beaute">💄 Beauté & Bien-être</option>
-            <option value="business">💼 Business & Finance</option>
-            <option value="sport">⚽ Sport & Fitness</option>
-            <option value="tech">💻 Tech & Innovation</option>
-            <option value="education">📚 Éducation & Formation</option>
-            <option value="immobilier">🏠 Immobilier</option>
-            <option value="voyage">✈️ Voyage & Tourisme</option>
-            <option value="musique">🎵 Musique & Entertainment</option>
-            <option value="autre">🌟 Autre / Général</option>
-          </select>
-
-          <!-- STEP 4: Duration -->
-          <div class="config-step-label"><div class="step-badge">4</div>Durée des vidéos</div>
-          <div class="config-section-title">Quelle longueur ?</div>
-          <div class="duration-section">
-            <div class="duration-header">
-              <div><span class="duration-val" id="durVal">30</span> <span class="duration-unit">secondes</span></div>
-              <div id="durCategory" style="font-size:0.75rem;color:var(--gold);font-weight:500;">Court format</div>
+          <!-- DETAILS PANEL -->
+          <div id="detailsPanel" class="details-panel">
+            <div class="config-step-label"><div class="step-badge">2</div>Détails du service</div>
+            <div class="config-section-title" id="detailsTitle">Précisez votre besoin</div>
+            <div id="dynamicFields" class="dynamic-fields">
+              <!-- Dynamically populated -->
             </div>
-            <input type="range" id="durationSlider" min="15" max="600" step="15" value="30">
-            <div class="duration-labels">
-              <span>15s</span><span>1min</span><span>3min</span><span>5min</span><span>10min</span>
-            </div>
-          </div>
-
-          <!-- STEP 5: Quantity -->
-          <div class="config-step-label"><div class="step-badge">5</div>Nombre de posts / mois</div>
-          <div class="config-section-title">Quelle fréquence ?</div>
-          <div class="qty-control">
-            <button class="qty-btn" id="qtyMinus">−</button>
-            <span class="qty-display" id="qtyVal">4</span>
-            <button class="qty-btn" id="qtyPlus">+</button>
-            <span class="qty-label">posts par mois</span>
           </div>
         </div>
 
@@ -576,20 +561,11 @@
               <div id="summaryNetworks"><span style="font-size:0.78rem;color:var(--grey);font-style:italic;">Aucune sélectionnée</span></div>
             </div>
             <div class="summary-row">
-              <span class="label">Type de contenu</span>
+              <span class="label">Service</span>
               <span class="value" id="summaryType">—</span>
             </div>
-            <div class="summary-row">
-              <span class="label">Niche</span>
-              <span class="value" id="summaryNiche">—</span>
-            </div>
-            <div class="summary-row">
-              <span class="label">Durée vidéo</span>
-              <span class="value" id="summaryDur">30 secondes</span>
-            </div>
-            <div class="summary-row">
-              <span class="label">Fréquence</span>
-              <span class="value" id="summaryQty">4 posts / mois</span>
+            <div id="dynamicSummaryRows">
+              <!-- Dynamically populated details -->
             </div>
 
             <div class="summary-divider"></div>
@@ -597,22 +573,7 @@
             <div class="summary-price-block">
               <div class="price-label">Prix total estimé</div>
               <div class="price-amount" id="totalPrice"><span class="price-currency">—</span></div>
-              <div class="price-breakdown" id="priceBreak">Sélectionnez au moins un réseau et un type de contenu</div>
-            </div>
-
-            <div class="summary-divider"></div>
-
-            <div class="summary-row" style="font-size:0.78rem;">
-              <span class="label">Prix de base / plateforme</span>
-              <span style="color:var(--grey)" id="baseRange">2 500 – 5 000 FCFA</span>
-            </div>
-            <div class="summary-row" style="font-size:0.78rem;">
-              <span class="label">Modificateur durée</span>
-              <span style="color:var(--gold)" id="durMult">×1.0</span>
-            </div>
-            <div class="summary-row" style="font-size:0.78rem;">
-              <span class="label">Modificateur type</span>
-              <span style="color:var(--gold)" id="typeMult">×1.0</span>
+              <div class="price-breakdown" id="priceBreak">Sélectionnez un service pour voir le tarif</div>
             </div>
 
             <button class="order-btn" id="orderBtn" disabled>Passer la commande →</button>
@@ -770,142 +731,251 @@ const observer = new IntersectionObserver(entries=>entries.forEach(e=>{
 document.querySelectorAll('.reveal').forEach(el=>observer.observe(el));
 
 // ===== CONFIGURATOR LOGIC =====
-const PLATFORMS = { tiktok:{price:3500,name:'TikTok',icon:'🎵'}, instagram:{price:3000,name:'Instagram',icon:'📸'}, facebook:{price:2500,name:'Facebook',icon:'👥'}, youtube:{price:5000,name:'YouTube',icon:'▶️'} };
-const CONTENT_TYPES = { video:{mult:1.0,name:'Vidéo / Reels'}, photo:{mult:0.6,name:'Photo / Carrousel'}, story:{mult:0.5,name:'Stories'}, live:{mult:1.4,name:'Live / Podcast'} };
-const NICHES = { mode:'Mode & Lifestyle',food:'Food & Restauration',beaute:'Beauté & Bien-être',business:'Business & Finance',sport:'Sport & Fitness',tech:'Tech & Innovation',education:'Éducation & Formation',immobilier:'Immobilier',voyage:'Voyage & Tourisme',musique:'Musique & Entertainment',autre:'Autre / Général' };
+const WHATSAPP_NUMBER = "2290198905311";
 
-let selectedNetworks = new Set();
-let selectedType = null;
-let duration = 30;
-let quantity = 4;
+const SERVICES_CONFIG = {
+  youtube: {
+    name: "YouTube", icon: "🎬", price: 15000,
+    fields: [
+      { id: "channelName", label: "Nom de la chaîne", type: "text", required: true },
+      { id: "niche", label: "Niche / Thématique", type: "text", required: true },
+      { id: "lang", label: "Langue", type: "radio", options: ["Français", "Anglais", "Autre"], required: true },
+      { id: "hasLogo", label: "Logo disponible ?", type: "radio", options: ["Oui", "Non (à créer)"], required: true },
+      { id: "desc", label: "Description du projet", type: "textarea", required: false }
+    ]
+  },
+  ads: {
+    name: "Campagne Pub", icon: "📢", price: 25000,
+    fields: [
+      { id: "platforms", label: "Plateforme(s)", type: "check", options: ["Facebook", "Instagram", "TikTok", "Google"], required: true },
+      { id: "goal", label: "Objectif", type: "radio", options: ["Ventes", "Notoriété", "Abonnés"], required: true },
+      { id: "link", label: "Lien à promouvoir", type: "text", required: true },
+      { id: "budget", label: "Budget pub estimé", type: "text", required: true },
+      { id: "target", label: "Cible (Pays/Âge)", type: "text", required: true }
+    ]
+  },
+  cm: {
+    name: "Community Manager", icon: "💬", price: 45000,
+    fields: [
+      { id: "networks", label: "Réseaux à gérer", type: "check", options: ["FB", "IG", "TikTok", "X", "LinkedIn"], required: true },
+      { id: "freq", label: "Fréquence souhaitée", type: "radio", options: ["Quotidien", "3x/semaine", "Week-end"], required: true },
+      { id: "tone", label: "Ton de la marque", type: "text", required: true },
+      { id: "access", label: "Accès comptes ?", type: "radio", options: ["Déjà créés", "À créer"], required: true }
+    ]
+  },
+  facebook: {
+    name: "Page Facebook", icon: "📘", price: 10000,
+    fields: [
+      { id: "pageName", label: "Nom de la page", type: "text", required: true },
+      { id: "category", label: "Catégorie", type: "text", required: true },
+      { id: "phone", label: "Téléphone contact", type: "text", required: true },
+      { id: "desc", label: "Description", type: "textarea", required: true },
+      { id: "logo", label: "Logo disponible ?", type: "radio", options: ["Oui", "Non"], required: true }
+    ]
+  },
+  boost: {
+    name: "Boosting YouTube", icon: "🚀", price: 20000,
+    fields: [
+      { id: "videoLink", label: "Lien de la vidéo", type: "text", required: true },
+      { id: "goal", label: "Objectif du boost", type: "radio", options: ["Vues", "Likes", "Abonnés"], required: true },
+      { id: "adsBudget", label: "Budget Google Ads", type: "text", required: true },
+      { id: "duration", label: "Durée (jours)", type: "text", required: true },
+      { id: "country", label: "Pays cible", type: "text", required: true }
+    ]
+  },
+  shopify: {
+    name: "Shopify", icon: "🛒", price: 150000,
+    fields: [
+      { id: "storeName", label: "Nom de la boutique", type: "text", required: true },
+      { id: "prodType", label: "Type de produits", type: "text", required: true },
+      { id: "prodCount", label: "Nombre de produits", type: "radio", options: ["1-10", "10-50", "50+"], required: true },
+      { id: "payment", label: "Moyen de paiement", type: "text", required: true },
+      { id: "domain", label: "Domaine disponible ?", type: "radio", options: ["Oui", "Non"], required: true }
+    ]
+  }
+};
 
-function getDurationMult(sec) {
-  if(sec<=30) return {m:1.0,label:'Court format',cat:'≤30s'};
-  if(sec<=60) return {m:1.3,label:'Format court',cat:'31–60s'};
-  if(sec<=180) return {m:1.7,label:'Format moyen',cat:'1–3min'};
-  if(sec<=360) return {m:2.2,label:'Long format',cat:'3–6min'};
-  return {m:3.0,label:'Très long format',cat:'6–10min'};
-}
-
-function formatDur(sec){
-  if(sec<60) return sec+'s';
-  const m=Math.floor(sec/60),s=sec%60;
-  return s ? m+'min'+s+'s' : m+' min';
-}
+let selectedServiceId = null;
 
 function formatPrice(n){ return n.toLocaleString('fr-FR') + ' FCFA'; }
 
-function calcPrice(){
-  if(selectedNetworks.size===0||!selectedType) return null;
-  const typeMult = CONTENT_TYPES[selectedType].mult;
-  const {m: durM} = getDurationMult(duration);
-  let total = 0;
-  selectedNetworks.forEach(net => { total += PLATFORMS[net].price * typeMult * durM * quantity; });
-  return Math.round(total);
-}
-
-function updateSummary(){
-  const netEl = document.getElementById('summaryNetworks');
-  if (!netEl) return;
-  if(selectedNetworks.size===0){ netEl.innerHTML='<span style="font-size:.78rem;color:var(--grey);font-style:italic;">Aucune sélectionnée</span>'; }
-  else { netEl.innerHTML='<div class="platform-pills">' + [...selectedNetworks].map(n=>`<span class="platform-pill">${PLATFORMS[n].icon} ${PLATFORMS[n].name}</span>`).join('') + '</div>'; }
-
-  document.getElementById('summaryType').textContent = selectedType ? CONTENT_TYPES[selectedType].name : '—';
-  const nicheSelect = document.getElementById('nicheSelect');
-  const nv = nicheSelect ? nicheSelect.value : "";
-  document.getElementById('summaryNiche').textContent = nv ? NICHES[nv]||'—' : '—';
-  document.getElementById('summaryDur').textContent = formatDur(duration);
-  document.getElementById('summaryQty').textContent = quantity + ' posts / mois';
-
-  const {m:dm,label:dlabel} = getDurationMult(duration);
-  const tm = selectedType ? CONTENT_TYPES[selectedType].mult : 1.0;
-  document.getElementById('durMult').textContent = '×' + dm.toFixed(1) + ' (' + dlabel + ')';
-  document.getElementById('typeMult').textContent = '×' + tm.toFixed(1);
-
-  const price = calcPrice();
-  const priceEl = document.getElementById('totalPrice');
-  const breakEl = document.getElementById('priceBreak');
+function updateSummary() {
+  const summaryNetworks = document.getElementById('summaryNetworks');
+  const summaryType = document.getElementById('summaryType');
+  const totalPrice = document.getElementById('totalPrice');
   const orderBtn = document.getElementById('orderBtn');
-  if(price !== null){
-    priceEl.innerHTML = '<strong>' + formatPrice(price) + '</strong>';
-    const perPost = Math.round(price/quantity);
-    breakEl.textContent = `${formatPrice(perPost)} / post × ${quantity} posts × ${selectedNetworks.size} plateforme(s)`;
-    if (orderBtn) orderBtn.disabled = false;
-  } else {
-    priceEl.innerHTML = '<span class="price-currency">—</span>';
-    breakEl.textContent = 'Sélectionnez au moins un réseau et un type de contenu';
-    if (orderBtn) orderBtn.disabled = true;
+  const priceBreak = document.getElementById('priceBreak');
+  const dynamicRows = document.getElementById('dynamicSummaryRows');
+
+  if (!selectedServiceId) {
+    summaryNetworks.innerHTML = '<span style="font-size:.78rem;color:var(--grey);font-style:italic;">Aucun sélectionné</span>';
+    summaryType.textContent = "—";
+    totalPrice.innerHTML = '<span class="price-currency">—</span>';
+    orderBtn.disabled = true;
+    priceBreak.textContent = "Sélectionnez un service pour continuer";
+    dynamicRows.innerHTML = "";
+    return;
   }
+
+  const config = SERVICES_CONFIG[selectedServiceId];
+  summaryNetworks.innerHTML = `<div class="platform-pills"><span class="platform-pill">${config.icon} ${config.name}</span></div>`;
+  summaryType.textContent = config.name;
+  totalPrice.innerHTML = `<strong>${formatPrice(config.price)}</strong>`;
+  orderBtn.disabled = false;
+  priceBreak.textContent = "Prix fixe pour la prestation de base";
+
+  // Dynamic summary of filled fields
+  let summaryHtml = "";
+  const fields = document.querySelectorAll('.field-input, .custom-options');
+  fields.forEach(f => {
+    let val = "";
+    if (f.classList.contains('field-input')) {
+      val = f.value.trim();
+    } else {
+      val = Array.from(f.querySelectorAll('.custom-opt.selected')).map(el => el.textContent).join(", ");
+    }
+    if (val) {
+      const label = f.closest('.field-group').querySelector('.field-label').textContent.replace('*', '').trim();
+      summaryHtml += `<div class="summary-row"><span class="label">${label}</span><span class="value">${val}</span></div>`;
+    }
+  });
+  dynamicRows.innerHTML = summaryHtml;
 }
 
-// Configurator Init
-document.querySelectorAll('.chip').forEach(chip=>{
-  chip.addEventListener('click',()=>{
-    const net = chip.dataset.network;
-    if(selectedNetworks.has(net)){selectedNetworks.delete(net);chip.classList.remove('selected');}
-    else{selectedNetworks.add(net);chip.classList.add('selected');}
+function generateFields(serviceId) {
+  const container = document.getElementById('dynamicFields');
+  const config = SERVICES_CONFIG[serviceId];
+  container.innerHTML = "";
+
+  config.fields.forEach(field => {
+    const group = document.createElement('div');
+    group.className = "field-group";
+
+    const label = document.createElement('label');
+    label.className = "field-label";
+    label.innerHTML = field.label + (field.required ? "<span>*</span>" : "");
+    group.appendChild(label);
+
+    if (field.type === "text" || field.type === "textarea") {
+      const input = document.createElement(field.type === "text" ? "input" : "textarea");
+      input.className = "field-input";
+      input.dataset.id = field.id;
+      input.dataset.required = field.required;
+      if (field.type === "text") input.type = "text";
+      input.oninput = updateSummary;
+      group.appendChild(input);
+    } else if (field.type === "radio" || field.type === "check") {
+      const optContainer = document.createElement('div');
+      optContainer.className = "custom-options";
+      optContainer.dataset.id = field.id;
+      optContainer.dataset.type = field.type;
+      optContainer.dataset.required = field.required;
+
+      field.options.forEach(opt => {
+        const div = document.createElement('div');
+        div.className = "custom-opt";
+        div.textContent = opt;
+        div.onclick = () => {
+          if (field.type === "radio") {
+            optContainer.querySelectorAll('.custom-opt').forEach(el => el.classList.remove('selected'));
+            div.classList.add('selected');
+          } else {
+            div.classList.toggle('selected');
+          }
+          updateSummary();
+        };
+        optContainer.appendChild(div);
+      });
+      group.appendChild(optContainer);
+    }
+
+    container.appendChild(group);
+  });
+}
+
+// Event Listeners
+document.querySelectorAll('.service-chip').forEach(chip => {
+  chip.addEventListener('click', () => {
+    document.querySelectorAll('.service-chip').forEach(c => c.classList.remove('selected'));
+    chip.classList.add('selected');
+    selectedServiceId = chip.dataset.service;
+
+    const panel = document.getElementById('detailsPanel');
+    panel.classList.add('active');
+    document.getElementById('detailsTitle').textContent = `Détails pour : ${SERVICES_CONFIG[selectedServiceId].name}`;
+
+    generateFields(selectedServiceId);
     updateSummary();
+
+    // Auto-scroll to panel
+    setTimeout(() => panel.scrollIntoView({ behavior: 'smooth', block: 'start' }), 100);
   });
 });
-
-document.querySelectorAll('.content-type-card').forEach(card=>{
-  card.addEventListener('click',()=>{
-    document.querySelectorAll('.content-type-card').forEach(c=>c.classList.remove('selected'));
-    card.classList.add('selected');
-    selectedType = card.dataset.type;
-    updateSummary();
-  });
-});
-
-const nicheSelect = document.getElementById('nicheSelect');
-if (nicheSelect) nicheSelect.addEventListener('change', updateSummary);
-
-const slider = document.getElementById('durationSlider');
-if (slider) {
-    slider.addEventListener('input',()=>{
-      duration = parseInt(slider.value);
-      document.getElementById('durVal').textContent = duration < 60 ? duration : formatDur(duration);
-      const unit = duration < 60 ? 'secondes' : '';
-      const unitEl = document.querySelector('.duration-unit');
-      if (unitEl) unitEl.textContent = unit;
-      const durCatEl = document.getElementById('durCategory');
-      if (durCatEl) durCatEl.textContent = getDurationMult(duration).label;
-      const pct = ((duration-15)/(600-15)*100).toFixed(1) + '%';
-      slider.style.setProperty('--pct', pct);
-      updateSummary();
-    });
-    slider.style.setProperty('--pct','2.5%');
-}
-
-const qtyMinus = document.getElementById('qtyMinus');
-const qtyPlus = document.getElementById('qtyPlus');
-const qtyVal = document.getElementById('qtyVal');
-if (qtyMinus) {
-    qtyMinus.addEventListener('click',()=>{ if(quantity>1){quantity--; if(qtyVal) qtyVal.textContent=quantity;updateSummary();} });
-}
-if (qtyPlus) {
-    qtyPlus.addEventListener('click',()=>{ if(quantity<30){quantity++; if(qtyVal) qtyVal.textContent=quantity;updateSummary();} });
-}
 
 const orderBtn = document.getElementById('orderBtn');
 if (orderBtn) {
-    orderBtn.addEventListener('click',()=>{
-      const price = calcPrice();
-      if(!price) return;
-      const nets = [...selectedNetworks].map(n=>PLATFORMS[n].name).join(', ');
-      const type = CONTENT_TYPES[selectedType].name;
-      const nv = document.getElementById('nicheSelect').value;
-      const niche = NICHES[nv] || 'Non précisé';
-      document.getElementById('modalDetail').innerHTML = `
-        <strong>Plateformes :</strong> ${nets}<br>
-        <strong>Type de contenu :</strong> ${type}<br>
-        <strong>Niche :</strong> ${niche}<br>
-        <strong>Durée :</strong> ${formatDur(duration)}<br>
-        <strong>Fréquence :</strong> ${quantity} posts / mois<br>
-        <strong>Prix estimé :</strong> ${formatPrice(price)}
-      `;
-      document.getElementById('modalOverlay').classList.add('open');
+  orderBtn.addEventListener('click', () => {
+    const fields = document.querySelectorAll('.field-input, .custom-options');
+    let isValid = true;
+    let firstError = null;
+    const data = {};
+
+    fields.forEach(f => {
+      const isRequired = f.dataset.required === "true";
+      let value = "";
+
+      if (f.classList.contains('field-input')) {
+        value = f.value.trim();
+        f.classList.remove('error');
+        if (isRequired && !value) {
+          isValid = false;
+          f.classList.add('error');
+          if (!firstError) firstError = f;
+        }
+      } else {
+        const selected = Array.from(f.querySelectorAll('.custom-opt.selected')).map(el => el.textContent);
+        value = selected.join(", ");
+        if (isRequired && selected.length === 0) {
+          isValid = false;
+          f.querySelectorAll('.custom-opt').forEach(opt => opt.style.borderColor = "#ff4444");
+          if (!firstError) firstError = f;
+        } else {
+          f.querySelectorAll('.custom-opt').forEach(opt => opt.style.borderColor = "");
+        }
+      }
+
+      const label = f.closest('.field-group').querySelector('.field-label').textContent.replace('*', '').trim();
+      data[label] = value || "N/A";
     });
+
+    if (!isValid) {
+      if (firstError) firstError.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      return;
+    }
+
+    // Prepare WhatsApp Message
+    const config = SERVICES_CONFIG[selectedServiceId];
+    let msg = `*NOUVELLE COMMANDE - CAPLAN & GOLD*\n\n`;
+    msg += `*Service:* ${config.icon} ${config.name}\n`;
+    msg += `*Prix estimé:* ${formatPrice(config.price)}\n\n`;
+    msg += `*DÉTAILS DU PROJET:*\n`;
+
+    for (const [key, val] of Object.entries(data)) {
+      msg += `• ${key}: ${val}\n`;
+    }
+
+    const url = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(msg)}`;
+
+    // Success Modal
+    document.getElementById('modalDetail').innerHTML = `
+      <strong>Service :</strong> ${config.name}<br>
+      <strong>Prix :</strong> ${formatPrice(config.price)}<br>
+      <p style="margin-top:10px; font-size:0.8rem; color:var(--gold)">Redirection vers WhatsApp en cours...</p>
+    `;
+    document.getElementById('modalOverlay').classList.add('open');
+
+    setTimeout(() => { window.open(url, '_blank'); }, 1500);
+  });
 }
 const modalClose = document.getElementById('modalClose');
 if (modalClose) modalClose.addEventListener('click',()=>document.getElementById('modalOverlay').classList.remove('open'));
