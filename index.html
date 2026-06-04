@@ -460,6 +460,7 @@
     <li><a href="#services">Services</a></li>
     <li><a href="#comptes">Comptes</a></li>
     <li><a href="#formations">Formations</a></li>
+    <li><a href="#leofarme">LÉOFARME</a></li>
     <li><a href="#process">Processus</a></li>
     <li><a href="#testimonials">Clients</a></li>
   </ul>
@@ -591,6 +592,35 @@
         <span class="price-tag">4 000 <span>FCFA</span></span>
         <button class="btn-card" onclick="orderProduct('Page Facebook Monétisée', '4 000 FCFA')">Commander</button>
       </div>
+    </div>
+  </section>
+</div>
+
+<!-- LÉOFARME -->
+<div id="leofarmeView" class="page-view">
+  <section id="leofarme" style="padding-top: 160px;">
+    <div class="section-tag reveal">Essai Gratuit</div>
+    <h2 class="reveal reveal-delay-1">TikTok <em>Growth</em>.</h2>
+    <p class="reveal reveal-delay-2" style="color:var(--grey); margin-top:20px; max-width:600px;">
+      Obtenez 100 vraies vues sur votre post TikTok gratuitement. Pas de carte de crédit, pas d'obligations.
+    </p>
+
+    <div class="card-premium reveal reveal-delay-3" style="max-width:600px; margin-top:40px; border-color:var(--gold);">
+      <div class="icon">🚀</div>
+      <h3>Boost de vues gratuit</h3>
+      <p style="font-size:0.85rem; color:var(--grey); margin-bottom:24px; line-height:1.6;">
+        Il vous suffit de nous fournir le lien de votre post TikTok. Note : Votre compte ne doit pas être en mode privé.
+      </p>
+
+      <div class="field-group" style="margin-bottom:20px;">
+        <label class="field-label">Lien du post TikTok <span>*</span></label>
+        <input type="text" id="leofarmeLink" class="field-input" placeholder="https://vm.tiktok.com/..." style="border-color:var(--gold);">
+      </div>
+
+      <button class="order-btn" id="leofarmeBtn" style="margin-top:0;">Obtenez des vues gratuites →</button>
+      <p style="font-size:0.7rem; color:var(--grey); text-align:center; margin-top:12px;">
+        Commande gratuite disponible toutes les 24 heures.
+      </p>
     </div>
   </section>
 </div>
@@ -853,6 +883,7 @@ function showView(hash) {
   if (hash === '#services') targetId = 'servicesView';
   if (hash === '#comptes') targetId = 'comptesView';
   if (hash === '#formations') targetId = 'formationsView';
+  if (hash === '#leofarme') targetId = 'leofarmeView';
   if (hash === '#process') targetId = 'processView';
   if (hash === '#testimonials') targetId = 'testimonialsView';
 
@@ -964,6 +995,37 @@ function orderProduct(name, price) {
   document.getElementById('modalOverlay').classList.add('open');
 
   setTimeout(() => { window.open(url, '_blank'); }, 1500);
+}
+
+const leofarmeBtn = document.getElementById('leofarmeBtn');
+if (leofarmeBtn) {
+  leofarmeBtn.addEventListener('click', () => {
+    const linkInput = document.getElementById('leofarmeLink');
+    const link = linkInput.value.trim();
+
+    if (!link) {
+      linkInput.classList.add('error');
+      linkInput.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      return;
+    }
+
+    linkInput.classList.remove('error');
+    const msg = `*ESSAI GRATUIT LÉOFARME*\n\n` +
+                `*Service:* 100 Vues TikTok Gratuites\n` +
+                `*Lien:* ${link}\n\n` +
+                `Je souhaite bénéficier de l'essai gratuit de 100 vues sur mon post TikTok.`;
+
+    const url = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(msg)}`;
+
+    document.getElementById('modalDetail').innerHTML = `
+      <strong>Service :</strong> 100 Vues TikTok Gratuites<br>
+      <strong>Post :</strong> ${link}<br>
+      <p style="margin-top:10px; font-size:0.8rem; color:var(--gold)">Redirection vers WhatsApp en cours...</p>
+    `;
+    document.getElementById('modalOverlay').classList.add('open');
+
+    setTimeout(() => { window.open(url, '_blank'); }, 1500);
+  });
 }
 
 const SERVICES_CONFIG = {
