@@ -5,7 +5,381 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>CAPLAN & GOLD — Gestion des Réseaux Sociaux</title>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/css/style.css">
+<style>
+  /* ===== THEME VARIABLES ===== */
+  [data-theme="dark"] {
+    --gold: #C9A84C;
+    --gold-light: #E8C96A;
+    --gold-pale: #F5E9C8;
+    --bg: #0A0A0A;
+    --surface: #111111;
+    --surface2: #1A1A1A;
+    --surface3: #222222;
+    --grey: #888888;
+    --text: #FAFAF7;
+    --text-muted: #999;
+    --border: rgba(255,255,255,0.07);
+    --border-gold: rgba(201,168,76,0.15);
+    --nav-bg: rgba(10,10,10,0.95);
+    --shadow: 0 20px 60px rgba(0,0,0,0.4);
+    --input-bg: #111;
+    --toggle-bg: #222;
+  }
+  [data-theme="light"] {
+    --gold: #A8731A;
+    --gold-light: #C9901F;
+    --gold-pale: #FFF8EC;
+    --bg: #F7F5F0;
+    --surface: #FFFFFF;
+    --surface2: #F0EDE6;
+    --surface3: #E8E4DC;
+    --grey: #6B6560;
+    --text: #1A1612;
+    --text-muted: #777;
+    --border: rgba(0,0,0,0.08);
+    --border-gold: rgba(168,115,26,0.2);
+    --nav-bg: rgba(247,245,240,0.97);
+    --shadow: 0 20px 60px rgba(0,0,0,0.1);
+    --input-bg: #F7F5F0;
+    --toggle-bg: #E8E4DC;
+  }
+
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 300;
+    overflow-x: hidden;
+    cursor: none;
+    transition: background 0.4s, color 0.4s;
+  }
+
+  /* ===== CURSOR ===== */
+  .cursor { width:10px;height:10px;background:var(--gold);border-radius:50%;position:fixed;top:0;left:0;pointer-events:none;z-index:9999; }
+  .cursor-ring { width:36px;height:36px;border:1px solid var(--gold);border-radius:50%;position:fixed;top:0;left:0;pointer-events:none;z-index:9998;transition:width .3s,height .3s,opacity .3s;opacity:0.6; }
+
+  /* ===== NAV ===== */
+  nav {
+    position: fixed; top:0;left:0;right:0;z-index:100;
+    padding: 22px 60px;
+    display: flex; align-items:center;justify-content:space-between;
+    background: var(--nav-bg);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+    transition: background 0.4s, border-color 0.4s;
+  }
+  .logo { font-family:'Playfair Display',serif;font-size:1.3rem;font-weight:700;letter-spacing:0.08em;color:var(--text); text-decoration: none; }
+  .logo span { color:var(--gold); }
+  .nav-links { display:flex;gap:36px;list-style:none; }
+  .nav-links a { font-size:0.78rem;letter-spacing:0.15em;text-transform:uppercase;color:var(--grey);text-decoration:none;transition:color .3s; }
+  .nav-links a:hover { color:var(--gold); }
+  .nav-right { display:flex;align-items:center;gap:20px; }
+
+  /* THEME TOGGLE */
+  .theme-toggle {
+    width: 52px; height: 28px;
+    background: var(--toggle-bg);
+    border-radius: 14px;
+    border: 1px solid var(--border-gold);
+    position: relative;
+    cursor: pointer;
+    transition: background 0.3s;
+    flex-shrink: 0;
+  }
+  .theme-toggle::before {
+    content: '';
+    position: absolute;
+    top: 3px; left: 3px;
+    width: 20px; height: 20px;
+    border-radius: 50%;
+    background: var(--gold);
+    transition: transform 0.35s cubic-bezier(.34,1.56,.64,1);
+  }
+  [data-theme="light"] .theme-toggle::before { transform: translateX(24px); }
+  .toggle-icons { position:absolute;inset:0;display:flex;align-items:center;justify-content:space-between;padding:0 7px;font-size:0.6rem;pointer-events:none; }
+
+  .nav-cta { font-size:0.75rem;letter-spacing:0.15em;text-transform:uppercase;color:#000;background:var(--gold);padding:10px 24px;text-decoration:none;font-weight:500;transition:background .3s,transform .2s; }
+  .nav-cta:hover { background:var(--gold-light);transform:translateY(-1px); }
+
+  /* ===== PAGE TRANSITION ===== */
+  .page-view {
+    display: none;
+    opacity: 0;
+    transition: opacity 0.4s ease-in-out;
+  }
+  .page-view.active {
+    display: block;
+    opacity: 1;
+  }
+
+  /* ===== HERO ===== */
+  #home { min-height:100vh;display:grid;grid-template-columns:1fr 1fr;position:relative;overflow:hidden; }
+  .hero-left { display:flex;flex-direction:column;justify-content:center;padding:120px 60px 80px;position:relative;z-index:2; }
+  .hero-eyebrow { font-size:0.72rem;letter-spacing:0.3em;text-transform:uppercase;color:var(--gold);margin-bottom:32px;display:flex;align-items:center;gap:12px;opacity:0;transform:translateY(20px);animation:fadeUp .8s .2s forwards; }
+  .hero-eyebrow::before { content:'';display:block;width:32px;height:1px;background:var(--gold); }
+  h1 { font-family:'Playfair Display',serif;font-size:clamp(2.8rem,5vw,5rem);line-height:1.05;font-weight:900;opacity:0;transform:translateY(30px);animation:fadeUp .9s .4s forwards; }
+  h1 em { font-style:italic;color:var(--gold); }
+  .hero-desc { font-size:1rem;color:var(--grey);max-width:420px;line-height:1.8;margin-top:28px;opacity:0;transform:translateY(20px);animation:fadeUp .8s .65s forwards; }
+  .hero-actions { display:flex;align-items:center;gap:28px;margin-top:44px;opacity:0;transform:translateY(20px);animation:fadeUp .8s .85s forwards; }
+  .btn-primary { background:var(--gold);color:#000;font-size:0.78rem;letter-spacing:0.18em;text-transform:uppercase;font-weight:500;padding:15px 34px;text-decoration:none;transition:background .3s,transform .2s;display:inline-block; border: none; font-family: 'DM Sans', sans-serif; cursor: pointer; }
+  .btn-primary:hover { background:var(--gold-light);transform:translateY(-2px); }
+  .btn-ghost { color:var(--text);font-size:0.78rem;letter-spacing:0.15em;text-transform:uppercase;text-decoration:none;display:flex;align-items:center;gap:10px;opacity:0.6;transition:opacity .3s; }
+  .btn-ghost:hover { opacity:1; }
+  .hero-stats { display:flex;gap:48px;margin-top:60px;padding-top:40px;border-top:1px solid var(--border);opacity:0;animation:fadeUp .8s 1.1s forwards; }
+  .stat-val { font-family:'Playfair Display',serif;font-size:2.2rem;font-weight:700;color:var(--gold);line-height:1; }
+  .stat-label { font-size:0.72rem;letter-spacing:0.12em;text-transform:uppercase;color:var(--grey);margin-top:6px; }
+  .hero-right { position:relative;overflow:hidden; }
+  .hero-visual { position:absolute;inset:0;background:var(--surface2); }
+  .hero-visual-grid { position:absolute;inset:0;display:grid;grid-template-columns:repeat(3,1fr);grid-template-rows:repeat(4,1fr);gap:2px; }
+  .grid-cell { background:var(--surface);position:relative;overflow:hidden;opacity:0;animation:cellReveal .6s forwards; }
+  .grid-cell:nth-child(1){animation-delay:.3s}.grid-cell:nth-child(2){animation-delay:.5s}.grid-cell:nth-child(3){animation-delay:.4s}.grid-cell:nth-child(4){animation-delay:.6s}.grid-cell:nth-child(5){animation-delay:.7s;grid-column:span 2}.grid-cell:nth-child(6){animation-delay:.8s}.grid-cell:nth-child(7){animation-delay:.9s;grid-row:span 2}.grid-cell:nth-child(8){animation-delay:1s}.grid-cell:nth-child(9){animation-delay:1.1s}.grid-cell:nth-child(10){animation-delay:1.2s}.grid-cell:nth-child(11){animation-delay:1.3s}.grid-cell:nth-child(12){animation-delay:1.4s}
+  .grid-cell::after{content:'';position:absolute;inset:0;background:var(--gold);opacity:0;transition:opacity .4s}.grid-cell:hover::after{opacity:0.06}
+  .cell-icon{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:1.6rem;opacity:0.2}
+  .cell-bar{position:absolute;bottom:0;left:0;right:0;height:3px;background:var(--gold);transform:scaleX(0);transform-origin:left;transition:transform .6s}.grid-cell:hover .cell-bar{transform:scaleX(1)}
+  .gold-line{position:absolute;bottom:0;left:0;right:0;height:4px;background:linear-gradient(90deg,transparent,var(--gold),transparent);z-index:3}
+
+  /* ===== SECTIONS ===== */
+  section { padding: 100px 60px; }
+  .section-tag { font-size:0.7rem;letter-spacing:0.3em;text-transform:uppercase;color:var(--gold);display:flex;align-items:center;gap:12px;margin-bottom:20px; }
+  .section-tag::before { content:'';display:block;width:24px;height:1px;background:var(--gold); }
+  h2 { font-family:'Playfair Display',serif;font-size:clamp(2rem,3.8vw,3.4rem);line-height:1.1;font-weight:900; }
+  h2 em { font-style:italic;color:var(--gold); }
+
+  /* ===== ABOUT ===== */
+  #about { background:var(--surface);display:grid;grid-template-columns:1fr 1fr;gap:100px;align-items:center; padding-top: 160px; }
+  .about-text p { font-size:1rem;color:var(--grey);line-height:1.9;margin-top:24px;max-width:480px; }
+  .about-right { display:grid;grid-template-columns:1fr 1fr;gap:16px; }
+  .about-card { background:var(--surface2);border:1px solid var(--border-gold);padding:28px 22px;position:relative;overflow:hidden;transition:border-color .3s,transform .3s; }
+  .about-card::before { content:'';position:absolute;top:0;left:0;right:0;height:2px;background:var(--gold);transform:scaleX(0);transform-origin:left;transition:transform .4s; }
+  .about-card:hover { border-color:rgba(201,168,76,0.35);transform:translateY(-4px); }
+  .about-card:hover::before { transform:scaleX(1); }
+  .card-icon { font-size:1.8rem;margin-bottom:14px; }
+  .card-title { font-family:'Playfair Display',serif;font-size:1rem;font-weight:700;margin-bottom:8px; }
+  .card-desc { font-size:0.83rem;color:var(--grey);line-height:1.6; }
+
+  /* ===== SERVICES CONFIGURATOR ===== */
+  #services { background: var(--bg); padding-top: 160px; }
+  .services-top { display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:60px; }
+
+  .configurator {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    padding: 0;
+    overflow: hidden;
+    box-shadow: var(--shadow);
+  }
+  .config-header {
+    background: var(--gold);
+    padding: 20px 36px;
+    display: flex; align-items:center; justify-content:space-between;
+  }
+  .config-header h3 { font-family:'Playfair Display',serif;font-size:1.2rem;font-weight:700;color:#000; }
+  .config-header span { font-size:0.75rem;letter-spacing:0.1em;text-transform:uppercase;color:rgba(0,0,0,0.6); }
+
+  .config-body { padding: 40px 36px; display:grid;grid-template-columns:1.1fr 1fr;gap:48px;align-items:start; }
+
+  /* Step labels */
+  .config-step-label {
+    font-size:0.68rem;letter-spacing:0.25em;text-transform:uppercase;color:var(--gold);
+    display:flex;align-items:center;gap:8px;margin-bottom:16px;
+  }
+  .config-step-label .step-badge {
+    width:20px;height:20px;border-radius:50%;background:var(--gold);color:#000;
+    font-size:0.65rem;font-weight:700;display:flex;align-items:center;justify-content:center;
+  }
+  .config-section-title { font-family:'Playfair Display',serif;font-size:1.05rem;font-weight:700;margin-bottom:20px; }
+
+  /* Network chips */
+  .network-chips { display:flex;gap:10px;flex-wrap:wrap;margin-bottom:32px; }
+  .chip {
+    display: flex; align-items:center; gap:8px;
+    padding: 10px 18px;
+    border: 1.5px solid var(--border);
+    background: var(--surface2);
+    cursor: pointer;
+    transition: all .25s;
+    font-size: 0.82rem;
+    font-weight: 500;
+    color: var(--grey);
+    user-select: none;
+  }
+  .chip .chip-icon { font-size: 1rem; }
+  .chip:hover { border-color: var(--gold); color:var(--text); }
+  .chip.selected { border-color: var(--gold); background: rgba(201,168,76,0.1); color: var(--gold); }
+  [data-theme="light"] .chip.selected { background: rgba(168,115,26,0.08); }
+
+  /* Content type */
+  .content-types { display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:32px; }
+  .content-type-card {
+    border: 1.5px solid var(--border);
+    background: var(--surface2);
+    padding: 14px 16px;
+    cursor: pointer;
+    transition: all .25s;
+    position: relative;
+  }
+  .content-type-card:hover { border-color:var(--gold); }
+  .content-type-card.selected { border-color:var(--gold);background:rgba(201,168,76,0.08); }
+  .ct-icon { font-size:1.3rem;margin-bottom:6px; }
+  .ct-name { font-size:0.83rem;font-weight:500;margin-bottom:2px; }
+  .ct-desc { font-size:0.72rem;color:var(--grey); }
+  .ct-check {
+    position:absolute;top:8px;right:10px;
+    width:16px;height:16px;border-radius:50%;
+    border:1.5px solid var(--border);
+    background:transparent;
+    transition:all .2s;
+    display:flex;align-items:center;justify-content:center;
+    font-size:0.6rem;color:transparent;
+  }
+  .content-type-card.selected .ct-check { background:var(--gold);border-color:var(--gold);color:#000; }
+
+  /* Niche */
+  .niche-select {
+    width:100%;padding:12px 16px;
+    background:var(--input-bg);
+    border:1.5px solid var(--border);
+    color:var(--text);
+    font-family:'DM Sans',sans-serif;
+    font-size:0.88rem;
+    appearance:none;
+    cursor:pointer;
+    transition:border-color .25s;
+    margin-bottom:32px;
+  }
+  .niche-select:focus { outline:none;border-color:var(--gold); }
+
+  /* Duration slider */
+  .duration-section { margin-bottom:32px; }
+  .duration-header { display:flex;justify-content:space-between;align-items:center;margin-bottom:12px; }
+  .duration-val { font-family:'Playfair Display',serif;font-size:1.4rem;font-weight:700;color:var(--gold); }
+  .duration-unit { font-size:0.72rem;color:var(--grey);letter-spacing:0.1em; }
+  input[type=range] {
+    width:100%;-webkit-appearance:none;height:4px;
+    background:linear-gradient(90deg,var(--gold) var(--pct,0%),var(--border) var(--pct,0%));
+    border-radius:2px;cursor:pointer;
+  }
+  input[type=range]::-webkit-slider-thumb { -webkit-appearance:none;width:18px;height:18px;border-radius:50%;background:var(--gold);border:2px solid var(--bg);box-shadow:0 2px 8px rgba(0,0,0,0.3); }
+  .duration-labels { display:flex;justify-content:space-between;margin-top:6px; }
+  .duration-labels span { font-size:0.7rem;color:var(--grey); }
+
+  /* Quantity */
+  .qty-control { display:flex;align-items:center;gap:12px;margin-bottom:32px; }
+  .qty-btn { width:34px;height:34px;border:1.5px solid var(--border);background:var(--surface2);color:var(--text);font-size:1.1rem;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all .2s; }
+  .qty-btn:hover { border-color:var(--gold);color:var(--gold); }
+  .qty-display { font-family:'Playfair Display',serif;font-size:1.4rem;font-weight:700;color:var(--gold);min-width:36px;text-align:center; }
+  .qty-label { font-size:0.78rem;color:var(--grey); }
+
+  /* RIGHT PANEL — Summary */
+  .config-summary {
+    background: var(--surface2);
+    border: 1px solid var(--border-gold);
+    padding: 32px 28px;
+    position: sticky; top: 120px;
+  }
+  .summary-title { font-family:'Playfair Display',serif;font-size:1.05rem;font-weight:700;margin-bottom:24px;padding-bottom:16px;border-bottom:1px solid var(--border); }
+  .summary-row { display:flex;justify-content:space-between;align-items:center;margin-bottom:14px;font-size:0.85rem; }
+  .summary-row .label { color:var(--grey); }
+  .summary-row .value { font-weight:500;color:var(--text); }
+  .summary-row .value.tag { background:rgba(201,168,76,0.12);color:var(--gold);padding:3px 10px;font-size:0.75rem; }
+  .summary-divider { height:1px;background:var(--border);margin:20px 0; }
+  .summary-price-block { text-align:center;padding:20px 0; }
+  .price-label { font-size:0.7rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--grey);margin-bottom:6px; }
+  .price-amount { font-family:'Playfair Display',serif;font-size:2.6rem;font-weight:900;color:var(--gold);line-height:1; }
+  .price-currency { font-size:1rem;font-weight:400;opacity:0.7; }
+  .price-breakdown { font-size:0.75rem;color:var(--grey);margin-top:6px; }
+
+  .order-btn {
+    display:block;width:100%;padding:16px;
+    background:var(--gold);color:#000;
+    font-size:0.8rem;letter-spacing:0.18em;text-transform:uppercase;font-weight:500;
+    border:none;cursor:pointer;margin-top:20px;
+    transition:background .3s,transform .2s;
+    font-family:'DM Sans',sans-serif;
+  }
+  .order-btn:hover { background:var(--gold-light);transform:translateY(-2px); }
+  .order-btn:disabled { background:var(--surface3);color:var(--grey);cursor:not-allowed;transform:none; }
+
+  .config-notice { font-size:0.73rem;color:var(--grey);text-align:center;margin-top:12px;line-height:1.5; }
+
+  /* Platform badges */
+  .platform-pills { display:flex;flex-wrap:wrap;gap:6px;margin-bottom:8px; }
+  .platform-pill { font-size:0.7rem;padding:3px 10px;background:rgba(201,168,76,0.1);color:var(--gold);border:1px solid rgba(201,168,76,0.2); }
+
+  /* ===== PROCESS ===== */
+  #process { background:var(--surface);display:grid;grid-template-columns:1fr 2fr;gap:100px;align-items:start; padding-top: 160px; }
+  .process-steps { display:flex;flex-direction:column; }
+  .process-step { display:flex;gap:32px;padding:36px 0;border-bottom:1px solid var(--border);transition:padding-left .3s; }
+  .process-step:hover { padding-left:12px; }
+  .process-step:first-child { border-top:1px solid var(--border); }
+  .step-num { font-family:'Playfair Display',serif;font-size:0.8rem;color:var(--gold);font-weight:700;min-width:28px;padding-top:4px; }
+  .step-content h3 { font-family:'Playfair Display',serif;font-size:1.15rem;font-weight:700;margin-bottom:10px; }
+  .step-content p { font-size:0.88rem;color:var(--grey);line-height:1.7; }
+
+  /* ===== TESTIMONIALS ===== */
+  #testimonials { background:var(--bg);overflow:hidden; padding-top: 160px; }
+  .testimonials-header { margin-bottom:60px; }
+  .testimonials-track { display:flex;gap:24px;animation:marquee 30s linear infinite;width:max-content; }
+  .testimonial-card { background:var(--surface);border:1px solid var(--border-gold);padding:36px 36px 32px;width:380px;flex-shrink:0;position:relative; }
+  .testimonial-card::before { content:'"';font-family:'Playfair Display',serif;font-size:5rem;color:var(--gold);opacity:0.2;position:absolute;top:12px;left:28px;line-height:1; }
+  .testimonial-text { font-size:0.9rem;color:var(--text);line-height:1.8;opacity:0.85;padding-top:28px; }
+  .testimonial-author { display:flex;align-items:center;gap:14px;margin-top:24px;padding-top:20px;border-top:1px solid var(--border); }
+  .author-avatar { width:40px;height:40px;border-radius:50%;background:linear-gradient(135deg,var(--gold),var(--surface2));display:flex;align-items:center;justify-content:center;font-family:'Playfair Display',serif;font-size:1rem;font-weight:700;color:#000; }
+  .author-name { font-size:0.85rem;font-weight:500; }
+  .author-role { font-size:0.75rem;color:var(--grey);margin-top:2px; }
+  .stars { color:var(--gold);font-size:0.75rem;margin-bottom:6px; }
+
+  /* ===== CTA ===== */
+  #cta { background:var(--surface);text-align:center;padding:140px 60px;position:relative;overflow:hidden; }
+  #cta::before { content:'';position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:700px;height:700px;background:radial-gradient(circle,rgba(201,168,76,0.07) 0%,transparent 70%);pointer-events:none; }
+  .cta-eyebrow { font-size:0.72rem;letter-spacing:0.3em;text-transform:uppercase;color:var(--gold);margin-bottom:24px; }
+  #cta h2 { max-width:700px;margin:0 auto 20px; }
+  #cta p { color:var(--grey);font-size:1rem;line-height:1.8;max-width:500px;margin:0 auto 48px; }
+  .cta-buttons { display:flex;gap:20px;justify-content:center;align-items:center; }
+  .btn-outline { font-size:0.78rem;letter-spacing:0.18em;text-transform:uppercase;color:var(--text);border:1px solid var(--border);padding:15px 36px;text-decoration:none;transition:border-color .3s,color .3s; }
+  .btn-outline:hover { border-color:var(--gold);color:var(--gold); }
+
+  /* ===== FOOTER ===== */
+  footer { background:var(--bg);border-top:1px solid var(--border);padding:60px;display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:60px; }
+  .footer-brand .logo { font-size:1.5rem;margin-bottom:16px;display:block; }
+  .footer-brand p { font-size:0.85rem;color:var(--grey);line-height:1.7;max-width:280px; }
+  .footer-col h4 { font-size:0.72rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--gold);margin-bottom:20px; }
+  .footer-col ul { list-style:none; }
+  .footer-col li { margin-bottom:10px; }
+  .footer-col a { font-size:0.85rem;color:var(--grey);text-decoration:none;transition:color .3s; }
+  .footer-col a:hover { color:var(--text); }
+  .footer-bottom { background:var(--bg);border-top:1px solid var(--border);padding:22px 60px;display:flex;justify-content:space-between;align-items:center; }
+  .footer-bottom p { font-size:0.78rem;color:var(--grey);opacity:0.5; }
+  .social-links { display:flex;gap:12px; }
+  .social-link { width:34px;height:34px;border:1px solid var(--border);display:flex;align-items:center;justify-content:center;font-size:0.75rem;color:var(--grey);text-decoration:none;transition:border-color .3s,color .3s; }
+  .social-link:hover { border-color:var(--gold);color:var(--gold); }
+
+  /* ===== MODAL ===== */
+  .modal-overlay { position:fixed;inset:0;background:rgba(0,0,0,0.75);z-index:1000;display:flex;align-items:center;justify-content:center;opacity:0;pointer-events:none;transition:opacity .3s; }
+  .modal-overlay.open { opacity:1;pointer-events:all; }
+  .modal { background:var(--surface);border:1px solid var(--border-gold);padding:48px;max-width:520px;width:90%;position:relative;transform:scale(0.95);transition:transform .3s; }
+  .modal-overlay.open .modal { transform:scale(1); }
+  .modal-close { position:absolute;top:16px;right:20px;background:none;border:none;color:var(--grey);font-size:1.5rem;cursor:pointer;transition:color .2s; }
+  .modal-close:hover { color:var(--text); }
+  .modal-icon { font-size:3rem;margin-bottom:16px; }
+  .modal h3 { font-family:'Playfair Display',serif;font-size:1.6rem;font-weight:700;margin-bottom:12px; }
+  .modal p { color:var(--grey);line-height:1.7;margin-bottom:20px; }
+  .modal-detail { background:var(--surface2);padding:20px;margin-bottom:24px;font-size:0.85rem;line-height:1.8; }
+  .modal-detail strong { color:var(--gold); }
+
+  /* ===== ANIMATIONS ===== */
+  @keyframes fadeUp { to{opacity:1;transform:translateY(0)} }
+  @keyframes cellReveal { to{opacity:1} }
+  @keyframes marquee { from{transform:translateX(0)} to{transform:translateX(-50%)} }
+  .reveal { opacity:0;transform:translateY(28px);transition:opacity .7s,transform .7s; }
+  .reveal.visible { opacity:1;transform:translateY(0); }
+  .reveal-delay-1{transition-delay:.1s}.reveal-delay-2{transition-delay:.2s}.reveal-delay-3{transition-delay:.3s}
+
+  ::-webkit-scrollbar{width:4px}::-webkit-scrollbar-track{background:var(--bg)}::-webkit-scrollbar-thumb{background:var(--gold)}
+</style>
 </head>
 <body>
 
@@ -14,68 +388,285 @@
 
 <!-- NAV -->
 <nav>
-  <div class="logo">CAPLAN <span>&</span> GOLD</div>
+  <a href="#home" class="logo">CAPLAN <span>&</span> GOLD</a>
   <ul class="nav-links">
-    <li><a href="about.html">À propos</a></li>
-    <li><a href="services.html">Commander</a></li>
-    <li><a href="process.html">Processus</a></li>
-    <li><a href="testimonials.html">Clients</a></li>
+    <li><a href="#about">À propos</a></li>
+    <li><a href="#services">Commander</a></li>
+    <li><a href="#process">Processus</a></li>
+    <li><a href="#testimonials">Clients</a></li>
   </ul>
   <div class="nav-right">
     <div class="theme-toggle" id="themeToggle" title="Basculer le thème">
       <div class="toggle-icons"><span>🌙</span><span>☀️</span></div>
     </div>
-    <a href="services.html" class="nav-cta">Commander</a>
+    <a href="#services" class="nav-cta">Commander</a>
   </div>
 </nav>
 
-<!-- HERO -->
-<section id="hero">
-  <div class="hero-left">
-    <div class="hero-eyebrow">Agence digitale premium</div>
-    <h1>Votre contenu<br>social, <em>créé</em><br>sur-mesure.</h1>
-    <p class="hero-desc">CAPLAN & GOLD crée du contenu premium pour TikTok, Instagram, Facebook et YouTube — adapté à votre niche, livré avec précision.</p>
-    <div class="hero-actions">
-      <a href="services.html" class="btn-primary">Configurer ma commande</a>
-      <a href="process.html" class="btn-ghost">↓ Comment ça marche</a>
-    </div>
-    <div class="hero-stats">
-      <div><div class="stat-val">250+</div><div class="stat-label">Clients actifs</div></div>
-      <div><div class="stat-val">98%</div><div class="stat-label">Satisfaction</div></div>
-      <div><div class="stat-val">8M+</div><div class="stat-label">Portée mensuelle</div></div>
-    </div>
-  </div>
-  <div class="hero-right">
-    <div class="hero-visual">
-      <div class="hero-visual-grid">
-        <div class="grid-cell"><div class="cell-icon">📱</div><div class="cell-bar"></div></div>
-        <div class="grid-cell"><div class="cell-icon">🎬</div><div class="cell-bar"></div></div>
-        <div class="grid-cell"><div class="cell-icon">✨</div><div class="cell-bar"></div></div>
-        <div class="grid-cell"><div class="cell-icon">🎯</div><div class="cell-bar"></div></div>
-        <div class="grid-cell"><div class="cell-icon">💎</div><div class="cell-bar"></div></div>
-        <div class="grid-cell"><div class="cell-icon">📊</div><div class="cell-bar"></div></div>
-        <div class="grid-cell"><div class="cell-icon">🔥</div><div class="cell-bar"></div></div>
-        <div class="grid-cell"><div class="cell-icon">🎨</div><div class="cell-bar"></div></div>
-        <div class="grid-cell"><div class="cell-icon">📈</div><div class="cell-bar"></div></div>
-        <div class="grid-cell"><div class="cell-icon">🌟</div><div class="cell-bar"></div></div>
-        <div class="grid-cell"><div class="cell-icon">🎵</div><div class="cell-bar"></div></div>
-        <div class="grid-cell"><div class="cell-icon">🏆</div><div class="cell-bar"></div></div>
+<!-- HOME / HERO -->
+<div id="homeView" class="page-view active">
+  <section id="home">
+    <div class="hero-left">
+      <div class="hero-eyebrow">Agence digitale premium</div>
+      <h1>Votre contenu<br>social, <em>créé</em><br>sur-mesure.</h1>
+      <p class="hero-desc">CAPLAN & GOLD crée du contenu premium pour TikTok, Instagram, Facebook et YouTube — adapté à votre niche, livré avec précision.</p>
+      <div class="hero-actions">
+        <a href="#services" class="btn-primary">Configurer ma commande</a>
+        <a href="#process" class="btn-ghost">↓ Comment ça marche</a>
+      </div>
+      <div class="hero-stats">
+        <div><div class="stat-val">250+</div><div class="stat-label">Clients actifs</div></div>
+        <div><div class="stat-val">98%</div><div class="stat-label">Satisfaction</div></div>
+        <div><div class="stat-val">8M+</div><div class="stat-label">Portée mensuelle</div></div>
       </div>
     </div>
-    <div class="gold-line"></div>
-  </div>
-</section>
+    <div class="hero-right">
+      <div class="hero-visual">
+        <div class="hero-visual-grid">
+          <div class="grid-cell"><div class="cell-icon">📱</div><div class="cell-bar"></div></div>
+          <div class="grid-cell"><div class="cell-icon">🎬</div><div class="cell-bar"></div></div>
+          <div class="grid-cell"><div class="cell-icon">✨</div><div class="cell-bar"></div></div>
+          <div class="grid-cell"><div class="cell-icon">🎯</div><div class="cell-bar"></div></div>
+          <div class="grid-cell"><div class="cell-icon">💎</div><div class="cell-bar"></div></div>
+          <div class="grid-cell"><div class="cell-icon">📊</div><div class="cell-bar"></div></div>
+          <div class="grid-cell"><div class="cell-icon">🔥</div><div class="cell-bar"></div></div>
+          <div class="grid-cell"><div class="cell-icon">🎨</div><div class="cell-bar"></div></div>
+          <div class="grid-cell"><div class="cell-icon">📈</div><div class="cell-bar"></div></div>
+          <div class="grid-cell"><div class="cell-icon">🌟</div><div class="cell-bar"></div></div>
+          <div class="grid-cell"><div class="cell-icon">🎵</div><div class="cell-bar"></div></div>
+          <div class="grid-cell"><div class="cell-icon">🏆</div><div class="cell-bar"></div></div>
+        </div>
+      </div>
+      <div class="gold-line"></div>
+    </div>
+  </section>
 
-<!-- CTA (Part of the flow of home) -->
-<section id="cta">
-  <div class="cta-eyebrow reveal">Prêt à vous lancer ?</div>
-  <h2 class="reveal reveal-delay-1">Élevons votre marque<br>vers l'<em>excellence</em>.</h2>
-  <p class="reveal reveal-delay-2">Rejoignez plus de 250 entreprises qui font confiance à CAPLAN & GOLD. Premier brief gratuit, sans engagement.</p>
-  <div class="cta-buttons reveal reveal-delay-3">
-    <a href="services.html" class="btn-primary">Configurer ma commande</a>
-    <a href="mailto:contact@caplan-gold.com" class="btn-outline">Nous contacter</a>
-  </div>
-</section>
+  <section id="cta">
+    <div class="cta-eyebrow reveal">Prêt à vous lancer ?</div>
+    <h2 class="reveal reveal-delay-1">Élevons votre marque<br>vers l'<em>excellence</em>.</h2>
+    <p class="reveal reveal-delay-2">Rejoignez plus de 250 entreprises qui font confiance à CAPLAN & GOLD. Premier brief gratuit, sans engagement.</p>
+    <div class="cta-buttons reveal reveal-delay-3">
+      <a href="#services" class="btn-primary">Configurer ma commande</a>
+      <a href="mailto:contact@caplan-gold.com" class="btn-outline">Nous contacter</a>
+    </div>
+  </section>
+</div>
+
+<!-- ABOUT -->
+<div id="aboutView" class="page-view">
+  <section id="about">
+    <div class="about-text">
+      <div class="section-tag reveal">Qui sommes-nous</div>
+      <h2 class="reveal reveal-delay-1">L'art de la<br><em>création</em> digitale.</h2>
+      <p class="reveal reveal-delay-2">Fondée par des passionnés du digital, CAPLAN & GOLD est une agence de création de contenu qui allie créativité et performance. Nous produisons des vidéos, posts et visuels qui captivent.</p>
+      <p class="reveal reveal-delay-3">Notre approche : comprendre votre niche, créer du contenu sur-mesure et mesurer chaque résultat avec précision.</p>
+    </div>
+    <div class="about-right">
+      <div class="about-card reveal"><div class="card-icon">🎬</div><div class="card-title">Vidéos & Reels</div><div class="card-desc">Productions vidéo professionnelles adaptées à chaque plateforme.</div></div>
+      <div class="about-card reveal reveal-delay-1"><div class="card-icon">📊</div><div class="card-title">Data-driven</div><div class="card-desc">Décisions basées sur les performances et les tendances réelles.</div></div>
+      <div class="about-card reveal reveal-delay-2"><div class="card-icon">🌍</div><div class="card-title">Multi-plateformes</div><div class="card-desc">TikTok, Instagram, Facebook, YouTube — présence cohérente partout.</div></div>
+      <div class="about-card reveal reveal-delay-3"><div class="card-icon">⚡</div><div class="card-title">Livraison rapide</div><div class="card-desc">Contenus livrés dans les délais, avec un suivi en temps réel.</div></div>
+    </div>
+  </section>
+</div>
+
+<!-- SERVICES -->
+<div id="servicesView" class="page-view">
+  <section id="services">
+    <div class="services-top">
+      <div>
+        <div class="section-tag reveal">Commande personnalisée</div>
+        <h2 class="reveal reveal-delay-1">Configurez votre<br><em>contenu</em> idéal.</h2>
+      </div>
+    </div>
+
+    <div class="configurator reveal">
+      <div class="config-header">
+        <h3>🛠️ Créateur de contenu sur-mesure</h3>
+        <span>Prix calculé en temps réel</span>
+      </div>
+      <div class="config-body">
+        <!-- LEFT: Configurator -->
+        <div>
+          <!-- STEP 1: Platforms -->
+          <div class="config-step-label"><div class="step-badge">1</div>Choisissez vos réseaux sociaux</div>
+          <div class="config-section-title">Sur quelles plateformes ?</div>
+          <div class="network-chips" id="networkChips">
+            <div class="chip" data-network="tiktok" data-price="3500"><span class="chip-icon">🎵</span>TikTok</div>
+            <div class="chip" data-network="instagram" data-price="3000"><span class="chip-icon">📸</span>Instagram</div>
+            <div class="chip" data-network="facebook" data-price="2500"><span class="chip-icon">👥</span>Facebook</div>
+            <div class="chip" data-network="youtube" data-price="5000"><span class="chip-icon">▶️</span>YouTube</div>
+          </div>
+
+          <!-- STEP 2: Content type -->
+          <div class="config-step-label"><div class="step-badge">2</div>Type de contenu</div>
+          <div class="config-section-title">Quel format ?</div>
+          <div class="content-types" id="contentTypes">
+            <div class="content-type-card" data-type="video" data-mult="1.0">
+              <div class="ct-check">✓</div>
+              <div class="ct-icon">🎬</div>
+              <div class="ct-name">Vidéo / Reels</div>
+              <div class="ct-desc">Contenu vidéo dynamique</div>
+            </div>
+            <div class="content-type-card" data-type="photo" data-mult="0.6">
+              <div class="ct-check">✓</div>
+              <div class="ct-icon">📷</div>
+              <div class="ct-name">Photo / Carrousel</div>
+              <div class="ct-desc">Posts visuels percutants</div>
+            </div>
+            <div class="content-type-card" data-type="story" data-mult="0.5">
+              <div class="ct-check">✓</div>
+              <div class="ct-icon">⚡</div>
+              <div class="ct-name">Stories</div>
+              <div class="ct-desc">Contenu éphémère engageant</div>
+            </div>
+            <div class="content-type-card" data-type="live" data-mult="1.4">
+              <div class="ct-check">✓</div>
+              <div class="ct-icon">🔴</div>
+              <div class="ct-name">Live / Podcast</div>
+              <div class="ct-desc">Contenu en direct ou long</div>
+            </div>
+          </div>
+
+          <!-- STEP 3: Niche -->
+          <div class="config-step-label"><div class="step-badge">3</div>Votre niche</div>
+          <div class="config-section-title">Dans quel secteur ?</div>
+          <select class="niche-select" id="nicheSelect">
+            <option value="">— Sélectionnez votre niche —</option>
+            <option value="mode">👗 Mode & Lifestyle</option>
+            <option value="food">🍽️ Food & Restauration</option>
+            <option value="beaute">💄 Beauté & Bien-être</option>
+            <option value="business">💼 Business & Finance</option>
+            <option value="sport">⚽ Sport & Fitness</option>
+            <option value="tech">💻 Tech & Innovation</option>
+            <option value="education">📚 Éducation & Formation</option>
+            <option value="immobilier">🏠 Immobilier</option>
+            <option value="voyage">✈️ Voyage & Tourisme</option>
+            <option value="musique">🎵 Musique & Entertainment</option>
+            <option value="autre">🌟 Autre / Général</option>
+          </select>
+
+          <!-- STEP 4: Duration -->
+          <div class="config-step-label"><div class="step-badge">4</div>Durée des vidéos</div>
+          <div class="config-section-title">Quelle longueur ?</div>
+          <div class="duration-section">
+            <div class="duration-header">
+              <div><span class="duration-val" id="durVal">30</span> <span class="duration-unit">secondes</span></div>
+              <div id="durCategory" style="font-size:0.75rem;color:var(--gold);font-weight:500;">Court format</div>
+            </div>
+            <input type="range" id="durationSlider" min="15" max="600" step="15" value="30">
+            <div class="duration-labels">
+              <span>15s</span><span>1min</span><span>3min</span><span>5min</span><span>10min</span>
+            </div>
+          </div>
+
+          <!-- STEP 5: Quantity -->
+          <div class="config-step-label"><div class="step-badge">5</div>Nombre de posts / mois</div>
+          <div class="config-section-title">Quelle fréquence ?</div>
+          <div class="qty-control">
+            <button class="qty-btn" id="qtyMinus">−</button>
+            <span class="qty-display" id="qtyVal">4</span>
+            <button class="qty-btn" id="qtyPlus">+</button>
+            <span class="qty-label">posts par mois</span>
+          </div>
+        </div>
+
+        <!-- RIGHT: Summary -->
+        <div>
+          <div class="config-summary">
+            <div class="summary-title">📋 Récapitulatif de commande</div>
+
+            <div class="summary-row">
+              <span class="label">Plateformes</span>
+              <div id="summaryNetworks"><span style="font-size:0.78rem;color:var(--grey);font-style:italic;">Aucune sélectionnée</span></div>
+            </div>
+            <div class="summary-row">
+              <span class="label">Type de contenu</span>
+              <span class="value" id="summaryType">—</span>
+            </div>
+            <div class="summary-row">
+              <span class="label">Niche</span>
+              <span class="value" id="summaryNiche">—</span>
+            </div>
+            <div class="summary-row">
+              <span class="label">Durée vidéo</span>
+              <span class="value" id="summaryDur">30 secondes</span>
+            </div>
+            <div class="summary-row">
+              <span class="label">Fréquence</span>
+              <span class="value" id="summaryQty">4 posts / mois</span>
+            </div>
+
+            <div class="summary-divider"></div>
+
+            <div class="summary-price-block">
+              <div class="price-label">Prix total estimé</div>
+              <div class="price-amount" id="totalPrice"><span class="price-currency">—</span></div>
+              <div class="price-breakdown" id="priceBreak">Sélectionnez au moins un réseau et un type de contenu</div>
+            </div>
+
+            <div class="summary-divider"></div>
+
+            <div class="summary-row" style="font-size:0.78rem;">
+              <span class="label">Prix de base / plateforme</span>
+              <span style="color:var(--grey)" id="baseRange">2 500 – 5 000 FCFA</span>
+            </div>
+            <div class="summary-row" style="font-size:0.78rem;">
+              <span class="label">Modificateur durée</span>
+              <span style="color:var(--gold)" id="durMult">×1.0</span>
+            </div>
+            <div class="summary-row" style="font-size:0.78rem;">
+              <span class="label">Modificateur type</span>
+              <span style="color:var(--gold)" id="typeMult">×1.0</span>
+            </div>
+
+            <button class="order-btn" id="orderBtn" disabled>Passer la commande →</button>
+            <p class="config-notice">✅ Premier brief gratuit · Paiement à la livraison</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- PROCESS -->
+<div id="processView" class="page-view">
+  <section id="process">
+    <div>
+      <div class="section-tag reveal">Comment ça marche</div>
+      <h2 class="reveal reveal-delay-1">Notre<br><em>méthode</em><br>en 4 étapes.</h2>
+    </div>
+    <div class="process-steps">
+      <div class="process-step reveal"><div class="step-num">01</div><div class="step-content"><h3>Configurez & Commandez</h3><p>Choisissez votre réseau social, type de contenu, niche et fréquence. Notre configurateur calcule le prix en temps réel.</p></div></div>
+      <div class="process-step reveal reveal-delay-1"><div class="step-num">02</div><div class="step-content"><h3>Brief & Validation</h3><p>Notre équipe vous contacte pour un brief détaillé gratuit et valide votre stratégie éditoriale ensemble.</p></div></div>
+      <div class="process-step reveal reveal-delay-2"><div class="step-num">03</div><div class="step-content"><h3>Production & Création</h3><p>Nos créateurs produisent vos contenus selon votre niche, vos valeurs et les tendances actuelles de chaque plateforme.</p></div></div>
+      <div class="process-step reveal reveal-delay-3"><div class="step-num">04</div><div class="step-content"><h3>Livraison & Optimisation</h3><p>Contenus livrés selon le calendrier défini, avec reporting mensuel et ajustements continus pour maximiser l'engagement.</p></div></div>
+    </div>
+  </section>
+</div>
+
+<!-- TESTIMONIALS -->
+<div id="testimonialsView" class="page-view">
+  <section id="testimonials">
+    <div class="testimonials-header">
+      <div class="section-tag reveal">Témoignages</div>
+      <h2 class="reveal reveal-delay-1">Ce que disent<br>nos <em>clients</em>.</h2>
+    </div>
+    <div style="overflow:hidden;margin:0 -60px;">
+      <div class="testimonials-track">
+        <div class="testimonial-card"><div class="stars">★★★★★</div><p class="testimonial-text">CAPLAN & GOLD a transformé notre présence Instagram. En 3 mois, notre engagement a triplé et nos ventes ont augmenté de 40%.</p><div class="testimonial-author"><div class="author-avatar">AL</div><div><div class="author-name">Amélie Laurent</div><div class="author-role">CEO, Maison Lumière</div></div></div></div>
+        <div class="testimonial-card"><div class="stars">★★★★★</div><p class="testimonial-text">Nos TikToks créés par CAPLAN & GOLD ont atteint 500K vues dès la première semaine. Une équipe qui connaît vraiment les algorithmes.</p><div class="testimonial-author"><div class="author-avatar">KD</div><div><div class="author-name">Kofi Diallo</div><div class="author-role">Fondateur, BrandAfrica</div></div></div></div>
+        <div class="testimonial-card"><div class="stars">★★★★★</div><p class="testimonial-text">Grâce à leurs Reels Instagram, nous avons gagné 100K abonnés en 2 mois. La qualité de production est impressionnante.</p><div class="testimonial-author"><div class="author-avatar">SF</div><div><div class="author-name">Sophie Fontaine</div><div class="author-role">Fondatrice, Belle & Bio</div></div></div></div>
+        <div class="testimonial-card"><div class="stars">★★★★★</div><p class="testimonial-text">Le meilleur investissement pour notre restaurant. Nos vidéos Facebook génèrent des réservations chaque semaine.</p><div class="testimonial-author"><div class="author-avatar">MB</div><div><div class="author-name">Marc Beaumont</div><div class="author-role">Restaurateur, Le Zinc</div></div></div></div>
+        <!-- Duplicate -->
+        <div class="testimonial-card"><div class="stars">★★★★★</div><p class="testimonial-text">CAPLAN & GOLD a transformé notre présence Instagram. En 3 mois, notre engagement a triplé et nos ventes ont augmenté de 40%.</p><div class="testimonial-author"><div class="author-avatar">AL</div><div><div class="author-name">Amélie Laurent</div><div class="author-role">CEO, Maison Lumière</div></div></div></div>
+        <div class="testimonial-card"><div class="stars">★★★★★</div><p class="testimonial-text">Nos TikToks créés par CAPLAN & GOLD ont atteint 500K vues dès la première semaine. Une équipe qui connaît vraiment les algorithmes.</p><div class="testimonial-author"><div class="author-avatar">KD</div><div><div class="author-name">Kofi Diallo</div><div class="author-role">Fondateur, BrandAfrica</div></div></div></div>
+        <div class="testimonial-card"><div class="stars">★★★★★</div><p class="testimonial-text">Grâce à leurs Reels Instagram, nous avons gagné 100K abonnés en 2 mois. La qualité de production est impressionnante.</p><div class="testimonial-author"><div class="author-avatar">SF</div><div><div class="author-name">Sophie Fontaine</div><div class="author-role">Fondatrice, Belle & Bio</div></div></div></div>
+        <div class="testimonial-card"><div class="stars">★★★★★</div><p class="testimonial-text">Le meilleur investissement pour notre restaurant. Nos vidéos Facebook génèrent des réservations chaque semaine.</p><div class="testimonial-author"><div class="author-avatar">MB</div><div><div class="author-name">Marc Beaumont</div><div class="author-role">Restaurateur, Le Zinc</div></div></div></div>
+      </div>
+    </div>
+  </section>
+</div>
 
 <!-- FOOTER -->
 <footer>
@@ -84,7 +675,7 @@
     <p>Agence de création de contenu pour les réseaux sociaux. TikTok, Instagram, Facebook, YouTube — votre présence, notre expertise.</p>
   </div>
   <div class="footer-col"><h4>Plateformes</h4><ul><li><a href="#">TikTok</a></li><li><a href="#">Instagram</a></li><li><a href="#">Facebook</a></li><li><a href="#">YouTube</a></li></ul></div>
-  <div class="footer-col"><h4>Entreprise</h4><ul><li><a href="about.html">À propos</a></li><li><a href="#">Notre équipe</a></li><li><a href="#">Portfolio</a></li><li><a href="#">Carrières</a></li></ul></div>
+  <div class="footer-col"><h4>Entreprise</h4><ul><li><a href="#about">À propos</a></li><li><a href="#">Notre équipe</a></li><li><a href="#">Portfolio</a></li><li><a href="#">Carrières</a></li></ul></div>
   <div class="footer-col"><h4>Contact</h4><ul><li><a href="mailto:contact@caplan-gold.com">contact@caplan-gold.com</a></li><li><a href="tel:+22900000000">+229 00 00 00 00</a></li><li><a href="#">Porto-Novo, Bénin</a></li></ul></div>
 </footer>
 <div class="footer-bottom">
@@ -97,6 +688,234 @@
   </div>
 </div>
 
-<script src="assets/js/main.js"></script>
+<!-- ORDER MODAL -->
+<div class="modal-overlay" id="modalOverlay">
+  <div class="modal">
+    <button class="modal-close" id="modalClose">×</button>
+    <div class="modal-icon">🎉</div>
+    <h3>Commande reçue !</h3>
+    <p>Merci pour votre confiance. Notre équipe vous contactera sous <strong>24h</strong> pour finaliser votre brief de contenu.</p>
+    <div class="modal-detail" id="modalDetail"></div>
+    <a href="mailto:contact@caplan-gold.com" class="btn-primary" style="display:block;text-align:center;">Nous écrire directement →</a>
+  </div>
+</div>
+
+<script>
+// ===== SPA NAVIGATION =====
+function showView(hash) {
+  const views = document.querySelectorAll('.page-view');
+  views.forEach(v => v.classList.remove('active'));
+
+  let targetId = 'homeView';
+  if (hash === '#about') targetId = 'aboutView';
+  if (hash === '#services') targetId = 'servicesView';
+  if (hash === '#process') targetId = 'processView';
+  if (hash === '#testimonials') targetId = 'testimonialsView';
+
+  const targetView = document.getElementById(targetId);
+  if (targetView) {
+    targetView.classList.add('active');
+    window.scrollTo(0, 0);
+  }
+}
+
+window.addEventListener('hashchange', () => {
+  showView(window.location.hash);
+});
+
+// Initial load
+showView(window.location.hash || '#home');
+
+// ===== THEME TOGGLE =====
+const html = document.documentElement;
+const toggle = document.getElementById('themeToggle');
+if (toggle) {
+  toggle.addEventListener('click', () => {
+    html.dataset.theme = html.dataset.theme === 'dark' ? 'light' : 'dark';
+    localStorage.setItem('cg-theme', html.dataset.theme);
+  });
+}
+const saved = localStorage.getItem('cg-theme');
+if (saved) html.dataset.theme = saved;
+
+// ===== CUSTOM CURSOR =====
+const cursor = document.getElementById('cursor');
+const ring = document.getElementById('cursorRing');
+if (cursor && ring) {
+  let mx=0,my=0,rx=0,ry=0;
+  document.addEventListener('mousemove', e => {
+    mx=e.clientX;
+    my=e.clientY;
+    cursor.style.transform=`translate(${mx-5}px,${my-5}px)`;
+  });
+  (function animateRing(){
+    rx+=(mx-rx)*0.12;
+    ry+=(my-ry)*0.12;
+    ring.style.transform=`translate(${rx-18}px,${ry-18}px)`;
+    requestAnimationFrame(animateRing);
+  })();
+  document.querySelectorAll('a,button,.chip,.content-type-card').forEach(el=>{
+    el.addEventListener('mouseenter',()=>{
+      ring.style.width='52px';
+      ring.style.height='52px';
+      ring.style.opacity='0.3';
+    });
+    el.addEventListener('mouseleave',()=>{
+      ring.style.width='36px';
+      ring.style.height='36px';
+      ring.style.opacity='0.6';
+    });
+  });
+}
+
+// ===== SCROLL REVEAL =====
+const observer = new IntersectionObserver(entries=>entries.forEach(e=>{
+  if(e.isIntersecting) e.target.classList.add('visible');
+}),{threshold:0.1});
+document.querySelectorAll('.reveal').forEach(el=>observer.observe(el));
+
+// ===== CONFIGURATOR LOGIC =====
+const PLATFORMS = { tiktok:{price:3500,name:'TikTok',icon:'🎵'}, instagram:{price:3000,name:'Instagram',icon:'📸'}, facebook:{price:2500,name:'Facebook',icon:'👥'}, youtube:{price:5000,name:'YouTube',icon:'▶️'} };
+const CONTENT_TYPES = { video:{mult:1.0,name:'Vidéo / Reels'}, photo:{mult:0.6,name:'Photo / Carrousel'}, story:{mult:0.5,name:'Stories'}, live:{mult:1.4,name:'Live / Podcast'} };
+const NICHES = { mode:'Mode & Lifestyle',food:'Food & Restauration',beaute:'Beauté & Bien-être',business:'Business & Finance',sport:'Sport & Fitness',tech:'Tech & Innovation',education:'Éducation & Formation',immobilier:'Immobilier',voyage:'Voyage & Tourisme',musique:'Musique & Entertainment',autre:'Autre / Général' };
+
+let selectedNetworks = new Set();
+let selectedType = null;
+let duration = 30;
+let quantity = 4;
+
+function getDurationMult(sec) {
+  if(sec<=30) return {m:1.0,label:'Court format',cat:'≤30s'};
+  if(sec<=60) return {m:1.3,label:'Format court',cat:'31–60s'};
+  if(sec<=180) return {m:1.7,label:'Format moyen',cat:'1–3min'};
+  if(sec<=360) return {m:2.2,label:'Long format',cat:'3–6min'};
+  return {m:3.0,label:'Très long format',cat:'6–10min'};
+}
+
+function formatDur(sec){
+  if(sec<60) return sec+'s';
+  const m=Math.floor(sec/60),s=sec%60;
+  return s ? m+'min'+s+'s' : m+' min';
+}
+
+function formatPrice(n){ return n.toLocaleString('fr-FR') + ' FCFA'; }
+
+function calcPrice(){
+  if(selectedNetworks.size===0||!selectedType) return null;
+  const typeMult = CONTENT_TYPES[selectedType].mult;
+  const {m: durM} = getDurationMult(duration);
+  let total = 0;
+  selectedNetworks.forEach(net => { total += PLATFORMS[net].price * typeMult * durM * quantity; });
+  return Math.round(total);
+}
+
+function updateSummary(){
+  const netEl = document.getElementById('summaryNetworks');
+  if (!netEl) return;
+  if(selectedNetworks.size===0){ netEl.innerHTML='<span style="font-size:.78rem;color:var(--grey);font-style:italic;">Aucune sélectionnée</span>'; }
+  else { netEl.innerHTML='<div class="platform-pills">' + [...selectedNetworks].map(n=>`<span class="platform-pill">${PLATFORMS[n].icon} ${PLATFORMS[n].name}</span>`).join('') + '</div>'; }
+
+  document.getElementById('summaryType').textContent = selectedType ? CONTENT_TYPES[selectedType].name : '—';
+  const nicheSelect = document.getElementById('nicheSelect');
+  const nv = nicheSelect ? nicheSelect.value : "";
+  document.getElementById('summaryNiche').textContent = nv ? NICHES[nv]||'—' : '—';
+  document.getElementById('summaryDur').textContent = formatDur(duration);
+  document.getElementById('summaryQty').textContent = quantity + ' posts / mois';
+
+  const {m:dm,label:dlabel} = getDurationMult(duration);
+  const tm = selectedType ? CONTENT_TYPES[selectedType].mult : 1.0;
+  document.getElementById('durMult').textContent = '×' + dm.toFixed(1) + ' (' + dlabel + ')';
+  document.getElementById('typeMult').textContent = '×' + tm.toFixed(1);
+
+  const price = calcPrice();
+  const priceEl = document.getElementById('totalPrice');
+  const breakEl = document.getElementById('priceBreak');
+  const orderBtn = document.getElementById('orderBtn');
+  if(price !== null){
+    priceEl.innerHTML = '<strong>' + formatPrice(price) + '</strong>';
+    const perPost = Math.round(price/quantity);
+    breakEl.textContent = `${formatPrice(perPost)} / post × ${quantity} posts × ${selectedNetworks.size} plateforme(s)`;
+    if (orderBtn) orderBtn.disabled = false;
+  } else {
+    priceEl.innerHTML = '<span class="price-currency">—</span>';
+    breakEl.textContent = 'Sélectionnez au moins un réseau et un type de contenu';
+    if (orderBtn) orderBtn.disabled = true;
+  }
+}
+
+// Configurator Init
+document.querySelectorAll('.chip').forEach(chip=>{
+  chip.addEventListener('click',()=>{
+    const net = chip.dataset.network;
+    if(selectedNetworks.has(net)){selectedNetworks.delete(net);chip.classList.remove('selected');}
+    else{selectedNetworks.add(net);chip.classList.add('selected');}
+    updateSummary();
+  });
+});
+
+document.querySelectorAll('.content-type-card').forEach(card=>{
+  card.addEventListener('click',()=>{
+    document.querySelectorAll('.content-type-card').forEach(c=>c.classList.remove('selected'));
+    card.classList.add('selected');
+    selectedType = card.dataset.type;
+    updateSummary();
+  });
+});
+
+const nicheSelect = document.getElementById('nicheSelect');
+if (nicheSelect) nicheSelect.addEventListener('change', updateSummary);
+
+const slider = document.getElementById('durationSlider');
+if (slider) {
+    slider.addEventListener('input',()=>{
+      duration = parseInt(slider.value);
+      document.getElementById('durVal').textContent = duration < 60 ? duration : formatDur(duration);
+      const unit = duration < 60 ? 'secondes' : '';
+      const unitEl = document.querySelector('.duration-unit');
+      if (unitEl) unitEl.textContent = unit;
+      const durCatEl = document.getElementById('durCategory');
+      if (durCatEl) durCatEl.textContent = getDurationMult(duration).label;
+      const pct = ((duration-15)/(600-15)*100).toFixed(1) + '%';
+      slider.style.setProperty('--pct', pct);
+      updateSummary();
+    });
+    slider.style.setProperty('--pct','2.5%');
+}
+
+const qtyMinus = document.getElementById('qtyMinus');
+const qtyPlus = document.getElementById('qtyPlus');
+const qtyVal = document.getElementById('qtyVal');
+if (qtyMinus) {
+    qtyMinus.addEventListener('click',()=>{ if(quantity>1){quantity--; if(qtyVal) qtyVal.textContent=quantity;updateSummary();} });
+}
+if (qtyPlus) {
+    qtyPlus.addEventListener('click',()=>{ if(quantity<30){quantity++; if(qtyVal) qtyVal.textContent=quantity;updateSummary();} });
+}
+
+const orderBtn = document.getElementById('orderBtn');
+if (orderBtn) {
+    orderBtn.addEventListener('click',()=>{
+      const price = calcPrice();
+      if(!price) return;
+      const nets = [...selectedNetworks].map(n=>PLATFORMS[n].name).join(', ');
+      const type = CONTENT_TYPES[selectedType].name;
+      const nv = document.getElementById('nicheSelect').value;
+      const niche = NICHES[nv] || 'Non précisé';
+      document.getElementById('modalDetail').innerHTML = `
+        <strong>Plateformes :</strong> ${nets}<br>
+        <strong>Type de contenu :</strong> ${type}<br>
+        <strong>Niche :</strong> ${niche}<br>
+        <strong>Durée :</strong> ${formatDur(duration)}<br>
+        <strong>Fréquence :</strong> ${quantity} posts / mois<br>
+        <strong>Prix estimé :</strong> ${formatPrice(price)}
+      `;
+      document.getElementById('modalOverlay').classList.add('open');
+    });
+}
+const modalClose = document.getElementById('modalClose');
+if (modalClose) modalClose.addEventListener('click',()=>document.getElementById('modalOverlay').classList.remove('open'));
+const modalOverlay = document.getElementById('modalOverlay');
+if (modalOverlay) modalOverlay.addEventListener('click',e=>{ if(e.target===e.currentTarget) e.currentTarget.classList.remove('open'); });
+</script>
 </body>
 </html>
