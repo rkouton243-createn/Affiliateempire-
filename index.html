@@ -283,6 +283,25 @@
   .service-name { font-size:0.75rem; font-weight:500; letter-spacing:0.05em; text-transform:uppercase; color:var(--grey); }
   .service-chip.selected .service-name { color:var(--gold); }
 
+  /* COMPTES & FORMATIONS GRID */
+  .grid-premium { display:grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap:24px; margin-top:40px; }
+  .card-premium { background:var(--surface); border:1px solid var(--border); padding:32px; transition:all .3s; position:relative; overflow:hidden; }
+  .card-premium:hover { border-color:var(--gold); transform:translateY(-5px); box-shadow:var(--shadow); }
+  .card-premium::before { content:''; position:absolute; top:0; left:0; width:100%; height:3px; background:var(--gold); transform:scaleX(0); transform-origin:left; transition:transform .4s; }
+  .card-premium:hover::before { transform:scaleX(1); }
+
+  .card-premium .icon { font-size:2.4rem; margin-bottom:20px; }
+  .card-premium h3 { font-family:'Playfair Display',serif; font-size:1.3rem; margin-bottom:12px; }
+  .card-premium .details { list-style:none; margin-bottom:24px; }
+  .card-premium .details li { font-size:0.85rem; color:var(--grey); margin-bottom:8px; display:flex; align-items:center; gap:8px; }
+  .card-premium .details li::before { content:'✓'; color:var(--gold); font-weight:bold; }
+
+  .card-premium .price-tag { font-family:'Playfair Display',serif; font-size:1.8rem; font-weight:900; color:var(--gold); margin-bottom:20px; display:block; }
+  .card-premium .price-tag span { font-size:0.9rem; font-weight:400; opacity:0.7; }
+
+  .btn-card { width:100%; padding:12px; background:var(--surface2); border:1px solid var(--border); color:var(--text); text-transform:uppercase; letter-spacing:0.1em; font-size:0.75rem; font-weight:500; cursor:pointer; transition:all .2s; }
+  .card-premium:hover .btn-card { background:var(--gold); color:#000; border-color:var(--gold); }
+
   /* DETAILS PANEL */
   .details-panel { display:none; margin-top:20px; border-top:1px solid var(--border); padding-top:40px; }
   .details-panel.active { display:block; animation:fadeIn .5s forwards; }
@@ -420,7 +439,9 @@
   <a href="#home" class="logo">CAPLAN <span>&</span> GOLD</a>
   <ul class="nav-links">
     <li><a href="#about">À propos</a></li>
-    <li><a href="#services">Commander</a></li>
+    <li><a href="#services">Services</a></li>
+    <li><a href="#comptes">Comptes</a></li>
+    <li><a href="#formations">Formations</a></li>
     <li><a href="#process">Processus</a></li>
     <li><a href="#testimonials">Clients</a></li>
   </ul>
@@ -489,6 +510,153 @@
       <div class="about-card reveal reveal-delay-1"><div class="card-icon">📊</div><div class="card-title">Data-driven</div><div class="card-desc">Décisions basées sur les performances et les tendances réelles.</div></div>
       <div class="about-card reveal reveal-delay-2"><div class="card-icon">🌍</div><div class="card-title">Multi-plateformes</div><div class="card-desc">TikTok, Instagram, Facebook, YouTube — présence cohérente partout.</div></div>
       <div class="about-card reveal reveal-delay-3"><div class="card-icon">⚡</div><div class="card-title">Livraison rapide</div><div class="card-desc">Contenus livrés dans les délais, avec un suivi en temps réel.</div></div>
+    </div>
+  </section>
+</div>
+
+<!-- COMPTES -->
+<div id="comptesView" class="page-view">
+  <section id="comptes" style="padding-top: 160px;">
+    <div class="section-tag reveal">Marketplace</div>
+    <h2 class="reveal reveal-delay-1">Comptes <em>Monétisés</em>.</h2>
+    <p class="reveal reveal-delay-2" style="color:var(--grey); margin-top:20px; max-width:600px;">Démarrez votre activité avec une longueur d'avance. Nos comptes sont prêts pour la monétisation immédiate.</p>
+
+    <div class="grid-premium">
+      <!-- TikTok -->
+      <div class="card-premium reveal">
+        <div class="icon">🎵</div>
+        <h3>Compte TikTok</h3>
+        <ul class="details">
+          <li>+10K abonnés réels</li>
+          <li>Creator Fund activé</li>
+          <li>+100K vues cumulées</li>
+        </ul>
+        <span class="price-tag">5 000 <span>FCFA</span></span>
+        <button class="btn-card" onclick="orderProduct('Compte TikTok', '5 000 FCFA')">Commander</button>
+      </div>
+
+      <!-- Instagram -->
+      <div class="card-premium reveal reveal-delay-1">
+        <div class="icon">📸</div>
+        <h3>Compte Instagram</h3>
+        <ul class="details">
+          <li>+10K abonnés</li>
+          <li>Badges Live activés</li>
+          <li>Boutique active</li>
+        </ul>
+        <span class="price-tag">5 000 <span>FCFA</span></span>
+        <button class="btn-card" onclick="orderProduct('Compte Instagram', '5 000 FCFA')">Commander</button>
+      </div>
+
+      <!-- YouTube -->
+      <div class="card-premium reveal reveal-delay-2">
+        <div class="icon">▶️</div>
+        <h3>Chaîne YouTube</h3>
+        <ul class="details">
+          <li>+1K abonnés</li>
+          <li>+4000h de visionnage</li>
+          <li>Prêt pour AdSense</li>
+        </ul>
+        <span class="price-tag">5 000 <span>FCFA</span></span>
+        <button class="btn-card" onclick="orderProduct('Chaîne YouTube', '5 000 FCFA')">Commander</button>
+      </div>
+
+      <!-- Facebook -->
+      <div class="card-premium reveal reveal-delay-3">
+        <div class="icon">📘</div>
+        <h3>Page Facebook</h3>
+        <ul class="details">
+          <li>+10K fans</li>
+          <li>In-Stream Ads prêts</li>
+          <li>Stars activées</li>
+        </ul>
+        <span class="price-tag">4 000 <span>FCFA</span></span>
+        <button class="btn-card" onclick="orderProduct('Page Facebook Monétisée', '4 000 FCFA')">Commander</button>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- FORMATIONS -->
+<div id="formationsView" class="page-view">
+  <section id="formations" style="padding-top: 160px;">
+    <div class="section-tag reveal">Académie</div>
+    <h2 class="reveal reveal-delay-1">Nos <em>Formations</em>.</h2>
+    <p class="reveal reveal-delay-2" style="color:var(--grey); margin-top:20px; max-width:600px;">Apprenez les secrets des experts pour maîtriser les algorithmes et monétiser votre présence en ligne.</p>
+
+    <div class="grid-premium">
+      <!-- TikTok -->
+      <div class="card-premium reveal">
+        <div class="icon">🎓</div>
+        <h3>Formation TikTok</h3>
+        <ul class="details">
+          <li>Maîtrise de l'algorithme</li>
+          <li>Choix de niche rentable</li>
+          <li>Stratégies de monétisation</li>
+        </ul>
+        <span class="price-tag">2 000 <span>FCFA</span></span>
+        <button class="btn-card" onclick="orderProduct('Formation TikTok', '2 000 FCFA')">Commander</button>
+      </div>
+
+      <!-- Instagram -->
+      <div class="card-premium reveal reveal-delay-1">
+        <div class="icon">🎓</div>
+        <h3>Formation Instagram</h3>
+        <ul class="details">
+          <li>Création de Reels viraux</li>
+          <li>Exploitation des Badges</li>
+          <li>Collaborations marques</li>
+        </ul>
+        <span class="price-tag">2 500 <span>FCFA</span></span>
+        <button class="btn-card" onclick="orderProduct('Formation Instagram', '2 500 FCFA')">Commander</button>
+      </div>
+
+      <!-- YouTube -->
+      <div class="card-premium reveal reveal-delay-2">
+        <div class="icon">🎓</div>
+        <h3>YouTube & AdSense</h3>
+        <ul class="details">
+          <li>SEO YouTube avancé</li>
+          <li>Atteindre les 1K abonnés</li>
+          <li>Optimisation AdSense</li>
+        </ul>
+        <span class="price-tag">3 000 <span>FCFA</span></span>
+        <button class="btn-card" onclick="orderProduct('Formation YouTube & AdSense', '3 000 FCFA')">Commander</button>
+      </div>
+
+      <!-- CM -->
+      <div class="card-premium reveal reveal-delay-3">
+        <div class="icon">🎓</div>
+        <h3>Community Manager</h3>
+        <ul class="details">
+          <li>Trouver ses clients</li>
+          <li>Fixer ses tarifs</li>
+          <li>Templates de reporting</li>
+        </ul>
+        <span class="price-tag">3 500 <span>FCFA</span></span>
+        <button class="btn-card" onclick="orderProduct('Formation Community Manager', '3 500 FCFA')">Commander</button>
+      </div>
+
+      <!-- PACK -->
+      <div class="card-premium reveal" style="grid-column: 1 / -1; border-color: var(--gold); background: rgba(201,168,76,0.05);">
+        <div style="display:flex; justify-content:space-between; align-items:start;">
+          <div>
+            <div class="icon">🚀</div>
+            <h3>Pack Expert 4-en-1</h3>
+            <ul class="details" style="display:grid; grid-template-columns:1fr 1fr; gap:10px 20px;">
+              <li>Toutes les formations incluses</li>
+              <li>Accès au Groupe VIP</li>
+              <li>Séances de Coaching offertes</li>
+              <li>Mises à jour à vie</li>
+            </ul>
+          </div>
+          <div style="text-align:right;">
+            <span style="text-decoration:line-through; color:var(--grey); font-size:1rem;">11 000 FCFA</span>
+            <span class="price-tag" style="font-size:3rem; margin-top:10px;">5 000 <span>FCFA</span></span>
+            <button class="btn-card" style="background:var(--gold); color:#000;" onclick="orderProduct('Pack Expert 4-en-1', '5 000 FCFA')">Saisir l'offre</button>
+          </div>
+        </div>
+      </div>
     </div>
   </section>
 </div>
@@ -665,6 +833,8 @@ function showView(hash) {
   let targetId = 'homeView';
   if (hash === '#about') targetId = 'aboutView';
   if (hash === '#services') targetId = 'servicesView';
+  if (hash === '#comptes') targetId = 'comptesView';
+  if (hash === '#formations') targetId = 'formationsView';
   if (hash === '#process') targetId = 'processView';
   if (hash === '#testimonials') targetId = 'testimonialsView';
 
@@ -732,6 +902,24 @@ document.querySelectorAll('.reveal').forEach(el=>observer.observe(el));
 
 // ===== CONFIGURATOR LOGIC =====
 const WHATSAPP_NUMBER = "2290198905311";
+
+function orderProduct(name, price) {
+  const msg = `*NOUVELLE COMMANDE - CAPLAN & GOLD*\n\n` +
+              `*Produit:* ${name}\n` +
+              `*Prix:* ${price}\n\n` +
+              `Je souhaite commander ce produit. Merci de me recontacter pour finaliser l'achat.`;
+
+  const url = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(msg)}`;
+
+  document.getElementById('modalDetail').innerHTML = `
+    <strong>Produit :</strong> ${name}<br>
+    <strong>Prix :</strong> ${price}<br>
+    <p style="margin-top:10px; font-size:0.8rem; color:var(--gold)">Redirection vers WhatsApp en cours...</p>
+  `;
+  document.getElementById('modalOverlay').classList.add('open');
+
+  setTimeout(() => { window.open(url, '_blank'); }, 1500);
+}
 
 const SERVICES_CONFIG = {
   youtube: {
