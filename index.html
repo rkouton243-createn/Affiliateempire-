@@ -71,12 +71,31 @@
     border-bottom: 1px solid var(--border);
     transition: background 0.4s, border-color 0.4s;
   }
-  .logo { font-family:'Playfair Display',serif;font-size:1.3rem;font-weight:700;letter-spacing:0.08em;color:var(--text); text-decoration: none; }
+  .logo { font-family:'Playfair Display',serif;font-size:1.3rem;font-weight:700;letter-spacing:0.08em;color:var(--text); text-decoration: none; z-index: 102; }
   .logo span { color:var(--gold); }
   .nav-links { display:flex;gap:36px;list-style:none; }
   .nav-links a { font-size:0.78rem;letter-spacing:0.15em;text-transform:uppercase;color:var(--grey);text-decoration:none;transition:color .3s; }
   .nav-links a:hover { color:var(--gold); }
-  .nav-right { display:flex;align-items:center;gap:20px; }
+  .nav-right { display:flex;align-items:center;gap:20px; z-index: 102; }
+
+  /* MOBILE NAV TOGGLE */
+  .mobile-nav-toggle {
+    display: none;
+    flex-direction: column;
+    gap: 6px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    z-index: 102;
+    padding: 5px;
+    margin-left: 10px;
+  }
+  .mobile-nav-toggle .bar {
+    width: 24px;
+    height: 2px;
+    background: var(--gold);
+    transition: all 0.3s;
+  }
 
   /* THEME TOGGLE */
   .theme-toggle {
@@ -428,6 +447,81 @@
 
   ::-webkit-scrollbar{width:4px}::-webkit-scrollbar-track{background:var(--bg)}::-webkit-scrollbar-thumb{background:var(--gold)}
 
+  /* ===== RESPONSIVENESS ===== */
+  @media (max-width: 1100px) {
+    nav { padding: 18px 30px; }
+    section { padding: 100px 30px; }
+  }
+
+  @media (max-width: 992px) {
+    .nav-links {
+      display: flex;
+      position: fixed;
+      top: 0; right: -100%;
+      width: 280px; height: 100vh;
+      background: var(--surface);
+      flex-direction: column;
+      padding: 120px 40px;
+      transition: right 0.4s cubic-bezier(0.77,0.2,0.05,1.0);
+      box-shadow: -10px 0 30px rgba(0,0,0,0.5);
+      z-index: 101;
+      gap: 25px;
+    }
+    .nav-links.active { right: 0; }
+    .mobile-nav-toggle { display: flex; }
+
+    /* Hamburger Animation */
+    .mobile-nav-toggle.active .bar:nth-child(1) { transform: translateY(8px) rotate(45deg); }
+    .mobile-nav-toggle.active .bar:nth-child(2) { opacity: 0; }
+    .mobile-nav-toggle.active .bar:nth-child(3) { transform: translateY(-8px) rotate(-45deg); }
+
+    #home { grid-template-columns: 1fr !important; min-height: auto; }
+    .hero-left { padding: 160px 30px 80px; text-align: center; align-items: center; }
+    .hero-desc { margin: 28px auto 0; }
+    .hero-actions { justify-content: center; }
+    .hero-stats { justify-content: center; flex-wrap: wrap; gap: 30px; }
+    .hero-right { display: none; }
+
+    #about { grid-template-columns: 1fr; gap: 60px; }
+    #about .about-text { text-align: center; }
+    #about .about-text p { margin: 24px auto 0; }
+    #about .section-tag { justify-content: center; }
+
+    .config-body { grid-template-columns: 1fr; }
+    .config-summary { position: static; margin-top: 40px; }
+
+    #process { grid-template-columns: 1fr; gap: 50px; }
+    #process h2 { text-align: center; }
+    #process .section-tag { justify-content: center; }
+
+    #cta { padding: 100px 30px; }
+    .cta-buttons { flex-direction: column; width: 100%; max-width: 300px; margin: 0 auto; }
+    .btn-primary, .btn-outline { width: 100%; text-align: center; }
+
+    footer { grid-template-columns: 1fr 1fr; gap: 40px; }
+    .footer-brand { grid-column: 1 / -1; text-align: center; }
+    .footer-brand p { margin: 16px auto 0; }
+  }
+
+  @media (max-width: 600px) {
+    nav { padding: 15px 20px; }
+    .logo { font-size: 1.1rem; }
+    .nav-cta { display: none; } /* Hide CTA on very small screens to save space */
+
+    h1 { font-size: 2.5rem; }
+    h2 { font-size: 2.0rem; }
+
+    .hero-stats { gap: 20px; }
+    .hero-stats > div { width: 100%; text-align: center; }
+    .stat-val { font-size: 1.8rem; }
+
+    .grid-premium { grid-template-columns: 1fr !important; }
+    .service-grid { grid-template-columns: 1fr !important; }
+
+    footer { grid-template-columns: 1fr !important; text-align: center; }
+    .footer-bottom { flex-direction: column; gap: 15px; text-align: center; }
+  }
+
   /* ===== BACKGROUND MUSIC ===== */
   .music-control {
     position: fixed;
@@ -602,20 +696,25 @@
 <!-- NAV -->
 <nav>
   <a href="#home" class="logo">CAPLAN <span>&</span> GOLD</a>
-  <ul class="nav-links">
+  <ul class="nav-links" id="navLinks">
     <li><a href="#about">À propos</a></li>
     <li><a href="#services">Services</a></li>
     <li><a href="#comptes">Comptes</a></li>
     <li><a href="#formations">Formations</a></li>
     <li><a href="#process">Processus</a></li>
-    <li><a href="#testimonials">Clients</a></li>
     <li><a href="#leofarme">LEOFARME</a></li>
+    <li><a href="#testimonials">Clients</a></li>
   </ul>
   <div class="nav-right">
     <div class="theme-toggle" id="themeToggle" title="Basculer le thème">
       <div class="toggle-icons"><span>🌙</span><span>☀️</span></div>
     </div>
     <a href="#services" class="nav-cta">Commander</a>
+    <button class="mobile-nav-toggle" id="mobileNavToggle" aria-label="Menu">
+      <span class="bar"></span>
+      <span class="bar"></span>
+      <span class="bar"></span>
+    </button>
   </div>
 </nav>
 
@@ -1424,6 +1523,25 @@ window.addEventListener('hashchange', () => {
 
 // Initial load
 showView(window.location.hash || '#home');
+
+// ===== MOBILE NAV =====
+const mobileNavToggle = document.getElementById('mobileNavToggle');
+const navLinks = document.getElementById('navLinks');
+const navLinksAnchors = document.querySelectorAll('.nav-links a');
+
+if (mobileNavToggle && navLinks) {
+  mobileNavToggle.addEventListener('click', () => {
+    mobileNavToggle.classList.toggle('active');
+    navLinks.classList.toggle('active');
+  });
+
+  navLinksAnchors.forEach(link => {
+    link.addEventListener('click', () => {
+      mobileNavToggle.classList.remove('active');
+      navLinks.classList.remove('active');
+    });
+  });
+}
 
 // ===== THEME TOGGLE =====
 const html = document.documentElement;
