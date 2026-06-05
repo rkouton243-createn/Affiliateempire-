@@ -521,6 +521,28 @@
     justify-content: space-between;
     align-items: center;
   }
+  .ai-chat-header .actions { display: flex; gap: 10px; align-items: center; }
+  .ai-settings-panel {
+    background: var(--surface2);
+    padding: 20px;
+    border-bottom: 1px solid var(--border);
+    display: none;
+    flex-direction: column;
+    gap: 12px;
+  }
+  .ai-settings-panel.active { display: flex; }
+  .ai-settings-panel label { font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--grey); }
+  .ai-settings-panel input, .ai-settings-panel select {
+    background: var(--input-bg);
+    border: 1px solid var(--border);
+    padding: 8px;
+    color: var(--text);
+    font-size: 0.8rem;
+    width: 100%;
+    outline: none;
+  }
+  .ai-settings-panel input:focus, .ai-settings-panel select:focus { border-color: var(--gold); }
+  .ai-settings-info { font-size: 0.65rem; color: var(--grey); font-style: italic; margin-top: -4px; }
   .ai-chat-body {
     padding: 20px;
     max-height: 350px;
@@ -1338,8 +1360,28 @@
 <div class="ai-widget">
   <div class="ai-chat" id="aiChat">
     <div class="ai-chat-header">
-      <span>Assistant CAPLAN & GOLD</span>
-      <button id="aiClose" style="background:none;border:none;cursor:pointer;font-size:1.2rem;">×</button>
+      <span>Assistant IA</span>
+      <div class="actions">
+        <button id="aiSettingsBtn" style="background:none;border:none;cursor:pointer;font-size:1rem;display:flex;">⚙️</button>
+        <button id="aiClose" style="background:none;border:none;cursor:pointer;font-size:1.2rem;">×</button>
+      </div>
+    </div>
+    <div class="ai-settings-panel" id="aiSettingsPanel">
+      <div>
+        <label>Fournisseur API</label>
+        <select id="aiProvider">
+          <option value="none">Aucun (Local/Fallback)</option>
+          <option value="gemini">Google Gemini</option>
+          <option value="deepseek">DeepSeek</option>
+          <option value="ollama">Ollama (Localhost)</option>
+        </select>
+      </div>
+      <div>
+        <label>Clé API / URL Endpoint</label>
+        <input type="password" id="aiApiKey" placeholder="sk-...">
+        <p class="ai-settings-info" id="aiApiHint">Gemini: clé API. Ollama: URL (ex: http://localhost:11434/api/generate)</p>
+      </div>
+      <button class="btn-primary" id="saveAiSettings" style="font-size: 0.65rem; padding: 10px; width: 100%;">Enregistrer & Connecter</button>
     </div>
     <div class="ai-chat-body" id="aiChatBody">
       <div class="ai-msg bot">Bonjour ! Je suis votre assistant. Comment puis-je vous aider aujourd'hui ?</div>
@@ -1745,13 +1787,32 @@ if (musicToggle && bgMusic) {
 const aiToggle = document.getElementById('aiToggle');
 const aiChat = document.getElementById('aiChat');
 const aiClose = document.getElementById('aiClose');
+const aiSettingsBtn = document.getElementById('aiSettingsBtn');
+const aiSettingsPanel = document.getElementById('aiSettingsPanel');
+const aiProvider = document.getElementById('aiProvider');
+const aiApiKey = document.getElementById('aiApiKey');
+const saveAiSettings = document.getElementById('saveAiSettings');
 const aiSend = document.getElementById('aiSend');
 const aiInput = document.getElementById('aiInput');
 const aiChatBody = document.getElementById('aiChatBody');
 
+let aiConfig = JSON.parse(localStorage.getItem('ai_config')) || { provider: 'none', apiKey: '' };
+
 if (aiToggle && aiChat && aiClose) {
   aiToggle.addEventListener('click', () => aiChat.classList.add('active'));
   aiClose.addEventListener('click', () => aiChat.classList.remove('active'));
+  aiSettingsBtn.addEventListener('click', () => aiSettingsPanel.classList.toggle('active'));
+
+  aiProvider.value = aiConfig.provider;
+  aiApiKey.value = aiConfig.apiKey;
+
+  saveAiSettings.addEventListener('click', () => {
+    aiConfig.provider = aiProvider.value;
+    aiConfig.apiKey = aiApiKey.value;
+    localStorage.setItem('ai_config', JSON.stringify(aiConfig));
+    aiSettingsPanel.classList.remove('active');
+    alert("Configuration IA enregistrée !");
+  });
 
   function addMsg(text, type) {
     const msg = document.createElement('div');
@@ -1761,19 +1822,66 @@ if (aiToggle && aiChat && aiClose) {
     aiChatBody.scrollTop = aiChatBody.scrollHeight;
   }
 
-  function handleAiQuery(q) {
+  async function handleAiQuery(q) {
     const query = q.toLowerCase();
     addMsg(q, 'user');
 
-    setTimeout(() => {
-      if (query.includes('achat') || query.includes('commander') || query.includes('procedure') || query.includes('acheter')) {
-        addMsg("Pour commander : 1. Choisissez votre service (YouTube, Ads, etc.). 2. Configurez les détails dans le formulaire. 3. Cliquez sur 'Passer la commande'. Vous serez redirigé vers WhatsApp pour finaliser avec notre équipe.", 'bot');
-      } else if (query.includes('fonction') || query.includes('qui es-tu') || query.includes('comment tu aides') || query.includes('aide')) {
-        addMsg("Je suis votre assistant IA. Je peux vous guider dans le choix de nos services, vous expliquer la procédure d'achat et répondre à vos questions sur l'agence.", 'bot');
-      } else {
-        addMsg("Je ne suis pas sûr de comprendre. Vous pouvez me poser des questions sur la procédure d'achat ou sur mon fonctionnement.", 'bot');
+    if (aiConfig.provider === 'none' || !aiConfig.apiKey) {
+      setTimeout(() => {
+        if (query.includes('achat') || query.includes('commander') || query.includes('procedure') || query.includes('acheter')) {
+          addMsg("Pour commander : 1. Choisissez votre service (YouTube, Ads, etc.). 2. Configurez les détails dans le formulaire. 3. Cliquez sur 'Passer la commande'. Vous serez redirigé vers WhatsApp pour finaliser avec notre équipe.", 'bot');
+        } else if (query.includes('fonction') || query.includes('qui es-tu') || query.includes('comment tu aides') || query.includes('aide')) {
+          addMsg("Je suis votre assistant IA. Je peux vous guider dans le choix de nos services, vous expliquer la procédure d'achat et répondre à vos questions sur l'agence.", 'bot');
+        } else {
+          addMsg("Je ne suis pas sûr de comprendre. Vous pouvez me poser des questions sur la procédure d'achat ou sur mon fonctionnement.", 'bot');
+        }
+      }, 600);
+      return;
+    }
+
+    try {
+      let responseText = "";
+      if (aiConfig.provider === 'gemini') {
+        const resp = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-pro:generateContent?key=${aiConfig.apiKey}`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ contents: [{ parts: [{ text: `Tu es l'assistant de CAPLAN & GOLD, une agence digitale premium au Bénin. Réponds brièvement à : ${q}` }] }] })
+        });
+        const data = await resp.json();
+        if (data.candidates && data.candidates[0] && data.candidates[0].content) {
+          responseText = data.candidates[0].content.parts[0].text;
+        } else {
+          throw new Error("Format de réponse Gemini invalide");
+        }
+      } else if (aiConfig.provider === 'deepseek') {
+        const resp = await fetch('https://api.deepseek.com/v1/chat/completions', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${aiConfig.apiKey}` },
+          body: JSON.stringify({ model: "deepseek-chat", messages: [{ role: "system", content: "Assistant de CAPLAN & GOLD." }, { role: "user", content: q }] })
+        });
+        const data = await resp.json();
+        if (data.choices && data.choices[0] && data.choices[0].message) {
+          responseText = data.choices[0].message.content;
+        } else {
+          throw new Error("Format de réponse DeepSeek invalide");
+        }
+      } else if (aiConfig.provider === 'ollama') {
+        const resp = await fetch(aiConfig.apiKey || 'http://localhost:11434/api/generate', {
+          method: 'POST',
+          body: JSON.stringify({ model: "llama3", prompt: q, stream: false })
+        });
+        const data = await resp.json();
+        if (data.response) {
+          responseText = data.response;
+        } else {
+          throw new Error("Format de réponse Ollama invalide");
+        }
       }
-    }, 600);
+      addMsg(responseText, 'bot');
+    } catch (err) {
+      console.error(err);
+      addMsg("Désolé, une erreur est survenue lors de la connexion à l'API. Vérifiez votre clé et les restrictions CORS.", 'bot');
+    }
   }
 
   aiSend.addEventListener('click', () => {
