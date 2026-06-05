@@ -476,6 +476,88 @@
     animation-play-state: paused;
     height: 4px;
   }
+
+  /* ===== AI ASSISTANT ===== */
+  .ai-widget {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    z-index: 1001;
+  }
+  .ai-toggle {
+    width: 60px;
+    height: 60px;
+    background: var(--gold);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+    transition: transform 0.3s;
+  }
+  .ai-toggle:hover { transform: scale(1.1); }
+  .ai-toggle svg { width: 30px; height: 30px; color: #000; }
+
+  .ai-chat {
+    position: absolute;
+    bottom: 80px;
+    right: 0;
+    width: 320px;
+    background: var(--surface);
+    border: 1px solid var(--border-gold);
+    box-shadow: var(--shadow);
+    display: none;
+    flex-direction: column;
+    overflow: hidden;
+  }
+  .ai-chat.active { display: flex; animation: fadeIn 0.3s forwards; }
+  .ai-chat-header {
+    background: var(--gold);
+    padding: 15px;
+    color: #000;
+    font-weight: 700;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .ai-chat-body {
+    padding: 20px;
+    max-height: 350px;
+    overflow-y: auto;
+    font-size: 0.85rem;
+    line-height: 1.6;
+  }
+  .ai-msg {
+    margin-bottom: 15px;
+    padding: 10px 14px;
+    border-radius: 12px;
+  }
+  .ai-msg.bot { background: var(--surface2); color: var(--text); border-bottom-left-radius: 2px; }
+  .ai-msg.user { background: var(--gold); color: #000; margin-left: 20px; border-bottom-right-radius: 2px; }
+  .ai-chat-footer {
+    padding: 15px;
+    border-top: 1px solid var(--border);
+    display: flex;
+    gap: 8px;
+  }
+  .ai-input {
+    flex: 1;
+    background: var(--input-bg);
+    border: 1px solid var(--border);
+    padding: 8px 12px;
+    color: var(--text);
+    font-size: 0.8rem;
+  }
+  .ai-send {
+    background: var(--gold);
+    border: none;
+    color: #000;
+    padding: 8px 15px;
+    cursor: pointer;
+    font-size: 0.8rem;
+    font-weight: 700;
+  }
 </style>
 </head>
 <body>
@@ -492,7 +574,7 @@
   </div>
 </div>
 <audio id="bgMusic" loop>
-  <source src="https://www.bensound.com/bensound-music/bensound-creativeminds.mp3" type="audio/mpeg">
+  <source src="https://www.epidemicsound.com/music/tracks/07e0605a-dfb9-492a-93f8-6eda51bca4d9/" type="audio/mpeg">
 </audio>
 
 <!-- NAV -->
@@ -553,7 +635,7 @@
     <p class="reveal reveal-delay-2">Rejoignez plus de 250 entreprises qui font confiance à CAPLAN & GOLD. Premier brief gratuit, sans engagement.</p>
     <div class="cta-buttons reveal reveal-delay-3">
       <a href="#services" class="btn-primary">Configurer ma commande</a>
-      <a href="mailto:contact@caplan-gold.com" class="btn-outline">Nous contacter</a>
+      <a href="mailto:rkouton243@gmail.com" class="btn-outline">Nous contacter</a>
     </div>
   </section>
 </div>
@@ -704,8 +786,8 @@
         <div class="icon">🌍</div>
         <h3>Pack Éligibilité Pays</h3>
         <p style="font-size:0.85rem; color:var(--grey); margin-bottom:20px; line-height:1.5;">Guide pas-à-pas pour créer des comptes TikTok/Facebook/Instagram 100% éligibles à la monétisation depuis l'Afrique (sans blocage).</p>
-        <span class="price-tag">2 000 <span>FCFA</span></span>
-        <button class="btn-card" onclick="orderProduct('Pack Éligibilité Pays', '2 000 FCFA')">Commander</button>
+        <span class="price-tag">2 500 <span>FCFA</span></span>
+        <button class="btn-card" onclick="orderProduct('Pack Éligibilité Pays', '2 500 FCFA')">Commander</button>
       </div>
 
       <!-- Pack Visibilité & Audience -->
@@ -713,8 +795,8 @@
         <div class="icon">📈</div>
         <h3>Pack Visibilité & Audience</h3>
         <p style="font-size:0.85rem; color:var(--grey); margin-bottom:20px; line-height:1.5;">Les méthodes et astuces pour booster l'algorithme, faire ses premiers milliers de vues et atteindre les critères requis.</p>
-        <span class="price-tag">2 000 <span>FCFA</span></span>
-        <button class="btn-card" onclick="orderProduct('Pack Visibilité & Audience', '2 000 FCFA')">Commander</button>
+        <span class="price-tag">2 500 <span>FCFA</span></span>
+        <button class="btn-card" onclick="orderProduct('Pack Visibilité & Audience', '2 500 FCFA')">Commander</button>
       </div>
 
       <!-- Masterclass Automatisation IA -->
@@ -942,7 +1024,7 @@
   </div>
   <div class="footer-col"><h4>Plateformes</h4><ul><li><a href="#">TikTok</a></li><li><a href="#">Instagram</a></li><li><a href="#">Facebook</a></li><li><a href="#">YouTube</a></li></ul></div>
   <div class="footer-col"><h4>Entreprise</h4><ul><li><a href="#about">À propos</a></li><li><a href="#">Notre équipe</a></li><li><a href="#">Portfolio</a></li><li><a href="#">Carrières</a></li></ul></div>
-  <div class="footer-col"><h4>Contact</h4><ul><li><a href="mailto:contact@caplan-gold.com">contact@caplan-gold.com</a></li><li><a href="tel:+22900000000">+229 00 00 00 00</a></li><li><a href="#">Porto-Novo, Bénin</a></li></ul></div>
+  <div class="footer-col"><h4>Contact</h4><ul><li><a href="mailto:rkouton243@gmail.com">rkouton243@gmail.com</a></li><li><a href="tel:+22900000000">01 98 90 53 11</a></li><li><a href="#">Porto-Novo, Bénin</a></li></ul></div>
 </footer>
 <div class="footer-bottom">
   <p>© 2024 CAPLAN & GOLD. Tous droits réservés.</p>
@@ -962,7 +1044,27 @@
     <h3>Commande reçue !</h3>
     <p>Merci pour votre confiance. Notre équipe vous contactera sous <strong>24h</strong> pour finaliser votre brief de contenu.</p>
     <div class="modal-detail" id="modalDetail"></div>
-    <a href="mailto:contact@caplan-gold.com" class="btn-primary" style="display:block;text-align:center;">Nous écrire directement →</a>
+    <a href="mailto:rkouton243@gmail.com" class="btn-primary" style="display:block;text-align:center;">Nous écrire directement →</a>
+  </div>
+</div>
+
+<!-- AI WIDGET -->
+<div class="ai-widget">
+  <div class="ai-chat" id="aiChat">
+    <div class="ai-chat-header">
+      <span>Assistant CAPLAN & GOLD</span>
+      <button id="aiClose" style="background:none;border:none;cursor:pointer;font-size:1.2rem;">×</button>
+    </div>
+    <div class="ai-chat-body" id="aiChatBody">
+      <div class="ai-msg bot">Bonjour ! Je suis votre assistant. Comment puis-je vous aider aujourd'hui ?</div>
+    </div>
+    <div class="ai-chat-footer">
+      <input type="text" class="ai-input" id="aiInput" placeholder="Posez une question...">
+      <button class="ai-send" id="aiSend">Envoi</button>
+    </div>
+  </div>
+  <div class="ai-toggle" id="aiToggle">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg>
   </div>
 </div>
 
@@ -1349,6 +1451,60 @@ if (musicToggle && bgMusic) {
     } else {
       bgMusic.pause();
       musicToggle.classList.add('paused');
+    }
+  });
+}
+
+// ===== AI ASSISTANT LOGIC =====
+const aiToggle = document.getElementById('aiToggle');
+const aiChat = document.getElementById('aiChat');
+const aiClose = document.getElementById('aiClose');
+const aiSend = document.getElementById('aiSend');
+const aiInput = document.getElementById('aiInput');
+const aiChatBody = document.getElementById('aiChatBody');
+
+if (aiToggle && aiChat && aiClose) {
+  aiToggle.addEventListener('click', () => aiChat.classList.add('active'));
+  aiClose.addEventListener('click', () => aiChat.classList.remove('active'));
+
+  function addMsg(text, type) {
+    const msg = document.createElement('div');
+    msg.className = `ai-msg ${type}`;
+    msg.textContent = text;
+    aiChatBody.appendChild(msg);
+    aiChatBody.scrollTop = aiChatBody.scrollHeight;
+  }
+
+  function handleAiQuery(q) {
+    const query = q.toLowerCase();
+    addMsg(q, 'user');
+
+    setTimeout(() => {
+      if (query.includes('achat') || query.includes('commander') || query.includes('procedure') || query.includes('acheter')) {
+        addMsg("Pour commander : 1. Choisissez votre service (YouTube, Ads, etc.). 2. Configurez les détails dans le formulaire. 3. Cliquez sur 'Passer la commande'. Vous serez redirigé vers WhatsApp pour finaliser avec notre équipe.", 'bot');
+      } else if (query.includes('fonction') || query.includes('qui es-tu') || query.includes('comment tu aides') || query.includes('aide')) {
+        addMsg("Je suis votre assistant IA. Je peux vous guider dans le choix de nos services, vous expliquer la procédure d'achat et répondre à vos questions sur l'agence.", 'bot');
+      } else {
+        addMsg("Je ne suis pas sûr de comprendre. Vous pouvez me poser des questions sur la procédure d'achat ou sur mon fonctionnement.", 'bot');
+      }
+    }, 600);
+  }
+
+  aiSend.addEventListener('click', () => {
+    const q = aiInput.value.trim();
+    if (q) {
+      handleAiQuery(q);
+      aiInput.value = '';
+    }
+  });
+
+  aiInput.addEventListener('keypress', (e) => {
+    if (e.key === 'Enter') {
+      const q = aiInput.value.trim();
+      if (q) {
+        handleAiQuery(q);
+        aiInput.value = '';
+      }
     }
   });
 }
