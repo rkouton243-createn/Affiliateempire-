@@ -703,6 +703,7 @@
     <li><a href="#formations">Formations</a></li>
     <li><a href="#process">Processus</a></li>
     <li><a href="#leofarme">LEOFARME</a></li>
+    <li><a href="#affiliation">Affiliation</a></li>
     <li><a href="#testimonials">Clients</a></li>
   </ul>
   <div class="nav-right">
@@ -1400,6 +1401,45 @@
   </section>
 </div>
 
+<!-- AFFILIATION -->
+<div id="affiliationView" class="page-view">
+  <section id="affiliation" style="padding-top: 160px;">
+    <div class="section-tag reveal">Programme Partenaire</div>
+    <h2 class="reveal reveal-delay-1">Devenez <em>Affilié</em> CAPLAN & GOLD</h2>
+    <p class="reveal reveal-delay-2" style="color:var(--grey); margin-top:20px; max-width:600px;">
+      Gagnez des commissions sur chaque vente ! Recommandez nos produits et services à votre entourage et recevez une récompense pour chaque achat effectué par un utilisateur parrainé.
+    </p>
+
+    <div class="grid-premium" style="margin-top: 60px;">
+      <div class="card-premium reveal">
+        <div class="icon">💸</div>
+        <h3>Commissions</h3>
+        <p style="font-size:0.85rem; color:var(--grey); line-height:1.6;">Recevez un pourcentage sur chaque commande validée via votre parrainage.</p>
+      </div>
+      <div class="card-premium reveal reveal-delay-1">
+        <div class="icon">🔗</div>
+        <h3>Lien Unique</h3>
+        <p style="font-size:0.85rem; color:var(--grey); line-height:1.6;">Obtenez un identifiant unique pour suivre vos recommandations en temps réel.</p>
+      </div>
+      <div class="card-premium reveal reveal-delay-2">
+        <div class="icon">📊</div>
+        <h3>Tableau de bord</h3>
+        <p style="font-size:0.85rem; color:var(--grey); line-height:1.6;">Suivez vos gains et vos performances depuis votre espace partenaire dédié.</p>
+      </div>
+    </div>
+
+    <div class="configurator reveal" style="margin-top: 60px; max-width: 800px; margin-left: auto; margin-right: auto;">
+      <div class="config-header">
+        <h3>🤝 Rejoindre le programme d'affiliation</h3>
+      </div>
+      <div class="config-body" style="display: block; padding: 40px; text-align: center;">
+        <p style="margin-bottom: 30px; color: var(--grey);">Inscrivez-vous dès maintenant pour commencer à générer des revenus passifs avec CAPLAN & GOLD.</p>
+        <a href="https://wa.me/2290198905311?text=Bonjour%20je%20souhaite%20devenir%20affilié%20CAPLAN%20%26%20GOLD" class="btn-primary">S'inscrire comme affilié</a>
+      </div>
+    </div>
+  </section>
+</div>
+
 <!-- TESTIMONIALS -->
 <div id="testimonialsView" class="page-view">
   <section id="testimonials">
@@ -1509,6 +1549,7 @@ function showView(hash) {
   if (hash === '#process') targetId = 'processView';
   if (hash === '#testimonials') targetId = 'testimonialsView';
   if (hash === '#leofarme') targetId = 'leofarmeView';
+  if (hash === '#affiliation') targetId = 'affiliationView';
 
   const targetView = document.getElementById(targetId);
   if (targetView) {
