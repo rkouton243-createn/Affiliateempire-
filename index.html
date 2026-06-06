@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>CAPLAN & GOLD — Gestion des Réseaux Sociaux</title>
+<title>CAPLAN & GOLD — Agence Digitale Premium</title>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
   /* ===== THEME VARIABLES ===== */
@@ -71,31 +71,16 @@
     border-bottom: 1px solid var(--border);
     transition: background 0.4s, border-color 0.4s;
   }
-  .logo { font-family:'Playfair Display',serif;font-size:1.3rem;font-weight:700;letter-spacing:0.08em;color:var(--text); text-decoration: none; z-index: 102; flex-shrink: 0; margin-right: 20px; }
+  .logo { font-family:'Playfair Display',serif;font-size:1.3rem;font-weight:700;letter-spacing:0.08em;color:var(--text); text-decoration: none; flex-shrink: 0; }
   .logo span { color:var(--gold); }
   .nav-links { display:flex;gap:24px;list-style:none; flex-wrap: wrap; justify-content: center; }
   .nav-links a { font-size:0.78rem;letter-spacing:0.15em;text-transform:uppercase;color:var(--grey);text-decoration:none;transition:color .3s; }
   .nav-links a:hover { color:var(--gold); }
-  .nav-right { display:flex;align-items:center;gap:20px; z-index: 102; }
+  .nav-right { display:flex;align-items:center;gap:20px; }
 
-  /* MOBILE NAV TOGGLE */
-  .mobile-nav-toggle {
-    display: none;
-    flex-direction: column;
-    gap: 6px;
-    background: none;
-    border: none;
-    cursor: pointer;
-    z-index: 102;
-    padding: 5px;
-    margin-left: 10px;
-  }
-  .mobile-nav-toggle .bar {
-    width: 24px;
-    height: 2px;
-    background: var(--gold);
-    transition: all 0.3s;
-  }
+  /* MOBILE NAV */
+  .mobile-nav-toggle { display: none; flex-direction: column; gap: 6px; background: none; border: none; cursor: pointer; }
+  .mobile-nav-toggle .bar { width: 24px; height: 2px; background: var(--gold); transition: all 0.3s; }
 
   /* THEME TOGGLE */
   .theme-toggle {
@@ -180,209 +165,82 @@
   .card-title { font-family:'Playfair Display',serif;font-size:1rem;font-weight:700;margin-bottom:8px; }
   .card-desc { font-size:0.83rem;color:var(--grey);line-height:1.6; }
 
-  /* ===== SERVICES CONFIGURATOR ===== */
+  /* ===== SERVICES (QUOTE GEN) ===== */
   #services { background: var(--bg); padding-top: 160px; }
-  .services-top { display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:60px; }
-
-  .configurator {
-    background: var(--surface);
-    border: 1px solid var(--border);
-    padding: 0;
-    overflow: hidden;
-    box-shadow: var(--shadow);
-  }
-  .config-header {
-    background: var(--gold);
-    padding: 20px 36px;
-    display: flex; align-items:center; justify-content:space-between;
-  }
-  .config-header h3 { font-family:'Playfair Display',serif;font-size:1.2rem;font-weight:700;color:#000; }
-  .config-header span { font-size:0.75rem;letter-spacing:0.1em;text-transform:uppercase;color:rgba(0,0,0,0.6); }
-
-  .config-body { padding: 40px 36px; display:grid;grid-template-columns:1.1fr 1fr;gap:48px;align-items:start; }
-
-  /* QUOTE GENERATOR */
-  .quote-container {
-    background: var(--surface);
-    border: 1px solid var(--border);
-    padding: 40px;
-    display: grid;
-    grid-template-columns: 1.5fr 1fr;
-    gap: 40px;
-    box-shadow: var(--shadow);
-  }
-  @media (max-width: 992px) {
-    .quote-container { grid-template-columns: 1fr; }
-  }
+  .quote-container { background: var(--surface); border: 1px solid var(--border); padding: 40px; display: grid; grid-template-columns: 1.5fr 1fr; gap: 40px; box-shadow: var(--shadow); }
   .quote-step { margin-bottom: 30px; }
-  .quote-step-title {
-    font-family: 'Playfair Display', serif;
-    font-size: 1.2rem;
-    font-weight: 700;
-    margin-bottom: 15px;
-    display: flex;
-    align-items: center;
-    gap: 10px;
-  }
-  .quote-step-title span {
-    width: 24px; height: 24px;
-    background: var(--gold);
-    color: #000;
-    border-radius: 50%;
-    display: flex; align-items: center; justify-content: center;
-    font-size: 0.8rem;
-  }
+  .quote-step-title { font-family: 'Playfair Display', serif; font-size: 1.2rem; font-weight: 700; margin-bottom: 15px; display: flex; align-items: center; gap: 10px; }
+  .quote-step-title span { width: 24px; height: 24px; background: var(--gold); color: #000; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 0.8rem; }
   .quote-options { display: flex; flex-wrap: wrap; gap: 10px; }
-  .quote-opt {
-    padding: 10px 20px;
-    background: var(--surface2);
-    border: 1.5px solid var(--border);
-    cursor: pointer;
-    transition: all 0.3s;
-    font-size: 0.9rem;
-    display: flex; align-items: center; gap: 8px;
-  }
+  .quote-opt { padding: 10px 20px; background: var(--surface2); border: 1.5px solid var(--border); cursor: pointer; transition: all 0.3s; font-size: 0.9rem; display: flex; align-items: center; gap: 8px; }
   .quote-opt:hover { border-color: var(--gold); }
   .quote-opt.selected { border-color: var(--gold); background: rgba(145, 97, 19, 0.1); color: var(--gold); }
-
-  .quote-summary {
-    background: var(--surface2);
-    padding: 30px;
-    border: 1px solid var(--border-gold);
-    position: sticky; top: 120px;
-    height: fit-content;
-  }
-  .summary-line {
-    display: flex; justify-content: space-between;
-    padding: 12px 0;
-    border-bottom: 1px solid var(--border);
-    font-size: 0.9rem;
-  }
-  .summary-line:last-of-type { border: none; }
-  .summary-total {
-    margin-top: 20px;
-    padding-top: 20px;
-    border-top: 2px solid var(--gold);
-    display: flex; justify-content: space-between; align-items: center;
-  }
+  .quote-summary { background: var(--surface2); padding: 30px; border: 1px solid var(--border-gold); position: sticky; top: 120px; height: fit-content; }
+  .summary-line { display: flex; justify-content: space-between; padding: 12px 0; border-bottom: 1px solid var(--border); font-size: 0.9rem; }
+  .summary-total { margin-top: 20px; padding-top: 20px; border-top: 2px solid var(--gold); display: flex; justify-content: space-between; align-items: center; }
   .total-label { font-weight: 700; color: var(--gold); }
   .total-price { font-family: 'Playfair Display', serif; font-size: 1.8rem; font-weight: 900; }
 
-  /* COMPTES & FORMATIONS GRID */
+  /* GRID PREMIUM */
   .grid-premium { display:grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap:24px; margin-top:40px; }
   .card-premium { background:var(--surface); border:1px solid var(--border); padding:32px; transition:all .3s; position:relative; overflow:hidden; }
   .card-premium:hover { border-color:var(--gold); transform:translateY(-5px); box-shadow:var(--shadow); }
   .card-premium::before { content:''; position:absolute; top:0; left:0; width:100%; height:3px; background:var(--gold); transform:scaleX(0); transform-origin:left; transition:transform .4s; }
   .card-premium:hover::before { transform:scaleX(1); }
-
   .card-premium .icon { font-size:2.4rem; margin-bottom:20px; }
   .card-premium h3 { font-family:'Playfair Display',serif; font-size:1.3rem; margin-bottom:12px; }
   .card-premium .details { list-style:none; margin-bottom:24px; }
   .card-premium .details li { font-size:0.85rem; color:var(--grey); margin-bottom:8px; display:flex; align-items:center; gap:8px; }
   .card-premium .details li::before { content:'✓'; color:var(--gold); font-weight:bold; }
-
   .card-premium .price-tag { font-family:'Playfair Display',serif; font-size:1.8rem; font-weight:900; color:var(--gold); margin-bottom:20px; display:block; }
   .card-premium .price-tag span { font-size:0.9rem; font-weight:400; opacity:0.7; }
-
   .btn-card { width:100%; padding:12px; background:var(--surface2); border:1px solid var(--border); color:var(--text); text-transform:uppercase; letter-spacing:0.1em; font-size:0.75rem; font-weight:500; cursor:pointer; transition:all .2s; }
   .card-premium:hover .btn-card { background:var(--gold); color:#000; border-color:var(--gold); }
 
-  /* DETAILS PANEL */
-  .details-panel { display:none; margin-top:20px; border-top:1px solid var(--border); padding-top:40px; }
-  .details-panel.active { display:block; animation:fadeIn .5s forwards; }
-  .dynamic-fields { display:grid; grid-template-columns:1fr; gap:20px; }
-
+  /* FORM FIELDS */
   .field-group { display:flex; flex-direction:column; gap:8px; }
   .field-label { font-size:0.75rem; text-transform:uppercase; letter-spacing:0.1em; color:var(--grey); }
   .field-label span { color: #ff4444; margin-left:4px; }
   .field-input { width:100%; padding:12px 16px; background:var(--input-bg); border:1.5px solid var(--border); color:var(--text); font-family:inherit; font-size:0.9rem; transition:border-color .2s; }
   .field-input:focus { outline:none; border-color:var(--gold); }
-  .field-input.error { border-color: #ff4444; }
 
-  /* Custom Radio/Check */
-  .custom-options { display:flex; flex-wrap:wrap; gap:10px; }
-  .custom-opt { padding:10px 16px; background:var(--surface2); border:1.5px solid var(--border); font-size:0.85rem; cursor:pointer; transition:all .2s; }
-  .custom-opt.selected { border-color:var(--gold); background:rgba(201,168,76,0.15); color:var(--gold); }
-
-  @keyframes fadeIn { from{opacity:0; transform:translateY(10px)} to{opacity:1; transform:translateY(0)} }
-
-  .order-btn {
-    display:block;width:100%;padding:16px;
-    background:var(--gold);color:#000;
-    font-size:0.8rem;letter-spacing:0.18em;text-transform:uppercase;font-weight:500;
-    border:none;cursor:pointer;margin-top:20px;
-    transition:background .3s,transform .2s;
-    font-family:'DM Sans',sans-serif;
-  }
+  .order-btn { display:block;width:100%;padding:16px; background:var(--gold);color:#000; font-size:0.8rem;letter-spacing:0.18em;text-transform:uppercase;font-weight:500; border:none;cursor:pointer;margin-top:20px; transition:background .3s,transform .2s; font-family:'DM Sans',sans-serif; }
   .order-btn:hover { background:var(--gold-light);transform:translateY(-2px); }
   .order-btn:disabled { background:var(--surface3);color:var(--grey);cursor:not-allowed;transform:none; }
 
-  .config-notice { font-size:0.73rem;color:var(--grey);text-align:center;margin-top:12px;line-height:1.5; }
-
   /* ===== PROCESS ===== */
   #process { background:var(--surface);display:grid;grid-template-columns:1fr 2fr;gap:100px;align-items:start; padding-top: 160px; }
-  .process-steps { display:flex;flex-direction:column; }
   .process-step { display:flex;gap:32px;padding:36px 0;border-bottom:1px solid var(--border);transition:padding-left .3s; }
   .process-step:hover { padding-left:12px; }
-  .process-step:first-child { border-top:1px solid var(--border); }
   .step-num { font-family:'Playfair Display',serif;font-size:0.8rem;color:var(--gold);font-weight:700;min-width:28px;padding-top:4px; }
   .step-content h3 { font-family:'Playfair Display',serif;font-size:1.15rem;font-weight:700;margin-bottom:10px; }
   .step-content p { font-size:0.88rem;color:var(--grey);line-height:1.7; }
 
   /* ===== TESTIMONIALS ===== */
   #testimonials { background:var(--bg);overflow:hidden; padding-top: 160px; }
-  .testimonials-header { margin-bottom:60px; }
   .testimonials-track { display:flex;gap:24px;animation:marquee 30s linear infinite;width:max-content; }
   .testimonial-card { background:var(--surface);border:1px solid var(--border-gold);padding:36px 36px 32px;width:380px;flex-shrink:0;position:relative; }
-  .testimonial-card::before { content:'"';font-family:'Playfair Display',serif;font-size:5rem;color:var(--gold);opacity:0.2;position:absolute;top:12px;left:28px;line-height:1; }
   .testimonial-text { font-size:0.9rem;color:var(--text);line-height:1.8;opacity:0.85;padding-top:28px; }
-  .testimonial-author { display:flex;align-items:center;gap:14px;margin-top:24px;padding-top:20px;border-top:1px solid var(--border); }
   .author-avatar { width:40px;height:40px;border-radius:50%;background:linear-gradient(135deg,var(--gold),var(--surface2));display:flex;align-items:center;justify-content:center;font-family:'Playfair Display',serif;font-size:1rem;font-weight:700;color:#000; }
-  .author-name { font-size:0.85rem;font-weight:500; }
-  .author-role { font-size:0.75rem;color:var(--grey);margin-top:2px; }
-  .stars { color:var(--gold);font-size:0.75rem;margin-bottom:6px; }
 
   /* ===== CTA ===== */
   #cta { background:var(--surface);text-align:center;padding:140px 60px;position:relative;overflow:hidden; }
-  #cta::before { content:'';position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:700px;height:700px;background:radial-gradient(circle,rgba(201,168,76,0.07) 0%,transparent 70%);pointer-events:none; }
-  .cta-eyebrow { font-size:0.72rem;letter-spacing:0.3em;text-transform:uppercase;color:var(--gold);margin-bottom:24px; }
-  #cta h2 { max-width:700px;margin:0 auto 20px; }
-  #cta p { color:var(--grey);font-size:1rem;line-height:1.8;max-width:500px;margin:0 auto 48px; }
-  .cta-buttons { display:flex;gap:20px;justify-content:center;align-items:center; }
   .btn-outline { font-size:0.78rem;letter-spacing:0.18em;text-transform:uppercase;color:var(--text);border:1px solid var(--border);padding:15px 36px;text-decoration:none;transition:border-color .3s,color .3s; }
   .btn-outline:hover { border-color:var(--gold);color:var(--gold); }
 
   /* ===== FOOTER ===== */
   footer { background:var(--bg);border-top:1px solid var(--border);padding:60px;display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:60px; }
-  .footer-brand .logo { font-size:1.5rem;margin-bottom:16px;display:block; }
-  .footer-brand p { font-size:0.85rem;color:var(--grey);line-height:1.7;max-width:280px; }
-  .footer-col h4 { font-size:0.72rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--gold);margin-bottom:20px; }
-  .footer-col ul { list-style:none; }
-  .footer-col li { margin-bottom:10px; }
-  .footer-col a { font-size:0.85rem;color:var(--grey);text-decoration:none;transition:color .3s; }
-  .footer-col a:hover { color:var(--text); }
   .footer-bottom { background:var(--bg);border-top:1px solid var(--border);padding:22px 60px;display:flex;justify-content:space-between;align-items:center; }
-  .footer-bottom p { font-size:0.78rem;color:var(--grey);opacity:0.5; }
-  .social-links { display:flex;gap:12px; }
-  .social-link { width:34px;height:34px;border:1px solid var(--border);display:flex;align-items:center;justify-content:center;font-size:0.75rem;color:var(--grey);text-decoration:none;transition:border-color .3s,color .3s; }
-  .social-link:hover { border-color:var(--gold);color:var(--gold); }
 
   /* ===== MODAL ===== */
-  .modal-overlay { position:fixed;inset:0;background:rgba(0,0,0,0.75);z-index:1000;display:flex;align-items:center;justify-content:center;opacity:0;pointer-events:none;transition:opacity .3s; }
+  .modal-overlay { position:fixed;inset:0;background:rgba(0,0,0,0.75);z-index:1100;display:flex;align-items:center;justify-content:center;opacity:0;pointer-events:none;transition:opacity .3s; }
   .modal-overlay.open { opacity:1;pointer-events:all; }
   .modal { background:var(--surface);border:1px solid var(--border-gold);padding:48px;max-width:520px;width:90%;position:relative;transform:scale(0.95);transition:transform .3s; }
-  .modal-overlay.open .modal { transform:scale(1); }
-  .modal-close { position:absolute;top:16px;right:20px;background:none;border:none;color:var(--grey);font-size:1.5rem;cursor:pointer;transition:color .2s; }
-  .modal-close:hover { color:var(--text); }
-  .modal-icon { font-size:3rem;margin-bottom:16px; }
-  .modal h3 { font-family:'Playfair Display',serif;font-size:1.6rem;font-weight:700;margin-bottom:12px; }
-  .modal p { color:var(--grey);line-height:1.7;margin-bottom:20px; }
+  .modal-close { position:absolute;top:16px;right:20px;background:none;border:none;color:var(--grey);font-size:1.5rem;cursor:pointer; }
   .modal-detail { background:var(--surface2);padding:20px;margin-bottom:24px;font-size:0.85rem;line-height:1.8; }
-  .modal-detail strong { color:var(--gold); }
 
   /* ===== ANIMATIONS ===== */
   @keyframes fadeUp { to{opacity:1;transform:translateY(0)} }
-  @keyframes cellReveal { to{opacity:1} }
   @keyframes marquee { from{transform:translateX(0)} to{transform:translateX(-50%)} }
   .reveal { opacity:0;transform:translateY(28px);transition:opacity .7s,transform .7s; }
   .reveal.visible { opacity:1;transform:translateY(0); }
@@ -390,232 +248,38 @@
 
   ::-webkit-scrollbar{width:4px}::-webkit-scrollbar-track{background:var(--bg)}::-webkit-scrollbar-thumb{background:var(--gold)}
 
-  /* ===== RESPONSIVENESS ===== */
-  @media (max-width: 1100px) {
-    nav { padding: 18px 30px; }
-    section { padding: 100px 30px; }
-  }
-
-  @media (max-width: 992px) {
-    .nav-links {
-      display: flex;
-      position: fixed;
-      top: 0; right: -100%;
-      width: 280px; height: 100vh;
-      background: var(--surface);
-      flex-direction: column;
-      padding: 120px 40px;
-      transition: right 0.4s cubic-bezier(0.77,0.2,0.05,1.0);
-      box-shadow: -10px 0 30px rgba(0,0,0,0.5);
-      z-index: 101;
-      gap: 25px;
-    }
-    .nav-links.active { right: 0; }
-    .mobile-nav-toggle { display: flex; }
-
-    /* Hamburger Animation */
-    .mobile-nav-toggle.active .bar:nth-child(1) { transform: translateY(8px) rotate(45deg); }
-    .mobile-nav-toggle.active .bar:nth-child(2) { opacity: 0; }
-    .mobile-nav-toggle.active .bar:nth-child(3) { transform: translateY(-8px) rotate(-45deg); }
-
-    #home { grid-template-columns: 1fr !important; min-height: auto; }
-    .hero-left { padding: 160px 30px 80px; text-align: center; align-items: center; }
-    .hero-desc { margin: 28px auto 0; }
-    .hero-actions { justify-content: center; }
-    .hero-stats { justify-content: center; flex-wrap: wrap; gap: 30px; }
-    .hero-right { display: none; }
-
-    #about { grid-template-columns: 1fr; gap: 60px; }
-    #about .about-text { text-align: center; }
-    #about .about-text p { margin: 24px auto 0; }
-    #about .section-tag { justify-content: center; }
-
-    .config-body { grid-template-columns: 1fr; }
-    .config-summary { position: static; margin-top: 40px; }
-
-    #process { grid-template-columns: 1fr; gap: 50px; }
-    #process h2 { text-align: center; }
-    #process .section-tag { justify-content: center; }
-
-    #cta { padding: 100px 30px; }
-    .cta-buttons { flex-direction: column; width: 100%; max-width: 300px; margin: 0 auto; }
-    .btn-primary, .btn-outline { width: 100%; text-align: center; }
-
-    footer { grid-template-columns: 1fr 1fr; gap: 40px; }
-    .footer-brand { grid-column: 1 / -1; text-align: center; }
-    .footer-brand p { margin: 16px auto 0; }
-  }
-
-  @media (max-width: 600px) {
-    nav { padding: 15px 20px; }
-    .logo { font-size: 1.1rem; }
-    .nav-cta { display: none; } /* Hide CTA on very small screens to save space */
-
-    h1 { font-size: 2.5rem; }
-    h2 { font-size: 2.0rem; }
-
-    .hero-stats { gap: 20px; }
-    .hero-stats > div { width: 100%; text-align: center; }
-    .stat-val { font-size: 1.8rem; }
-
-    .grid-premium { grid-template-columns: 1fr !important; }
-    .service-grid { grid-template-columns: 1fr !important; }
-
-    footer { grid-template-columns: 1fr !important; text-align: center; }
-    .footer-bottom { flex-direction: column; gap: 15px; text-align: center; }
-  }
-
-  /* ===== BACKGROUND MUSIC ===== */
-  .music-control {
-    position: fixed;
-    bottom: 30px;
-    left: 30px;
-    z-index: 1001;
-    width: 44px;
-    height: 44px;
-    background: var(--surface2);
-    border: 1px solid var(--border-gold);
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-    transition: all 0.3s;
-    box-shadow: var(--shadow);
-  }
-  .music-control:hover {
-    transform: scale(1.1);
-    border-color: var(--gold);
-  }
-  .music-icon {
-    font-size: 1.2rem;
-    color: var(--gold);
-  }
-  .music-waves {
-    display: flex;
-    align-items: center;
-    gap: 2px;
-    height: 12px;
-  }
-  .wave {
-    width: 2px;
-    height: 100%;
-    background: var(--gold);
-    animation: wave-anim 1s ease-in-out infinite;
-  }
+  /* MUSIC TOGGLE */
+  .music-control { position: fixed; bottom: 30px; left: 30px; z-index: 1001; width: 44px; height: 44px; background: var(--surface2); border: 1px solid var(--border-gold); border-radius: 50%; display: flex; align-items: center; justify-content: center; cursor: pointer; box-shadow: var(--shadow); }
+  .music-waves { display: flex; align-items: center; gap: 2px; height: 12px; }
+  .wave { width: 2px; height: 100%; background: var(--gold); animation: wave-anim 1s ease-in-out infinite; }
   .wave:nth-child(2) { animation-delay: 0.2s; }
   .wave:nth-child(3) { animation-delay: 0.4s; }
-  @keyframes wave-anim {
-    0%, 100% { height: 4px; }
-    50% { height: 12px; }
-  }
-  .music-control.paused .wave {
-    animation-play-state: paused;
-    height: 4px;
-  }
+  @keyframes wave-anim { 0%, 100% { height: 4px; } 50% { height: 12px; } }
+  .music-control.paused .wave { animation-play-state: paused; height: 4px; }
 
-  /* ===== AI ASSISTANT ===== */
-  .ai-widget {
-    position: fixed;
-    bottom: 30px;
-    right: 30px;
-    z-index: 1001;
-  }
-  .ai-toggle {
-    width: 60px;
-    height: 60px;
-    background: var(--gold);
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.3);
-    transition: transform 0.3s;
-  }
-  .ai-toggle:hover { transform: scale(1.1); }
-  .ai-toggle svg { width: 30px; height: 30px; color: #000; }
-
-  .ai-chat {
-    position: absolute;
-    bottom: 80px;
-    right: 0;
-    width: 320px;
-    background: var(--surface);
-    border: 1px solid var(--border-gold);
-    box-shadow: var(--shadow);
-    display: none;
-    flex-direction: column;
-    overflow: hidden;
-  }
+  /* AI WIDGET */
+  .ai-widget { position: fixed; bottom: 30px; right: 30px; z-index: 1001; }
+  .ai-toggle { width: 60px; height: 60px; background: var(--gold); border-radius: 50%; display: flex; align-items: center; justify-content: center; cursor: pointer; box-shadow: 0 10px 30px rgba(0,0,0,0.3); transition: transform 0.3s; }
+  .ai-chat { position: absolute; bottom: 80px; right: 0; width: 320px; background: var(--surface); border: 1px solid var(--border-gold); box-shadow: var(--shadow); display: none; flex-direction: column; overflow: hidden; }
   .ai-chat.active { display: flex; animation: fadeIn 0.3s forwards; }
-  .ai-chat-header {
-    background: var(--gold);
-    padding: 15px;
-    color: #000;
-    font-weight: 700;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-  }
-  .ai-chat-header .actions { display: flex; gap: 10px; align-items: center; }
-  .ai-settings-panel {
-    background: var(--surface2);
-    padding: 20px;
-    border-bottom: 1px solid var(--border);
-    display: none;
-    flex-direction: column;
-    gap: 12px;
-  }
+  .ai-chat-header { background: var(--gold); padding: 15px; color: #000; font-weight: 700; display: flex; justify-content: space-between; align-items: center; }
+  .ai-settings-panel { background: var(--surface2); padding: 20px; border-bottom: 1px solid var(--border); display: none; flex-direction: column; gap: 12px; }
   .ai-settings-panel.active { display: flex; }
-  .ai-settings-panel label { font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--grey); }
-  .ai-settings-panel input, .ai-settings-panel select {
-    background: var(--input-bg);
-    border: 1px solid var(--border);
-    padding: 8px;
-    color: var(--text);
-    font-size: 0.8rem;
-    width: 100%;
-    outline: none;
-  }
-  .ai-settings-panel input:focus, .ai-settings-panel select:focus { border-color: var(--gold); }
-  .ai-settings-info { font-size: 0.65rem; color: var(--grey); font-style: italic; margin-top: -4px; }
-  .ai-chat-body {
-    padding: 20px;
-    max-height: 350px;
-    overflow-y: auto;
-    font-size: 0.85rem;
-    line-height: 1.6;
-  }
-  .ai-msg {
-    margin-bottom: 15px;
-    padding: 10px 14px;
-    border-radius: 12px;
-  }
+  .ai-chat-body { padding: 20px; max-height: 350px; overflow-y: auto; font-size: 0.85rem; line-height: 1.6; }
+  .ai-msg { margin-bottom: 15px; padding: 10px 14px; border-radius: 12px; }
   .ai-msg.bot { background: var(--surface2); color: var(--text); border-bottom-left-radius: 2px; }
   .ai-msg.user { background: var(--gold); color: #000; margin-left: 20px; border-bottom-right-radius: 2px; }
-  .ai-chat-footer {
-    padding: 15px;
-    border-top: 1px solid var(--border);
-    display: flex;
-    gap: 8px;
-  }
-  .ai-input {
-    flex: 1;
-    background: var(--input-bg);
-    border: 1px solid var(--border);
-    padding: 8px 12px;
-    color: var(--text);
-    font-size: 0.8rem;
-  }
-  .ai-send {
-    background: var(--gold);
-    border: none;
-    color: #000;
-    padding: 8px 15px;
-    cursor: pointer;
-    font-size: 0.8rem;
-    font-weight: 700;
+  .ai-chat-footer { padding: 15px; border-top: 1px solid var(--border); display: flex; gap: 8px; }
+  .ai-input { flex: 1; background: var(--input-bg); border: 1px solid var(--border); padding: 8px 12px; color: var(--text); font-size: 0.8rem; }
+  .ai-send { background: var(--gold); border: none; color: #000; padding: 8px 15px; cursor: pointer; font-weight: 700; }
+
+  @media (max-width: 992px) {
+    .nav-links { display: none; position: fixed; top: 0; right: 0; width: 280px; height: 100vh; background: var(--surface); flex-direction: column; padding: 120px 40px; box-shadow: -10px 0 30px rgba(0,0,0,0.5); z-index: 999; }
+    .nav-links.active { display: flex; }
+    .mobile-nav-toggle { display: flex; z-index: 1000; }
+    #home { grid-template-columns: 1fr; }
+    .hero-right { display: none; }
+    .quote-container { grid-template-columns: 1fr; }
   }
 </style>
 </head>
@@ -624,7 +288,7 @@
 <div class="cursor" id="cursor"></div>
 <div class="cursor-ring" id="cursorRing"></div>
 
-<!-- BACKGROUND MUSIC -->
+<!-- MUSIC -->
 <div class="music-control paused" id="musicToggle">
   <div class="music-waves">
     <div class="wave"></div>
@@ -642,8 +306,8 @@
   <ul class="nav-links" id="navLinks">
     <li><a href="#about">À propos</a></li>
     <li><a href="#services">Services</a></li>
-    <li><a href="#comptes">Comptes</a></li>
-    <li><a href="#formations">Formations</a></li>
+    <li><a href="#comptes">Marketplace</a></li>
+    <li><a href="#formations">Académie</a></li>
     <li><a href="#process">Processus</a></li>
     <li><a href="#leofarme">LEOFARME</a></li>
     <li><a href="#affiliation">Affiliation</a></li>
@@ -654,15 +318,11 @@
       <div class="toggle-icons"><span>🌙</span><span>☀️</span></div>
     </div>
     <a href="#services" class="nav-cta">Commander</a>
-    <button class="mobile-nav-toggle" id="mobileNavToggle" aria-label="Menu">
-      <span class="bar"></span>
-      <span class="bar"></span>
-      <span class="bar"></span>
-    </button>
+    <button class="mobile-nav-toggle" id="mobileNavToggle"><span class="bar"></span><span class="bar"></span><span class="bar"></span></button>
   </div>
 </nav>
 
-<!-- HOME / HERO -->
+<!-- HOME -->
 <div id="homeView" class="page-view active">
   <section id="home">
     <div class="hero-left">
@@ -682,12 +342,8 @@
     <div class="hero-right">
       <div class="hero-visual">
         <div class="hero-images">
-          <div class="hero-img-wrapper reveal">
-            <img src="https://thumbor.comeup.com/U6dX1aImg9R2R5YX1GFu8ZnLOq8=/fit-in/760x427/filters:quality(90):no_upscale()/uploads/media/picture/2026-04-28/bef5cb1c-2511e79e-27d9-4351-9f43-850dfc904e04-69f0cb54a3a6b.png" alt="Miniature YouTube">
-          </div>
-          <div class="hero-img-wrapper reveal reveal-delay-2">
-            <img src="https://thumbor.comeup.com/SpomXDlKdqFiUEDx9FuB8smE3w4=/fit-in/760x427/filters:quality(90):no_upscale()/uploads/media/picture/2026-05-26/2b6bf03f-Swello-6a155622cc9cc.png" alt="Boost Audience YouTube">
-          </div>
+          <div class="hero-img-wrapper reveal"> <img src="https://thumbor.comeup.com/U6dX1aImg9R2R5YX1GFu8ZnLOq8=/fit-in/760x427/filters:quality(90):no_upscale()/uploads/media/picture/2026-04-28/bef5cb1c-2511e79e-27d9-4351-9f43-850dfc904e04-69f0cb54a3a6b.png" alt="Miniature YouTube"> </div>
+          <div class="hero-img-wrapper reveal reveal-delay-2"> <img src="https://thumbor.comeup.com/SpomXDlKdqFiUEDx9FuB8smE3w4=/fit-in/760x427/filters:quality(90):no_upscale()/uploads/media/picture/2026-05-26/2b6bf03f-Swello-6a155622cc9cc.png" alt="Boost Audience YouTube"> </div>
         </div>
       </div>
       <div class="gold-line"></div>
@@ -723,568 +379,117 @@
   </section>
 </div>
 
-<!-- COMPTES -->
+<!-- MARKETPLACE (COMPTES) -->
 <div id="comptesView" class="page-view">
   <section id="comptes" style="padding-top: 160px;">
     <div class="section-tag reveal">Marketplace</div>
-    <h2 class="reveal reveal-delay-1">Marketplace <em>Premium</em>.</h2>
-    <p class="reveal reveal-delay-2" style="color:var(--grey); margin-top:20px; max-width:600px;">Services digitaux et comptes monétisés pour propulser votre business en ligne. Qualité CaplanGold garantie.</p>
+    <h2 class="reveal reveal-delay-1">Services <em>Digitaux</em>.</h2>
+    <p class="reveal reveal-delay-2" style="color:var(--grey); margin-top:20px; max-width:600px;">Des solutions professionnelles pour propulser votre business.</p>
 
-    <!-- Comptes Monétisés -->
-    <h3 class="reveal" style="margin-top:60px; font-family:'Playfair Display',serif; color:var(--gold); border-bottom:1px solid var(--border-gold); padding-bottom:10px;">📱 Comptes Monétisés</h3>
+    <h3 class="reveal" style="margin-top:60px; font-family:'Playfair Display',serif; color:var(--gold); border-bottom:1px solid var(--border-gold); padding-bottom:10px;">📱 Montage Vidéo & UGC</h3>
     <div class="grid-premium">
-      <div class="card-premium reveal">
-        <div class="icon">🎵</div>
-        <h3>Compte TikTok</h3>
-        <ul class="details">
-          <li>Vendeur: CaplanGold</li>
-          <li>+10K abonnés réels</li>
-          <li>Creator Fund activé</li>
-        </ul>
-        <span class="price-tag">5 000 <span>FCFA</span></span>
-        <button class="btn-card" onclick="orderProduct('Compte TikTok', '5 000 FCFA')">Commander</button>
-      </div>
-
-      <div class="card-premium reveal reveal-delay-1">
-        <div class="icon">📸</div>
-        <h3>Compte Instagram</h3>
-        <ul class="details">
-          <li>Vendeur: CaplanGold</li>
-          <li>+10K abonnés</li>
-          <li>Badges Live activés</li>
-        </ul>
-        <span class="price-tag">5 000 <span>FCFA</span></span>
-        <button class="btn-card" onclick="orderProduct('Compte Instagram', '5 000 FCFA')">Commander</button>
-      </div>
-
-      <div class="card-premium reveal reveal-delay-2">
-        <div class="icon">▶️</div>
-        <h3>Chaîne YouTube</h3>
-        <ul class="details">
-          <li>Vendeur: CaplanGold</li>
-          <li>+1K abonnés</li>
-          <li>Prêt pour AdSense</li>
-        </ul>
-        <span class="price-tag">5 000 <span>FCFA</span></span>
-        <button class="btn-card" onclick="orderProduct('Chaîne YouTube', '5 000 FCFA')">Commander</button>
-      </div>
-
-      <div class="card-premium reveal reveal-delay-3">
-        <div class="icon">📘</div>
-        <h3>Page Facebook</h3>
-        <ul class="details">
-          <li>Vendeur: CaplanGold</li>
-          <li>+10K fans</li>
-          <li>In-Stream Ads prêts</li>
-        </ul>
-        <span class="price-tag">4 000 <span>FCFA</span></span>
-        <button class="btn-card" onclick="orderProduct('Page Facebook Monétisée', '4 000 FCFA')">Commander</button>
-      </div>
+      <div class="card-premium reveal"><h3>Montage Reels/TikTok</h3><span class="price-tag">3 500 <span>FCFA</span></span><button class="btn-card" onclick="orderProduct('Montage Reels', '3 500 FCFA')">Commander</button></div>
+      <div class="card-premium reveal"><h3>Montage ADS/VSL</h3><span class="price-tag">5 000 <span>FCFA</span></span><button class="btn-card" onclick="orderProduct('Montage ADS', '5 000 FCFA')">Commander</button></div>
+      <div class="card-premium reveal"><h3>Publicité UGC</h3><span class="price-tag">4 000 <span>FCFA</span></span><button class="btn-card" onclick="orderProduct('UGC', '4 000 FCFA')">Commander</button></div>
     </div>
 
-    <!-- Montage Vidéo -->
-    <h3 class="reveal" style="margin-top:60px; font-family:'Playfair Display',serif; color:var(--gold); border-bottom:1px solid var(--border-gold); padding-bottom:10px;">🎬 Montage Vidéo</h3>
+    <h3 class="reveal" style="margin-top:40px; font-family:'Playfair Display',serif; color:var(--gold); border-bottom:1px solid var(--border-gold); padding-bottom:10px;">📈 SEO & Web</h3>
     <div class="grid-premium">
-      <div class="card-premium reveal">
-        <div class="icon">📱</div>
-        <h3>Montage Reels/TikTok</h3>
-        <ul class="details">
-          <li>Vendeur: CaplanGold</li>
-          <li>Note: ⭐ 5,0 (139)</li>
-          <li>Format optimisé mobile</li>
-        </ul>
-        <span class="price-tag">5 000 <span>FCFA</span></span>
-        <button class="btn-card" onclick="orderProduct('Montage Reels/TikTok/Shorts', '5 000 FCFA')">Commander</button>
-      </div>
-      <div class="card-premium reveal">
-        <div class="icon">📢</div>
-        <h3>Montage ADS/VSL</h3>
-        <ul class="details">
-          <li>Vendeur: CaplanGold</li>
-          <li>Note: ⭐ 4,9 (162)</li>
-          <li>Vidéos de vente à haute conversion</li>
-        </ul>
-        <span class="price-tag">5 000 <span>FCFA</span></span>
-        <button class="btn-card" onclick="orderProduct('Montage ADS/VSL', '5 000 FCFA')">Commander</button>
-      </div>
-      <div class="card-premium reveal">
-        <div class="icon">🎥</div>
-        <h3>Montage Pro</h3>
-        <ul class="details">
-          <li>Vendeur: CaplanGold</li>
-          <li>Note: ⭐ 5,0 (733)</li>
-          <li>Édition haute performance</li>
-        </ul>
-        <span class="price-tag">5 000 <span>FCFA</span></span>
-        <button class="btn-card" onclick="orderProduct('Montage vidéo professionnel', '5 000 FCFA')">Commander</button>
-      </div>
-      <div class="card-premium reveal">
-        <div class="icon">🎞️</div>
-        <h3>Montage Générique</h3>
-        <ul class="details">
-          <li>Vendeur: CaplanGold</li>
-          <li>Note: ⭐ 5,0 (428)</li>
-          <li>Qualité Oxame / CaplanGold</li>
-        </ul>
-        <span class="price-tag">5 000 <span>FCFA</span></span>
-        <button class="btn-card" onclick="orderProduct('Montage vidéo générique', '5 000 FCFA')">Commander</button>
-      </div>
+      <div class="card-premium reveal"><h3>Backlinks SEO</h3><span class="price-tag">3 000 <span>FCFA</span></span><button class="btn-card" onclick="orderProduct('Backlinks SEO', '3 000 FCFA')">Commander</button></div>
+      <div class="card-premium reveal"><h3>Optimisation Site</h3><span class="price-tag">4 500 <span>FCFA</span></span><button class="btn-card" onclick="orderProduct('Optimisation Site', '4 500 FCFA')">Commander</button></div>
+      <div class="card-premium reveal"><h3>Tunnel Systeme.io</h3><span class="price-tag">5 000 <span>FCFA</span></span><button class="btn-card" onclick="orderProduct('Tunnel Vente', '5 000 FCFA')">Commander</button></div>
     </div>
 
-    <!-- SEO & Référencement -->
-    <h3 class="reveal" style="margin-top:60px; font-family:'Playfair Display',serif; color:var(--gold); border-bottom:1px solid var(--border-gold); padding-bottom:10px;">📈 SEO & Référencement</h3>
+    <h3 class="reveal" style="margin-top:40px; font-family:'Playfair Display',serif; color:var(--gold); border-bottom:1px solid var(--border-gold); padding-bottom:10px;">👤 Comptes & RH</h3>
     <div class="grid-premium">
-      <div class="card-premium reveal">
-        <div class="icon">🔗</div>
-        <h3>Backlinks SEO</h3>
-        <ul class="details">
-          <li>Vendeur: CaplanGold</li>
-          <li>Note: ⭐ 5,0 (5,8k)</li>
-          <li>Améliorer votre autorité</li>
-        </ul>
-        <span class="price-tag">3 500 <span>FCFA</span></span>
-        <button class="btn-card" onclick="orderProduct('Backlinks SEO', '3 500 FCFA')">Commander</button>
-      </div>
-      <div class="card-premium reveal">
-        <div class="icon">🔍</div>
-        <h3>Optimisation Site</h3>
-        <ul class="details">
-          <li>Vendeur: CaplanGold</li>
-          <li>Note: ⭐ 5,0 (1,9k)</li>
-          <li>Audit & Optimisation technique</li>
-        </ul>
-        <span class="price-tag">3 500 <span>FCFA</span></span>
-        <button class="btn-card" onclick="orderProduct('Optimisation SEO site', '3 500 FCFA')">Commander</button>
-      </div>
-      <div class="card-premium reveal">
-        <div class="icon">🚀</div>
-        <h3>Classement Google</h3>
-        <ul class="details">
-          <li>Vendeur: CaplanGold</li>
-          <li>Note: ⭐ 4,9 (575)</li>
-          <li>Faire grimper votre site</li>
-        </ul>
-        <span class="price-tag">3 500 <span>FCFA</span></span>
-        <button class="btn-card" onclick="orderProduct('SEO Google', '3 500 FCFA')">Commander</button>
-      </div>
-      <div class="card-premium reveal">
-        <div class="icon">💎</div>
-        <h3>Backlink DA 50+</h3>
-        <ul class="details">
-          <li>Vendeur: CaplanGold</li>
-          <li>Note: ⭐ 5,0 (598)</li>
-          <li>Booster SEO haute qualité</li>
-        </ul>
-        <span class="price-tag">5 000 <span>FCFA</span></span>
-        <button class="btn-card" onclick="orderProduct('Backlink DA 50', '5 000 FCFA')">Commander</button>
-      </div>
-      <div class="card-premium reveal">
-        <div class="icon">🇫🇷</div>
-        <h3>Backlinks FR</h3>
-        <ul class="details">
-          <li>Vendeur: CaplanGold</li>
-          <li>Note: ⭐ 5,0 (192)</li>
-          <li>Manuellement posés</li>
-        </ul>
-        <span class="price-tag">4 500 <span>FCFA</span></span>
-        <button class="btn-card" onclick="orderProduct('Backlinks SEO FR', '4 500 FCFA')">Commander</button>
-      </div>
-    </div>
-
-    <!-- Publicité & Ads -->
-    <h3 class="reveal" style="margin-top:60px; font-family:'Playfair Display',serif; color:var(--gold); border-bottom:1px solid var(--border-gold); padding-bottom:10px;">📣 Publicité & Ads</h3>
-    <div class="grid-premium">
-      <div class="card-premium reveal">
-        <div class="icon">👥</div>
-        <h3>Facebook Ads</h3>
-        <ul class="details">
-          <li>Vendeur: CaplanGold</li>
-          <li>Note: ⭐ 5,0 (24)</li>
-          <li>Création de campagnes</li>
-        </ul>
-        <span class="price-tag">5 000 <span>FCFA</span></span>
-        <button class="btn-card" onclick="orderProduct('Campagnes Facebook Ads', '5 000 FCFA')">Commander</button>
-      </div>
-      <div class="card-premium reveal">
-        <div class="icon">🎯</div>
-        <h3>Google Ads Pro</h3>
-        <ul class="details">
-          <li>Vendeur: CaplanGold</li>
-          <li>Note: ⭐ 5,0 (873)</li>
-          <li>Optimisation de campagnes</li>
-        </ul>
-        <span class="price-tag">5 000 <span>FCFA</span></span>
-        <button class="btn-card" onclick="orderProduct('Optimisation Google Ads', '5 000 FCFA')">Commander</button>
-      </div>
-      <div class="card-premium reveal">
-        <div class="icon">⚙️</div>
-        <h3>Gestion Google Ads</h3>
-        <ul class="details">
-          <li>Vendeur: CaplanGold</li>
-          <li>Note: ⭐ 4,9 (180)</li>
-          <li>Création et gestion complète</li>
-        </ul>
-        <span class="price-tag">4 000 <span>FCFA</span></span>
-        <button class="btn-card" onclick="orderProduct('Gestion Google Ads', '4 000 FCFA')">Commander</button>
-      </div>
-      <div class="card-premium reveal">
-        <div class="icon">💳</div>
-        <h3>Comptes Publicitaires</h3>
-        <ul class="details">
-          <li>Vendeur: CaplanGold</li>
-          <li>Note: ⭐ 5,0 (8)</li>
-          <li>FB/Insta/TikTok/Snap</li>
-        </ul>
-        <span class="price-tag">3 500 <span>FCFA</span></span>
-        <button class="btn-card" onclick="orderProduct('Compte publicitaire multi-plateforme', '3 500 FCFA')">Commander</button>
-      </div>
-    </div>
-
-    <!-- Site Web & E-commerce -->
-    <h3 class="reveal" style="margin-top:60px; font-family:'Playfair Display',serif; color:var(--gold); border-bottom:1px solid var(--border-gold); padding-bottom:10px;">🖥️ Site Web & E-commerce</h3>
-    <div class="grid-premium">
-      <div class="card-premium reveal">
-        <div class="icon">🌪️</div>
-        <h3>Tunnel Systeme.io</h3>
-        <ul class="details">
-          <li>Vendeur: CaplanGold</li>
-          <li>Note: ⭐ 5,0 (137)</li>
-          <li>Création tunnel de vente</li>
-        </ul>
-        <span class="price-tag">5 000 <span>FCFA</span></span>
-        <button class="btn-card" onclick="orderProduct('Tunnel de vente Systeme.io', '5 000 FCFA')">Commander</button>
-      </div>
-      <div class="card-premium reveal">
-        <div class="icon">📈</div>
-        <h3>Conversion E-com</h3>
-        <ul class="details">
-          <li>Vendeur: CaplanGold</li>
-          <li>Note: ⭐ 4,8 (31)</li>
-          <li>Tunnel haute performance</li>
-        </ul>
-        <span class="price-tag">5 000 <span>FCFA</span></span>
-        <button class="btn-card" onclick="orderProduct('Tunnel de vente Systeme.io v2', '5 000 FCFA')">Commander</button>
-      </div>
-    </div>
-
-    <!-- Réseaux Sociaux & Community -->
-    <h3 class="reveal" style="margin-top:60px; font-family:'Playfair Display',serif; color:var(--gold); border-bottom:1px solid var(--border-gold); padding-bottom:10px;">📱 Réseaux Sociaux & Community</h3>
-    <div class="grid-premium">
-      <div class="card-premium reveal">
-        <div class="icon">👤</div>
-        <h3>CM Personnel</h3>
-        <ul class="details">
-          <li>Vendeur: CaplanGold</li>
-          <li>Note: ⭐ 4,9 (950)</li>
-          <li>Gestion quotidienne réseaux</li>
-        </ul>
-        <span class="price-tag">5 000 <span>FCFA</span></span>
-        <button class="btn-card" onclick="orderProduct('Community Manager personnel', '5 000 FCFA')">Commander</button>
-      </div>
-      <div class="card-premium reveal">
-        <div class="icon">🤳</div>
-        <h3>Publicité UGC</h3>
-        <ul class="details">
-          <li>Vendeur: CaplanGold</li>
-          <li>Note: ⭐ 5,0 (486)</li>
-          <li>Micro-trottoir ou POV</li>
-        </ul>
-        <span class="price-tag">3 500 <span>FCFA</span></span>
-        <button class="btn-card" onclick="orderProduct('Publicité UGC', '3 500 FCFA')">Commander</button>
-      </div>
-      <div class="card-premium reveal">
-        <div class="icon">🛍️</div>
-        <h3>Vidéo Produits</h3>
-        <ul class="details">
-          <li>Vendeur: CaplanGold</li>
-          <li>Note: ⭐ 5,0 (277)</li>
-          <li>Promotion services/produits</li>
-        </ul>
-        <span class="price-tag">5 000 <span>FCFA</span></span>
-        <button class="btn-card" onclick="orderProduct('Publicité vidéo produits', '5 000 FCFA')">Commander</button>
-      </div>
-    </div>
-
-    <!-- Rédaction & Contenu -->
-    <h3 class="reveal" style="margin-top:60px; font-family:'Playfair Display',serif; color:var(--gold); border-bottom:1px solid var(--border-gold); padding-bottom:10px;">📄 Rédaction & Contenu</h3>
-    <div class="grid-premium">
-      <div class="card-premium reveal">
-        <div class="icon">📧</div>
-        <h3>Emails Klaviyo</h3>
-        <ul class="details">
-          <li>Vendeur: CaplanGold</li>
-          <li>Note: ⭐ 5,0 (8)</li>
-          <li>Rédaction séquences mails</li>
-        </ul>
-        <span class="price-tag">4 500 <span>FCFA</span></span>
-        <button class="btn-card" onclick="orderProduct('Séquences emails Klaviyo', '4 500 FCFA')">Commander</button>
-      </div>
-    </div>
-
-    <!-- Business & RH -->
-    <h3 class="reveal" style="margin-top:60px; font-family:'Playfair Display',serif; color:var(--gold); border-bottom:1px solid var(--border-gold); padding-bottom:10px;">💼 Business & RH</h3>
-    <div class="grid-premium">
-      <div class="card-premium reveal">
-        <div class="icon">📄</div>
-        <h3>CV Compatible ATS</h3>
-        <ul class="details">
-          <li>Vendeur: CaplanGold</li>
-          <li>Note: ⭐ 4,9 (878)</li>
-          <li>Optimisation pour recrutement</li>
-        </ul>
-        <span class="price-tag">4 000 <span>FCFA</span></span>
-        <button class="btn-card" onclick="orderProduct('CV compatible ATS', '4 000 FCFA')">Commander</button>
-      </div>
-      <div class="card-premium reveal">
-        <div class="icon">✍️</div>
-        <h3>Reformulation CV</h3>
-        <ul class="details">
-          <li>Vendeur: CaplanGold</li>
-          <li>Note: ⭐ 5,0 (175)</li>
-          <li>Passage filtres ATS</li>
-        </ul>
-        <span class="price-tag">4 000 <span>FCFA</span></span>
-        <button class="btn-card" onclick="orderProduct('Reformulation CV ATS', '4 000 FCFA')">Commander</button>
-      </div>
-      <div class="card-premium reveal">
-        <div class="icon">🎧</div>
-        <h3>SAV & Clientèle</h3>
-        <ul class="details">
-          <li>Vendeur: CaplanGold</li>
-          <li>Note: ⭐ 5,0 (613)</li>
-          <li>Gestion service client</li>
-        </ul>
-        <span class="price-tag">3 500 <span>FCFA</span></span>
-        <button class="btn-card" onclick="orderProduct('Gestion SAV/Service client', '3 500 FCFA')">Commander</button>
-      </div>
-      <div class="card-premium reveal">
-        <div class="icon">🤖</div>
-        <h3>Automatisation IA</h3>
-        <ul class="details">
-          <li>Vendeur: CaplanGold</li>
-          <li>Note: ⭐ 5,0 (79)</li>
-          <li>Optimisation flux business</li>
-        </ul>
-        <span class="price-tag">5 000 <span>FCFA</span></span>
-        <button class="btn-card" onclick="orderProduct('Automatisation IA Business', '5 000 FCFA')">Commander</button>
-      </div>
+      <div class="card-premium reveal"><h3>Comptes Publicitaires</h3><span class="price-tag">3 500 <span>FCFA</span></span><button class="btn-card" onclick="orderProduct('Compte Pub', '3 500 FCFA')">Commander</button></div>
+      <div class="card-premium reveal"><h3>CV Compatible ATS</h3><span class="price-tag">2 500 <span>FCFA</span></span><button class="btn-card" onclick="orderProduct('CV ATS', '2 500 FCFA')">Commander</button></div>
+      <div class="card-premium reveal"><h3>Automatisation IA</h3><span class="price-tag">5 000 <span>FCFA</span></span><button class="btn-card" onclick="orderProduct('Auto IA', '5 000 FCFA')">Commander</button></div>
     </div>
   </section>
 </div>
 
-<!-- FORMATIONS -->
+<!-- ACADEMIE (FORMATIONS) -->
 <div id="formationsView" class="page-view">
   <section id="formations" style="padding-top: 160px;">
     <div class="section-tag reveal">Académie</div>
     <h2 class="reveal reveal-delay-1">Nos <em>Formations</em>.</h2>
-    <p class="reveal reveal-delay-2" style="color:var(--grey); margin-top:20px; max-width:600px;">Apprenez les secrets des experts pour maîtriser les algorithmes et monétiser votre présence en ligne.</p>
+    <p class="reveal reveal-delay-2" style="color:var(--grey); margin-top:20px; max-width:600px;">Maîtrisez les algorithmes et monétisez votre présence en ligne.</p>
 
     <div class="grid-premium">
-      <!-- TikTok -->
-      <div class="card-premium reveal">
-        <div class="icon">🎓</div>
-        <h3>Formation TikTok</h3>
-        <ul class="details">
-          <li>Maîtrise de l'algorithme</li>
-          <li>Choix de niche rentable</li>
-          <li>Stratégies de monétisation</li>
-        </ul>
-        <span class="price-tag">2 500 <span>FCFA</span></span>
-        <button class="btn-card" onclick="orderProduct('Formation TikTok', '2 500 FCFA')">Commander</button>
-      </div>
-
-      <!-- Instagram -->
-      <div class="card-premium reveal reveal-delay-1">
-        <div class="icon">🎓</div>
-        <h3>Formation Instagram</h3>
-        <ul class="details">
-          <li>Création de Reels viraux</li>
-          <li>Exploitation des Badges</li>
-          <li>Collaborations marques</li>
-        </ul>
-        <span class="price-tag">2 500 <span>FCFA</span></span>
-        <button class="btn-card" onclick="orderProduct('Formation Instagram', '2 500 FCFA')">Commander</button>
-      </div>
-
-      <!-- YouTube -->
-      <div class="card-premium reveal reveal-delay-2">
-        <div class="icon">🎓</div>
-        <h3>YouTube & AdSense</h3>
-        <ul class="details">
-          <li>SEO YouTube avancé</li>
-          <li>Atteindre les 1K abonnés</li>
-          <li>Optimisation AdSense</li>
-        </ul>
-        <span class="price-tag">3 000 <span>FCFA</span></span>
-        <button class="btn-card" onclick="orderProduct('Formation YouTube & AdSense', '3 000 FCFA')">Commander</button>
-      </div>
-
-      <!-- CM -->
-      <div class="card-premium reveal reveal-delay-3">
-        <div class="icon">🎓</div>
-        <h3>Community Manager</h3>
-        <ul class="details">
-          <li>Trouver ses clients</li>
-          <li>Fixer ses tarifs</li>
-          <li>Templates de reporting</li>
-        </ul>
-        <span class="price-tag">3 500 <span>FCFA</span></span>
-        <button class="btn-card" onclick="orderProduct('Formation Community Manager', '3 500 FCFA')">Commander</button>
-      </div>
-
-      <!-- Pack Éligibilité Pays -->
-      <div class="card-premium reveal">
-        <div class="icon">🌍</div>
-        <h3>Pack Éligibilité Pays</h3>
-        <p style="font-size:0.85rem; color:var(--grey); margin-bottom:20px; line-height:1.5;">Guide pas-à-pas pour créer des comptes TikTok/Facebook/Instagram 100% éligibles à la monétisation depuis l'Afrique (sans blocage).</p>
-        <span class="price-tag">2 500 <span>FCFA</span></span>
-        <button class="btn-card" onclick="orderProduct('Pack Éligibilité Pays', '2 500 FCFA')">Commander</button>
-      </div>
-
-      <!-- Pack Visibilité & Audience -->
-      <div class="card-premium reveal">
-        <div class="icon">📈</div>
-        <h3>Pack Visibilité & Audience</h3>
-        <p style="font-size:0.85rem; color:var(--grey); margin-bottom:20px; line-height:1.5;">Les méthodes et astuces pour booster l'algorithme, faire ses premiers milliers de vues et atteindre les critères requis.</p>
-        <span class="price-tag">2 500 <span>FCFA</span></span>
-        <button class="btn-card" onclick="orderProduct('Pack Visibilité & Audience', '2 500 FCFA')">Commander</button>
-      </div>
-
-      <!-- Masterclass Automatisation IA -->
-      <div class="card-premium reveal">
-        <div class="icon">🤖</div>
-        <h3>Masterclass Automatisation IA</h3>
-        <p style="font-size:0.85rem; color:var(--grey); margin-bottom:20px; line-height:1.5;">Vidéo pratique + Prompts Masters pour générer des scripts et des vidéos en masse en quelques clics.</p>
-        <span class="price-tag">2 500 <span>FCFA</span></span>
-        <button class="btn-card" onclick="orderProduct('Masterclass Automatisation IA', '2 500 FCFA')">Commander</button>
-      </div>
-
-      <!-- Guide Montage CapCut Pro -->
-      <div class="card-premium reveal">
-        <div class="icon">✂️</div>
-        <h3>Guide Montage CapCut Pro</h3>
-        <p style="font-size:0.85rem; color:var(--grey); margin-bottom:20px; line-height:1.5;">Formation vidéo (PC/Mobile) pour maîtriser le montage court (TikTok/Reels), ajouter des sous-titres dynamiques et maximiser la rétention.</p>
-        <span class="price-tag">2 500 <span>FCFA</span></span>
-        <button class="btn-card" onclick="orderProduct('Guide Montage CapCut Pro', '2 500 FCFA')">Commander</button>
-      </div>
-
-      <!-- Pack Expert 4-en-1 -->
-      <div class="card-premium reveal" style="grid-column: 1 / -1; border-color: var(--gold); background: rgba(201,168,76,0.05);">
-        <div style="display:flex; justify-content:space-between; align-items:start;">
-          <div>
-            <div class="icon">🚀</div>
-            <h3>Pack Expert 4-en-1</h3>
-            <ul class="details" style="display:grid; grid-template-columns:1fr 1fr; gap:10px 20px;">
-              <li>Toutes les formations incluses</li>
-              <li>Accès au Groupe VIP</li>
-              <li>Séances de Coaching offertes</li>
-              <li>Mises à jour à vie</li>
-            </ul>
-          </div>
-          <div style="text-align:right;">
-            <span style="text-decoration:line-through; color:var(--grey); font-size:1rem;">11 000 FCFA</span>
-            <span class="price-tag" style="font-size:3rem; margin-top:10px;">5 000 <span>FCFA</span></span>
-            <button class="btn-card" style="background:var(--gold); color:#000;" onclick="orderProduct('Pack Expert 4-en-1', '5 000 FCFA')">Saisir l'offre</button>
-          </div>
-        </div>
-      </div>
-
-      <!-- OFFRE COMBO EMPIRE -->
-      <div class="card-premium reveal" style="grid-column: 1 / -1; border-color: var(--gold); background: rgba(201,168,76,0.1);">
-        <div style="display:flex; justify-content:space-between; align-items:start;">
-          <div>
-            <div class="icon">👑</div>
-            <h3>OFFRE COMBO EMPIRE (Le Tout)</h3>
-            <p style="font-size:0.85rem; color:var(--grey); margin-top:10px; max-width:500px; line-height:1.5;">L'offre ultime : Les 4 modules ci-dessus + un accès à votre canal ou groupe WhatsApp de soutien.</p>
-          </div>
-          <div style="text-align:right;">
-            <span style="text-decoration:line-through; color:var(--grey); font-size:1rem;">10 000 FCFA</span>
-            <span class="price-tag" style="font-size:3rem; margin-top:10px;">3 000 <span>FCFA</span></span>
-            <button class="btn-card" style="background:var(--gold); color:#000;" onclick="orderProduct('OFFRE COMBO EMPIRE', '3 000 FCFA')">Saisir l'offre</button>
-          </div>
-        </div>
-      </div>
+      <div class="card-premium reveal"><h3>Pack Éligibilité Pays</h3><span class="price-tag">2 500 <span>FCFA</span></span><button class="btn-card" onclick="orderProduct('Pack Éligibilité', '2 500 FCFA')">Commander</button></div>
+      <div class="card-premium reveal"><h3>Pack Visibilité Audience</h3><span class="price-tag">3 000 <span>FCFA</span></span><button class="btn-card" onclick="orderProduct('Pack Visibilité', '3 000 FCFA')">Commander</button></div>
+      <div class="card-premium reveal"><h3>Masterclass Auto IA</h3><span class="price-tag">4 000 <span>FCFA</span></span><button class="btn-card" onclick="orderProduct('Masterclass IA', '4 000 FCFA')">Commander</button></div>
+      <div class="card-premium reveal"><h3>Guide Montage CapCut</h3><span class="price-tag">2 500 <span>FCFA</span></span><button class="btn-card" onclick="orderProduct('Guide CapCut', '2 500 FCFA')">Commander</button></div>
     </div>
   </section>
 </div>
 
-<!-- SERVICES -->
+<!-- SERVICES (QUOTE GEN + COINS) -->
 <div id="servicesView" class="page-view">
   <section id="services" style="padding-top: 160px;">
     <div class="section-tag reveal">Marketing Digital</div>
     <h2 class="reveal reveal-delay-1">Générateur de <em>Devis</em>.</h2>
-    <p class="reveal reveal-delay-2" style="color:var(--grey); margin-top:20px; max-width:600px;">Simulez votre budget marketing pour les réseaux sociaux en quelques clics.</p>
+    <p class="reveal reveal-delay-2" style="color:var(--grey); margin-top:20px;">Simulez votre budget marketing pour les réseaux sociaux.</p>
 
-    <div id="quoteGenerator" class="reveal reveal-delay-3" style="margin-top:60px;">
-      <div class="quote-container">
-        <!-- Forms -->
-        <div>
-          <div class="quote-step">
-            <div class="quote-step-title"><span>1</span> Plateformes</div>
-            <div class="quote-options" id="platformOpts">
-              <div class="quote-opt" data-id="fb" data-price="2500">Facebook</div>
-              <div class="quote-opt" data-id="ig" data-price="2500">Instagram</div>
-              <div class="quote-opt" data-id="tk" data-price="3000">TikTok</div>
-              <div class="quote-opt" data-id="li" data-price="4000">LinkedIn</div>
-            </div>
-          </div>
-
-          <div class="quote-step">
-            <div class="quote-step-title"><span>2</span> Services</div>
-            <div class="quote-options" id="serviceOpts">
-              <div class="quote-opt" data-id="content" data-price="5000">Création de Contenu</div>
-              <div class="quote-opt" data-id="cm" data-price="4000">Community Management</div>
-              <div class="quote-opt" data-id="ads" data-price="4500">Gestion Publicitaire (Ads)</div>
-            </div>
-          </div>
-
-          <div class="quote-step">
-            <div class="quote-step-title"><span>3</span> Volume / Durée</div>
-            <div style="display:grid; grid-template-columns: 1fr 1fr; gap: 20px;">
-              <div class="field-group">
-                <label class="field-label">Nombre de posts</label>
-                <input type="number" id="postQty" class="field-input" value="1" min="1">
-              </div>
-              <div class="field-group">
-                <label class="field-label">Durée (Mois)</label>
-                <input type="number" id="durationQty" class="field-input" value="1" min="1">
-              </div>
-            </div>
+    <div class="quote-container reveal" style="margin-top:60px;">
+      <div>
+        <div class="quote-step">
+          <div class="quote-step-title"><span>1</span> Plateformes</div>
+          <div class="quote-options" id="platformOpts">
+            <div class="quote-opt" data-id="fb" data-price="1000">Facebook</div>
+            <div class="quote-opt" data-id="ig" data-price="1000">Instagram</div>
+            <div class="quote-opt" data-id="tk" data-price="1500">TikTok</div>
+            <div class="quote-opt" data-id="li" data-price="2000">LinkedIn</div>
           </div>
         </div>
-
-        <!-- Summary -->
-        <div class="quote-summary">
-          <h3 style="font-family:'Playfair Display',serif; margin-bottom: 20px;">Récapitulatif</h3>
-          <div id="summaryItems">
-            <!-- Dynamic items -->
-            <p style="color:var(--grey); font-size: 0.8rem; font-style: italic;">Sélectionnez des options pour générer le devis...</p>
+        <div class="quote-step">
+          <div class="quote-step-title"><span>2</span> Services</div>
+          <div class="quote-options" id="serviceOpts">
+            <div class="quote-opt" data-id="content" data-price="3000">Création de Contenu</div>
+            <div class="quote-opt" data-id="cm" data-price="2000">Community Management</div>
+            <div class="quote-opt" data-id="ads" data-price="2500">Gestion Publicitaire (Ads)</div>
           </div>
-
-          <div class="summary-total">
-            <span class="total-label">Estimation Totale</span>
-            <span class="total-price" id="quoteTotalPrice">0 FCFA</span>
+        </div>
+        <div class="quote-step">
+          <div class="quote-step-title"><span>3</span> Volume</div>
+          <div style="display:grid; grid-template-columns: 1fr 1fr; gap: 20px;">
+            <div class="field-group"><label class="field-label">Posts</label><input type="number" id="postQty" class="field-input" value="1" min="1"></div>
+            <div class="field-group"><label class="field-label">Mois</label><input type="number" id="durationQty" class="field-input" value="1" min="1"></div>
           </div>
-
-          <button class="order-btn" id="generateQuoteBtn" style="margin-top: 30px;">Commander ce Pack →</button>
         </div>
       </div>
+      <div class="quote-summary">
+        <h3 style="font-family:'Playfair Display',serif; margin-bottom: 20px;">Récapitulatif</h3>
+        <div id="summaryItems"></div>
+        <div class="summary-total"><span class="total-label">Total</span><span class="total-price" id="quoteTotalPrice">0 FCFA</span></div>
+        <button class="order-btn" id="generateQuoteBtn">Commander ce Pack →</button>
+      </div>
     </div>
-  </section>
-</div>
 
-<!-- PROCESS -->
-<div id="processView" class="page-view">
-  <section id="process">
-    <div>
-      <div class="section-tag reveal">Comment ça marche</div>
-      <h2 class="reveal reveal-delay-1">Notre<br><em>méthode</em><br>en 4 étapes.</h2>
-    </div>
-    <div class="process-steps">
-      <div class="process-step reveal"><div class="step-num">01</div><div class="step-content"><h3>Choisissez & Commandez</h3><p>Choisissez votre type de production vidéo (Short ou Long Métrage). Nos tarifs sont fixes et transparents.</p></div></div>
-      <div class="process-step reveal reveal-delay-1"><div class="step-num">02</div><div class="step-content"><h3>Brief & Validation</h3><p>Notre équipe vous contacte pour un brief détaillé gratuit et valide votre stratégie éditoriale ensemble.</p></div></div>
-      <div class="process-step reveal reveal-delay-2"><div class="step-num">03</div><div class="step-content"><h3>Production & Création</h3><p>Nos créateurs produisent vos contenus selon votre niche, vos valeurs et les tendances actuelles de chaque plateforme.</p></div></div>
-      <div class="process-step reveal reveal-delay-3"><div class="step-num">04</div><div class="step-content"><h3>Livraison & Optimisation</h3><p>Contenus livrés selon le calendrier défini, avec reporting mensuel et ajustements continus pour maximiser l'engagement.</p></div></div>
+    <!-- TIKTOK COINS -->
+    <div id="tiktokCoins" class="reveal" style="margin-top:80px;">
+      <h3 style="font-family:'Playfair Display',serif; color:var(--gold); margin-bottom:30px; border-bottom:1px solid var(--border-gold); padding-bottom:10px;">🪙 Pièces TikTok</h3>
+      <div class="grid-premium">
+        <div class="card-premium"><h3>5 Pièces</h3><span class="price-tag">2 <span>€</span></span><button class="btn-card" onclick="openCoinOrder('5 Pièces', '2 €')">Sélectionner</button></div>
+        <div class="card-premium"><h3>70 Pièces</h3><span class="price-tag">9 <span>€</span></span><button class="btn-card" onclick="openCoinOrder('70 Pièces', '9 €')">Sélectionner</button></div>
+        <div class="card-premium"><h3>350 Pièces</h3><span class="price-tag">18 <span>€</span></span><button class="btn-card" onclick="openCoinOrder('350 Pièces', '18 €')">Sélectionner</button></div>
+        <div class="card-premium"><h3>700 Pièces</h3><span class="price-tag">35 <span>€</span></span><button class="btn-card" onclick="openCoinOrder('700 Pièces', '35 €')">Sélectionner</button></div>
+        <div class="card-premium"><h3>1400 Pièces</h3><span class="price-tag">50 <span>€</span></span><button class="btn-card" onclick="openCoinOrder('1400 Pièces', '50 €')">Sélectionner</button></div>
+        <div class="card-premium"><h3>3500 Pièces</h3><span class="price-tag">75 <span>€</span></span><button class="btn-card" onclick="openCoinOrder('3500 Pièces', '75 €')">Sélectionner</button></div>
+        <div class="card-premium"><h3>7000 Pièces</h3><span class="price-tag">80 <span>€</span></span><button class="btn-card" onclick="openCoinOrder('7000 Pièces', '80 €')">Sélectionner</button></div>
+        <div class="card-premium"><h3>17500 Pièces</h3><span class="price-tag">90 <span>€</span></span><button class="btn-card" onclick="openCoinOrder('17500 Pièces', '90 €')">Sélectionner</button></div>
+      </div>
+      <!-- COIN FORM -->
+      <div id="coinOrderForm" class="configurator" style="display:none; margin-top:40px; max-width:600px; margin-left:auto; margin-right:auto;">
+        <div class="config-header"><h3 id="coinFormTitle" style="color:#000;">Commander</h3></div>
+        <div class="config-body" style="display:block; padding:40px;">
+          <div class="field-group"><label class="field-label">Nom</label><input type="text" id="coinName" class="field-input"></div>
+          <div class="field-group" style="margin-top:10px;"><label class="field-label">User TikTok</label><input type="text" id="coinUser" class="field-input"></div>
+          <div class="field-group" style="margin-top:10px;"><label class="field-label">WhatsApp</label><input type="text" id="coinWhatsapp" class="field-input"></div>
+          <button class="order-btn" onclick="submitCoinOrder()">Confirmer →</button>
+        </div>
+      </div>
     </div>
   </section>
 </div>
@@ -1293,25 +498,12 @@
 <div id="leofarmeView" class="page-view">
   <section id="leofarme" style="padding-top: 160px;">
     <div class="section-tag reveal">Service Gratuit</div>
-    <h2 class="reveal reveal-delay-1">Essai gratuit de <em>vues TikTok</em></h2>
-    <p class="reveal reveal-delay-2" style="color:var(--grey); margin-top:20px; max-width:600px;">
-      Obtenir des vues TikTok gratuites, Il vous suffit de nous fournir le lien de votre post TikTok, et nous ajouterons 100 De vraies vues sur votre publication gratuitement. Pas d'obligations, pas de carte de crédit ni d'informations personnelles requises.
-    </p>
-    <p class="reveal reveal-delay-2" style="color:var(--gold); font-size: 0.8rem; margin-top: 10px;">
-      Note: Your TikTok account must not be private.
-    </p>
-
+    <h2>Essai gratuit de <em>vues TikTok</em></h2>
+    <p style="color:var(--grey); margin-top:20px; max-width:600px;">Envoyez votre lien, recevez 100 vues gratuites toutes les 24h.</p>
     <div class="configurator reveal" style="margin-top: 40px; max-width: 600px;">
-      <div class="config-header">
-        <h3>🚀 Boost TikTok Express</h3>
-      </div>
       <div class="config-body" style="display: block; padding: 40px;">
-        <div class="field-group">
-          <label class="field-label">Lien du post TikTok <span>*</span></label>
-          <input type="text" id="tiktokLink" class="field-input" placeholder="https://vm.tiktok.com/TMYUVDcHs">
-        </div>
-        <button class="order-btn" style="margin-top: 30px;" onclick="orderFreeViews()">Obtenez des vues gratuites</button>
-        <p class="config-notice" style="margin-top: 20px;">Commande dès l’instant, gratuite toutes les 24 heures.</p>
+        <div class="field-group"><label class="field-label">Lien TikTok</label><input type="text" id="tiktokLink" class="field-input"></div>
+        <button class="order-btn" onclick="orderFreeViews()">Obtenir mes vues</button>
       </div>
     </div>
   </section>
@@ -1320,512 +512,150 @@
 <!-- AFFILIATION -->
 <div id="affiliationView" class="page-view">
   <section id="affiliation" style="padding-top: 160px;">
-    <div class="section-tag reveal">Programme Partenaire</div>
-    <h2 class="reveal reveal-delay-1">Devenez <em>Affilié</em> CAPLAN & GOLD</h2>
-    <p class="reveal reveal-delay-2" style="color:var(--grey); margin-top:20px; max-width:600px;">
-      Gagnez des commissions sur chaque vente ! Recommandez nos produits et services à votre entourage et recevez une récompense pour chaque achat effectué par un utilisateur parrainé.
-    </p>
-
-    <div class="grid-premium" style="margin-top: 60px;">
-      <div class="card-premium reveal">
-        <div class="icon">💸</div>
-        <h3>Commissions</h3>
-        <p style="font-size:0.85rem; color:var(--grey); line-height:1.6;">Recevez un pourcentage sur chaque commande validée via votre parrainage.</p>
-      </div>
-      <div class="card-premium reveal reveal-delay-1">
-        <div class="icon">🔗</div>
-        <h3>Lien Unique</h3>
-        <p style="font-size:0.85rem; color:var(--grey); line-height:1.6;">Obtenez un identifiant unique pour suivre vos recommandations en temps réel.</p>
-      </div>
-      <div class="card-premium reveal reveal-delay-2">
-        <div class="icon">📊</div>
-        <h3>Tableau de bord</h3>
-        <p style="font-size:0.85rem; color:var(--grey); line-height:1.6;">Suivez vos gains et vos performances depuis votre espace partenaire dédié.</p>
-      </div>
+    <div class="section-tag reveal">Partenariat</div>
+    <h2>Devenez <em>Affilié</em></h2>
+    <p style="color:var(--grey); margin-top:20px; max-width:600px;">Gagnez des commissions en recommandant nos services.</p>
+    <div class="grid-premium">
+      <div class="card-premium"><h3>Commissions</h3><p>Recevez un % sur chaque vente.</p></div>
+      <div class="card-premium"><h3>Lien Unique</h3><p>Suivi en temps réel.</p></div>
+      <div class="card-premium"><h3>Support</h3><p>Assistance dédiée.</p></div>
     </div>
-
-    <div class="configurator reveal" style="margin-top: 60px; max-width: 800px; margin-left: auto; margin-right: auto;">
-      <div class="config-header">
-        <h3>🤝 Rejoindre le programme d'affiliation</h3>
-      </div>
-      <div class="config-body" style="display: block; padding: 40px; text-align: center;">
-        <p style="margin-bottom: 30px; color: var(--grey);">Inscrivez-vous dès maintenant pour commencer à générer des revenus passifs avec CAPLAN & GOLD.</p>
-        <a href="https://wa.me/2290198905311?text=Bonjour%20je%20souhaite%20devenir%20affilié%20CAPLAN%20%26%20GOLD" class="btn-primary">S'inscrire comme affilié</a>
-      </div>
-    </div>
-  </section>
-</div>
-
-<!-- TESTIMONIALS -->
-<div id="testimonialsView" class="page-view">
-  <section id="testimonials">
-    <div class="testimonials-header">
-      <div class="section-tag reveal">Témoignages</div>
-      <h2 class="reveal reveal-delay-1">Ce que disent<br>nos <em>clients</em>.</h2>
-    </div>
-    <div style="overflow:hidden;margin:0 -60px;">
-      <div class="testimonials-track">
-        <div class="testimonial-card"><div class="stars">★★★★★</div><p class="testimonial-text">CAPLAN & GOLD a transformé notre présence Instagram. En 3 mois, notre engagement a triplé et nos ventes au augmenté de 40%.</p><div class="testimonial-author"><div class="author-avatar">AL</div><div><div class="author-name">Amélie Laurent</div><div class="author-role">CEO, Maison Lumière</div></div></div></div>
-        <div class="testimonial-card"><div class="stars">★★★★★</div><p class="testimonial-text">Nos TikToks créés par CAPLAN & GOLD ont atteint 500K vues dès la première semaine. Une équipe qui connaît vraiment les algorithmes.</p><div class="testimonial-author"><div class="author-avatar">KD</div><div><div class="author-name">Kofi Diallo</div><div class="author-role">Fondateur, BrandAfrica</div></div></div></div>
-        <div class="testimonial-card"><div class="stars">★★★★★</div><p class="testimonial-text">Grâce à leurs Reels Instagram, nous avons gagné 100K abonnés en 2 mois. La qualité de production est impressionnante.</p><div class="testimonial-author"><div class="author-avatar">SF</div><div><div class="author-name">Sophie Fontaine</div><div class="author-role">Fondatrice, Belle & Bio</div></div></div></div>
-        <div class="testimonial-card"><div class="stars">★★★★★</div><p class="testimonial-text">Le meilleur investissement pour notre restaurant. Nos vidéos Facebook génèrent des réservations chaque semaine.</p><div class="testimonial-author"><div class="author-avatar">MB</div><div><div class="author-name">Marc Beaumont</div><div class="author-role">Restaurateur, Le Zinc</div></div></div></div>
-        <!-- Duplicate -->
-        <div class="testimonial-card"><div class="stars">★★★★★</div><p class="testimonial-text">CAPLAN & GOLD a transformé notre présence Instagram. En 3 mois, notre engagement a triplé et nos ventes ont augmenté de 40%.</p><div class="testimonial-author"><div class="author-avatar">AL</div><div><div class="author-name">Amélie Laurent</div><div class="author-role">CEO, Maison Lumière</div></div></div></div>
-        <div class="testimonial-card"><div class="stars">★★★★★</div><p class="testimonial-text">Nos TikToks créés par CAPLAN & GOLD ont atteint 500K vues dès la première semaine. Une équipe qui connaît vraiment les algorithmes.</p><div class="testimonial-author"><div class="author-avatar">KD</div><div><div class="author-name">Kofi Diallo</div><div class="author-role">Fondateur, BrandAfrica</div></div></div></div>
-        <div class="testimonial-card"><div class="stars">★★★★★</div><p class="testimonial-text">Grâce à leurs Reels Instagram, nous avons gagné 100K abonnés en 2 mois. La qualité de production est impressionnante.</p><div class="testimonial-author"><div class="author-avatar">SF</div><div><div class="author-name">Sophie Fontaine</div><div class="author-role">Fondatrice, Belle & Bio</div></div></div></div>
-        <div class="testimonial-card"><div class="stars">★★★★★</div><p class="testimonial-text">Le meilleur investissement pour notre restaurant. Nos vidéos Facebook génèrent des réservations chaque semaine.</p><div class="testimonial-author"><div class="author-avatar">MB</div><div><div class="author-name">Marc Beaumont</div><div class="author-role">Restaurateur, Le Zinc</div></div></div></div>
-      </div>
-    </div>
+    <div style="text-align:center; margin-top:40px;"><a href="https://wa.me/2290198905311?text=Affiliation" class="btn-primary">Rejoindre le programme</a></div>
   </section>
 </div>
 
 <!-- FOOTER -->
 <footer>
-  <div class="footer-brand">
-    <span class="logo">CAPLAN <span style="color:var(--gold)">&</span> GOLD</span>
-    <p>Agence de création de contenu pour les réseaux sociaux. TikTok, Instagram, Facebook, YouTube — votre présence, notre expertise.</p>
-  </div>
-  <div class="footer-col"><h4>Plateformes</h4><ul><li><a href="#">TikTok</a></li><li><a href="#">Instagram</a></li><li><a href="#">Facebook</a></li><li><a href="#">YouTube</a></li></ul></div>
-  <div class="footer-col"><h4>Entreprise</h4><ul><li><a href="#about">À propos</a></li><li><a href="#">Notre équipe</a></li><li><a href="#">Portfolio</a></li><li><a href="#">Carrières</a></li></ul></div>
-  <div class="footer-col"><h4>Contact</h4><ul><li><a href="mailto:rkouton243@gmail.com">rkouton243@gmail.com</a></li><li><a href="tel:+2290198905311">01 98 90 53 11</a></li><li><a href="#">Porto-Novo, Bénin</a></li></ul></div>
+  <div class="footer-brand"><span class="logo">CAPLAN <span>&</span> GOLD</span><p>Agence digitale premium au Bénin.</p></div>
+  <div class="footer-col"><h4>Contact</h4><ul><li>rkouton243@gmail.com</li><li>01 98 90 53 11</li></ul></div>
 </footer>
-<div class="footer-bottom">
-  <p>© 2024 CAPLAN & GOLD. Tous droits réservés.</p>
-  <div class="social-links">
-    <a href="#" class="social-link">in</a>
-    <a href="#" class="social-link">ig</a>
-    <a href="#" class="social-link">tk</a>
-    <a href="#" class="social-link">fb</a>
-  </div>
-</div>
 
-<!-- ORDER MODAL -->
-<div class="modal-overlay" id="modalOverlay">
-  <div class="modal">
-    <button class="modal-close" id="modalClose">×</button>
-    <div class="modal-icon">🎉</div>
-    <h3>Commande reçue !</h3>
-    <p>Merci pour votre confiance. Notre équipe vous contactera sous <strong>24h</strong> pour finaliser votre brief de contenu.</p>
-    <div class="modal-detail" id="modalDetail"></div>
-    <a href="mailto:rkouton243@gmail.com" class="btn-primary" style="display:block;text-align:center;">Nous écrire directement →</a>
-  </div>
-</div>
+<!-- MODAL -->
+<div class="modal-overlay" id="modalOverlay"><div class="modal"><button class="modal-close" id="modalClose">×</button><h3>Reçu !</h3><div class="modal-detail" id="modalDetail"></div><button class="btn-primary" onclick="document.getElementById('modalOverlay').classList.remove('open')">Fermer</button></div></div>
 
 <!-- AI WIDGET -->
 <div class="ai-widget">
   <div class="ai-chat" id="aiChat">
-    <div class="ai-chat-header">
-      <span>Assistant IA</span>
-      <div class="actions">
-        <button id="aiSettingsBtn" style="background:none;border:none;cursor:pointer;font-size:1rem;display:flex;">⚙️</button>
-        <button id="aiClose" style="background:none;border:none;cursor:pointer;font-size:1.2rem;">×</button>
-      </div>
-    </div>
+    <div class="ai-chat-header"><span>Assistant IA</span><div class="actions"><button id="aiSettingsBtn">⚙️</button><button id="aiClose">×</button></div></div>
     <div class="ai-settings-panel" id="aiSettingsPanel">
-      <div>
-        <label>Fournisseur API</label>
-        <select id="aiProvider">
-          <option value="none">Aucun (Local/Fallback)</option>
-          <option value="gemini">Google Gemini</option>
-          <option value="deepseek">DeepSeek</option>
-          <option value="ollama">Ollama (Localhost)</option>
-        </select>
-      </div>
-      <div>
-        <label>Clé API / URL Endpoint</label>
-        <input type="password" id="aiApiKey" placeholder="sk-...">
-        <p class="ai-settings-info" id="aiApiHint">Gemini: clé API. Ollama: URL (ex: http://localhost:11434/api/generate)</p>
-      </div>
-      <button class="btn-primary" id="saveAiSettings" style="font-size: 0.65rem; padding: 10px; width: 100%;">Enregistrer & Connecter</button>
+      <label>Provider</label><select id="aiProvider"><option value="none">FAQ Fallback</option><option value="gemini">Gemini</option><option value="deepseek">DeepSeek</option></select>
+      <label>Key</label><input type="password" id="aiApiKey"><button class="btn-primary" id="saveAiSettings" style="font-size:0.7rem;">Sauver</button>
     </div>
-    <div class="ai-chat-body" id="aiChatBody">
-      <div class="ai-msg bot">Bonjour ! Je suis votre assistant. Comment puis-je vous aider aujourd'hui ?</div>
-    </div>
-    <div class="ai-chat-footer">
-      <input type="text" class="ai-input" id="aiInput" placeholder="Posez une question...">
-      <button class="ai-send" id="aiSend">Envoi</button>
-    </div>
+    <div class="ai-chat-body" id="aiChatBody"><div class="ai-msg bot">Bonjour ! Comment puis-je vous aider ?</div></div>
+    <div class="ai-chat-footer"><input type="text" class="ai-input" id="aiInput"><button class="ai-send" id="aiSend">OK</button></div>
   </div>
-  <div class="ai-toggle" id="aiToggle">
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg>
-  </div>
+  <div class="ai-toggle" id="aiToggle">🤖</div>
 </div>
 
 <script>
-// ===== SPA NAVIGATION =====
+const WHATSAPP_NUMBER = "2290198905311";
 function showView(hash) {
-  const views = document.querySelectorAll('.page-view');
-  views.forEach(v => v.classList.remove('active'));
-
-  let targetId = 'homeView';
-  if (hash === '#about') targetId = 'aboutView';
-  if (hash === '#services') targetId = 'servicesView';
-  if (hash === '#comptes') targetId = 'comptesView';
-  if (hash === '#formations') targetId = 'formationsView';
-  if (hash === '#process') targetId = 'processView';
-  if (hash === '#testimonials') targetId = 'testimonialsView';
-  if (hash === '#leofarme') targetId = 'leofarmeView';
-  if (hash === '#affiliation') targetId = 'affiliationView';
-
-  const targetView = document.getElementById(targetId);
-  if (targetView) {
-    targetView.classList.add('active');
-    window.scrollTo(0, 0);
-  }
+  const views = document.querySelectorAll('.page-view'); views.forEach(v => v.classList.remove('active'));
+  let targetId = (hash.replace('#','') + 'View') || 'homeView';
+  if (!document.getElementById(targetId)) targetId = 'homeView';
+  document.getElementById(targetId).classList.add('active'); window.scrollTo(0,0);
 }
-
-window.addEventListener('hashchange', () => {
-  showView(window.location.hash);
-});
-
-// Initial load
+window.addEventListener('hashchange', () => showView(window.location.hash));
 showView(window.location.hash || '#home');
 
-// ===== MOBILE NAV =====
 const mobileNavToggle = document.getElementById('mobileNavToggle');
 const navLinks = document.getElementById('navLinks');
-const navLinksAnchors = document.querySelectorAll('.nav-links a');
+mobileNavToggle.onclick = () => navLinks.classList.toggle('active');
 
-if (mobileNavToggle && navLinks) {
-  mobileNavToggle.addEventListener('click', () => {
-    mobileNavToggle.classList.toggle('active');
-    navLinks.classList.toggle('active');
-  });
+const themeToggle = document.getElementById('themeToggle');
+themeToggle.onclick = () => {
+  document.documentElement.dataset.theme = document.documentElement.dataset.theme === 'dark' ? 'light' : 'dark';
+};
 
-  navLinksAnchors.forEach(link => {
-    link.addEventListener('click', () => {
-      mobileNavToggle.classList.remove('active');
-      navLinks.classList.remove('active');
-    });
-  });
-}
-
-// ===== THEME TOGGLE =====
-const html = document.documentElement;
-const toggle = document.getElementById('themeToggle');
-if (toggle) {
-  toggle.addEventListener('click', () => {
-    html.dataset.theme = html.dataset.theme === 'dark' ? 'light' : 'dark';
-    localStorage.setItem('cg-theme', html.dataset.theme);
-  });
-}
-const saved = localStorage.getItem('cg-theme');
-if (saved) {
-  html.dataset.theme = saved;
-} else {
-  html.dataset.theme = 'light';
-}
-
-// ===== CUSTOM CURSOR =====
-const cursor = document.getElementById('cursor');
-const ring = document.getElementById('cursorRing');
-if (cursor && ring) {
-  let mx=0,my=0,rx=0,ry=0;
-  document.addEventListener('mousemove', e => {
-    mx=e.clientX;
-    my=e.clientY;
-    cursor.style.transform=`translate(${mx-5}px,${my-5}px)`;
-  });
-  (function animateRing(){
-    rx+=(mx-rx)*0.12;
-    ry+=(my-ry)*0.12;
-    ring.style.transform=`translate(${rx-18}px,${ry-18}px)`;
-    requestAnimationFrame(animateRing);
-  })();
-  document.querySelectorAll('a,button,.chip,.content-type-card').forEach(el=>{
-    el.addEventListener('mouseenter',()=>{
-      ring.style.width='52px';
-      ring.style.height='52px';
-      ring.style.opacity='0.3';
-    });
-    el.addEventListener('mouseleave',()=>{
-      ring.style.width='36px';
-      ring.style.height='36px';
-      ring.style.opacity='0.6';
-    });
-  });
-}
-
-// ===== SCROLL REVEAL =====
-const observer = new IntersectionObserver(entries=>entries.forEach(e=>{
-  if(e.isIntersecting) e.target.classList.add('visible');
-}),{threshold:0.1});
-document.querySelectorAll('.reveal').forEach(el=>observer.observe(el));
-
-// ===== CONFIGURATOR LOGIC =====
-const WHATSAPP_NUMBER = "2290198905311";
-
-function orderProduct(name, price) {
-  const msg = `*NOUVELLE COMMANDE - CAPLAN & GOLD*\n\n` +
-              `*Produit:* ${name}\n` +
-              `*Prix:* ${price}\n\n` +
-              `Je souhaite commander ce produit. Merci de me recontacter pour finaliser l'achat.`;
-
-  const url = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(msg)}`;
-
-  document.getElementById('modalDetail').innerHTML = `
-    <strong>Produit :</strong> ${name}<br>
-    <strong>Prix :</strong> ${price}<br>
-    <p style="margin-top:10px; font-size:0.8rem; color:var(--gold)">Redirection vers WhatsApp en cours...</p>
-  `;
-  document.getElementById('modalOverlay').classList.add('open');
-
-  setTimeout(() => { window.open(url, '_blank'); }, 1500);
-}
-
-function formatPrice(n){ return n.toLocaleString('fr-FR') + ' FCFA'; }
-
-// ===== QUOTE GENERATOR LOGIC =====
-const platformOpts = document.querySelectorAll('#platformOpts .quote-opt');
-const serviceOpts = document.querySelectorAll('#serviceOpts .quote-opt');
-const postQtyInput = document.getElementById('postQty');
-const durationQtyInput = document.getElementById('durationQty');
-const summaryItems = document.getElementById('summaryItems');
-const quoteTotalPrice = document.getElementById('quoteTotalPrice');
-const generateQuoteBtn = document.getElementById('generateQuoteBtn');
-
-function updateQuote() {
-  const selectedPlatforms = Array.from(platformOpts).filter(opt => opt.classList.contains('selected'));
-  const selectedServices = Array.from(serviceOpts).filter(opt => opt.classList.contains('selected'));
-  const postQty = parseInt(postQtyInput.value) || 1;
-  const durationQty = parseInt(durationQtyInput.value) || 1;
-
-  if (selectedPlatforms.length === 0 || selectedServices.length === 0) {
-    summaryItems.innerHTML = '<p style="color:var(--grey); font-size: 0.8rem; font-style: italic;">Sélectionnez des options pour générer le devis...</p>';
-    quoteTotalPrice.textContent = '0 FCFA';
-    generateQuoteBtn.disabled = true;
-    return;
-  }
-
-  generateQuoteBtn.disabled = false;
-  let html = "";
-  let totalBase = 0;
-
-  selectedPlatforms.forEach(p => {
-    totalBase += parseInt(p.dataset.price);
-    html += `<div class="summary-line"><span class="label">Plateforme: ${p.textContent}</span><span class="value">${formatPrice(parseInt(p.dataset.price))}</span></div>`;
-  });
-
-  let servicesTotal = 0;
-  selectedServices.forEach(s => {
-    servicesTotal += parseInt(s.dataset.price);
-    html += `<div class="summary-line"><span class="label">Service: ${s.textContent}</span><span class="value">${formatPrice(parseInt(s.dataset.price))}</span></div>`;
-  });
-
-  const subTotal = (totalBase + servicesTotal) * postQty * durationQty;
-  html += `<div class="summary-line" style="margin-top:10px; font-weight:700;"><span class="label">Volume: ${postQty} posts x ${durationQty} mois</span></div>`;
-
-  summaryItems.innerHTML = html;
-  quoteTotalPrice.textContent = formatPrice(subTotal);
-}
-
-platformOpts.forEach(opt => {
-  opt.addEventListener('click', () => {
-    opt.classList.toggle('selected');
-    updateQuote();
-  });
-});
-
-serviceOpts.forEach(opt => {
-  opt.addEventListener('click', () => {
-    opt.classList.toggle('selected');
-    updateQuote();
-  });
-});
-
-[postQtyInput, durationQtyInput].forEach(input => {
-  input.addEventListener('input', updateQuote);
-});
-
-generateQuoteBtn.addEventListener('click', () => {
-  const selectedPlatforms = Array.from(platformOpts).filter(opt => opt.classList.contains('selected')).map(el => el.textContent).join(", ");
-  const selectedServices = Array.from(serviceOpts).filter(opt => opt.classList.contains('selected')).map(el => el.textContent).join(", ");
-  const total = quoteTotalPrice.textContent;
-  const posts = postQtyInput.value;
-  const duration = durationQtyInput.value;
-
-  const msg = `*DEVIS MARKETING - CAPLAN & GOLD*\n\n` +
-              `*Plateformes:* ${selectedPlatforms}\n` +
-              `*Services:* ${selectedServices}\n` +
-              `*Volume:* ${posts} posts par mois\n` +
-              `*Durée:* ${duration} mois\n` +
-              `*ESTIMATION TOTALE:* ${total}\n\n` +
-              `Je souhaite commander ce pack marketing personnalisé.`;
-
-  const url = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(msg)}`;
-
-  document.getElementById('modalDetail').innerHTML = `
-    <strong>Pack Marketing Personnalisé</strong><br>
-    <strong>Prix estimé :</strong> ${total}<br>
-    <p style="margin-top:10px; font-size:0.8rem; color:var(--gold)">Redirection vers WhatsApp...</p>
-  `;
-  document.getElementById('modalOverlay').classList.add('open');
-  setTimeout(() => { window.open(url, '_blank'); }, 1500);
-});
-
-function orderFreeViews() {
-  const link = document.getElementById('tiktokLink').value.trim();
-  if (!link) {
-    alert("Veuillez entrer le lien de votre post TikTok.");
-    return;
-  }
-
-  const msg = `*ESSAI GRATUIT LEOFARME*\n\n` +
-              `*Service:* 100 Vues TikTok Gratuites\n` +
-              `*Lien:* ${link}\n\n` +
-              `Je souhaite profiter de l'offre gratuite.`;
-
-  const url = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(msg)}`;
-
-  document.getElementById('modalDetail').innerHTML = `
-    <strong>Service :</strong> 100 Vues TikTok Gratuites<br>
-    <strong>Prix :</strong> GRATUIT<br>
-    <p style="margin-top:10px; font-size:0.8rem; color:var(--gold)">Redirection vers WhatsApp en cours...</p>
-  `;
-  document.getElementById('modalOverlay').classList.add('open');
-
-  setTimeout(() => { window.open(url, '_blank'); }, 1500);
-}
-const modalClose = document.getElementById('modalClose');
-if (modalClose) modalClose.addEventListener('click',()=>document.getElementById('modalOverlay').classList.remove('open'));
-const modalOverlay = document.getElementById('modalOverlay');
-if (modalOverlay) modalOverlay.addEventListener('click',e=>{ if(e.target===e.currentTarget) e.currentTarget.classList.remove('open'); });
-
-// ===== BACKGROUND MUSIC LOGIC =====
 const musicToggle = document.getElementById('musicToggle');
 const bgMusic = document.getElementById('bgMusic');
+musicToggle.onclick = () => {
+  if (bgMusic.paused) { bgMusic.play(); musicToggle.classList.remove('paused'); } else { bgMusic.pause(); musicToggle.classList.add('paused'); }
+};
 
-if (musicToggle && bgMusic) {
-  musicToggle.addEventListener('click', () => {
-    if (bgMusic.paused) {
-      bgMusic.play().catch(e => console.log("Playback blocked by browser"));
-      musicToggle.classList.remove('paused');
-    } else {
-      bgMusic.pause();
-      musicToggle.classList.add('paused');
-    }
-  });
+function formatPrice(n){ return n.toLocaleString('fr-FR') + ' FCFA'; }
+function orderProduct(name, price) {
+  const msg = `*COMMANDE*\n\nProduit: ${name}\nPrix: ${price}`;
+  window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(msg)}`, '_blank');
 }
 
-// ===== AI ASSISTANT LOGIC =====
+// QUOTE GEN
+const pOpts = document.querySelectorAll('#platformOpts .quote-opt');
+const sOpts = document.querySelectorAll('#serviceOpts .quote-opt');
+function updateQuote() {
+  let total = 0; let html = '';
+  pOpts.forEach(o => { if(o.classList.contains('selected')) { total += parseInt(o.dataset.price); html += `<div>${o.textContent}</div>`; }});
+  sOpts.forEach(o => { if(o.classList.contains('selected')) { total += parseInt(o.dataset.price); html += `<div>${o.textContent}</div>`; }});
+  const final = total * parseInt(document.getElementById('postQty').value) * parseInt(document.getElementById('durationQty').value);
+  document.getElementById('summaryItems').innerHTML = html;
+  document.getElementById('quoteTotalPrice').textContent = formatPrice(final);
+}
+pOpts.forEach(o => o.onclick = () => { o.classList.toggle('selected'); updateQuote(); });
+sOpts.forEach(o => o.onclick = () => { o.classList.toggle('selected'); updateQuote(); });
+document.getElementById('postQty').oninput = updateQuote;
+document.getElementById('durationQty').oninput = updateQuote;
+
+// COINS
+function openCoinOrder(t, p) {
+  document.getElementById('coinOrderForm').style.display='block';
+  document.getElementById('coinFormTitle').textContent = t + ' (' + p + ')';
+  window.selectedCoin = {t,p};
+}
+function submitCoinOrder() {
+  const msg = `*COINS*\nOffre: ${window.selectedCoin.t}\nUser: ${document.getElementById('coinUser').value}`;
+  window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(msg)}`, '_blank');
+}
+
+// AI
 const aiToggle = document.getElementById('aiToggle');
 const aiChat = document.getElementById('aiChat');
-const aiClose = document.getElementById('aiClose');
-const aiSettingsBtn = document.getElementById('aiSettingsBtn');
-const aiSettingsPanel = document.getElementById('aiSettingsPanel');
-const aiProvider = document.getElementById('aiProvider');
-const aiApiKey = document.getElementById('aiApiKey');
-const saveAiSettings = document.getElementById('saveAiSettings');
-const aiSend = document.getElementById('aiSend');
-const aiInput = document.getElementById('aiInput');
-const aiChatBody = document.getElementById('aiChatBody');
+aiToggle.onclick = () => aiChat.classList.toggle('active');
+document.getElementById('aiSettingsBtn').onclick = () => document.getElementById('aiSettingsPanel').classList.toggle('active');
+document.getElementById('aiSend').onclick = async () => {
+  const q = document.getElementById('aiInput').value; if(!q) return;
+  const chat = document.getElementById('aiChatBody');
+  const addMsg = (text, type) => {
+    const m = document.createElement('div'); m.className=`ai-msg ${type}`; m.textContent=text;
+    chat.appendChild(m); chat.scrollTop = chat.scrollHeight;
+  };
+  addMsg(q, 'user'); document.getElementById('aiInput').value = '';
 
-let aiConfig = JSON.parse(localStorage.getItem('ai_config')) || { provider: 'none', apiKey: '' };
+  const provider = document.getElementById('aiProvider').value;
+  const key = document.getElementById('aiApiKey').value;
 
-if (aiToggle && aiChat && aiClose) {
-  aiToggle.addEventListener('click', () => aiChat.classList.add('active'));
-  aiClose.addEventListener('click', () => aiChat.classList.remove('active'));
-  aiSettingsBtn.addEventListener('click', () => aiSettingsPanel.classList.toggle('active'));
-
-  aiProvider.value = aiConfig.provider;
-  aiApiKey.value = aiConfig.apiKey;
-
-  saveAiSettings.addEventListener('click', () => {
-    aiConfig.provider = aiProvider.value;
-    aiConfig.apiKey = aiApiKey.value;
-    localStorage.setItem('ai_config', JSON.stringify(aiConfig));
-    aiSettingsPanel.classList.remove('active');
-    alert("Configuration IA enregistrée !");
-  });
-
-  function addMsg(text, type) {
-    const msg = document.createElement('div');
-    msg.className = `ai-msg ${type}`;
-    msg.textContent = text;
-    aiChatBody.appendChild(msg);
-    aiChatBody.scrollTop = aiChatBody.scrollHeight;
+  if (provider === 'none' || !key) {
+    if (q.toLowerCase().includes('achat') || q.toLowerCase().includes('commander')) addMsg("Pour commander, allez dans Services ou Marketplace and cliquez sur Commander.", 'bot');
+    else addMsg("Je suis votre assistant FAQ. Pour des réponses plus poussées, configurez une clé API dans les réglages.", 'bot');
+    return;
   }
 
-  async function handleAiQuery(q) {
-    const query = q.toLowerCase();
-    addMsg(q, 'user');
-
-    if (aiConfig.provider === 'none' || !aiConfig.apiKey) {
-      setTimeout(() => {
-        if (query.includes('achat') || query.includes('commander') || query.includes('procedure') || query.includes('acheter')) {
-          addMsg("Pour commander : 1. Rendez-vous dans la section 'Services' ou 'Marketplace'. 2. Choisissez le produit ou service souhaité. 3. Cliquez sur 'Commander'. Vous serez redirigé vers WhatsApp pour finaliser avec notre équipe.", 'bot');
-        } else if (query.includes('fonction') || query.includes('qui es-tu') || query.includes('comment tu aides') || query.includes('aide')) {
-          addMsg("Je suis votre assistant IA. Je peux vous guider dans le choix de nos services, vous expliquer la procédure d'achat et répondre à vos questions sur l'agence.", 'bot');
-        } else {
-          addMsg("Je ne suis pas sûr de comprendre. Vous pouvez me poser des questions sur la procédure d'achat ou sur mon fonctionnement.", 'bot');
-        }
-      }, 600);
-      return;
+  try {
+    let respText = "Désolé, je ne peux pas répondre pour le moment.";
+    if (provider === 'gemini') {
+      const r = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-pro:generateContent?key=${key}`, {
+        method: 'POST', headers: {'Content-Type':'application/json'},
+        body: JSON.stringify({contents: [{parts: [{text: q}]}]})
+      });
+      const d = await r.json(); respText = d.candidates[0].content.parts[0].text;
+    } else if (provider === 'deepseek') {
+      const r = await fetch('https://api.deepseek.com/v1/chat/completions', {
+        method: 'POST', headers: {'Content-Type':'application/json', 'Authorization': `Bearer ${key}`},
+        body: JSON.stringify({model: "deepseek-chat", messages: [{role:"user", content: q}]})
+      });
+      const d = await r.json(); respText = d.choices[0].message.content;
     }
+    addMsg(respText, 'bot');
+  } catch(e) { addMsg("Erreur de connexion à l'IA.", 'bot'); }
+};
 
-    try {
-      let responseText = "";
-      if (aiConfig.provider === 'gemini') {
-        const resp = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-pro:generateContent?key=${aiConfig.apiKey}`, {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ contents: [{ parts: [{ text: `Tu es l'assistant de CAPLAN & GOLD, une agence digitale premium au Bénin. Réponds brièvement à : ${q}` }] }] })
-        });
-        const data = await resp.json();
-        if (data.candidates && data.candidates[0] && data.candidates[0].content) {
-          responseText = data.candidates[0].content.parts[0].text;
-        } else {
-          throw new Error("Format de réponse Gemini invalide");
-        }
-      } else if (aiConfig.provider === 'deepseek') {
-        const resp = await fetch('https://api.deepseek.com/v1/chat/completions', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${aiConfig.apiKey}` },
-          body: JSON.stringify({ model: "deepseek-chat", messages: [{ role: "system", content: "Assistant de CAPLAN & GOLD." }, { role: "user", content: q }] })
-        });
-        const data = await resp.json();
-        if (data.choices && data.choices[0] && data.choices[0].message) {
-          responseText = data.choices[0].message.content;
-        } else {
-          throw new Error("Format de réponse DeepSeek invalide");
-        }
-      } else if (aiConfig.provider === 'ollama') {
-        const resp = await fetch(aiConfig.apiKey || 'http://localhost:11434/api/generate', {
-          method: 'POST',
-          body: JSON.stringify({ model: "llama3", prompt: q, stream: false })
-        });
-        const data = await resp.json();
-        if (data.response) {
-          responseText = data.response;
-        } else {
-          throw new Error("Format de réponse Ollama invalide");
-        }
-      }
-      addMsg(responseText, 'bot');
-    } catch (err) {
-      console.error(err);
-      addMsg("Désolé, une erreur est survenue lors de la connexion à l'API. Vérifiez votre clé et les restrictions CORS.", 'bot');
-    }
-  }
-
-  aiSend.addEventListener('click', () => {
-    const q = aiInput.value.trim();
-    if (q) {
-      handleAiQuery(q);
-      aiInput.value = '';
-    }
-  });
-
-  aiInput.addEventListener('keypress', (e) => {
-    if (e.key === 'Enter') {
-      const q = aiInput.value.trim();
-      if (q) {
-        handleAiQuery(q);
-        aiInput.value = '';
-      }
-    }
-  });
-}
+// CURSOR
+const cursor = document.getElementById('cursor'); const ring = document.getElementById('cursorRing');
+document.addEventListener('mousemove', e => {
+  cursor.style.transform = `translate(${e.clientX-5}px, ${e.clientY-5}px)`;
+  ring.style.transform = `translate(${e.clientX-18}px, ${e.clientY-18}px)`;
+});
+const observer = new IntersectionObserver(entries => entries.forEach(e => { if(e.isIntersecting) e.target.classList.add('visible'); }), {threshold:0.1});
+document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
 </script>
 </body>
 </html>
