@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="fr" data-theme="dark">
+<html lang="fr" data-theme="light">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -26,21 +26,21 @@
     --toggle-bg: #222;
   }
   [data-theme="light"] {
-    --gold: #A8731A;
-    --gold-light: #C9901F;
+    --gold: #916113;
+    --gold-light: #A8731A;
     --gold-pale: #FFF8EC;
-    --bg: #F7F5F0;
+    --bg: #FDFCFB;
     --surface: #FFFFFF;
-    --surface2: #F0EDE6;
+    --surface2: #F5F2EE;
     --surface3: #E8E4DC;
-    --grey: #6B6560;
+    --grey: #5A544E;
     --text: #1A1612;
-    --text-muted: #777;
-    --border: rgba(0,0,0,0.08);
-    --border-gold: rgba(168,115,26,0.2);
-    --nav-bg: rgba(247,245,240,0.97);
-    --shadow: 0 20px 60px rgba(0,0,0,0.1);
-    --input-bg: #F7F5F0;
+    --text-muted: #666;
+    --border: rgba(0,0,0,0.1);
+    --border-gold: rgba(145,97,19,0.25);
+    --nav-bg: rgba(253,252,251,0.98);
+    --shadow: 0 10px 40px rgba(0,0,0,0.08);
+    --input-bg: #FDFCFB;
     --toggle-bg: #E8E4DC;
   }
 
@@ -63,17 +63,17 @@
 
   /* ===== NAV ===== */
   nav {
-    position: fixed; top:0;left:0;right:0;z-index:100;
-    padding: 22px 60px;
+    position: fixed; top:0;left:0;right:0;z-index:1000;
+    padding: 22px 40px;
     display: flex; align-items:center;justify-content:space-between;
     background: var(--nav-bg);
     backdrop-filter: blur(12px);
     border-bottom: 1px solid var(--border);
     transition: background 0.4s, border-color 0.4s;
   }
-  .logo { font-family:'Playfair Display',serif;font-size:1.3rem;font-weight:700;letter-spacing:0.08em;color:var(--text); text-decoration: none; z-index: 102; }
+  .logo { font-family:'Playfair Display',serif;font-size:1.3rem;font-weight:700;letter-spacing:0.08em;color:var(--text); text-decoration: none; z-index: 102; flex-shrink: 0; margin-right: 20px; }
   .logo span { color:var(--gold); }
-  .nav-links { display:flex;gap:36px;list-style:none; }
+  .nav-links { display:flex;gap:24px;list-style:none; flex-wrap: wrap; justify-content: center; }
   .nav-links a { font-size:0.78rem;letter-spacing:0.15em;text-transform:uppercase;color:var(--grey);text-decoration:none;transition:color .3s; }
   .nav-links a:hover { color:var(--gold); }
   .nav-right { display:flex;align-items:center;gap:20px; z-index: 102; }
@@ -1594,7 +1594,11 @@ if (toggle) {
   });
 }
 const saved = localStorage.getItem('cg-theme');
-if (saved) html.dataset.theme = saved;
+if (saved) {
+  html.dataset.theme = saved;
+} else {
+  html.dataset.theme = 'light';
+}
 
 // ===== CUSTOM CURSOR =====
 const cursor = document.getElementById('cursor');
