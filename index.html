@@ -201,107 +201,6 @@
 
   .config-body { padding: 40px 36px; display:grid;grid-template-columns:1.1fr 1fr;gap:48px;align-items:start; }
 
-  /* Step labels */
-  .config-step-label {
-    font-size:0.68rem;letter-spacing:0.25em;text-transform:uppercase;color:var(--gold);
-    display:flex;align-items:center;gap:8px;margin-bottom:16px;
-  }
-  .config-step-label .step-badge {
-    width:20px;height:20px;border-radius:50%;background:var(--gold);color:#000;
-    font-size:0.65rem;font-weight:700;display:flex;align-items:center;justify-content:center;
-  }
-  .config-section-title { font-family:'Playfair Display',serif;font-size:1.05rem;font-weight:700;margin-bottom:20px; }
-
-  /* Network chips */
-  .network-chips { display:flex;gap:10px;flex-wrap:wrap;margin-bottom:32px; }
-  .chip {
-    display: flex; align-items:center; gap:8px;
-    padding: 10px 18px;
-    border: 1.5px solid var(--border);
-    background: var(--surface2);
-    cursor: pointer;
-    transition: all .25s;
-    font-size: 0.82rem;
-    font-weight: 500;
-    color: var(--grey);
-    user-select: none;
-  }
-  .chip .chip-icon { font-size: 1rem; }
-  .chip:hover { border-color: var(--gold); color:var(--text); }
-  .chip.selected { border-color: var(--gold); background: rgba(201,168,76,0.1); color: var(--gold); }
-  [data-theme="light"] .chip.selected { background: rgba(168,115,26,0.08); }
-
-  /* Content type */
-  .content-types { display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:32px; }
-  .content-type-card {
-    border: 1.5px solid var(--border);
-    background: var(--surface2);
-    padding: 14px 16px;
-    cursor: pointer;
-    transition: all .25s;
-    position: relative;
-  }
-  .content-type-card:hover { border-color:var(--gold); }
-  .content-type-card.selected { border-color:var(--gold);background:rgba(201,168,76,0.08); }
-  .ct-icon { font-size:1.3rem;margin-bottom:6px; }
-  .ct-name { font-size:0.83rem;font-weight:500;margin-bottom:2px; }
-  .ct-desc { font-size:0.72rem;color:var(--grey); }
-  .ct-check {
-    position:absolute;top:8px;right:10px;
-    width:16px;height:16px;border-radius:50%;
-    border:1.5px solid var(--border);
-    background:transparent;
-    transition:all .2s;
-    display:flex;align-items:center;justify-content:center;
-    font-size:0.6rem;color:transparent;
-  }
-  .content-type-card.selected .ct-check { background:var(--gold);border-color:var(--gold);color:#000; }
-
-  /* Niche */
-  .niche-select {
-    width:100%;padding:12px 16px;
-    background:var(--input-bg);
-    border:1.5px solid var(--border);
-    color:var(--text);
-    font-family:'DM Sans',sans-serif;
-    font-size:0.88rem;
-    appearance:none;
-    cursor:pointer;
-    transition:border-color .25s;
-    margin-bottom:32px;
-  }
-  .niche-select:focus { outline:none;border-color:var(--gold); }
-
-  /* Duration slider */
-  .duration-section { margin-bottom:32px; }
-  .duration-header { display:flex;justify-content:space-between;align-items:center;margin-bottom:12px; }
-  .duration-val { font-family:'Playfair Display',serif;font-size:1.4rem;font-weight:700;color:var(--gold); }
-  .duration-unit { font-size:0.72rem;color:var(--grey);letter-spacing:0.1em; }
-  input[type=range] {
-    width:100%;-webkit-appearance:none;height:4px;
-    background:linear-gradient(90deg,var(--gold) var(--pct,0%),var(--border) var(--pct,0%));
-    border-radius:2px;cursor:pointer;
-  }
-  input[type=range]::-webkit-slider-thumb { -webkit-appearance:none;width:18px;height:18px;border-radius:50%;background:var(--gold);border:2px solid var(--bg);box-shadow:0 2px 8px rgba(0,0,0,0.3); }
-  .duration-labels { display:flex;justify-content:space-between;margin-top:6px; }
-  .duration-labels span { font-size:0.7rem;color:var(--grey); }
-
-  /* Quantity */
-  .qty-control { display:flex;align-items:center;gap:12px;margin-bottom:32px; }
-  .qty-btn { width:34px;height:34px;border:1.5px solid var(--border);background:var(--surface2);color:var(--text);font-size:1.1rem;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all .2s; }
-  .qty-btn:hover { border-color:var(--gold);color:var(--gold); }
-  .qty-display { font-family:'Playfair Display',serif;font-size:1.4rem;font-weight:700;color:var(--gold);min-width:36px;text-align:center; }
-  .qty-label { font-size:0.78rem;color:var(--grey); }
-
-  /* SERVICE GRID */
-  .service-grid { display:grid; grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); gap:12px; margin-bottom:40px; }
-  .service-chip { background:var(--surface2); border:1.5px solid var(--border); padding:20px 10px; text-align:center; cursor:pointer; transition:all .25s; }
-  .service-chip:hover { border-color:var(--gold); }
-  .service-chip.selected { border-color:var(--gold); background:rgba(201,168,76,0.1); }
-  .service-icon { font-size:1.8rem; margin-bottom:8px; }
-  .service-name { font-size:0.75rem; font-weight:500; letter-spacing:0.05em; text-transform:uppercase; color:var(--grey); }
-  .service-chip.selected .service-name { color:var(--gold); }
-
   /* COMPTES & FORMATIONS GRID */
   .grid-premium { display:grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap:24px; margin-top:40px; }
   .card-premium { background:var(--surface); border:1px solid var(--border); padding:32px; transition:all .3s; position:relative; overflow:hidden; }
@@ -340,25 +239,6 @@
 
   @keyframes fadeIn { from{opacity:0; transform:translateY(10px)} to{opacity:1; transform:translateY(0)} }
 
-  /* RIGHT PANEL — Summary */
-  .config-summary {
-    background: var(--surface2);
-    border: 1px solid var(--border-gold);
-    padding: 32px 28px;
-    position: sticky; top: 120px;
-  }
-  .summary-title { font-family:'Playfair Display',serif;font-size:1.05rem;font-weight:700;margin-bottom:24px;padding-bottom:16px;border-bottom:1px solid var(--border); }
-  .summary-row { display:flex;justify-content:space-between;align-items:center;margin-bottom:14px;font-size:0.85rem; }
-  .summary-row .label { color:var(--grey); }
-  .summary-row .value { font-weight:500;color:var(--text); }
-  .summary-row .value.tag { background:rgba(201,168,76,0.12);color:var(--gold);padding:3px 10px;font-size:0.75rem; }
-  .summary-divider { height:1px;background:var(--border);margin:20px 0; }
-  .summary-price-block { text-align:center;padding:20px 0; }
-  .price-label { font-size:0.7rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--grey);margin-bottom:6px; }
-  .price-amount { font-family:'Playfair Display',serif;font-size:2.6rem;font-weight:900;color:var(--gold);line-height:1; }
-  .price-currency { font-size:1rem;font-weight:400;opacity:0.7; }
-  .price-breakdown { font-size:0.75rem;color:var(--grey);margin-top:6px; }
-
   .order-btn {
     display:block;width:100%;padding:16px;
     background:var(--gold);color:#000;
@@ -371,10 +251,6 @@
   .order-btn:disabled { background:var(--surface3);color:var(--grey);cursor:not-allowed;transform:none; }
 
   .config-notice { font-size:0.73rem;color:var(--grey);text-align:center;margin-top:12px;line-height:1.5; }
-
-  /* Platform badges */
-  .platform-pills { display:flex;flex-wrap:wrap;gap:6px;margin-bottom:8px; }
-  .platform-pill { font-size:0.7rem;padding:3px 10px;background:rgba(201,168,76,0.1);color:var(--gold);border:1px solid rgba(201,168,76,0.2); }
 
   /* ===== PROCESS ===== */
   #process { background:var(--surface);display:grid;grid-template-columns:1fr 2fr;gap:100px;align-items:start; padding-top: 160px; }
@@ -727,7 +603,7 @@
       <h1>Votre contenu<br>social, <em>créé</em><br>sur-mesure.</h1>
       <p class="hero-desc">CAPLAN & GOLD crée du contenu premium pour TikTok, Instagram, Facebook et YouTube — adapté à votre niche, livré avec précision.</p>
       <div class="hero-actions">
-        <a href="#services" class="btn-primary">Configurer ma commande</a>
+        <a href="#services" class="btn-primary">Découvrir nos services</a>
         <a href="#process" class="btn-ghost">↓ Comment ça marche</a>
       </div>
       <div class="hero-stats">
@@ -756,7 +632,7 @@
     <h2 class="reveal reveal-delay-1">Élevons votre marque<br>vers l'<em>excellence</em>.</h2>
     <p class="reveal reveal-delay-2">Rejoignez plus de 250 entreprises qui font confiance à CAPLAN & GOLD. Premier brief gratuit, sans engagement.</p>
     <div class="cta-buttons reveal reveal-delay-3">
-      <a href="#services" class="btn-primary">Configurer ma commande</a>
+      <a href="#services" class="btn-primary">Découvrir nos services</a>
       <a href="mailto:rkouton243@gmail.com" class="btn-outline">Nous contacter</a>
     </div>
   </section>
@@ -1267,92 +1143,39 @@
 
 <!-- SERVICES -->
 <div id="servicesView" class="page-view">
-  <section id="services">
-    <div class="services-top">
-      <div>
-        <div class="section-tag reveal">Commande personnalisée</div>
-        <h2 class="reveal reveal-delay-1">Configurez votre<br><em>contenu</em> idéal.</h2>
+  <section id="services" style="padding-top: 160px;">
+    <div class="section-tag reveal">Prestations</div>
+    <h2 class="reveal reveal-delay-1">Nos <em>Services</em>.</h2>
+    <p class="reveal reveal-delay-2" style="color:var(--grey); margin-top:20px; max-width:600px;">Des solutions de production vidéo adaptées à votre audience pour un impact maximal.</p>
+
+    <div class="grid-premium">
+      <!-- TikTok Vidéo Short -->
+      <div class="card-premium reveal">
+        <div class="icon">📱</div>
+        <h3>TikTok Vidéo Short</h3>
+        <ul class="details">
+          <li>Format vertical (9:16)</li>
+          <li>Montage dynamique</li>
+          <li>Sous-titres inclus</li>
+          <li>Optimisé pour la viralité</li>
+        </ul>
+        <span class="price-tag">3 000 <span>FCFA / MOIS</span></span>
+        <button class="btn-card" onclick="orderProduct('TikTok Vidéo Short', '3 000 FCFA / MOIS')">Commander</button>
       </div>
-    </div>
 
-    <div class="configurator reveal">
-      <div class="config-header">
-        <h3>🛠️ Créateur de contenu sur-mesure</h3>
-        <span>Prix calculé en temps réel</span>
+      <!-- Long Métrage -->
+      <div class="card-premium reveal reveal-delay-1">
+        <div class="icon">🎬</div>
+        <h3>Long Métrage</h3>
+        <ul class="details">
+          <li>Format horizontal (16:9)</li>
+          <li>Storytelling avancé</li>
+          <li>Étalonnage pro</li>
+          <li>Qualité Cinématique</li>
+        </ul>
+        <span class="price-tag">7 000 <span>FCFA</span></span>
+        <button class="btn-card" onclick="orderProduct('Long Métrage', '7 000 FCFA')">Commander</button>
       </div>
-      <div class="config-body">
-        <!-- LEFT: Configurator -->
-        <div>
-          <!-- STEP 1: Service Selection -->
-          <div class="config-step-label"><div class="step-badge">1</div>Sélectionnez un service</div>
-          <div class="config-section-title">Quel type de prestation ?</div>
-          <div class="service-grid" id="serviceGrid">
-            <div class="service-chip" data-service="youtube">
-              <div class="service-icon">🎬</div>
-              <div class="service-name">YouTube</div>
-            </div>
-            <div class="service-chip" data-service="ads">
-              <div class="service-icon">📢</div>
-              <div class="service-name">Campagne Pub</div>
-            </div>
-            <div class="service-chip" data-service="cm">
-              <div class="service-icon">💬</div>
-              <div class="service-name">Community Manager</div>
-            </div>
-            <div class="service-chip" data-service="facebook">
-              <div class="service-icon">📘</div>
-              <div class="service-name">Page Facebook</div>
-            </div>
-            <div class="service-chip" data-service="boost">
-              <div class="service-icon">🚀</div>
-              <div class="service-name">Boosting YouTube</div>
-            </div>
-            <div class="service-chip" data-service="shopify">
-              <div class="service-icon">🛒</div>
-              <div class="service-name">Shopify</div>
-            </div>
-          </div>
-
-          <!-- DETAILS PANEL -->
-          <div id="detailsPanel" class="details-panel">
-            <div class="config-step-label"><div class="step-badge">2</div>Détails du service</div>
-            <div class="config-section-title" id="detailsTitle">Précisez votre besoin</div>
-            <div id="dynamicFields" class="dynamic-fields">
-              <!-- Dynamically populated -->
-            </div>
-          </div>
-        </div>
-
-        <!-- RIGHT: Summary -->
-        <div>
-          <div class="config-summary">
-            <div class="summary-title">📋 Récapitulatif de commande</div>
-
-            <div class="summary-row">
-              <span class="label">Plateformes</span>
-              <div id="summaryNetworks"><span style="font-size:0.78rem;color:var(--grey);font-style:italic;">Aucune sélectionnée</span></div>
-            </div>
-            <div class="summary-row">
-              <span class="label">Service</span>
-              <span class="value" id="summaryType">—</span>
-            </div>
-            <div id="dynamicSummaryRows">
-              <!-- Dynamically populated details -->
-            </div>
-
-            <div class="summary-divider"></div>
-
-            <div class="summary-price-block">
-              <div class="price-label">Prix total estimé</div>
-              <div class="price-amount" id="totalPrice"><span class="price-currency">—</span></div>
-              <div class="price-breakdown" id="priceBreak">Sélectionnez un service pour voir le tarif</div>
-            </div>
-
-            <button class="order-btn" id="orderBtn" disabled>Passer la commande →</button>
-            <p class="config-notice">✅ Premier brief gratuit · Paiement à la livraison</p>
-          </div>
-        </div>
-  </div>
     </div>
   </section>
 </div>
@@ -1365,7 +1188,7 @@
       <h2 class="reveal reveal-delay-1">Notre<br><em>méthode</em><br>en 4 étapes.</h2>
     </div>
     <div class="process-steps">
-      <div class="process-step reveal"><div class="step-num">01</div><div class="step-content"><h3>Configurez & Commandez</h3><p>Choisissez votre réseau social, type de contenu, niche et fréquence. Notre configurateur calcule le prix en temps réel.</p></div></div>
+      <div class="process-step reveal"><div class="step-num">01</div><div class="step-content"><h3>Choisissez & Commandez</h3><p>Choisissez votre type de production vidéo (Short ou Long Métrage). Nos tarifs sont fixes et transparents.</p></div></div>
       <div class="process-step reveal reveal-delay-1"><div class="step-num">02</div><div class="step-content"><h3>Brief & Validation</h3><p>Notre équipe vous contacte pour un brief détaillé gratuit et valide votre stratégie éditoriale ensemble.</p></div></div>
       <div class="process-step reveal reveal-delay-2"><div class="step-num">03</div><div class="step-content"><h3>Production & Création</h3><p>Nos créateurs produisent vos contenus selon votre niche, vos valeurs et les tendances actuelles de chaque plateforme.</p></div></div>
       <div class="process-step reveal reveal-delay-3"><div class="step-num">04</div><div class="step-content"><h3>Livraison & Optimisation</h3><p>Contenus livrés selon le calendrier défini, avec reporting mensuel et ajustements continus pour maximiser l'engagement.</p></div></div>
@@ -1657,250 +1480,7 @@ function orderProduct(name, price) {
   setTimeout(() => { window.open(url, '_blank'); }, 1500);
 }
 
-const SERVICES_CONFIG = {
-  youtube: {
-    name: "YouTube", icon: "🎬", price: 3500,
-    fields: [
-      { id: "channelName", label: "Nom de la chaîne", type: "text", required: true },
-      { id: "niche", label: "Niche / Thématique", type: "text", required: true },
-      { id: "lang", label: "Langue", type: "radio", options: ["Français", "Anglais", "Autre"], required: true },
-      { id: "hasLogo", label: "Logo disponible ?", type: "radio", options: ["Oui", "Non (à créer)"], required: true },
-      { id: "desc", label: "Description du projet", type: "textarea", required: false }
-    ]
-  },
-  ads: {
-    name: "Campagne Pub", icon: "📢", price: 4500,
-    fields: [
-      { id: "platforms", label: "Plateforme(s)", type: "check", options: ["Facebook", "Instagram", "TikTok", "Google"], required: true },
-      { id: "goal", label: "Objectif", type: "radio", options: ["Ventes", "Notoriété", "Abonnés"], required: true },
-      { id: "link", label: "Lien à promouvoir", type: "text", required: true },
-      { id: "budget", label: "Budget pub estimé", type: "text", required: true },
-      { id: "target", label: "Cible (Pays/Âge)", type: "text", required: true }
-    ]
-  },
-  cm: {
-    name: "Community Manager", icon: "💬", price: 5000,
-    fields: [
-      { id: "networks", label: "Réseaux à gérer", type: "check", options: ["FB", "IG", "TikTok", "X", "LinkedIn"], required: true },
-      { id: "freq", label: "Fréquence souhaitée", type: "radio", options: ["Quotidien", "3x/semaine", "Week-end"], required: true },
-      { id: "tone", label: "Ton de la marque", type: "text", required: true },
-      { id: "access", label: "Accès comptes ?", type: "radio", options: ["Déjà créés", "À créer"], required: true }
-    ]
-  },
-  facebook: {
-    name: "Page Facebook", icon: "📘", price: 2500,
-    fields: [
-      { id: "pageName", label: "Nom de la page", type: "text", required: true },
-      { id: "category", label: "Catégorie", type: "text", required: true },
-      { id: "phone", label: "Téléphone contact", type: "text", required: true },
-      { id: "desc", label: "Description", type: "textarea", required: true },
-      { id: "logo", label: "Logo disponible ?", type: "radio", options: ["Oui", "Non"], required: true }
-    ]
-  },
-  boost: {
-    name: "Boosting YouTube", icon: "🚀", price: 3000,
-    fields: [
-      { id: "videoLink", label: "Lien de la vidéo", type: "text", required: true },
-      { id: "goal", label: "Objectif du boost", type: "radio", options: ["Vues", "Likes", "Abonnés"], required: true },
-      { id: "adsBudget", label: "Budget Google Ads", type: "text", required: true },
-      { id: "duration", label: "Durée (jours)", type: "text", required: true },
-      { id: "country", label: "Pays cible", type: "text", required: true }
-    ]
-  },
-  shopify: {
-    name: "Shopify", icon: "🛒", price: 5000,
-    fields: [
-      { id: "storeName", label: "Nom de la boutique", type: "text", required: true },
-      { id: "prodType", label: "Type de produits", type: "text", required: true },
-      { id: "prodCount", label: "Nombre de produits", type: "radio", options: ["1-10", "10-50", "50+"], required: true },
-      { id: "payment", label: "Moyen de paiement", type: "text", required: true },
-      { id: "domain", label: "Domaine disponible ?", type: "radio", options: ["Oui", "Non"], required: true }
-    ]
-  }
-};
-
-let selectedServiceId = null;
-
 function formatPrice(n){ return n.toLocaleString('fr-FR') + ' FCFA'; }
-
-function updateSummary() {
-  const summaryNetworks = document.getElementById('summaryNetworks');
-  const summaryType = document.getElementById('summaryType');
-  const totalPrice = document.getElementById('totalPrice');
-  const orderBtn = document.getElementById('orderBtn');
-  const priceBreak = document.getElementById('priceBreak');
-  const dynamicRows = document.getElementById('dynamicSummaryRows');
-
-  if (!selectedServiceId) {
-    summaryNetworks.innerHTML = '<span style="font-size:.78rem;color:var(--grey);font-style:italic;">Aucun sélectionné</span>';
-    summaryType.textContent = "—";
-    totalPrice.innerHTML = '<span class="price-currency">—</span>';
-    orderBtn.disabled = true;
-    priceBreak.textContent = "Sélectionnez un service pour continuer";
-    dynamicRows.innerHTML = "";
-    return;
-  }
-
-  const config = SERVICES_CONFIG[selectedServiceId];
-  summaryNetworks.innerHTML = `<div class="platform-pills"><span class="platform-pill">${config.icon} ${config.name}</span></div>`;
-  summaryType.textContent = config.name;
-  totalPrice.innerHTML = `<strong>${formatPrice(config.price)}</strong>`;
-  orderBtn.disabled = false;
-  priceBreak.textContent = "Prix fixe pour la prestation de base";
-
-  // Dynamic summary of filled fields
-  let summaryHtml = "";
-  const fields = document.querySelectorAll('.field-input, .custom-options');
-  fields.forEach(f => {
-    let val = "";
-    if (f.classList.contains('field-input')) {
-      val = f.value.trim();
-    } else {
-      val = Array.from(f.querySelectorAll('.custom-opt.selected')).map(el => el.textContent).join(", ");
-    }
-    if (val) {
-      const label = f.closest('.field-group').querySelector('.field-label').textContent.replace('*', '').trim();
-      summaryHtml += `<div class="summary-row"><span class="label">${label}</span><span class="value">${val}</span></div>`;
-    }
-  });
-  dynamicRows.innerHTML = summaryHtml;
-}
-
-function generateFields(serviceId) {
-  const container = document.getElementById('dynamicFields');
-  const config = SERVICES_CONFIG[serviceId];
-  container.innerHTML = "";
-
-  config.fields.forEach(field => {
-    const group = document.createElement('div');
-    group.className = "field-group";
-
-    const label = document.createElement('label');
-    label.className = "field-label";
-    label.innerHTML = field.label + (field.required ? "<span>*</span>" : "");
-    group.appendChild(label);
-
-    if (field.type === "text" || field.type === "textarea") {
-      const input = document.createElement(field.type === "text" ? "input" : "textarea");
-      input.className = "field-input";
-      input.dataset.id = field.id;
-      input.dataset.required = field.required;
-      if (field.type === "text") input.type = "text";
-      input.oninput = updateSummary;
-      group.appendChild(input);
-    } else if (field.type === "radio" || field.type === "check") {
-      const optContainer = document.createElement('div');
-      optContainer.className = "custom-options";
-      optContainer.dataset.id = field.id;
-      optContainer.dataset.type = field.type;
-      optContainer.dataset.required = field.required;
-
-      field.options.forEach(opt => {
-        const div = document.createElement('div');
-        div.className = "custom-opt";
-        div.textContent = opt;
-        div.onclick = () => {
-          if (field.type === "radio") {
-            optContainer.querySelectorAll('.custom-opt').forEach(el => el.classList.remove('selected'));
-            div.classList.add('selected');
-          } else {
-            div.classList.toggle('selected');
-          }
-          updateSummary();
-        };
-        optContainer.appendChild(div);
-      });
-      group.appendChild(optContainer);
-    }
-
-    container.appendChild(group);
-  });
-}
-
-// Event Listeners
-document.querySelectorAll('.service-chip').forEach(chip => {
-  chip.addEventListener('click', () => {
-    document.querySelectorAll('.service-chip').forEach(c => c.classList.remove('selected'));
-    chip.classList.add('selected');
-    selectedServiceId = chip.dataset.service;
-
-    const panel = document.getElementById('detailsPanel');
-    panel.classList.add('active');
-    document.getElementById('detailsTitle').textContent = `Détails pour : ${SERVICES_CONFIG[selectedServiceId].name}`;
-
-    generateFields(selectedServiceId);
-    updateSummary();
-
-    // Auto-scroll to panel
-    setTimeout(() => panel.scrollIntoView({ behavior: 'smooth', block: 'start' }), 100);
-  });
-});
-
-const orderBtn = document.getElementById('orderBtn');
-if (orderBtn) {
-  orderBtn.addEventListener('click', () => {
-    const fields = document.querySelectorAll('.field-input, .custom-options');
-    let isValid = true;
-    let firstError = null;
-    const data = {};
-
-    fields.forEach(f => {
-      const isRequired = f.dataset.required === "true";
-      let value = "";
-
-      if (f.classList.contains('field-input')) {
-        value = f.value.trim();
-        f.classList.remove('error');
-        if (isRequired && !value) {
-          isValid = false;
-          f.classList.add('error');
-          if (!firstError) firstError = f;
-        }
-      } else {
-        const selected = Array.from(f.querySelectorAll('.custom-opt.selected')).map(el => el.textContent);
-        value = selected.join(", ");
-        if (isRequired && selected.length === 0) {
-          isValid = false;
-          f.querySelectorAll('.custom-opt').forEach(opt => opt.style.borderColor = "#ff4444");
-          if (!firstError) firstError = f;
-        } else {
-          f.querySelectorAll('.custom-opt').forEach(opt => opt.style.borderColor = "");
-        }
-      }
-
-      const label = f.closest('.field-group').querySelector('.field-label').textContent.replace('*', '').trim();
-      data[label] = value || "N/A";
-    });
-
-    if (!isValid) {
-      if (firstError) firstError.scrollIntoView({ behavior: 'smooth', block: 'center' });
-      return;
-    }
-
-    // Prepare WhatsApp Message
-    const config = SERVICES_CONFIG[selectedServiceId];
-    let msg = `*NOUVELLE COMMANDE - CAPLAN & GOLD*\n\n`;
-    msg += `*Service:* ${config.icon} ${config.name}\n`;
-    msg += `*Prix estimé:* ${formatPrice(config.price)}\n\n`;
-    msg += `*DÉTAILS DU PROJET:*\n`;
-
-    for (const [key, val] of Object.entries(data)) {
-      msg += `• ${key}: ${val}\n`;
-    }
-
-    const url = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(msg)}`;
-
-    // Success Modal
-    document.getElementById('modalDetail').innerHTML = `
-      <strong>Service :</strong> ${config.name}<br>
-      <strong>Prix :</strong> ${formatPrice(config.price)}<br>
-      <p style="margin-top:10px; font-size:0.8rem; color:var(--gold)">Redirection vers WhatsApp en cours...</p>
-    `;
-    document.getElementById('modalOverlay').classList.add('open');
-
-    setTimeout(() => { window.open(url, '_blank'); }, 1500);
-  });
-}
 
 function orderFreeViews() {
   const link = document.getElementById('tiktokLink').value.trim();
@@ -1992,7 +1572,7 @@ if (aiToggle && aiChat && aiClose) {
     if (aiConfig.provider === 'none' || !aiConfig.apiKey) {
       setTimeout(() => {
         if (query.includes('achat') || query.includes('commander') || query.includes('procedure') || query.includes('acheter')) {
-          addMsg("Pour commander : 1. Choisissez votre service (YouTube, Ads, etc.). 2. Configurez les détails dans le formulaire. 3. Cliquez sur 'Passer la commande'. Vous serez redirigé vers WhatsApp pour finaliser avec notre équipe.", 'bot');
+          addMsg("Pour commander : 1. Rendez-vous dans la section 'Services' ou 'Marketplace'. 2. Choisissez le produit ou service souhaité. 3. Cliquez sur 'Commander'. Vous serez redirigé vers WhatsApp pour finaliser avec notre équipe.", 'bot');
         } else if (query.includes('fonction') || query.includes('qui es-tu') || query.includes('comment tu aides') || query.includes('aide')) {
           addMsg("Je suis votre assistant IA. Je peux vous guider dans le choix de nos services, vous expliquer la procédure d'achat et répondre à vos questions sur l'agence.", 'bot');
         } else {
