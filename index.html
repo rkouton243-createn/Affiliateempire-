@@ -201,6 +201,73 @@
 
   .config-body { padding: 40px 36px; display:grid;grid-template-columns:1.1fr 1fr;gap:48px;align-items:start; }
 
+  /* QUOTE GENERATOR */
+  .quote-container {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    padding: 40px;
+    display: grid;
+    grid-template-columns: 1.5fr 1fr;
+    gap: 40px;
+    box-shadow: var(--shadow);
+  }
+  @media (max-width: 992px) {
+    .quote-container { grid-template-columns: 1fr; }
+  }
+  .quote-step { margin-bottom: 30px; }
+  .quote-step-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.2rem;
+    font-weight: 700;
+    margin-bottom: 15px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .quote-step-title span {
+    width: 24px; height: 24px;
+    background: var(--gold);
+    color: #000;
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 0.8rem;
+  }
+  .quote-options { display: flex; flex-wrap: wrap; gap: 10px; }
+  .quote-opt {
+    padding: 10px 20px;
+    background: var(--surface2);
+    border: 1.5px solid var(--border);
+    cursor: pointer;
+    transition: all 0.3s;
+    font-size: 0.9rem;
+    display: flex; align-items: center; gap: 8px;
+  }
+  .quote-opt:hover { border-color: var(--gold); }
+  .quote-opt.selected { border-color: var(--gold); background: rgba(145, 97, 19, 0.1); color: var(--gold); }
+
+  .quote-summary {
+    background: var(--surface2);
+    padding: 30px;
+    border: 1px solid var(--border-gold);
+    position: sticky; top: 120px;
+    height: fit-content;
+  }
+  .summary-line {
+    display: flex; justify-content: space-between;
+    padding: 12px 0;
+    border-bottom: 1px solid var(--border);
+    font-size: 0.9rem;
+  }
+  .summary-line:last-of-type { border: none; }
+  .summary-total {
+    margin-top: 20px;
+    padding-top: 20px;
+    border-top: 2px solid var(--gold);
+    display: flex; justify-content: space-between; align-items: center;
+  }
+  .total-label { font-weight: 700; color: var(--gold); }
+  .total-price { font-family: 'Playfair Display', serif; font-size: 1.8rem; font-weight: 900; }
+
   /* COMPTES & FORMATIONS GRID */
   .grid-premium { display:grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap:24px; margin-top:40px; }
   .card-premium { background:var(--surface); border:1px solid var(--border); padding:32px; transition:all .3s; position:relative; overflow:hidden; }
@@ -1144,37 +1211,63 @@
 <!-- SERVICES -->
 <div id="servicesView" class="page-view">
   <section id="services" style="padding-top: 160px;">
-    <div class="section-tag reveal">Prestations</div>
-    <h2 class="reveal reveal-delay-1">Nos <em>Services</em>.</h2>
-    <p class="reveal reveal-delay-2" style="color:var(--grey); margin-top:20px; max-width:600px;">Des solutions de production vidéo adaptées à votre audience pour un impact maximal.</p>
+    <div class="section-tag reveal">Marketing Digital</div>
+    <h2 class="reveal reveal-delay-1">Générateur de <em>Devis</em>.</h2>
+    <p class="reveal reveal-delay-2" style="color:var(--grey); margin-top:20px; max-width:600px;">Simulez votre budget marketing pour les réseaux sociaux en quelques clics.</p>
 
-    <div class="grid-premium">
-      <!-- TikTok Vidéo Short -->
-      <div class="card-premium reveal">
-        <div class="icon">📱</div>
-        <h3>TikTok Vidéo Short</h3>
-        <ul class="details">
-          <li>Format vertical (9:16)</li>
-          <li>Montage dynamique</li>
-          <li>Sous-titres inclus</li>
-          <li>Optimisé pour la viralité</li>
-        </ul>
-        <span class="price-tag">3 000 <span>FCFA / MOIS</span></span>
-        <button class="btn-card" onclick="orderProduct('TikTok Vidéo Short', '3 000 FCFA / MOIS')">Commander</button>
-      </div>
+    <div id="quoteGenerator" class="reveal reveal-delay-3" style="margin-top:60px;">
+      <div class="quote-container">
+        <!-- Forms -->
+        <div>
+          <div class="quote-step">
+            <div class="quote-step-title"><span>1</span> Plateformes</div>
+            <div class="quote-options" id="platformOpts">
+              <div class="quote-opt" data-id="fb" data-price="2500">Facebook</div>
+              <div class="quote-opt" data-id="ig" data-price="2500">Instagram</div>
+              <div class="quote-opt" data-id="tk" data-price="3000">TikTok</div>
+              <div class="quote-opt" data-id="li" data-price="4000">LinkedIn</div>
+            </div>
+          </div>
 
-      <!-- Long Métrage -->
-      <div class="card-premium reveal reveal-delay-1">
-        <div class="icon">🎬</div>
-        <h3>Long Métrage</h3>
-        <ul class="details">
-          <li>Format horizontal (16:9)</li>
-          <li>Storytelling avancé</li>
-          <li>Étalonnage pro</li>
-          <li>Qualité Cinématique</li>
-        </ul>
-        <span class="price-tag">7 000 <span>FCFA</span></span>
-        <button class="btn-card" onclick="orderProduct('Long Métrage', '7 000 FCFA')">Commander</button>
+          <div class="quote-step">
+            <div class="quote-step-title"><span>2</span> Services</div>
+            <div class="quote-options" id="serviceOpts">
+              <div class="quote-opt" data-id="content" data-price="5000">Création de Contenu</div>
+              <div class="quote-opt" data-id="cm" data-price="4000">Community Management</div>
+              <div class="quote-opt" data-id="ads" data-price="4500">Gestion Publicitaire (Ads)</div>
+            </div>
+          </div>
+
+          <div class="quote-step">
+            <div class="quote-step-title"><span>3</span> Volume / Durée</div>
+            <div style="display:grid; grid-template-columns: 1fr 1fr; gap: 20px;">
+              <div class="field-group">
+                <label class="field-label">Nombre de posts</label>
+                <input type="number" id="postQty" class="field-input" value="1" min="1">
+              </div>
+              <div class="field-group">
+                <label class="field-label">Durée (Mois)</label>
+                <input type="number" id="durationQty" class="field-input" value="1" min="1">
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Summary -->
+        <div class="quote-summary">
+          <h3 style="font-family:'Playfair Display',serif; margin-bottom: 20px;">Récapitulatif</h3>
+          <div id="summaryItems">
+            <!-- Dynamic items -->
+            <p style="color:var(--grey); font-size: 0.8rem; font-style: italic;">Sélectionnez des options pour générer le devis...</p>
+          </div>
+
+          <div class="summary-total">
+            <span class="total-label">Estimation Totale</span>
+            <span class="total-price" id="quoteTotalPrice">0 FCFA</span>
+          </div>
+
+          <button class="order-btn" id="generateQuoteBtn" style="margin-top: 30px;">Commander ce Pack →</button>
+        </div>
       </div>
     </div>
   </section>
@@ -1481,6 +1574,94 @@ function orderProduct(name, price) {
 }
 
 function formatPrice(n){ return n.toLocaleString('fr-FR') + ' FCFA'; }
+
+// ===== QUOTE GENERATOR LOGIC =====
+const platformOpts = document.querySelectorAll('#platformOpts .quote-opt');
+const serviceOpts = document.querySelectorAll('#serviceOpts .quote-opt');
+const postQtyInput = document.getElementById('postQty');
+const durationQtyInput = document.getElementById('durationQty');
+const summaryItems = document.getElementById('summaryItems');
+const quoteTotalPrice = document.getElementById('quoteTotalPrice');
+const generateQuoteBtn = document.getElementById('generateQuoteBtn');
+
+function updateQuote() {
+  const selectedPlatforms = Array.from(platformOpts).filter(opt => opt.classList.contains('selected'));
+  const selectedServices = Array.from(serviceOpts).filter(opt => opt.classList.contains('selected'));
+  const postQty = parseInt(postQtyInput.value) || 1;
+  const durationQty = parseInt(durationQtyInput.value) || 1;
+
+  if (selectedPlatforms.length === 0 || selectedServices.length === 0) {
+    summaryItems.innerHTML = '<p style="color:var(--grey); font-size: 0.8rem; font-style: italic;">Sélectionnez des options pour générer le devis...</p>';
+    quoteTotalPrice.textContent = '0 FCFA';
+    generateQuoteBtn.disabled = true;
+    return;
+  }
+
+  generateQuoteBtn.disabled = false;
+  let html = "";
+  let totalBase = 0;
+
+  selectedPlatforms.forEach(p => {
+    totalBase += parseInt(p.dataset.price);
+    html += `<div class="summary-line"><span class="label">Plateforme: ${p.textContent}</span><span class="value">${formatPrice(parseInt(p.dataset.price))}</span></div>`;
+  });
+
+  let servicesTotal = 0;
+  selectedServices.forEach(s => {
+    servicesTotal += parseInt(s.dataset.price);
+    html += `<div class="summary-line"><span class="label">Service: ${s.textContent}</span><span class="value">${formatPrice(parseInt(s.dataset.price))}</span></div>`;
+  });
+
+  const subTotal = (totalBase + servicesTotal) * postQty * durationQty;
+  html += `<div class="summary-line" style="margin-top:10px; font-weight:700;"><span class="label">Volume: ${postQty} posts x ${durationQty} mois</span></div>`;
+
+  summaryItems.innerHTML = html;
+  quoteTotalPrice.textContent = formatPrice(subTotal);
+}
+
+platformOpts.forEach(opt => {
+  opt.addEventListener('click', () => {
+    opt.classList.toggle('selected');
+    updateQuote();
+  });
+});
+
+serviceOpts.forEach(opt => {
+  opt.addEventListener('click', () => {
+    opt.classList.toggle('selected');
+    updateQuote();
+  });
+});
+
+[postQtyInput, durationQtyInput].forEach(input => {
+  input.addEventListener('input', updateQuote);
+});
+
+generateQuoteBtn.addEventListener('click', () => {
+  const selectedPlatforms = Array.from(platformOpts).filter(opt => opt.classList.contains('selected')).map(el => el.textContent).join(", ");
+  const selectedServices = Array.from(serviceOpts).filter(opt => opt.classList.contains('selected')).map(el => el.textContent).join(", ");
+  const total = quoteTotalPrice.textContent;
+  const posts = postQtyInput.value;
+  const duration = durationQtyInput.value;
+
+  const msg = `*DEVIS MARKETING - CAPLAN & GOLD*\n\n` +
+              `*Plateformes:* ${selectedPlatforms}\n` +
+              `*Services:* ${selectedServices}\n` +
+              `*Volume:* ${posts} posts par mois\n` +
+              `*Durée:* ${duration} mois\n` +
+              `*ESTIMATION TOTALE:* ${total}\n\n` +
+              `Je souhaite commander ce pack marketing personnalisé.`;
+
+  const url = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(msg)}`;
+
+  document.getElementById('modalDetail').innerHTML = `
+    <strong>Pack Marketing Personnalisé</strong><br>
+    <strong>Prix estimé :</strong> ${total}<br>
+    <p style="margin-top:10px; font-size:0.8rem; color:var(--gold)">Redirection vers WhatsApp...</p>
+  `;
+  document.getElementById('modalOverlay').classList.add('open');
+  setTimeout(() => { window.open(url, '_blank'); }, 1500);
+});
 
 function orderFreeViews() {
   const link = document.getElementById('tiktokLink').value.trim();
