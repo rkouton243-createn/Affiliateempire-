@@ -208,13 +208,6 @@
   .order-btn:hover { background:var(--gold-light);transform:translateY(-2px); }
   .order-btn:disabled { background:var(--surface3);color:var(--grey);cursor:not-allowed;transform:none; }
 
-  /* ===== PROCESS ===== */
-  #process { background:var(--surface);display:grid;grid-template-columns:1fr 2fr;gap:100px;align-items:start; padding-top: 160px; }
-  .process-step { display:flex;gap:32px;padding:36px 0;border-bottom:1px solid var(--border);transition:padding-left .3s; }
-  .process-step:hover { padding-left:12px; }
-  .step-num { font-family:'Playfair Display',serif;font-size:0.8rem;color:var(--gold);font-weight:700;min-width:28px;padding-top:4px; }
-  .step-content h3 { font-family:'Playfair Display',serif;font-size:1.15rem;font-weight:700;margin-bottom:10px; }
-  .step-content p { font-size:0.88rem;color:var(--grey);line-height:1.7; }
 
   /* ===== TESTIMONIALS ===== */
   #testimonials { background:var(--bg);overflow:hidden; padding-top: 160px; }
@@ -308,7 +301,6 @@
     <li><a href="#services">Services</a></li>
     <li><a href="#comptes">Marketplace</a></li>
     <li><a href="#formations">Académie</a></li>
-    <li><a href="#process">Processus</a></li>
     <li><a href="#leofarme">LEOFARME</a></li>
     <li><a href="#affiliation">Affiliation</a></li>
     <li><a href="#testimonials">Clients</a></li>
@@ -331,7 +323,6 @@
       <p class="hero-desc">CAPLAN & GOLD crée du contenu premium pour TikTok, Instagram, Facebook et YouTube — adapté à votre niche, livré avec précision.</p>
       <div class="hero-actions">
         <a href="#services" class="btn-primary">Découvrir nos services</a>
-        <a href="#process" class="btn-ghost">↓ Comment ça marche</a>
       </div>
       <div class="hero-stats">
         <div><div class="stat-val">250+</div><div class="stat-label">Clients actifs</div></div>
@@ -473,12 +464,12 @@
       <div class="grid-premium">
         <div class="card-premium"><h3>5 Pièces</h3><span class="price-tag">2 <span>€</span></span><button class="btn-card" onclick="openCoinOrder('5 Pièces', '2 €')">Sélectionner</button></div>
         <div class="card-premium"><h3>70 Pièces</h3><span class="price-tag">9 <span>€</span></span><button class="btn-card" onclick="openCoinOrder('70 Pièces', '9 €')">Sélectionner</button></div>
-        <div class="card-premium"><h3>350 Pièces</h3><span class="price-tag">18 <span>€</span></span><button class="btn-card" onclick="openCoinOrder('350 Pièces', '18 €')">Sélectionner</button></div>
-        <div class="card-premium"><h3>700 Pièces</h3><span class="price-tag">35 <span>€</span></span><button class="btn-card" onclick="openCoinOrder('700 Pièces', '35 €')">Sélectionner</button></div>
-        <div class="card-premium"><h3>1400 Pièces</h3><span class="price-tag">50 <span>€</span></span><button class="btn-card" onclick="openCoinOrder('1400 Pièces', '50 €')">Sélectionner</button></div>
-        <div class="card-premium"><h3>3500 Pièces</h3><span class="price-tag">75 <span>€</span></span><button class="btn-card" onclick="openCoinOrder('3500 Pièces', '75 €')">Sélectionner</button></div>
+        <div class="card-premium"><h3>350 Pièces</h3><span class="price-tag">12 <span>€</span></span><button class="btn-card" onclick="openCoinOrder('350 Pièces', '12 €')">Sélectionner</button></div>
+        <div class="card-premium"><h3>700 Pièces</h3><span class="price-tag">20 <span>€</span></span><button class="btn-card" onclick="openCoinOrder('700 Pièces', '20 €')">Sélectionner</button></div>
+        <div class="card-premium"><h3>1400 Pièces</h3><span class="price-tag">35 <span>€</span></span><button class="btn-card" onclick="openCoinOrder('1400 Pièces', '35 €')">Sélectionner</button></div>
+        <div class="card-premium"><h3>3500 Pièces</h3><span class="price-tag">50 <span>€</span></span><button class="btn-card" onclick="openCoinOrder('3500 Pièces', '50 €')">Sélectionner</button></div>
         <div class="card-premium"><h3>7000 Pièces</h3><span class="price-tag">80 <span>€</span></span><button class="btn-card" onclick="openCoinOrder('7000 Pièces', '80 €')">Sélectionner</button></div>
-        <div class="card-premium"><h3>17500 Pièces</h3><span class="price-tag">90 <span>€</span></span><button class="btn-card" onclick="openCoinOrder('17500 Pièces', '90 €')">Sélectionner</button></div>
+        <div class="card-premium"><h3>17500 Pièces</h3><span class="price-tag">150 <span>€</span></span><button class="btn-card" onclick="openCoinOrder('17500 Pièces', '150 €')">Sélectionner</button></div>
       </div>
       <!-- COIN FORM -->
       <div id="coinOrderForm" class="configurator" style="display:none; margin-top:40px; max-width:600px; margin-left:auto; margin-right:auto;">
@@ -538,7 +529,7 @@
   <div class="ai-chat" id="aiChat">
     <div class="ai-chat-header"><span>Assistant IA</span><div class="actions"><button id="aiSettingsBtn">⚙️</button><button id="aiClose">×</button></div></div>
     <div class="ai-settings-panel" id="aiSettingsPanel">
-      <label>Provider</label><select id="aiProvider"><option value="none">FAQ Fallback</option><option value="gemini">Gemini</option><option value="deepseek">DeepSeek</option></select>
+      <label>Provider</label><select id="aiProvider"><option value="none">FAQ Fallback</option><option value="gemini">Gemini</option><option value="deepseek">DeepSeek</option><option value="ollama">Ollama</option></select>
       <label>Key</label><input type="password" id="aiApiKey"><button class="btn-primary" id="saveAiSettings" style="font-size:0.7rem;">Sauver</button>
     </div>
     <div class="ai-chat-body" id="aiChatBody"><div class="ai-msg bot">Bonjour ! Comment puis-je vous aider ?</div></div>
@@ -602,7 +593,14 @@ function openCoinOrder(t, p) {
   window.selectedCoin = {t,p};
 }
 function submitCoinOrder() {
-  const msg = `*COINS*\nOffre: ${window.selectedCoin.t}\nUser: ${document.getElementById('coinUser').value}`;
+  const msg = `*COINS*\nOffre: ${window.selectedCoin.t}\nUser: ${document.getElementById('coinUser').value}\nNom: ${document.getElementById('coinName').value}\nWhatsApp: ${document.getElementById('coinWhatsapp').value}`;
+  window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(msg)}`, '_blank');
+}
+
+function orderFreeViews() {
+  const link = document.getElementById('tiktokLink').value;
+  if(!link) return alert("Veuillez fournir un lien TikTok");
+  const msg = `*ESSAI GRATUIT LEOFARME*\n\nLien TikTok: ${link}\nJe souhaite mes 100 vues gratuites.`;
   window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(msg)}`, '_blank');
 }
 
