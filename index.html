@@ -1,145 +1,659 @@
-🔥 Let's go ! Je te fais une version avec 2 sections : Accueil (fil d'actualité) et Chat 🐱.
-
 <!DOCTYPE html>
-<html lang="fr">
+<html lang="fr" data-theme="light">
 <head>
-  <meta charset="UTF-8">
-  <title>ARAKFORUM - Politique Anonyme</title>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      background: #1a1a1a;
-      color: #fff;
-      margin: 0;
-      padding: 0;
-    }
-    .container {
-      max-width: 800px;
-      margin: auto;
-      padding: 20px;
-    }
-    .nav {
-      display: flex;
-      gap: 20px;
-      margin-bottom: 20px;
-    }
-    .nav a {
-      color: #4CAF50;
-      text-decoration: none;
-      cursor: pointer;
-    }
-    .nav a.active {
-      font-weight: bold;
-      border-bottom: 2px solid #4CAF50;
-    }
-    .section {
-      display: none;
-    }
-    .section.active {
-      display: block;
-    }
-    .post {
-      background: #333;
-      padding: 15px;
-      margin: 10px 0;
-      border-radius: 5px;
-    }
-    .pseudo {
-      color: #4CAF50;
-      font-weight: bold;
-    }
-    input, textarea {
-      width: 100%;
-      padding: 10px;
-      margin: 5px 0;
-      background: #444;
-      border: none;
-      color: #fff;
-    }
-    button {
-      padding: 10px 20px;
-      background: #4CAF50;
-      border: none;
-      color: #fff;
-      cursor: pointer;
-    }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CAPLAN & GOLD — Agence Digitale Premium</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  /* ===== THEME VARIABLES ===== */
+  [data-theme="dark"] {
+    --gold: #C9A84C;
+    --gold-light: #E8C96A;
+    --gold-pale: #F5E9C8;
+    --bg: #0A0A0A;
+    --surface: #111111;
+    --surface2: #1A1A1A;
+    --surface3: #222222;
+    --grey: #888888;
+    --text: #FAFAF7;
+    --text-muted: #999;
+    --border: rgba(255,255,255,0.07);
+    --border-gold: rgba(201,168,76,0.15);
+    --nav-bg: rgba(10,10,10,0.95);
+    --shadow: 0 20px 60px rgba(0,0,0,0.4);
+    --input-bg: #111;
+    --toggle-bg: #222;
+  }
+  [data-theme="light"] {
+    --gold: #916113;
+    --gold-light: #A8731A;
+    --gold-pale: #FFF8EC;
+    --bg: #FDFCFB;
+    --surface: #FFFFFF;
+    --surface2: #F5F2EE;
+    --surface3: #E8E4DC;
+    --grey: #5A544E;
+    --text: #1A1612;
+    --text-muted: #666;
+    --border: rgba(0,0,0,0.1);
+    --border-gold: rgba(145,97,19,0.25);
+    --nav-bg: rgba(253,252,251,0.98);
+    --shadow: 0 10px 40px rgba(0,0,0,0.08);
+    --input-bg: #FDFCFB;
+    --toggle-bg: #E8E4DC;
+  }
+
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 300;
+    overflow-x: hidden;
+    cursor: none;
+    transition: background 0.4s, color 0.4s;
+  }
+
+  /* ===== CURSOR ===== */
+  .cursor { width:10px;height:10px;background:var(--gold);border-radius:50%;position:fixed;top:0;left:0;pointer-events:none;z-index:9999; }
+  .cursor-ring { width:36px;height:36px;border:1px solid var(--gold);border-radius:50%;position:fixed;top:0;left:0;pointer-events:none;z-index:9998;transition:width .3s,height .3s,opacity .3s;opacity:0.6; }
+
+  /* ===== NAV ===== */
+  nav {
+    position: fixed; top:0;left:0;right:0;z-index:1000;
+    padding: 22px 40px;
+    display: flex; align-items:center;justify-content:space-between;
+    background: var(--nav-bg);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+    transition: background 0.4s, border-color 0.4s;
+  }
+  .logo { font-family:'Playfair Display',serif;font-size:1.3rem;font-weight:700;letter-spacing:0.08em;color:var(--text); text-decoration: none; flex-shrink: 0; }
+  .logo span { color:var(--gold); }
+  .nav-links { display:flex;gap:24px;list-style:none; flex-wrap: wrap; justify-content: center; }
+  .nav-links a { font-size:0.78rem;letter-spacing:0.15em;text-transform:uppercase;color:var(--grey);text-decoration:none;transition:color .3s; }
+  .nav-links a:hover { color:var(--gold); }
+  .nav-right { display:flex;align-items:center;gap:20px; }
+
+  /* MOBILE NAV */
+  .mobile-nav-toggle { display: none; flex-direction: column; gap: 6px; background: none; border: none; cursor: pointer; }
+  .mobile-nav-toggle .bar { width: 24px; height: 2px; background: var(--gold); transition: all 0.3s; }
+
+  /* THEME TOGGLE */
+  .theme-toggle {
+    width: 52px; height: 28px;
+    background: var(--toggle-bg);
+    border-radius: 14px;
+    border: 1px solid var(--border-gold);
+    position: relative;
+    cursor: pointer;
+    transition: background 0.3s;
+    flex-shrink: 0;
+  }
+  .theme-toggle::before {
+    content: '';
+    position: absolute;
+    top: 3px; left: 3px;
+    width: 20px; height: 20px;
+    border-radius: 50%;
+    background: var(--gold);
+    transition: transform 0.35s cubic-bezier(.34,1.56,.64,1);
+  }
+  [data-theme="light"] .theme-toggle::before { transform: translateX(24px); }
+  .toggle-icons { position:absolute;inset:0;display:flex;align-items:center;justify-content:space-between;padding:0 7px;font-size:0.6rem;pointer-events:none; }
+
+  .nav-cta { font-size:0.75rem;letter-spacing:0.15em;text-transform:uppercase;color:#000;background:var(--gold);padding:10px 24px;text-decoration:none;font-weight:500;transition:background .3s,transform .2s; }
+  .nav-cta:hover { background:var(--gold-light);transform:translateY(-1px); }
+
+  /* ===== PAGE TRANSITION ===== */
+  .page-view {
+    display: none;
+    opacity: 0;
+    transition: opacity 0.4s ease-in-out;
+  }
+  .page-view.active {
+    display: block;
+    opacity: 1;
+  }
+
+  /* ===== HERO ===== */
+  #home { min-height:100vh;display:grid;grid-template-columns:1fr 1fr;position:relative;overflow:hidden; }
+  .hero-left { display:flex;flex-direction:column;justify-content:center;padding:120px 60px 80px;position:relative;z-index:2; }
+  .hero-eyebrow { font-size:0.72rem;letter-spacing:0.3em;text-transform:uppercase;color:var(--gold);margin-bottom:32px;display:flex;align-items:center;gap:12px;opacity:0;transform:translateY(20px);animation:fadeUp .8s .2s forwards; }
+  .hero-eyebrow::before { content:'';display:block;width:32px;height:1px;background:var(--gold); }
+  h1 { font-family:'Playfair Display',serif;font-size:clamp(2.8rem,5vw,5rem);line-height:1.05;font-weight:900;opacity:0;transform:translateY(30px);animation:fadeUp .9s .4s forwards; }
+  h1 em { font-style:italic;color:var(--gold); }
+  .hero-desc { font-size:1rem;color:var(--grey);max-width:420px;line-height:1.8;margin-top:28px;opacity:0;transform:translateY(20px);animation:fadeUp .8s .65s forwards; }
+  .hero-actions { display:flex;align-items:center;gap:28px;margin-top:44px;opacity:0;transform:translateY(20px);animation:fadeUp .8s .85s forwards; }
+  .btn-primary { background:var(--gold);color:#000;font-size:0.78rem;letter-spacing:0.18em;text-transform:uppercase;font-weight:500;padding:15px 34px;text-decoration:none;transition:background .3s,transform .2s;display:inline-block; border: none; font-family: 'DM Sans', sans-serif; cursor: pointer; }
+  .btn-primary:hover { background:var(--gold-light);transform:translateY(-2px); }
+  .btn-ghost { color:var(--text);font-size:0.78rem;letter-spacing:0.15em;text-transform:uppercase;text-decoration:none;display:flex;align-items:center;gap:10px;opacity:0.6;transition:opacity .3s; }
+  .btn-ghost:hover { opacity:1; }
+  .hero-stats { display:flex;gap:48px;margin-top:60px;padding-top:40px;border-top:1px solid var(--border);opacity:0;animation:fadeUp .8s 1.1s forwards; }
+  .stat-val { font-family:'Playfair Display',serif;font-size:2.2rem;font-weight:700;color:var(--gold);line-height:1; }
+  .stat-label { font-size:0.72rem;letter-spacing:0.12em;text-transform:uppercase;color:var(--grey);margin-top:6px; }
+  .hero-right { position:relative;overflow:hidden; }
+  .hero-visual { position:absolute;inset:0;background:var(--bg); display:flex; align-items:center; justify-content:center; }
+  .hero-images { position:relative; width:80%; height:70%; }
+  .hero-img-wrapper { position:absolute; border:1px solid var(--border-gold); background:var(--surface); padding:8px; box-shadow:var(--shadow); transition:transform .4s; }
+  .hero-img-wrapper:nth-child(1) { top:10%; left:10%; width:70%; z-index:1; transform:rotate(-4deg); }
+  .hero-img-wrapper:nth-child(2) { bottom:15%; right:5%; width:65%; z-index:2; transform:rotate(3deg); }
+  .hero-img-wrapper img { width:100%; height:auto; display:block; filter:grayscale(20%); transition:filter .4s; }
+  .hero-img-wrapper:hover { transform:scale(1.05) rotate(0deg); z-index:3; }
+  .hero-img-wrapper:hover img { filter:grayscale(0%); }
+  .gold-line { position:absolute;bottom:0;left:0;right:0;height:4px;background:linear-gradient(90deg,transparent,var(--gold),transparent);z-index:3}
+
+  /* ===== SECTIONS ===== */
+  section { padding: 100px 60px; }
+  .section-tag { font-size:0.7rem;letter-spacing:0.3em;text-transform:uppercase;color:var(--gold);display:flex;align-items:center;gap:12px;margin-bottom:20px; }
+  .section-tag::before { content:'';display:block;width:24px;height:1px;background:var(--gold); }
+  h2 { font-family:'Playfair Display',serif;font-size:clamp(2rem,3.8vw,3.4rem);line-height:1.1;font-weight:900; }
+  h2 em { font-style:italic;color:var(--gold); }
+
+  /* ===== ABOUT ===== */
+  #about { background:var(--surface);display:grid;grid-template-columns:1fr 1fr;gap:100px;align-items:center; padding-top: 160px; }
+  .about-text p { font-size:1rem;color:var(--grey);line-height:1.9;margin-top:24px;max-width:480px; }
+  .about-right { display:grid;grid-template-columns:1fr 1fr;gap:16px; }
+  .about-card { background:var(--surface2);border:1px solid var(--border-gold);padding:28px 22px;position:relative;overflow:hidden;transition:border-color .3s,transform .3s; }
+  .about-card::before { content:'';position:absolute;top:0;left:0;right:0;height:2px;background:var(--gold);transform:scaleX(0);transform-origin:left;transition:transform .4s; }
+  .about-card:hover { border-color:rgba(201,168,76,0.35);transform:translateY(-4px); }
+  .about-card:hover::before { transform:scaleX(1); }
+  .card-icon { font-size:1.8rem;margin-bottom:14px; }
+  .card-title { font-family:'Playfair Display',serif;font-size:1rem;font-weight:700;margin-bottom:8px; }
+  .card-desc { font-size:0.83rem;color:var(--grey);line-height:1.6; }
+
+  /* ===== SERVICES (QUOTE GEN) ===== */
+  #services { background: var(--bg); padding-top: 160px; }
+  .quote-container { background: var(--surface); border: 1px solid var(--border); padding: 40px; display: grid; grid-template-columns: 1.5fr 1fr; gap: 40px; box-shadow: var(--shadow); }
+  .quote-step { margin-bottom: 30px; }
+  .quote-step-title { font-family: 'Playfair Display', serif; font-size: 1.2rem; font-weight: 700; margin-bottom: 15px; display: flex; align-items: center; gap: 10px; }
+  .quote-step-title span { width: 24px; height: 24px; background: var(--gold); color: #000; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 0.8rem; }
+  .quote-options { display: flex; flex-wrap: wrap; gap: 10px; }
+  .quote-opt { padding: 10px 20px; background: var(--surface2); border: 1.5px solid var(--border); cursor: pointer; transition: all 0.3s; font-size: 0.9rem; display: flex; align-items: center; gap: 8px; }
+  .quote-opt:hover { border-color: var(--gold); }
+  .quote-opt.selected { border-color: var(--gold); background: rgba(145, 97, 19, 0.1); color: var(--gold); }
+  .quote-summary { background: var(--surface2); padding: 30px; border: 1px solid var(--border-gold); position: sticky; top: 120px; height: fit-content; }
+  .summary-line { display: flex; justify-content: space-between; padding: 12px 0; border-bottom: 1px solid var(--border); font-size: 0.9rem; }
+  .summary-total { margin-top: 20px; padding-top: 20px; border-top: 2px solid var(--gold); display: flex; justify-content: space-between; align-items: center; }
+  .total-label { font-weight: 700; color: var(--gold); }
+  .total-price { font-family: 'Playfair Display', serif; font-size: 1.8rem; font-weight: 900; }
+
+  /* GRID PREMIUM */
+  .grid-premium { display:grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap:24px; margin-top:40px; }
+  .card-premium { background:var(--surface); border:1px solid var(--border); padding:32px; transition:all .3s; position:relative; overflow:hidden; }
+  .card-premium:hover { border-color:var(--gold); transform:translateY(-5px); box-shadow:var(--shadow); }
+  .card-premium::before { content:''; position:absolute; top:0; left:0; width:100%; height:3px; background:var(--gold); transform:scaleX(0); transform-origin:left; transition:transform .4s; }
+  .card-premium:hover::before { transform:scaleX(1); }
+  .card-premium .icon { font-size:2.4rem; margin-bottom:20px; }
+  .card-premium h3 { font-family:'Playfair Display',serif; font-size:1.3rem; margin-bottom:12px; }
+  .card-premium .details { list-style:none; margin-bottom:24px; }
+  .card-premium .details li { font-size:0.85rem; color:var(--grey); margin-bottom:8px; display:flex; align-items:center; gap:8px; }
+  .card-premium .details li::before { content:'✓'; color:var(--gold); font-weight:bold; }
+  .card-premium .price-tag { font-family:'Playfair Display',serif; font-size:1.8rem; font-weight:900; color:var(--gold); margin-bottom:20px; display:block; }
+  .card-premium .price-tag span { font-size:0.9rem; font-weight:400; opacity:0.7; }
+  .btn-card { width:100%; padding:12px; background:var(--surface2); border:1px solid var(--border); color:var(--text); text-transform:uppercase; letter-spacing:0.1em; font-size:0.75rem; font-weight:500; cursor:pointer; transition:all .2s; }
+  .card-premium:hover .btn-card { background:var(--gold); color:#000; border-color:var(--gold); }
+
+  /* FORM FIELDS */
+  .field-group { display:flex; flex-direction:column; gap:8px; }
+  .field-label { font-size:0.75rem; text-transform:uppercase; letter-spacing:0.1em; color:var(--grey); }
+  .field-label span { color: #ff4444; margin-left:4px; }
+  .field-input { width:100%; padding:12px 16px; background:var(--input-bg); border:1.5px solid var(--border); color:var(--text); font-family:inherit; font-size:0.9rem; transition:border-color .2s; }
+  .field-input:focus { outline:none; border-color:var(--gold); }
+
+  .order-btn { display:block;width:100%;padding:16px; background:var(--gold);color:#000; font-size:0.8rem;letter-spacing:0.18em;text-transform:uppercase;font-weight:500; border:none;cursor:pointer;margin-top:20px; transition:background .3s,transform .2s; font-family:'DM Sans',sans-serif; }
+  .order-btn:hover { background:var(--gold-light);transform:translateY(-2px); }
+  .order-btn:disabled { background:var(--surface3);color:var(--grey);cursor:not-allowed;transform:none; }
+
+
+  /* ===== TESTIMONIALS ===== */
+  #testimonials { background:var(--bg);overflow:hidden; padding-top: 160px; }
+  .testimonials-track { display:flex;gap:24px;animation:marquee 30s linear infinite;width:max-content; }
+  .testimonial-card { background:var(--surface);border:1px solid var(--border-gold);padding:36px 36px 32px;width:380px;flex-shrink:0;position:relative; }
+  .testimonial-text { font-size:0.9rem;color:var(--text);line-height:1.8;opacity:0.85;padding-top:28px; }
+  .author-avatar { width:40px;height:40px;border-radius:50%;background:linear-gradient(135deg,var(--gold),var(--surface2));display:flex;align-items:center;justify-content:center;font-family:'Playfair Display',serif;font-size:1rem;font-weight:700;color:#000; }
+
+  /* ===== CTA ===== */
+  #cta { background:var(--surface);text-align:center;padding:140px 60px;position:relative;overflow:hidden; }
+  .btn-outline { font-size:0.78rem;letter-spacing:0.18em;text-transform:uppercase;color:var(--text);border:1px solid var(--border);padding:15px 36px;text-decoration:none;transition:border-color .3s,color .3s; }
+  .btn-outline:hover { border-color:var(--gold);color:var(--gold); }
+
+  /* ===== FOOTER ===== */
+  footer { background:var(--bg);border-top:1px solid var(--border);padding:60px;display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:60px; }
+  .footer-bottom { background:var(--bg);border-top:1px solid var(--border);padding:22px 60px;display:flex;justify-content:space-between;align-items:center; }
+
+  /* ===== MODAL ===== */
+  .modal-overlay { position:fixed;inset:0;background:rgba(0,0,0,0.75);z-index:1100;display:flex;align-items:center;justify-content:center;opacity:0;pointer-events:none;transition:opacity .3s; }
+  .modal-overlay.open { opacity:1;pointer-events:all; }
+  .modal { background:var(--surface);border:1px solid var(--border-gold);padding:48px;max-width:520px;width:90%;position:relative;transform:scale(0.95);transition:transform .3s; }
+  .modal-close { position:absolute;top:16px;right:20px;background:none;border:none;color:var(--grey);font-size:1.5rem;cursor:pointer; }
+  .modal-detail { background:var(--surface2);padding:20px;margin-bottom:24px;font-size:0.85rem;line-height:1.8; }
+
+  /* ===== ANIMATIONS ===== */
+  @keyframes fadeUp { to{opacity:1;transform:translateY(0)} }
+  @keyframes marquee { from{transform:translateX(0)} to{transform:translateX(-50%)} }
+  .reveal { opacity:0;transform:translateY(28px);transition:opacity .7s,transform .7s; }
+  .reveal.visible { opacity:1;transform:translateY(0); }
+  .reveal-delay-1{transition-delay:.1s}.reveal-delay-2{transition-delay:.2s}.reveal-delay-3{transition-delay:.3s}
+
+  ::-webkit-scrollbar{width:4px}::-webkit-scrollbar-track{background:var(--bg)}::-webkit-scrollbar-thumb{background:var(--gold)}
+
+  /* MUSIC TOGGLE */
+  .music-control { position: fixed; bottom: 30px; left: 30px; z-index: 1001; width: 44px; height: 44px; background: var(--surface2); border: 1px solid var(--border-gold); border-radius: 50%; display: flex; align-items: center; justify-content: center; cursor: pointer; box-shadow: var(--shadow); }
+  .music-waves { display: flex; align-items: center; gap: 2px; height: 12px; }
+  .wave { width: 2px; height: 100%; background: var(--gold); animation: wave-anim 1s ease-in-out infinite; }
+  .wave:nth-child(2) { animation-delay: 0.2s; }
+  .wave:nth-child(3) { animation-delay: 0.4s; }
+  @keyframes wave-anim { 0%, 100% { height: 4px; } 50% { height: 12px; } }
+  .music-control.paused .wave { animation-play-state: paused; height: 4px; }
+
+  /* AI WIDGET */
+  .ai-widget { position: fixed; bottom: 30px; right: 30px; z-index: 1001; }
+  .ai-toggle { width: 60px; height: 60px; background: var(--gold); border-radius: 50%; display: flex; align-items: center; justify-content: center; cursor: pointer; box-shadow: 0 10px 30px rgba(0,0,0,0.3); transition: transform 0.3s; }
+  .ai-chat { position: absolute; bottom: 80px; right: 0; width: 320px; background: var(--surface); border: 1px solid var(--border-gold); box-shadow: var(--shadow); display: none; flex-direction: column; overflow: hidden; }
+  .ai-chat.active { display: flex; animation: fadeIn 0.3s forwards; }
+  .ai-chat-header { background: var(--gold); padding: 15px; color: #000; font-weight: 700; display: flex; justify-content: space-between; align-items: center; }
+  .ai-settings-panel { background: var(--surface2); padding: 20px; border-bottom: 1px solid var(--border); display: none; flex-direction: column; gap: 12px; }
+  .ai-settings-panel.active { display: flex; }
+  .ai-chat-body { padding: 20px; max-height: 350px; overflow-y: auto; font-size: 0.85rem; line-height: 1.6; }
+  .ai-msg { margin-bottom: 15px; padding: 10px 14px; border-radius: 12px; }
+  .ai-msg.bot { background: var(--surface2); color: var(--text); border-bottom-left-radius: 2px; }
+  .ai-msg.user { background: var(--gold); color: #000; margin-left: 20px; border-bottom-right-radius: 2px; }
+  .ai-chat-footer { padding: 15px; border-top: 1px solid var(--border); display: flex; gap: 8px; }
+  .ai-input { flex: 1; background: var(--input-bg); border: 1px solid var(--border); padding: 8px 12px; color: var(--text); font-size: 0.8rem; }
+  .ai-send { background: var(--gold); border: none; color: #000; padding: 8px 15px; cursor: pointer; font-weight: 700; }
+
+  @media (max-width: 992px) {
+    .nav-links { display: none; position: fixed; top: 0; right: 0; width: 280px; height: 100vh; background: var(--surface); flex-direction: column; padding: 120px 40px; box-shadow: -10px 0 30px rgba(0,0,0,0.5); z-index: 999; }
+    .nav-links.active { display: flex; }
+    .mobile-nav-toggle { display: flex; z-index: 1000; }
+    #home { grid-template-columns: 1fr; }
+    .hero-right { display: none; }
+    .quote-container { grid-template-columns: 1fr; }
+  }
+</style>
 </head>
 <body>
-  <div class="container">
-    <h1>ARAKFORUM - Politique</h1>
-    <p>Discutez anonymement de politique (Afrique & Monde)</p>
 
-    <!-- Navigation -->
-    <div class="nav">
-      <a onclick="showSection('accueil')">Accueil</a>
-      <a onclick="showSection('chat')">Chat 🐱</a>
-    </div>
+<div class="cursor" id="cursor"></div>
+<div class="cursor-ring" id="cursorRing"></div>
 
-    <!-- Sections -->
-    <div id="accueil" class="section active">
-      <h2>Fil d'actualité</h2>
-      <textarea id="newPostAccueil" placeholder="Écris un post..."></textarea>
-      <button onclick="addPost('accueil')">Poster</button>
-      <div id="postsAccueil"></div>
-    </div>
-
-    <div id="chat" class="section">
-      <h2>Chat 🐱</h2>
-      <input id="newMsgChat" placeholder="Écris un message...">
-      <button onclick="addPost('chat')">Envoyer</button>
-      <div id="postsChat"></div>
-    </div>
+<!-- MUSIC -->
+<div class="music-control paused" id="musicToggle">
+  <div class="music-waves">
+    <div class="wave"></div>
+    <div class="wave"></div>
+    <div class="wave"></div>
   </div>
+</div>
+<audio id="bgMusic" loop>
+  <source src="https://www.chosic.com/wp-content/uploads/2021/07/The-Lounge-chosic.com_.mp3" type="audio/mpeg">
+</audio>
 
-  <script>
-    // Génère un pseudo aléatoire
-    function getPseudo() {
-      const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
-      let pseudo = '';
-      for (let i = 0; i < 8; i++) {
-        pseudo += chars.charAt(Math.floor(Math.random() * chars.length));
-      }
-      return pseudo;
-    }
+<!-- NAV -->
+<nav>
+  <a href="#home" class="logo">CAPLAN <span>&</span> GOLD</a>
+  <ul class="nav-links" id="navLinks">
+    <li><a href="#about">À propos</a></li>
+    <li><a href="#services">Services</a></li>
+    <li><a href="#comptes">Marketplace</a></li>
+    <li><a href="#formations">Académie</a></li>
+    <li><a href="#leofarme">LEOFARME</a></li>
+    <li><a href="#affiliation">Affiliation</a></li>
+    <li><a href="#testimonials">Clients</a></li>
+  </ul>
+  <div class="nav-right">
+    <div class="theme-toggle" id="themeToggle" title="Basculer le thème">
+      <div class="toggle-icons"><span>🌙</span><span>☀️</span></div>
+    </div>
+    <a href="#services" class="nav-cta">Commander</a>
+    <button class="mobile-nav-toggle" id="mobileNavToggle"><span class="bar"></span><span class="bar"></span><span class="bar"></span></button>
+  </div>
+</nav>
 
-    // Affiche une section
-    function showSection(id) {
-      document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
-      document.querySelectorAll('.nav a').forEach(a => a.classList.remove('active'));
-      document.getElementById(id).classList.add('active');
-      document.querySelector(`.nav a[onclick*="${id}"]`).classList.add('active');
-    }
-
-    // Ajoute un post
-    function addPost(type) {
-      const input = type === 'accueil' ? 'newPostAccueil' : 'newMsgChat';
-      const postsDiv = type === 'accueil' ? 'postsAccueil' : 'postsChat';
-      const text = document.getElementById(input).value;
-      if (text.trim() === '') return;
-      const pseudo = getPseudo();
-      const post = `
-        <div class="post">
-          <span class="pseudo">${pseudo}</span>: ${text}
+<!-- HOME -->
+<div id="homeView" class="page-view active">
+  <section id="home">
+    <div class="hero-left">
+      <div class="hero-eyebrow">Agence digitale premium</div>
+      <h1>Votre contenu<br>social, <em>créé</em><br>sur-mesure.</h1>
+      <p class="hero-desc">CAPLAN & GOLD crée du contenu premium pour TikTok, Instagram, Facebook et YouTube — adapté à votre niche, livré avec précision.</p>
+      <div class="hero-actions">
+        <a href="#services" class="btn-primary">Découvrir nos services</a>
+      </div>
+      <div class="hero-stats">
+        <div><div class="stat-val">250+</div><div class="stat-label">Clients actifs</div></div>
+        <div><div class="stat-val">98%</div><div class="stat-label">Satisfaction</div></div>
+        <div><div class="stat-val">8M+</div><div class="stat-label">Portée mensuelle</div></div>
+      </div>
+    </div>
+    <div class="hero-right">
+      <div class="hero-visual">
+        <div class="hero-images">
+          <div class="hero-img-wrapper reveal"> <img src="https://thumbor.comeup.com/U6dX1aImg9R2R5YX1GFu8ZnLOq8=/fit-in/760x427/filters:quality(90):no_upscale()/uploads/media/picture/2026-04-28/bef5cb1c-2511e79e-27d9-4351-9f43-850dfc904e04-69f0cb54a3a6b.png" alt="Miniature YouTube"> </div>
+          <div class="hero-img-wrapper reveal reveal-delay-2"> <img src="https://thumbor.comeup.com/SpomXDlKdqFiUEDx9FuB8smE3w4=/fit-in/760x427/filters:quality(90):no_upscale()/uploads/media/picture/2026-05-26/2b6bf03f-Swello-6a155622cc9cc.png" alt="Boost Audience YouTube"> </div>
         </div>
-      `;
-      document.getElementById(postsDiv).innerHTML += post;
-      document.getElementById(input).value = '';
+      </div>
+      <div class="gold-line"></div>
+    </div>
+  </section>
+
+  <section id="cta">
+    <div class="cta-eyebrow reveal">Prêt à vous lancer ?</div>
+    <h2 class="reveal reveal-delay-1">Élevons votre marque<br>vers l'<em>excellence</em>.</h2>
+    <p class="reveal reveal-delay-2">Rejoignez plus de 250 entreprises qui font confiance à CAPLAN & GOLD. Premier brief gratuit, sans engagement.</p>
+    <div class="cta-buttons reveal reveal-delay-3">
+      <a href="#services" class="btn-primary">Découvrir nos services</a>
+      <a href="mailto:rkouton243@gmail.com" class="btn-outline">Nous contacter</a>
+    </div>
+  </section>
+</div>
+
+<!-- ABOUT -->
+<div id="aboutView" class="page-view">
+  <section id="about">
+    <div class="about-text">
+      <div class="section-tag reveal">Qui sommes-nous</div>
+      <h2 class="reveal reveal-delay-1">L'art de la<br><em>création</em> digitale.</h2>
+      <p class="reveal reveal-delay-2">Fondée par des passionnés du digital, CAPLAN & GOLD est une agence de création de contenu qui allie créativité et performance. Nous produisons des vidéos, posts et visuels qui captivent.</p>
+      <p class="reveal reveal-delay-3">Notre approche : comprendre votre niche, créer du contenu sur-mesure et mesurer chaque résultat avec précision.</p>
+    </div>
+    <div class="about-right">
+      <div class="about-card reveal"><div class="card-icon">🎬</div><div class="card-title">Vidéos & Reels</div><div class="card-desc">Productions vidéo professionnelles adaptées à chaque plateforme.</div></div>
+      <div class="about-card reveal reveal-delay-1"><div class="card-icon">📊</div><div class="card-title">Data-driven</div><div class="card-desc">Décisions basées sur les performances et les tendances réelles.</div></div>
+      <div class="about-card reveal reveal-delay-2"><div class="card-icon">🌍</div><div class="card-title">Multi-plateformes</div><div class="card-desc">TikTok, Instagram, Facebook, YouTube — présence cohérente partout.</div></div>
+      <div class="about-card reveal reveal-delay-3"><div class="card-icon">⚡</div><div class="card-title">Livraison rapide</div><div class="card-desc">Contenus livrés dans les délais, avec un suivi en temps réel.</div></div>
+    </div>
+  </section>
+</div>
+
+<!-- MARKETPLACE (COMPTES) -->
+<div id="comptesView" class="page-view">
+  <section id="comptes" style="padding-top: 160px;">
+    <div class="section-tag reveal">Marketplace</div>
+    <h2 class="reveal reveal-delay-1">Services <em>Digitaux</em>.</h2>
+    <p class="reveal reveal-delay-2" style="color:var(--grey); margin-top:20px; max-width:600px;">Des solutions professionnelles pour propulser votre business.</p>
+
+    <h3 class="reveal" style="margin-top:60px; font-family:'Playfair Display',serif; color:var(--gold); border-bottom:1px solid var(--border-gold); padding-bottom:10px;">📱 Montage Vidéo & UGC</h3>
+    <div class="grid-premium">
+      <div class="card-premium reveal"><h3>Montage Reels/TikTok</h3><span class="price-tag">3 500 <span>FCFA</span></span><button class="btn-card" onclick="orderProduct('Montage Reels', '3 500 FCFA')">Commander</button></div>
+      <div class="card-premium reveal"><h3>Montage ADS/VSL</h3><span class="price-tag">5 000 <span>FCFA</span></span><button class="btn-card" onclick="orderProduct('Montage ADS', '5 000 FCFA')">Commander</button></div>
+      <div class="card-premium reveal"><h3>Publicité UGC</h3><span class="price-tag">4 000 <span>FCFA</span></span><button class="btn-card" onclick="orderProduct('UGC', '4 000 FCFA')">Commander</button></div>
+    </div>
+
+    <h3 class="reveal" style="margin-top:40px; font-family:'Playfair Display',serif; color:var(--gold); border-bottom:1px solid var(--border-gold); padding-bottom:10px;">📈 SEO & Web</h3>
+    <div class="grid-premium">
+      <div class="card-premium reveal"><h3>Backlinks SEO</h3><span class="price-tag">3 000 <span>FCFA</span></span><button class="btn-card" onclick="orderProduct('Backlinks SEO', '3 000 FCFA')">Commander</button></div>
+      <div class="card-premium reveal"><h3>Optimisation Site</h3><span class="price-tag">4 500 <span>FCFA</span></span><button class="btn-card" onclick="orderProduct('Optimisation Site', '4 500 FCFA')">Commander</button></div>
+      <div class="card-premium reveal"><h3>Tunnel Systeme.io</h3><span class="price-tag">5 000 <span>FCFA</span></span><button class="btn-card" onclick="orderProduct('Tunnel Vente', '5 000 FCFA')">Commander</button></div>
+    </div>
+
+    <h3 class="reveal" style="margin-top:40px; font-family:'Playfair Display',serif; color:var(--gold); border-bottom:1px solid var(--border-gold); padding-bottom:10px;">👤 Comptes & RH</h3>
+    <div class="grid-premium">
+      <div class="card-premium reveal"><h3>Comptes Publicitaires</h3><span class="price-tag">3 500 <span>FCFA</span></span><button class="btn-card" onclick="orderProduct('Compte Pub', '3 500 FCFA')">Commander</button></div>
+      <div class="card-premium reveal"><h3>CV Compatible ATS</h3><span class="price-tag">2 500 <span>FCFA</span></span><button class="btn-card" onclick="orderProduct('CV ATS', '2 500 FCFA')">Commander</button></div>
+      <div class="card-premium reveal"><h3>Automatisation IA</h3><span class="price-tag">5 000 <span>FCFA</span></span><button class="btn-card" onclick="orderProduct('Auto IA', '5 000 FCFA')">Commander</button></div>
+    </div>
+  </section>
+</div>
+
+<!-- ACADEMIE (FORMATIONS) -->
+<div id="formationsView" class="page-view">
+  <section id="formations" style="padding-top: 160px;">
+    <div class="section-tag reveal">Académie</div>
+    <h2 class="reveal reveal-delay-1">Nos <em>Formations</em>.</h2>
+    <p class="reveal reveal-delay-2" style="color:var(--grey); margin-top:20px; max-width:600px;">Maîtrisez les algorithmes et monétisez votre présence en ligne.</p>
+
+    <div class="grid-premium">
+      <div class="card-premium reveal"><h3>Pack Éligibilité Pays</h3><span class="price-tag">2 500 <span>FCFA</span></span><button class="btn-card" onclick="orderProduct('Pack Éligibilité', '2 500 FCFA')">Commander</button></div>
+      <div class="card-premium reveal"><h3>Pack Visibilité Audience</h3><span class="price-tag">3 000 <span>FCFA</span></span><button class="btn-card" onclick="orderProduct('Pack Visibilité', '3 000 FCFA')">Commander</button></div>
+      <div class="card-premium reveal"><h3>Masterclass Auto IA</h3><span class="price-tag">4 000 <span>FCFA</span></span><button class="btn-card" onclick="orderProduct('Masterclass IA', '4 000 FCFA')">Commander</button></div>
+      <div class="card-premium reveal"><h3>Guide Montage CapCut</h3><span class="price-tag">2 500 <span>FCFA</span></span><button class="btn-card" onclick="orderProduct('Guide CapCut', '2 500 FCFA')">Commander</button></div>
+    </div>
+  </section>
+</div>
+
+<!-- SERVICES (QUOTE GEN + COINS) -->
+<div id="servicesView" class="page-view">
+  <section id="services" style="padding-top: 160px;">
+    <div class="section-tag reveal">Marketing Digital</div>
+    <h2 class="reveal reveal-delay-1">Générateur de <em>Devis</em>.</h2>
+    <p class="reveal reveal-delay-2" style="color:var(--grey); margin-top:20px;">Simulez votre budget marketing pour les réseaux sociaux.</p>
+
+    <div class="quote-container reveal" style="margin-top:60px;">
+      <div>
+        <div class="quote-step">
+          <div class="quote-step-title"><span>1</span> Plateformes</div>
+          <div class="quote-options" id="platformOpts">
+            <div class="quote-opt" data-id="fb" data-price="1000">Facebook</div>
+            <div class="quote-opt" data-id="ig" data-price="1000">Instagram</div>
+            <div class="quote-opt" data-id="tk" data-price="1500">TikTok</div>
+            <div class="quote-opt" data-id="li" data-price="2000">LinkedIn</div>
+          </div>
+        </div>
+        <div class="quote-step">
+          <div class="quote-step-title"><span>2</span> Services</div>
+          <div class="quote-options" id="serviceOpts">
+            <div class="quote-opt" data-id="content" data-price="3000">Création de Contenu</div>
+            <div class="quote-opt" data-id="cm" data-price="2000">Community Management</div>
+            <div class="quote-opt" data-id="ads" data-price="2500">Gestion Publicitaire (Ads)</div>
+          </div>
+        </div>
+        <div class="quote-step">
+          <div class="quote-step-title"><span>3</span> Volume</div>
+          <div style="display:grid; grid-template-columns: 1fr 1fr; gap: 20px;">
+            <div class="field-group"><label class="field-label">Posts</label><input type="number" id="postQty" class="field-input" value="1" min="1"></div>
+            <div class="field-group"><label class="field-label">Mois</label><input type="number" id="durationQty" class="field-input" value="1" min="1"></div>
+          </div>
+        </div>
+      </div>
+      <div class="quote-summary">
+        <h3 style="font-family:'Playfair Display',serif; margin-bottom: 20px;">Récapitulatif</h3>
+        <div id="summaryItems"></div>
+        <div class="summary-total"><span class="total-label">Total</span><span class="total-price" id="quoteTotalPrice">0 FCFA</span></div>
+        <button class="order-btn" id="generateQuoteBtn">Commander ce Pack →</button>
+      </div>
+    </div>
+
+    <!-- TIKTOK COINS -->
+    <div id="tiktokCoins" class="reveal" style="margin-top:80px;">
+      <h3 style="font-family:'Playfair Display',serif; color:var(--gold); margin-bottom:30px; border-bottom:1px solid var(--border-gold); padding-bottom:10px;">🪙 Pièces TikTok</h3>
+      <div class="grid-premium">
+        <div class="card-premium"><h3>5 Pièces</h3><span class="price-tag">2 <span>€</span></span><button class="btn-card" onclick="openCoinOrder('5 Pièces', '2 €')">Sélectionner</button></div>
+        <div class="card-premium"><h3>70 Pièces</h3><span class="price-tag">9 <span>€</span></span><button class="btn-card" onclick="openCoinOrder('70 Pièces', '9 €')">Sélectionner</button></div>
+        <div class="card-premium"><h3>350 Pièces</h3><span class="price-tag">12 <span>€</span></span><button class="btn-card" onclick="openCoinOrder('350 Pièces', '12 €')">Sélectionner</button></div>
+        <div class="card-premium"><h3>700 Pièces</h3><span class="price-tag">20 <span>€</span></span><button class="btn-card" onclick="openCoinOrder('700 Pièces', '20 €')">Sélectionner</button></div>
+        <div class="card-premium"><h3>1400 Pièces</h3><span class="price-tag">35 <span>€</span></span><button class="btn-card" onclick="openCoinOrder('1400 Pièces', '35 €')">Sélectionner</button></div>
+        <div class="card-premium"><h3>3500 Pièces</h3><span class="price-tag">50 <span>€</span></span><button class="btn-card" onclick="openCoinOrder('3500 Pièces', '50 €')">Sélectionner</button></div>
+        <div class="card-premium"><h3>7000 Pièces</h3><span class="price-tag">80 <span>€</span></span><button class="btn-card" onclick="openCoinOrder('7000 Pièces', '80 €')">Sélectionner</button></div>
+        <div class="card-premium"><h3>17500 Pièces</h3><span class="price-tag">150 <span>€</span></span><button class="btn-card" onclick="openCoinOrder('17500 Pièces', '150 €')">Sélectionner</button></div>
+      </div>
+      <!-- COIN FORM -->
+      <div id="coinOrderForm" class="configurator" style="display:none; margin-top:40px; max-width:600px; margin-left:auto; margin-right:auto;">
+        <div class="config-header"><h3 id="coinFormTitle" style="color:#000;">Commander</h3></div>
+        <div class="config-body" style="display:block; padding:40px;">
+          <div class="field-group"><label class="field-label">Nom</label><input type="text" id="coinName" class="field-input"></div>
+          <div class="field-group" style="margin-top:10px;"><label class="field-label">User TikTok</label><input type="text" id="coinUser" class="field-input"></div>
+          <div class="field-group" style="margin-top:10px;"><label class="field-label">WhatsApp</label><input type="text" id="coinWhatsapp" class="field-input"></div>
+          <button class="order-btn" onclick="submitCoinOrder()">Confirmer →</button>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- LEOFARME -->
+<div id="leofarmeView" class="page-view">
+  <section id="leofarme" style="padding-top: 160px;">
+    <div class="section-tag reveal">Service Gratuit</div>
+    <h2>Essai gratuit de <em>vues TikTok</em></h2>
+    <p style="color:var(--grey); margin-top:20px; max-width:600px;">Envoyez votre lien, recevez 100 vues gratuites toutes les 24h.</p>
+    <div class="configurator reveal" style="margin-top: 40px; max-width: 600px;">
+      <div class="config-body" style="display: block; padding: 40px;">
+        <div class="field-group"><label class="field-label">Lien TikTok</label><input type="text" id="tiktokLink" class="field-input"></div>
+        <button class="order-btn" onclick="orderFreeViews()">Obtenir mes vues</button>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- AFFILIATION -->
+<div id="affiliationView" class="page-view">
+  <section id="affiliation" style="padding-top: 160px;">
+    <div class="section-tag reveal">Partenariat</div>
+    <h2>Devenez <em>Affilié</em></h2>
+    <p style="color:var(--grey); margin-top:20px; max-width:600px;">Gagnez des commissions en recommandant nos services.</p>
+    <div class="grid-premium">
+      <div class="card-premium"><h3>Commissions</h3><p>Recevez un % sur chaque vente.</p></div>
+      <div class="card-premium"><h3>Lien Unique</h3><p>Suivi en temps réel.</p></div>
+      <div class="card-premium"><h3>Support</h3><p>Assistance dédiée.</p></div>
+    </div>
+    <div style="text-align:center; margin-top:40px;"><a href="https://wa.me/2290198905311?text=Affiliation" class="btn-primary">Rejoindre le programme</a></div>
+  </section>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-brand"><span class="logo">CAPLAN <span>&</span> GOLD</span><p>Agence digitale premium au Bénin.</p></div>
+  <div class="footer-col"><h4>Contact</h4><ul><li>rkouton243@gmail.com</li><li>01 98 90 53 11</li></ul></div>
+</footer>
+
+<!-- MODAL -->
+<div class="modal-overlay" id="modalOverlay"><div class="modal"><button class="modal-close" id="modalClose">×</button><h3>Reçu !</h3><div class="modal-detail" id="modalDetail"></div><button class="btn-primary" onclick="document.getElementById('modalOverlay').classList.remove('open')">Fermer</button></div></div>
+
+<!-- AI WIDGET -->
+<div class="ai-widget">
+  <div class="ai-chat" id="aiChat">
+    <div class="ai-chat-header"><span>Assistant IA</span><div class="actions"><button id="aiSettingsBtn">⚙️</button><button id="aiClose">×</button></div></div>
+    <div class="ai-settings-panel" id="aiSettingsPanel">
+      <label>Provider</label><select id="aiProvider"><option value="none">FAQ Fallback</option><option value="gemini">Gemini</option><option value="deepseek">DeepSeek</option><option value="ollama">Ollama</option></select>
+      <label>Key</label><input type="password" id="aiApiKey"><button class="btn-primary" id="saveAiSettings" style="font-size:0.7rem;">Sauver</button>
+    </div>
+    <div class="ai-chat-body" id="aiChatBody"><div class="ai-msg bot">Bonjour ! Comment puis-je vous aider ?</div></div>
+    <div class="ai-chat-footer"><input type="text" class="ai-input" id="aiInput"><button class="ai-send" id="aiSend">OK</button></div>
+  </div>
+  <div class="ai-toggle" id="aiToggle">🤖</div>
+</div>
+
+<script>
+const WHATSAPP_NUMBER = "2290198905311";
+function showView(hash) {
+  const views = document.querySelectorAll('.page-view'); views.forEach(v => v.classList.remove('active'));
+  let targetId = (hash.replace('#','') + 'View') || 'homeView';
+  if (!document.getElementById(targetId)) targetId = 'homeView';
+  document.getElementById(targetId).classList.add('active'); window.scrollTo(0,0);
+}
+window.addEventListener('hashchange', () => showView(window.location.hash));
+showView(window.location.hash || '#home');
+
+const mobileNavToggle = document.getElementById('mobileNavToggle');
+const navLinks = document.getElementById('navLinks');
+mobileNavToggle.onclick = () => navLinks.classList.toggle('active');
+
+const themeToggle = document.getElementById('themeToggle');
+themeToggle.onclick = () => {
+  document.documentElement.dataset.theme = document.documentElement.dataset.theme === 'dark' ? 'light' : 'dark';
+};
+
+const musicToggle = document.getElementById('musicToggle');
+const bgMusic = document.getElementById('bgMusic');
+musicToggle.onclick = () => {
+  if (bgMusic.paused) { bgMusic.play(); musicToggle.classList.remove('paused'); } else { bgMusic.pause(); musicToggle.classList.add('paused'); }
+};
+
+function formatPrice(n){ return n.toLocaleString('fr-FR') + ' FCFA'; }
+function orderProduct(name, price) {
+  const msg = `*COMMANDE*\n\nProduit: ${name}\nPrix: ${price}`;
+  window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(msg)}`, '_blank');
+}
+
+// QUOTE GEN
+const pOpts = document.querySelectorAll('#platformOpts .quote-opt');
+const sOpts = document.querySelectorAll('#serviceOpts .quote-opt');
+function updateQuote() {
+  let total = 0; let html = '';
+  pOpts.forEach(o => { if(o.classList.contains('selected')) { total += parseInt(o.dataset.price); html += `<div>${o.textContent}</div>`; }});
+  sOpts.forEach(o => { if(o.classList.contains('selected')) { total += parseInt(o.dataset.price); html += `<div>${o.textContent}</div>`; }});
+  const final = total * parseInt(document.getElementById('postQty').value) * parseInt(document.getElementById('durationQty').value);
+  document.getElementById('summaryItems').innerHTML = html;
+  document.getElementById('quoteTotalPrice').textContent = formatPrice(final);
+}
+pOpts.forEach(o => o.onclick = () => { o.classList.toggle('selected'); updateQuote(); });
+sOpts.forEach(o => o.onclick = () => { o.classList.toggle('selected'); updateQuote(); });
+document.getElementById('postQty').oninput = updateQuote;
+document.getElementById('durationQty').oninput = updateQuote;
+
+// COINS
+function openCoinOrder(t, p) {
+  document.getElementById('coinOrderForm').style.display='block';
+  document.getElementById('coinFormTitle').textContent = t + ' (' + p + ')';
+  window.selectedCoin = {t,p};
+}
+function submitCoinOrder() {
+  const msg = `*COINS*\nOffre: ${window.selectedCoin.t}\nUser: ${document.getElementById('coinUser').value}\nNom: ${document.getElementById('coinName').value}\nWhatsApp: ${document.getElementById('coinWhatsapp').value}`;
+  window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(msg)}`, '_blank');
+}
+
+function orderFreeViews() {
+  const link = document.getElementById('tiktokLink').value;
+  if(!link) return alert("Veuillez fournir un lien TikTok");
+  const msg = `*ESSAI GRATUIT LEOFARME*\n\nLien TikTok: ${link}\nJe souhaite mes 100 vues gratuites.`;
+  window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(msg)}`, '_blank');
+}
+
+// AI
+const aiToggle = document.getElementById('aiToggle');
+const aiChat = document.getElementById('aiChat');
+aiToggle.onclick = () => aiChat.classList.toggle('active');
+document.getElementById('aiSettingsBtn').onclick = () => document.getElementById('aiSettingsPanel').classList.toggle('active');
+document.getElementById('aiSend').onclick = async () => {
+  const q = document.getElementById('aiInput').value; if(!q) return;
+  const chat = document.getElementById('aiChatBody');
+  const addMsg = (text, type) => {
+    const m = document.createElement('div'); m.className=`ai-msg ${type}`; m.textContent=text;
+    chat.appendChild(m); chat.scrollTop = chat.scrollHeight;
+  };
+  addMsg(q, 'user'); document.getElementById('aiInput').value = '';
+
+  const provider = document.getElementById('aiProvider').value;
+  const key = document.getElementById('aiApiKey').value;
+
+  if (provider === 'none' || !key) {
+    if (q.toLowerCase().includes('achat') || q.toLowerCase().includes('commander')) addMsg("Pour commander, allez dans Services ou Marketplace and cliquez sur Commander.", 'bot');
+    else addMsg("Je suis votre assistant FAQ. Pour des réponses plus poussées, configurez une clé API dans les réglages.", 'bot');
+    return;
+  }
+
+  try {
+    let respText = "Désolé, je ne peux pas répondre pour le moment.";
+    if (provider === 'gemini') {
+      const r = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-pro:generateContent?key=${key}`, {
+        method: 'POST', headers: {'Content-Type':'application/json'},
+        body: JSON.stringify({contents: [{parts: [{text: q}]}]})
+      });
+      const d = await r.json(); respText = d.candidates[0].content.parts[0].text;
+    } else if (provider === 'deepseek') {
+      const r = await fetch('https://api.deepseek.com/v1/chat/completions', {
+        method: 'POST', headers: {'Content-Type':'application/json', 'Authorization': `Bearer ${key}`},
+        body: JSON.stringify({model: "deepseek-chat", messages: [{role:"user", content: q}]})
+      });
+      const d = await r.json(); respText = d.choices[0].message.content;
     }
-  </script>
+    addMsg(respText, 'bot');
+  } catch(e) { addMsg("Erreur de connexion à l'IA.", 'bot'); }
+};
+
+// CURSOR
+const cursor = document.getElementById('cursor'); const ring = document.getElementById('cursorRing');
+document.addEventListener('mousemove', e => {
+  cursor.style.transform = `translate(${e.clientX-5}px, ${e.clientY-5}px)`;
+  ring.style.transform = `translate(${e.clientX-18}px, ${e.clientY-18}px)`;
+});
+const observer = new IntersectionObserver(entries => entries.forEach(e => { if(e.isIntersecting) e.target.classList.add('visible'); }), {threshold:0.1});
+document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+</script>
 </body>
 </html>
-
-
-Comment ça marche ?
-- Accueil : fil d'actualité (posts).
-- Chat 🐱 : messages courts.
-- Les pseudos sont aléatoires.
-- Pas de sauvegarde (reset si rafraîchissement).
-
-Tu veux :
-- Sauvegarder les posts (localStorage) ?
-- Ajouter des réponses aux posts ?
-- Un truc pour voir les nouveaux messages en temps réel ?
-
-Prêt à tester sur ZeroNet ! 😊
