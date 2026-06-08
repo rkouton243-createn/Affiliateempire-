@@ -274,6 +274,15 @@
   .expertise-card p { font-size: 0.88rem; color: var(--grey); line-height: 1.7; margin-bottom: 20px; }
   .expertise-stat { font-family: 'Playfair Display', serif; font-size: 1.8rem; font-weight: 900; color: var(--gold); border-top: 1px solid var(--border); padding-top: 15px; display: block; margin-top: auto; }
 
+  /* ===== SHOWCASE ===== */
+  .showcase-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 30px; margin-top: 40px; }
+  .showcase-item { background: var(--surface); border: 1px solid var(--border-gold); padding: 15px; text-align: center; transition: transform 0.3s; }
+  .showcase-item:hover { transform: translateY(-5px); }
+  .showcase-img { width: 100%; height: auto; aspect-ratio: 1/1; object-fit: cover; border-bottom: 1px solid var(--border); margin-bottom: 15px; }
+  .showcase-name { font-family: 'Playfair Display', serif; font-size: 1.1rem; font-weight: 700; color: var(--gold); }
+  .showcase-video { width: 100%; aspect-ratio: 9/16; border: none; background: #000; }
+  .showcase-stats { font-size: 0.9rem; font-weight: 700; color: var(--gold); margin-top: 10px; text-transform: uppercase; letter-spacing: 0.05em; }
+
   /* ===== MODAL ===== */
   .modal-overlay { position:fixed;inset:0;background:rgba(0,0,0,0.75);z-index:1100;display:flex;align-items:center;justify-content:center;opacity:0;pointer-events:none;transition:opacity .3s; }
   .modal-overlay.open { opacity:1;pointer-events:all; }
@@ -502,6 +511,8 @@
 
     <h3 class="reveal" style="margin-top:40px; font-family:'Playfair Display',serif; color:var(--gold); border-bottom:1px solid var(--border-gold); padding-bottom:10px;">👤 Comptes & RH</h3>
     <div class="grid-premium">
+      <div class="card-premium reveal"><h3>Compte TikTok Monétisé</h3><span class="price-tag">4 000 <span>FCFA</span></span><button class="btn-card" onclick="orderProduct('TikTok Monétisé', '4 000 FCFA')">Commander</button></div>
+      <div class="card-premium reveal"><h3>Compte YouTube Monétisé</h3><span class="price-tag">5 000 <span>FCFA</span></span><button class="btn-card" onclick="orderProduct('YouTube Monétisé', '5 000 FCFA')">Commander</button></div>
       <div class="card-premium reveal"><h3>Comptes Publicitaires</h3><span class="price-tag">3 500 <span>FCFA</span></span><button class="btn-card" onclick="orderProduct('Compte Pub', '3 500 FCFA')">Commander</button></div>
       <div class="card-premium reveal"><h3>CV Compatible ATS</h3><span class="price-tag">2 500 <span>FCFA</span></span><button class="btn-card" onclick="orderProduct('CV ATS', '2 500 FCFA')">Commander</button></div>
       <div class="card-premium reveal"><h3>Automatisation IA</h3><span class="price-tag">5 000 <span>FCFA</span></span><button class="btn-card" onclick="orderProduct('Auto IA', '5 000 FCFA')">Commander</button></div>
@@ -776,20 +787,24 @@
       </div>
     </div>
 
-    <!-- CTA SPECIFIQUE VISIBILITE -->
-    <div class="visibilite-cta reveal reveal-delay-1" style="margin-top:80px;">
-      <div class="vis-cta-content">
-        <div class="vis-price-badge">
-          <span class="vis-price">5 000</span>
-          <span class="vis-currency">FCFA</span>
-        </div>
-        <div class="vis-cta-text">
-          <h3>Prêt à exploser votre visibilité ?</h3>
-          <p>Rejoignez les créateurs qui ont multiplié leur audience grâce à notre accompagnement professionnel.</p>
-        </div>
-        <a href="https://wa.me/22998905311?text=Bonjour%20je%20veux%20d%C3%A9bloquer%20ma%20visibilit%C3%A9%20TikTok%20(5000FCFA)" class="vis-btn-primary" target="_blank">
-          🔓 DÉBLOQUER MA VISIBILITÉ
-        </a>
+
+    <!-- RÉSULTATS & TÉMOIGNAGES -->
+    <h3 class="reveal" style="margin-top:80px; font-family:'Playfair Display',serif; color:var(--gold); border-bottom:1px solid var(--border-gold); padding-bottom:10px;">🌟 Nos Résultats & Témoignages</h3>
+    <div class="showcase-grid">
+      <!-- Seraphine Photo -->
+      <div class="showcase-item reveal">
+        <img src="https://p16-common-sign.tiktokcdn.com/tos-maliva-avt-0068/2672b2b444730d0b8e2f6698ba928b34~tplv-tiktokx-cropcenter:1080:1080.jpeg?dr=14579&refresh_token=f29fd725&x-expires=1781128800&x-signature=pvAGVb09%2B6C7RZNtzweCNY%2FilQk%3D&t=4d5b0474&ps=13740610&shp=a5d48078&shcp=81f88b70&idc=my2" alt="SERAPHINE DIALLO" class="showcase-img">
+        <div class="showcase-name">SERAPHINE DIALLO</div>
+      </div>
+      <!-- Video 1 -->
+      <div class="showcase-item reveal reveal-delay-1">
+        <iframe class="showcase-video" src="https://www.tiktok.com/embed/v2/7624531370349743363" allowfullscreen></iframe>
+        <div class="showcase-stats">15K de vues</div>
+      </div>
+      <!-- Video 2 -->
+      <div class="showcase-item reveal reveal-delay-2">
+        <iframe class="showcase-video" src="https://www.tiktok.com/embed/v2/7624100993256525078" allowfullscreen></iframe>
+        <div class="showcase-stats">18K de vues</div>
       </div>
     </div>
   </section>
