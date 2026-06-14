@@ -1,145 +1,474 @@
-🔥 Let's go ! Je te fais une version avec 2 sections : Accueil (fil d'actualité) et Chat 🐱.
-
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-  <meta charset="UTF-8">
-  <title>ARAKFORUM - Politique Anonyme</title>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      background: #1a1a1a;
-      color: #fff;
-      margin: 0;
-      padding: 0;
-    }
-    .container {
-      max-width: 800px;
-      margin: auto;
-      padding: 20px;
-    }
-    .nav {
-      display: flex;
-      gap: 20px;
-      margin-bottom: 20px;
-    }
-    .nav a {
-      color: #4CAF50;
-      text-decoration: none;
-      cursor: pointer;
-    }
-    .nav a.active {
-      font-weight: bold;
-      border-bottom: 2px solid #4CAF50;
-    }
-    .section {
-      display: none;
-    }
-    .section.active {
-      display: block;
-    }
-    .post {
-      background: #333;
-      padding: 15px;
-      margin: 10px 0;
-      border-radius: 5px;
-    }
-    .pseudo {
-      color: #4CAF50;
-      font-weight: bold;
-    }
-    input, textarea {
-      width: 100%;
-      padding: 10px;
-      margin: 5px 0;
-      background: #444;
-      border: none;
-      color: #fff;
-    }
-    button {
-      padding: 10px 20px;
-      background: #4CAF50;
-      border: none;
-      color: #fff;
-      cursor: pointer;
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Skills Mentor - Formation & Services Digitaux</title>
+    <meta name="description" content="Plateforme d'expertise : IA, Crypto, Streaming, Business et Services Digitaux.">
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&family=Playfair+Display:ital,wght@0,700;1,700&display=swap" rel="stylesheet">
+
+    <style>
+        /* --- BLOC 2 : CSS --- */
+        :root {
+            --bg-main: #000000;
+            --bg-card: rgba(15, 15, 15, 0.9);
+            --text-main: #ffffff;
+            --text-muted: #888888;
+            --accent: #6366f1;
+            --accent-glow: rgba(99, 102, 241, 0.4);
+
+            --cat-ia: #3b82f6;
+            --cat-crypto: #f59e0b;
+            --cat-streaming: #ef4444;
+            --cat-business: #10b981;
+            --cat-services: #a855f7;
+            --cat-comptes: #06b6d4;
+            --cat-boost: #f43f5e;
+            --cat-section: #ec4899;
+
+            --transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-main);
+            color: var(--text-main);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* LED & Animations */
+        @keyframes led-pulse {
+            0%, 100% { box-shadow: 0 0 5px var(--accent-glow); }
+            50% { box-shadow: 0 0 20px var(--accent-glow); }
+        }
+        .led-effect { animation: led-pulse 2s infinite; }
+
+        .led-border-flow {
+            position: relative;
+            border: 1px solid rgba(255,255,255,0.08);
+            transition: var(--transition);
+        }
+        .led-border-flow:hover {
+            border-color: var(--accent);
+            box-shadow: 0 0 15px var(--accent-glow);
+        }
+
+        .container { max-width: 1400px; margin: 0 auto; padding: 0 20px; }
+
+        /* --- HEADER --- */
+        header {
+            position: fixed;
+            top: 0; left: 0; width: 100%; z-index: 1000;
+            background-color: rgba(0, 0, 0, 0.9);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            height: 75px;
+            display: flex; align-items: center;
+        }
+
+        .nav-wrapper { display: flex; justify-content: space-between; align-items: center; width: 100%; }
+        .logo { font-size: 1.5rem; font-weight: 900; letter-spacing: -1px; color: #fff; text-decoration: none; text-transform: uppercase; }
+
+        .nav-links { display: flex; gap: 0.5rem; }
+        .nav-links a {
+            font-weight: 700; font-size: 0.65rem; text-transform: uppercase;
+            color: var(--text-muted); padding: 10px 12px; border-radius: 12px;
+            transition: var(--transition); text-decoration: none;
+        }
+        .nav-links a:hover, .nav-links a.active {
+            color: #fff; background: rgba(255, 255, 255, 0.05);
+            box-shadow: 0 0 10px var(--accent-glow);
+        }
+
+        .search-container { position: relative; margin-right: 1rem; }
+        .search-container input {
+            background: #111; border: 1px solid #222; color: #fff;
+            padding: 0.6rem 1rem 0.6rem 2.2rem; border-radius: 8px;
+            outline: none; width: 140px; transition: var(--transition); font-size: 0.75rem;
+        }
+        .search-container input:focus { border-color: var(--accent); width: 180px; }
+        .search-icon { position: absolute; left: 10px; top: 50%; transform: translateY(-50%); opacity: 0.4; }
+
+        .burger { display: none; flex-direction: column; gap: 5px; cursor: pointer; }
+        .burger span { width: 25px; height: 2px; background: #fff; }
+
+        /* --- HERO --- */
+        .hero { padding: 160px 0 60px; text-align: center; }
+        .hero h1 { font-family: 'Playfair Display', serif; font-size: clamp(2.5rem, 8vw, 5.5rem); font-weight: 700; line-height: 1; margin-bottom: 2rem; }
+        .hero p { font-size: 1.15rem; color: var(--text-muted); max-width: 700px; margin: 0 auto; }
+
+        /* --- FILTERS --- */
+        .filters { display: flex; justify-content: center; gap: 8px; margin-bottom: 60px; flex-wrap: wrap; }
+        .filter-btn {
+            padding: 12px 22px; border-radius: 12px; background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.05); font-weight: 800; font-size: 0.75rem;
+            color: var(--text-muted); transition: var(--transition); text-transform: uppercase; cursor: pointer;
+        }
+        .filter-btn.active { background: #fff; color: #000; border-color: #fff; box-shadow: 0 0 20px rgba(255,255,255,0.2); }
+
+        /* --- GRID --- */
+        .article-grid { display: grid; gap: 30px; margin-bottom: 80px; }
+        @media (min-width: 640px) { .article-grid { grid-template-columns: repeat(2, 1fr); } }
+        @media (min-width: 1024px) { .article-grid { grid-template-columns: repeat(3, 1fr); } }
+        @media (min-width: 1440px) { .article-grid { grid-template-columns: repeat(4, 1fr); } }
+
+        .card {
+            background: var(--bg-card); backdrop-filter: blur(15px); border-radius: 18px;
+            overflow: hidden; border: 1px solid rgba(255, 255, 255, 0.05);
+            transition: var(--transition); display: flex; flex-direction: column; cursor: pointer;
+        }
+        .card:hover { transform: translateY(-8px); border-color: var(--accent); }
+        .card-img { height: 200px; background-color: #111; background-size: cover; background-position: center; }
+        .card-content { padding: 1.5rem; flex-grow: 1; display: flex; flex-direction: column; }
+
+        .badge {
+            font-size: 0.6rem; text-transform: uppercase; font-weight: 900;
+            padding: 5px 12px; border-radius: 6px; margin-bottom: 1rem;
+            display: inline-block; width: fit-content; letter-spacing: 1px;
+        }
+        .badge-ia { background: var(--cat-ia); color: white; }
+        .badge-crypto { background: var(--cat-crypto); color: white; }
+        .badge-streaming { background: var(--cat-streaming); color: white; }
+        .badge-business { background: var(--cat-business); color: white; }
+        .badge-services { background: var(--cat-services); color: white; }
+        .badge-comptes { background: var(--cat-comptes); color: white; }
+        .badge-boost { background: var(--cat-boost); color: white; }
+        .badge-section { background: var(--cat-section); color: white; }
+
+        .card-title { font-size: 1.3rem; margin-bottom: 0.7rem; line-height: 1.2; font-weight: 800; }
+        .card-resume { font-size: 0.9rem; color: var(--text-muted); margin-bottom: 1.5rem; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+        .card-footer { margin-top: auto; display: flex; justify-content: space-between; align-items: center; padding-top: 1rem; border-top: 1px solid rgba(255, 255, 255, 0.05); }
+
+        /* --- DETAIL VIEW --- */
+        #article-view { display: none; padding: 140px 0 100px; max-width: 900px; margin: 0 auto; animation: fadeInUp 0.6s ease; }
+        @keyframes fadeInUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+
+        .back-btn {
+            display: inline-flex; align-items: center; gap: 10px; margin-bottom: 3rem;
+            color: #fff; font-weight: 800; text-transform: uppercase; font-size: 0.8rem;
+            padding: 10px 20px; background: rgba(255, 255, 255, 0.05); border-radius: 12px; border: none; cursor: pointer;
+        }
+        .article-main-img { width: 100%; border-radius: 24px; margin-bottom: 3rem; max-height: 500px; object-fit: cover; }
+        .article-content { font-size: 1.1rem; color: #ccc; }
+        .article-content h2 { margin: 3rem 0 1.2rem; color: white; font-size: 2rem; }
+        .article-content p { margin-bottom: 1.5rem; }
+
+        .price-tag { font-size: 3rem; font-weight: 900; color: #fff; margin: 2rem 0; display: block; text-shadow: 0 0 20px var(--accent-glow); }
+        .cta-button {
+            display: inline-block; background: #fff; color: #000; padding: 1.4rem 3.5rem;
+            border-radius: 16px; font-weight: 900; text-transform: uppercase; letter-spacing: 2px;
+            text-decoration: none; text-align: center; width: 100%; transition: var(--transition);
+        }
+        .cta-button:hover { transform: scale(1.02); box-shadow: 0 0 30px rgba(255,255,255,0.4); }
+
+        /* --- CHATBOT --- */
+        #chatbot-widget { position: fixed; bottom: 30px; left: 30px; z-index: 2000; }
+        #chatbot-btn {
+            width: 65px; height: 65px; border-radius: 50%; background: var(--accent);
+            display: flex; align-items: center; justify-content: center; cursor: pointer;
+            box-shadow: 0 10px 30px var(--accent-glow); transition: var(--transition);
+        }
+        #chatbot-btn:hover { transform: scale(1.1); }
+        #chatbot-window {
+            display: none; position: absolute; bottom: 85px; left: 0; width: 350px; height: 500px;
+            background: #0a0a0a; border: 1px solid rgba(255,255,255,0.1); border-radius: 20px;
+            flex-direction: column; overflow: hidden; box-shadow: 0 20px 50px rgba(0,0,0,0.9);
+        }
+        #chat-header { background: var(--accent); padding: 18px; font-weight: 800; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 1px; color: #fff; }
+        #chat-messages { flex-grow: 1; padding: 20px; overflow-y: auto; display: flex; flex-direction: column; gap: 12px; }
+        .msg { padding: 12px 16px; border-radius: 14px; max-width: 85%; font-size: 0.9rem; line-height: 1.4; word-wrap: break-word; }
+        .msg-bot { background: #1a1a1a; align-self: flex-start; color: #eee; }
+        .msg-user { background: var(--accent); align-self: flex-end; color: #fff; }
+        #chat-input-area { padding: 15px; border-top: 1px solid rgba(255,255,255,0.05); display: flex; gap: 10px; }
+        #chat-input-area input { flex-grow: 1; background: #111; border: 1px solid #222; color: #fff; padding: 12px; border-radius: 10px; outline: none; }
+
+        /* --- FOOTER --- */
+        footer { padding: 8rem 0 4rem; border-top: 1px solid rgba(255, 255, 255, 0.05); text-align: center; color: #444; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 3px; }
+
+        #back-to-top {
+            position: fixed; bottom: 30px; right: 30px; background: #fff; width: 55px; height: 55px;
+            border-radius: 50%; display: flex; align-items: center; justify-content: center;
+            opacity: 0; visibility: hidden; transition: var(--transition); color: #000; z-index: 99; cursor: pointer; border: none; font-size: 1.2rem;
+        }
+        #back-to-top.visible { opacity: 1; visibility: visible; }
+
+        @media (max-width: 1024px) {
+            .nav-links { display: none; position: fixed; top: 75px; left: 0; width: 100%; background: #000; flex-direction: column; padding: 3rem 2rem; height: calc(100vh - 75px); gap: 2rem; }
+            .nav-links.show { display: flex; }
+            .burger { display: flex; }
+            .search-container { display: none; }
+        }
+    </style>
 </head>
 <body>
-  <div class="container">
-    <h1>ARAKFORUM - Politique</h1>
-    <p>Discutez anonymement de politique (Afrique & Monde)</p>
 
-    <!-- Navigation -->
-    <div class="nav">
-      <a onclick="showSection('accueil')">Accueil</a>
-      <a onclick="showSection('chat')">Chat 🐱</a>
-    </div>
+    <header>
+        <div class="container nav-wrapper">
+            <a href="#" class="logo" onclick="home(event)">Skills Mentor</a>
 
-    <!-- Sections -->
-    <div id="accueil" class="section active">
-      <h2>Fil d'actualité</h2>
-      <textarea id="newPostAccueil" placeholder="Écris un post..."></textarea>
-      <button onclick="addPost('accueil')">Poster</button>
-      <div id="postsAccueil"></div>
-    </div>
+            <div style="display: flex; align-items: center;">
+                <div class="search-container">
+                    <span class="search-icon">🔍</span>
+                    <input type="text" id="search-input" placeholder="RECHERCHE">
+                </div>
 
-    <div id="chat" class="section">
-      <h2>Chat 🐱</h2>
-      <input id="newMsgChat" placeholder="Écris un message...">
-      <button onclick="addPost('chat')">Envoyer</button>
-      <div id="postsChat"></div>
-    </div>
-  </div>
+                <nav class="nav-links" id="mobile-menu">
+                    <a href="#" onclick="filterBy('ia', event)">IA</a>
+                    <a href="#" onclick="filterBy('crypto', event)">Crypto</a>
+                    <a href="#" onclick="filterBy('streaming', event)">Streaming</a>
+                    <a href="#" onclick="filterBy('business', event)">Business</a>
+                    <a href="#" onclick="filterBy('services', event)">Services</a>
+                    <a href="#" onclick="filterBy('comptes', event)">Comptes</a>
+                    <a href="#" onclick="filterBy('boost', event)">Boost</a>
+                    <a href="#" onclick="filterBy('section', event)">Section</a>
+                </nav>
 
-  <script>
-    // Génère un pseudo aléatoire
-    function getPseudo() {
-      const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
-      let pseudo = '';
-      for (let i = 0; i < 8; i++) {
-        pseudo += chars.charAt(Math.floor(Math.random() * chars.length));
-      }
-      return pseudo;
-    }
-
-    // Affiche une section
-    function showSection(id) {
-      document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
-      document.querySelectorAll('.nav a').forEach(a => a.classList.remove('active'));
-      document.getElementById(id).classList.add('active');
-      document.querySelector(`.nav a[onclick*="${id}"]`).classList.add('active');
-    }
-
-    // Ajoute un post
-    function addPost(type) {
-      const input = type === 'accueil' ? 'newPostAccueil' : 'newMsgChat';
-      const postsDiv = type === 'accueil' ? 'postsAccueil' : 'postsChat';
-      const text = document.getElementById(input).value;
-      if (text.trim() === '') return;
-      const pseudo = getPseudo();
-      const post = `
-        <div class="post">
-          <span class="pseudo">${pseudo}</span>: ${text}
+                <button class="burger" id="burger-btn" onclick="toggleMenu()">
+                    <span></span><span></span><span></span>
+                </button>
+            </div>
         </div>
-      `;
-      document.getElementById(postsDiv).innerHTML += post;
-      document.getElementById(input).value = '';
-    }
-  </script>
+    </header>
+
+    <main class="container">
+        <section id="list-view">
+            <div class="hero">
+                <h1>L'Excellence Digitale.</h1>
+                <p>Propulsez vos revenus avec nos formations d'élite et nos services technologiques de pointe. Intelligence Artificielle, Business et Services Numériques.</p>
+            </div>
+
+            <div class="filters">
+                <button class="filter-btn active" onclick="filterBy('all', event)">Tous</button>
+                <button class="filter-btn" onclick="filterBy('ia', event)">IA</button>
+                <button class="filter-btn" onclick="filterBy('crypto', event)">Crypto</button>
+                <button class="filter-btn" onclick="filterBy('streaming', event)">Streaming</button>
+                <button class="filter-btn" onclick="filterBy('business', event)">Business</button>
+                <button class="filter-btn" onclick="filterBy('services', event)">Services</button>
+                <button class="filter-btn" onclick="filterBy('comptes', event)">Comptes</button>
+                <button class="filter-btn" onclick="filterBy('boost', event)">Boost</button>
+                <button class="filter-btn" onclick="filterBy('section', event)">Section</button>
+            </div>
+
+            <div class="article-grid" id="article-grid"></div>
+        </section>
+
+        <section id="article-view">
+            <button class="back-btn" onclick="home(event)">← RETOUR</button>
+            <div id="article-content"></div>
+        </section>
+    </main>
+
+    <!-- Chatbot Widget -->
+    <div id="chatbot-widget">
+        <div id="chatbot-window">
+            <div id="chat-header">Skills Assistant</div>
+            <div id="chat-messages">
+                <div class="msg msg-bot">Bonjour ! Je suis votre assistant Skills Mentor. Comment puis-je vous aider ?</div>
+            </div>
+            <div id="chat-input-area">
+                <input type="text" id="chat-user-input" placeholder="Posez votre question...">
+                <button onclick="sendChat()" style="background:none; border:none; color:var(--accent); font-weight:900; cursor:pointer">ENVOYER</button>
+            </div>
+        </div>
+        <div id="chatbot-btn" onclick="toggleChat()">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="white"><path d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm-2 12H6v-2h12v2zm0-3H6V9h12v2zm0-3H6V6h12v2z"/></svg>
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy; 2026 Skills Mentor. ALL RIGHTS RESERVED.</p>
+    </footer>
+
+    <button id="back-to-top" onclick="window.scrollTo({top:0, behavior:'smooth'})">↑</button>
+
+    <script>
+        /* --- BLOC 3 : JS --- */
+
+        // CONFIGURATION
+        const WHATSAPP_NUMBER = "2290198905311";
+
+        // Data logic
+        const calcComptePrice = (baseUSD) => Math.round((baseUSD + 2) * 655);
+
+        const articles = [
+            // SERVICES (MONETIZED ACCOUNTS REQUESTED BY USER)
+            {
+                id: 1, titre: "Compte TikTok Monétisé", categorie: "services", date: "2026-05-24",
+                resume: "Accédez instantanément à la monétisation TikTok avec un compte pré-configuré éligible.",
+                image: "https://images.unsplash.com/photo-1611605698335-8b1c4367c2cd?auto=format&fit=crop&w=800&q=80",
+                contenu: `<h2>Prêt pour le Creator Fund</h2><p>Compte éligible à la monétisation directe. Commencez à gagner dès maintenant.</p><span class="price-tag">3500 FCFA</span><a href="https://wa.me/${WHATSAPP_NUMBER}?text=Commander%20Compte%20TikTok%20Monétisé" class="cta-button">COMMANDER</a>`
+            },
+            {
+                id: 2, titre: "PayPal Vérifié (Afrique)", categorie: "services", date: "2026-05-24",
+                resume: "Recevez vos paiements internationaux sans limites avec un compte PayPal totalement vérifié.",
+                image: "https://images.unsplash.com/photo-1580519542036-c47de6196ba5?auto=format&fit=crop&w=800&q=80",
+                contenu: `<h2>Paiements Sans Limites</h2><p>Solution sécurisée pour les freelances en Afrique.</p><span class="price-tag">4500 FCFA</span><a href="https://wa.me/${WHATSAPP_NUMBER}?text=Commander%20PayPal%20Vérifié" class="cta-button">COMMANDER</a>`
+            },
+            {
+                id: 3, titre: "Compte Facebook Monétisé", categorie: "services", date: "2026-05-24",
+                resume: "Page Facebook éligible aux revenus publicitaires In-Stream.",
+                image: "https://images.unsplash.com/photo-1611162616305-c69b3fa7fbe0?auto=format&fit=crop&w=800&q=80",
+                contenu: `<h2>Monétisation Facebook</h2><p>Exploitez la puissance des vidéos sur Facebook.</p><span class="price-tag">3000 FCFA</span><a href="https://wa.me/${WHATSAPP_NUMBER}?text=Commander%20Facebook%20Monétisé" class="cta-button">COMMANDER</a>`
+            },
+            {
+                id: 4, titre: "Compte Instagram Monétisé", categorie: "services", date: "2026-05-24",
+                resume: "Accès aux Reels Bonus et collaborations marques.",
+                image: "https://images.unsplash.com/photo-1611162618071-b39a2dd7d5d8?auto=format&fit=crop&w=800&q=80",
+                contenu: `<h2>Influence Profit</h2><p>Compte prêt pour la monétisation Instagram.</p><span class="price-tag">4000 FCFA</span><a href="https://wa.me/${WHATSAPP_NUMBER}?text=Commander%20Instagram%20Monétisé" class="cta-button">COMMANDER</a>`
+            },
+            // ADDITIONAL SERVICES
+            {
+                id: 5, titre: "Abonnement IPTV Premium", categorie: "services", date: "2026-05-23",
+                resume: "Accès total aux chaînes mondiales et VOD en 4K.",
+                image: "https://images.unsplash.com/photo-1522869635100-9f4c5e86aa37?auto=format&fit=crop&w=800&q=80",
+                contenu: `<h2>Le meilleur de la TV</h2><p>Sport, Cinéma, Documentaires.</p><span class="price-tag">6500 FCFA</span><a href="https://wa.me/${WHATSAPP_NUMBER}?text=Abonnement%20IPTV" class="cta-button">COMMANDER</a>`
+            },
+            {
+                id: 6, titre: "VPN Ultra-Rapide", categorie: "services", date: "2026-05-23",
+                resume: "Sécurisez votre connexion et accédez au contenu mondial.",
+                image: "https://images.unsplash.com/photo-1563986768609-322da13575f3?auto=format&fit=crop&w=800&q=80",
+                contenu: `<h2>Sécurité & Liberté</h2><p>Navigation anonyme illimitée.</p><span class="price-tag">2500 FCFA</span><a href="https://wa.me/${WHATSAPP_NUMBER}?text=VPN%20Premium" class="cta-button">COMMANDER</a>`
+            },
+            // COMPTES (PRE-WARMED)
+            {
+                id: 50, titre: "Compte Instagram Warming", categorie: "comptes", date: "2026-05-26",
+                resume: "Compte pré-chauffé avec historique réel pour vos campagnes publicitaires.",
+                image: "https://images.unsplash.com/photo-1611162618071-b39a2dd7d5d8?auto=format&fit=crop&w=800&q=80",
+                contenu: `<h2>Prêt à l'emploi</h2><p>Évitez les blocages Meta avec un historique de confiance.</p><span class="price-tag">${calcComptePrice(10)} FCFA</span><a href="https://wa.me/${WHATSAPP_NUMBER}?text=Instagram%20Warming" class="cta-button">COMMANDER</a>`
+            },
+            // BOOST (SMM)
+            {
+                id: 100, titre: "Boost de Présence Sociale", categorie: "boost", date: "2026-05-25",
+                resume: "Propulsez vos statistiques sur Facebook, TikTok, Instagram et YouTube.",
+                image: "https://images.unsplash.com/photo-1611162617213-7d7a39e9b1d7?auto=format&fit=crop&w=800&q=80",
+                contenu: `
+                    <h2>Calculateur de Boost (FCFA)</h2>
+                    <div style="background:#111; padding:25px; border-radius:15px; margin:25px 0; border:1px solid #222">
+                        <label style="display:block; margin-bottom:8px; font-size:0.8rem; font-weight:800; color:#666">SERVICE</label>
+                        <select id="b-plat" onchange="uB()" style="width:100%; padding:14px; margin-bottom:20px; background:#000; color:#fff; border:1px solid #333; border-radius:8px">
+                            <option value="5">Facebook Followers (5 FCFA/u)</option>
+                            <option value="2">TikTok Views (2 FCFA/u)</option>
+                            <option value="4">Instagram Likes (4 FCFA/u)</option>
+                            <option value="12">YouTube Subs (12 FCFA/u)</option>
+                        </select>
+                        <label style="display:block; margin-bottom:8px; font-size:0.8rem; font-weight:800; color:#666">QUANTITÉ</label>
+                        <input type="number" id="b-qty" value="1000" oninput="uB()" style="width:100%; padding:14px; background:#000; color:#fff; border:1px solid #333; border-radius:8px; outline:none">
+                        <div style="margin-top:25px; font-weight:900; font-size:1.4rem; text-align:center">Total: <span id="b-tot">---</span> FCFA</div>
+                    </div>
+                    <a id="b-link" href="#" class="cta-button">COMMANDER CE BOOST</a>
+                `
+            },
+            // SECTION
+            {
+                id: 200, titre: "Documentation Technique", categorie: "section", date: "2026-05-21",
+                resume: "Guides et ressources pour l'implémentation de nos solutions technologiques.",
+                image: "https://images.unsplash.com/photo-1456324504439-367cee3b3c32?auto=format&fit=crop&w=800&q=80",
+                contenu: "<h2>Guides Experts</h2><p>Accédez à la connaissance pour maîtriser vos outils.</p>"
+            }
+        ];
+
+        let currentFilter = 'all';
+        let searchQuery = '';
+
+        const grid = document.getElementById('article-grid');
+        const listView = document.getElementById('list-view');
+        const articleView = document.getElementById('article-view');
+        const content = document.getElementById('article-content');
+
+        function render() {
+            const filtered = articles.filter(a => {
+                const matchF = currentFilter === 'all' || a.categorie === currentFilter;
+                const matchS = a.titre.toLowerCase().includes(searchQuery.toLowerCase()) ||
+                               a.resume.toLowerCase().includes(searchQuery.toLowerCase());
+                return matchF && matchS;
+            }).sort((a,b) => new Date(b.date) - new Date(a.date));
+
+            grid.innerHTML = filtered.map(a => `
+                <div class="card led-border-flow" onclick="viewArticle(${a.id})">
+                    <div class="card-img" style="background-image:url('${a.image}')"></div>
+                    <div class="card-content">
+                        <span class="badge badge-${a.categorie}">${a.categorie}</span>
+                        <h2 class="card-title">${a.titre}</h2>
+                        <p class="card-resume">${a.resume}</p>
+                        <div class="card-footer">
+                            <span style="font-size:0.7rem; color:#444">${new Date(a.date).toLocaleDateString('fr-FR')}</span>
+                            <span style="color:var(--accent); font-weight:800; font-size:0.7rem">DÉCOUVRIR →</span>
+                        </div>
+                    </div>
+                </div>
+            `).join('') || '<div style="grid-column:1/-1; text-align:center; padding:100px; color:#222; font-weight:900; text-transform:uppercase">AUCUN CONTENU DISPONIBLE POUR CETTE CATÉGORIE.</div>';
+        }
+
+        function viewArticle(id) {
+            const a = articles.find(x => x.id === id);
+            content.innerHTML = `
+                <span class="badge badge-${a.categorie}">${a.categorie}</span>
+                <h1 style="margin:1.5rem 0; font-size:clamp(2rem, 5vw, 3rem); font-weight:800">${a.titre}</h1>
+                <img src="${a.image}" class="article-main-img">
+                <div class="article-content">${a.contenu}</div>
+            `;
+            listView.style.display = 'none';
+            articleView.style.display = 'block';
+            window.scrollTo(0,0);
+            if(a.id === 100) uB();
+        }
+
+        function home(e) { if(e) e.preventDefault(); articleView.style.display = 'none'; listView.style.display = 'block'; window.scrollTo(0,0); }
+        function filterBy(cat, e) {
+            if(e) e.preventDefault(); currentFilter = cat;
+            searchQuery = ''; document.getElementById('search-input').value = '';
+            document.querySelectorAll('.filter-btn').forEach(b => {
+                const text = b.innerText.toLowerCase();
+                b.classList.toggle('active', text === cat || (cat === 'all' && text === 'tous'));
+            });
+            home(); render();
+            document.getElementById('mobile-menu').classList.remove('show');
+        }
+        function toggleMenu() { document.getElementById('mobile-menu').classList.toggle('show'); }
+
+        // Boost Logic
+        function uB() {
+            const plat = document.getElementById('b-plat'); if(!plat) return;
+            const p = parseFloat(plat.value);
+            const q = parseInt(document.getElementById('b-qty').value) || 0;
+            const t = Math.round(p * q);
+            document.getElementById('b-tot').innerText = t.toLocaleString();
+            document.getElementById('b-link').href = `https://wa.me/${WHATSAPP_NUMBER}?text=Boost%20Quantité:${q}%20Total:${t}FCFA`;
+        }
+
+        // Chatbot Logic
+        function toggleChat() { const w = document.getElementById('chatbot-window'); w.style.display = w.style.display === 'flex' ? 'none' : 'flex'; }
+        function sendChat() {
+            const i = document.getElementById('chat-user-input');
+            const m = document.getElementById('chat-messages');
+            if(!i.value) return;
+
+            // XSS Fix: use textContent instead of innerHTML for user input
+            const userMsg = document.createElement('div');
+            userMsg.className = 'msg msg-user';
+            userMsg.textContent = i.value;
+            m.appendChild(userMsg);
+
+            const val = i.value; i.value = '';
+            setTimeout(() => {
+                const botMsg = document.createElement('div');
+                botMsg.className = 'msg msg-bot';
+                botMsg.textContent = `Merci pour votre message. Un conseiller va vous répondre sur WhatsApp (+${WHATSAPP_NUMBER}) pour finaliser votre demande concernant votre message.`;
+                m.appendChild(botMsg);
+                m.scrollTop = m.scrollHeight;
+            }, 600);
+        }
+
+        document.getElementById('search-input').oninput = (e) => { searchQuery = e.target.value; render(); };
+        window.onscroll = () => document.getElementById('back-to-top').classList.toggle('visible', window.scrollY > 400);
+
+        render();
+    </script>
 </body>
 </html>
-
-
-Comment ça marche ?
-- Accueil : fil d'actualité (posts).
-- Chat 🐱 : messages courts.
-- Les pseudos sont aléatoires.
-- Pas de sauvegarde (reset si rafraîchissement).
-
-Tu veux :
-- Sauvegarder les posts (localStorage) ?
-- Ajouter des réponses aux posts ?
-- Un truc pour voir les nouveaux messages en temps réel ?
-
-Prêt à tester sur ZeroNet ! 😊
