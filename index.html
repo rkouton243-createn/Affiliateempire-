@@ -1,145 +1,1399 @@
-🔥 Let's go ! Je te fais une version avec 2 sections : Accueil (fil d'actualité) et Chat 🐱.
-
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-  <meta charset="UTF-8">
-  <title>ARAKFORUM - Politique Anonyme</title>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      background: #1a1a1a;
-      color: #fff;
-      margin: 0;
-      padding: 0;
-    }
-    .container {
-      max-width: 800px;
-      margin: auto;
-      padding: 20px;
-    }
-    .nav {
-      display: flex;
-      gap: 20px;
-      margin-bottom: 20px;
-    }
-    .nav a {
-      color: #4CAF50;
-      text-decoration: none;
-      cursor: pointer;
-    }
-    .nav a.active {
-      font-weight: bold;
-      border-bottom: 2px solid #4CAF50;
-    }
-    .section {
-      display: none;
-    }
-    .section.active {
-      display: block;
-    }
-    .post {
-      background: #333;
-      padding: 15px;
-      margin: 10px 0;
-      border-radius: 5px;
-    }
-    .pseudo {
-      color: #4CAF50;
-      font-weight: bold;
-    }
-    input, textarea {
-      width: 100%;
-      padding: 10px;
-      margin: 5px 0;
-      background: #444;
-      border: none;
-      color: #fff;
-    }
-    button {
-      padding: 10px 20px;
-      background: #4CAF50;
-      border: none;
-      color: #fff;
-      cursor: pointer;
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Skills Mentor - Formations & Tutoriels</title>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&family=Playfair+Display:ital,wght@0,700;1,700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- GSAP for v2.0 Animations -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: #000000;
+            background-image:
+                linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+            background-size: 80px 80px;
+            min-height: 100vh;
+        }
+        /* Effet Glassmorphism */
+        .glass-card {
+            background: rgba(15, 15, 15, 0.6);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+        .glass-nav {
+            background: rgba(0, 0, 0, 0.85);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        .page-section {
+            display: none;
+            opacity: 0;
+        }
+        .page-section.active {
+            display: block;
+        }
+        .nav-link {
+            padding: 10px 20px;
+            border-radius: 12px;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            border: 1px solid transparent;
+            font-size: 0.75rem;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+            font-weight: 600;
+        }
+        .nav-link:hover {
+            background: rgba(255, 255, 255, 0.05);
+            border-color: rgba(255, 255, 255, 0.1);
+            transform: translateY(-2px);
+        }
+        .nav-link.active-capsule {
+            background: rgba(124, 58, 237, 0.15);
+            color: #a78bfa !important;
+            border-color: rgba(124, 58, 237, 0.5);
+            box-shadow: 0 0 15px rgba(124, 58, 237, 0.2);
+        }
+
+        /* LED Light Animations */
+        @keyframes led-pulse {
+            0%, 100% { box-shadow: 0 0 5px rgba(124, 58, 237, 0.4), 0 0 10px rgba(124, 58, 237, 0.2); border-color: rgba(124, 58, 237, 0.5); }
+            50% { box-shadow: 0 0 15px rgba(124, 58, 237, 0.8), 0 0 25px rgba(124, 58, 237, 0.4); border-color: rgba(167, 139, 250, 1); }
+        }
+
+        .led-effect {
+            animation: led-pulse 2s infinite;
+        }
+
+        .led-border-flow {
+            position: relative;
+            background: #000;
+            border: 1px solid transparent;
+            background-clip: padding-box;
+        }
+        .led-border-flow::before {
+            content: '';
+            position: absolute;
+            top: -2px; bottom: -2px; left: -2px; right: -2px;
+            background: linear-gradient(45deg, #7c3aed, #3b82f6, #06b6d4, #7c3aed);
+            background-size: 400% 400%;
+            z-index: -1;
+            border-radius: inherit;
+            animation: gradient-flow 3s linear infinite;
+        }
+
+        @keyframes gradient-flow {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        .hover-led:hover {
+            animation: led-pulse 1s infinite;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .hero-title {
+            font-family: 'Playfair Display', serif;
+        }
+        /* Chatbot Styles */
+        #chatbot-window {
+            display: none;
+            bottom: 80px;
+            right: 20px;
+            width: 320px;
+            height: 450px;
+            z-index: 1000;
+        }
+        #chatbot-window.active {
+            display: flex;
+        }
+        .chat-message {
+            max-width: 80%;
+            padding: 8px 12px;
+            border-radius: 12px;
+            margin-bottom: 8px;
+            font-size: 0.85rem;
+        }
+        .bot-msg { background: rgba(124, 58, 237, 0.2); align-self: flex-start; }
+        .user-msg { background: rgba(255, 255, 255, 0.1); align-self: flex-end; }
+    </style>
 </head>
-<body>
-  <div class="container">
-    <h1>ARAKFORUM - Politique</h1>
-    <p>Discutez anonymement de politique (Afrique & Monde)</p>
+<body class="text-gray-200 min-h-screen antialiased selection:bg-purple-500 selection:text-white">
 
-    <!-- Navigation -->
-    <div class="nav">
-      <a onclick="showSection('accueil')">Accueil</a>
-      <a onclick="showSection('chat')">Chat 🐱</a>
-    </div>
-
-    <!-- Sections -->
-    <div id="accueil" class="section active">
-      <h2>Fil d'actualité</h2>
-      <textarea id="newPostAccueil" placeholder="Écris un post..."></textarea>
-      <button onclick="addPost('accueil')">Poster</button>
-      <div id="postsAccueil"></div>
-    </div>
-
-    <div id="chat" class="section">
-      <h2>Chat 🐱</h2>
-      <input id="newMsgChat" placeholder="Écris un message...">
-      <button onclick="addPost('chat')">Envoyer</button>
-      <div id="postsChat"></div>
-    </div>
-  </div>
-
-  <script>
-    // Génère un pseudo aléatoire
-    function getPseudo() {
-      const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
-      let pseudo = '';
-      for (let i = 0; i < 8; i++) {
-        pseudo += chars.charAt(Math.floor(Math.random() * chars.length));
-      }
-      return pseudo;
-    }
-
-    // Affiche une section
-    function showSection(id) {
-      document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
-      document.querySelectorAll('.nav a').forEach(a => a.classList.remove('active'));
-      document.getElementById(id).classList.add('active');
-      document.querySelector(`.nav a[onclick*="${id}"]`).classList.add('active');
-    }
-
-    // Ajoute un post
-    function addPost(type) {
-      const input = type === 'accueil' ? 'newPostAccueil' : 'newMsgChat';
-      const postsDiv = type === 'accueil' ? 'postsAccueil' : 'postsChat';
-      const text = document.getElementById(input).value;
-      if (text.trim() === '') return;
-      const pseudo = getPseudo();
-      const post = `
-        <div class="post">
-          <span class="pseudo">${pseudo}</span>: ${text}
+    <!-- Menu Navigation -->
+    <nav class="glass-nav fixed top-0 left-0 w-full z-50 px-6 py-4 transition-all duration-300">
+        <div class="max-w-7xl mx-auto flex justify-between items-center">
+            <a href="#/accueil" class="text-2xl font-bold tracking-wider text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-indigo-400">
+                Skills Mentor
+            </a>
+            <!-- Mobile Menu Toggle -->
+            <button id="menu-toggle" class="md:hidden text-2xl text-purple-400">
+                <i class="fas fa-bars"></i>
+            </button>
+            <div id="nav-links" class="hidden lg:flex space-x-2 text-[10px] xl:text-xs font-medium items-center">
+                <a href="#/accueil" class="nav-link hover:text-purple-400">Accueil</a>
+                <a href="#/formations" class="nav-link hover:text-purple-400">Formations</a>
+                <a href="#/code-dev" class="nav-link hover:text-purple-400">Code Dev</a>
+                <a href="#/boost" class="nav-link text-yellow-400 hover:text-yellow-300 font-bold"><i class="fas fa-rocket mr-1"></i>Boost</a>
+                <a href="#/comptes" class="nav-link hover:text-purple-400">Comptes</a>
+                <a href="#/services" class="nav-link hover:text-purple-400">Services</a>
+                <a href="#/formateur" class="nav-link hover:text-purple-400">Devenir Formateur</a>
+                <a href="#/contact" class="nav-link hover:text-purple-400">Contact</a>
+            </div>
+            <div class="flex items-center gap-4">
+                <select id="lang-selector" class="hidden xl:block bg-black border border-white/10 rounded-lg px-2 py-1 text-[10px] focus:outline-none cursor-pointer">
+                    <option value="fr">🇫🇷 FR</option>
+                    <option value="wo">🇸🇳 Wolof</option>
+                    <option value="sw">🇰🇪 Swahili</option>
+                    <option value="ln">🇨🇩 Lingala</option>
+                    <option value="yo">🇳🇬 Yoruba</option>
+                    <option value="zu">🇿🇦 Zulu</option>
+                    <option value="bm">🇲🇱 Bambara</option>
+                    <option value="ha">🇳🇬 Hausa</option>
+                    <option value="ar">🇲🇦 Arabe</option>
+                </select>
+            </div>
         </div>
-      `;
-      document.getElementById(postsDiv).innerHTML += post;
-      document.getElementById(input).value = '';
-    }
-  </script>
+        <!-- Mobile Dropdown -->
+        <div id="mobile-menu" class="hidden flex-col space-y-4 mt-4 pb-4 lg:hidden border-t border-white/5">
+            <div class="pt-4 px-2">
+                <select id="lang-selector-mobile" class="w-full bg-black border border-white/10 rounded-lg px-3 py-2 text-xs focus:outline-none">
+                    <option value="fr">🇫🇷 Français</option>
+                    <option value="wo">🇸🇳 Wolof</option>
+                    <option value="sw">🇰🇪 Swahili</option>
+                    <option value="ln">🇨🇩 Lingala</option>
+                    <option value="yo">🇳🇬 Yoruba</option>
+                    <option value="zu">🇿🇦 Zulu</option>
+                    <option value="bm">🇲🇱 Bambara</option>
+                    <option value="ha">🇳🇬 Hausa</option>
+                    <option value="ar">🇲🇦 Arabe</option>
+                </select>
+            </div>
+            <a href="#/accueil" class="nav-link hover:text-purple-400 pt-4">Accueil</a>
+            <a href="#/formations" class="nav-link hover:text-purple-400">Formations</a>
+            <a href="#/code-dev" class="nav-link hover:text-purple-400">Code Dev</a>
+            <a href="#/boost" class="nav-link text-yellow-400 font-bold">Boost</a>
+            <a href="#/comptes" class="nav-link hover:text-purple-400">Comptes</a>
+            <a href="#/services" class="nav-link hover:text-purple-400">Services</a>
+            <a href="#/formateur" class="nav-link hover:text-purple-400">Devenir Formateur</a>
+            <a href="#/contact" class="nav-link hover:text-purple-400">Contact</a>
+        </div>
+    </nav>
+
+    <main class="min-h-screen">
+    <section id="accueil" class="page-section pt-40 pb-20 px-6 max-w-7xl mx-auto">
+        <div class="flex flex-col items-center text-center">
+            <!-- Content -->
+            <div class="max-w-4xl mx-auto">
+                <p class="text-xs md:text-sm font-bold tracking-[0.3em] text-white uppercase mb-6 opacity-80">
+                    BIG SAVINGS ON THIS SALE
+                </p>
+                <h1 class="hero-title text-5xl md:text-8xl font-bold text-white mb-8 leading-tight">
+                    <span id="welcome-prefix">Skills</span> <span class="italic font-normal text-transparent bg-clip-text bg-gradient-to-r from-pink-300 to-indigo-200">Mentor</span> <br>
+                    <span id="event-badge" class="text-4xl md:text-6xl block mt-2">Event</span>
+                </h1>
+                <p class="text-gray-400 max-w-lg text-sm md:text-base mb-10 leading-relaxed font-light">
+                    Maîtrisez le développement et l'IA avec les meilleures formations du marché. Profitez de nos offres exclusives pour propulser votre carrière digitale dès aujourd'hui.
+                </p>
+                <div class="flex flex-wrap justify-center gap-6">
+                    <a href="#/formations" class="bg-gradient-to-r from-blue-400 to-purple-500 hover:scale-105 text-white px-10 py-4 rounded-xl font-bold shadow-xl transition-all flex items-center gap-2" style="background: linear-gradient(90deg, #4facfe 0%, #f093fb 100%);">
+                        Follow Us <i class="fas fa-arrow-right text-xs"></i>
+                    </a>
+                    <a href="#/formations" class="flex items-center gap-2 text-white font-bold hover:text-purple-400 transition-colors group">
+                        Explorer les cours <i class="fas fa-play-circle text-2xl group-hover:scale-110 transition-transform"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="code-dev" class="page-section pt-40 pb-20 px-6 max-w-7xl mx-auto">
+        <div class="text-center py-20">
+            <div class="inline-block p-4 rounded-full bg-blue-500/10 text-blue-500 text-5xl mb-8">
+                <i class="fas fa-code"></i>
+            </div>
+            <h2 class="hero-title text-4xl md:text-6xl font-bold text-white mb-6">Code Dev</h2>
+            <p class="text-gray-400 max-w-2xl mx-auto text-lg italic">
+                "L'art de transformer le café en code."
+            </p>
+            <div class="mt-12 grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="glass-card p-10 rounded-3xl border border-white/5 opacity-50">
+                    <div class="text-2xl mb-4"><i class="fas fa-tools"></i></div>
+                    <h3 class="font-bold mb-2">Projets Open Source</h3>
+                    <p class="text-xs">Bientôt disponible</p>
+                </div>
+                <div class="glass-card p-10 rounded-3xl border border-white/5 opacity-50">
+                    <div class="text-2xl mb-4"><i class="fas fa-book"></i></div>
+                    <h3 class="font-bold mb-2">Documentation</h3>
+                    <p class="text-xs">Bientôt disponible</p>
+                </div>
+                <div class="glass-card p-10 rounded-3xl border border-white/5 opacity-50">
+                    <div class="text-2xl mb-4"><i class="fas fa-terminal"></i></div>
+                    <h3 class="font-bold mb-2">Snippets & Gists</h3>
+                    <p class="text-xs">Bientôt disponible</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <section id="boost" class="page-section pt-32 pb-20 px-6 max-w-2xl mx-auto">
+        <div class="glass-card rounded-3xl p-6 md:p-10 border border-white/10 shadow-2xl relative overflow-hidden">
+            <!-- Social Icons Header -->
+            <div class="grid grid-cols-4 gap-4 mb-8">
+                <div class="bg-black rounded-2xl p-4 flex flex-col items-center border border-white/5 hover:border-blue-500/50 transition-all cursor-pointer group">
+                    <i class="fab fa-facebook text-3xl text-[#1877F2] mb-2 group-hover:scale-110 transition-transform"></i>
+                    <span class="text-[10px] font-semibold text-gray-400">Facebook</span>
+                </div>
+                <div class="bg-black rounded-2xl p-4 flex flex-col items-center border border-white/5 hover:border-pink-500/50 transition-all cursor-pointer group">
+                    <i class="fab fa-tiktok text-3xl text-white mb-2 group-hover:scale-110 transition-transform"></i>
+                    <span class="text-[10px] font-semibold text-gray-400">TikTok</span>
+                </div>
+                <div class="bg-black rounded-2xl p-4 flex flex-col items-center border border-white/5 hover:border-orange-500/50 transition-all cursor-pointer group">
+                    <i class="fab fa-instagram text-3xl text-[#E4405F] mb-2 group-hover:scale-110 transition-transform"></i>
+                    <span class="text-[10px] font-semibold text-gray-400">Instagram</span>
+                </div>
+                <div class="bg-black rounded-2xl p-4 flex flex-col items-center border border-white/5 hover:border-red-500/50 transition-all cursor-pointer group">
+                    <i class="fab fa-youtube text-3xl text-[#FF0000] mb-2 group-hover:scale-110 transition-transform"></i>
+                    <span class="text-[10px] font-semibold text-gray-400">YouTube</span>
+                </div>
+            </div>
+
+            <div class="text-center mb-8">
+                <p class="text-purple-400 text-xs font-bold tracking-widest uppercase mb-2">Social Media Marketing</p>
+                <h2 class="text-2xl font-bold">Booster votre visibilité</h2>
+            </div>
+
+            <form id="boost-form" class="space-y-6">
+                <!-- Type de service -->
+                <div>
+                    <label class="flex items-center gap-2 text-xs font-semibold text-gray-400 mb-3">
+                        <i class="fas fa-folder text-yellow-500"></i> Type de service
+                    </label>
+                    <select id="boost-type" class="w-full bg-black border border-white/10 rounded-xl px-4 py-3.5 focus:outline-none focus:border-purple-500 transition-colors text-sm appearance-none cursor-pointer">
+                        <option value="" class="bg-black">Choisir un type de service...</option>
+                        <option value="facebook" class="bg-black">Facebook - Followers / Likes</option>
+                        <option value="tiktok" class="bg-black">TikTok - Vues / Abonnés</option>
+                        <option value="instagram" class="bg-black">Instagram - Followers / Likes</option>
+                        <option value="youtube" class="bg-black">YouTube - Vues / Watchtime</option>
+                    </select>
+                </div>
+
+                <!-- Qualité & Offre -->
+                <div>
+                    <label class="flex items-center gap-2 text-xs font-semibold text-gray-400 mb-3">
+                        <i class="fas fa-clipboard-list text-orange-400"></i> Qualité & offre
+                    </label>
+                    <select id="boost-offer" class="w-full bg-black border border-white/10 rounded-xl px-4 py-3.5 focus:outline-none focus:border-purple-500 transition-colors text-sm appearance-none cursor-pointer">
+                        <option value="" class="bg-black">Choisir une offre...</option>
+                    </select>
+                </div>
+
+                <!-- Lien -->
+                <div>
+                    <label class="flex items-center gap-2 text-xs font-semibold text-gray-400 mb-3">
+                        <i class="fas fa-link text-blue-400"></i> Lien du profil / post / page
+                    </label>
+                    <input type="url" id="boost-link" placeholder="https://.com/your_id" class="w-full bg-black border border-white/10 rounded-xl px-4 py-3.5 focus:outline-none focus:border-purple-500 transition-colors text-sm">
+                </div>
+
+                <!-- Quantité -->
+                <div class="relative">
+                    <label class="flex items-center gap-2 text-xs font-semibold text-gray-400 mb-3">
+                        <i class="fas fa-chart-bar text-green-400"></i> Quantité
+                    </label>
+                    <input type="number" id="boost-quantity" placeholder="0" class="w-full bg-black border border-white/10 rounded-xl px-4 py-3.5 focus:outline-none focus:border-purple-500 transition-colors text-sm">
+                    <div class="absolute bottom-3 right-4 w-8 h-8 bg-indigo-900/50 rounded-full flex items-center justify-center text-indigo-300">
+                        <i class="far fa-lightbulb"></i>
+                    </div>
+                </div>
+
+                <!-- Total -->
+                <div class="bg-black rounded-2xl p-6 flex justify-between items-center border border-white/5 mt-8">
+                    <span class="text-gray-400 text-sm font-medium">Total estimé</span>
+                    <span id="boost-total" class="text-2xl font-bold text-purple-400">0 FCFA</span>
+                </div>
+
+                <button type="submit" class="w-full bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-500 hover:to-indigo-500 text-white font-bold py-4 rounded-xl shadow-lg shadow-purple-600/20 transition-all transform hover:-translate-y-1 flex items-center justify-center gap-2">
+                    <i class="fab fa-whatsapp text-xl"></i> Passer la commande
+                </button>
+            </form>
+        </div>
+    </section>
+
+    <section id="services" class="page-section pt-32 pb-20 px-6 max-w-7xl mx-auto">
+        <div class="text-center mb-14">
+            <h2 class="text-3xl font-bold mb-4">Nos Services Premium</h2>
+            <p class="text-gray-400">Des solutions sur mesure pour accélérer votre croissance technologique et business.</p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
+            <!-- Services Existants -->
+            <div class="glass-card p-8 rounded-2xl border border-white/5 hover:border-purple-500/30 transition-all flex flex-col">
+                <div class="text-3xl text-purple-400 mb-6"><i class="fas fa-brain"></i></div>
+                <h3 class="text-xl font-bold mb-4">Consultation IA</h3>
+                <p class="text-gray-400 text-sm leading-relaxed mb-6">Intégrez l'intelligence artificielle dans vos processus métier pour gagner en productivité et en efficacité.</p>
+                <a href="https://wa.me/2290198905311?text=Bonjour%20Skills%20Mentor%2C%20je%20souhaite%20commander%20le%20service%20%3A%20Consultation%20IA" target="_blank" class="mt-auto block text-center bg-purple-600/20 hover:bg-purple-600 text-purple-400 hover:text-white py-2 rounded-lg border border-purple-500/30 transition-all font-semibold">Commander</a>
+            </div>
+            <div class="glass-card p-8 rounded-2xl border border-white/5 hover:border-blue-500/30 transition-all flex flex-col">
+                <div class="text-3xl text-blue-400 mb-6"><i class="fas fa-code-branch"></i></div>
+                <h3 class="text-xl font-bold mb-4">Développement Web & Mobile</h3>
+                <p class="text-gray-400 text-sm leading-relaxed mb-6">Conception d'applications robustes, scalables et centrées sur l'utilisateur avec les dernières technologies.</p>
+                <a href="https://wa.me/2290198905311?text=Bonjour%20Skills%20Mentor%2C%20je%20souhaite%20commander%20le%20service%20%3A%20Développement%20Web%20%26%20Mobile" target="_blank" class="mt-auto block text-center bg-blue-600/20 hover:bg-blue-600 text-blue-400 hover:text-white py-2 rounded-lg border border-blue-500/30 transition-all font-semibold">Commander</a>
+            </div>
+            <div class="glass-card p-8 rounded-2xl border border-white/5 hover:border-green-500/30 transition-all flex flex-col">
+                <div class="text-3xl text-green-400 mb-6"><i class="fas fa-bullhorn"></i></div>
+                <h3 class="text-xl font-bold mb-4">Stratégie Digitale</h3>
+                <p class="text-gray-400 text-sm leading-relaxed mb-6">Accompagnement dans votre visibilité en ligne, acquisition de leads et monétisation de vos réseaux sociaux.</p>
+                <a href="https://wa.me/2290198905311?text=Bonjour%20Skills%20Mentor%2C%20je%20souhaite%20commander%20le%20service%20%3A%20Stratégie%20Digitale" target="_blank" class="mt-auto block text-center bg-green-600/20 hover:bg-green-600 text-green-400 hover:text-white py-2 rounded-lg border border-green-500/30 transition-all font-semibold">Commander</a>
+            </div>
+
+            <!-- Nouveaux Services -->
+            <div class="glass-card p-8 rounded-2xl border border-white/5 hover:border-orange-500/30 transition-all flex flex-col">
+                <div class="text-3xl text-orange-400 mb-6"><i class="fas fa-tv"></i></div>
+                <h3 class="text-xl font-bold mb-4">Abonnements IPTV Premium</h3>
+                <p class="text-gray-400 text-sm leading-relaxed mb-6">Accès à des milliers de chaînes internationales, films et séries, notamment pour les grands événements sportifs.</p>
+                <a href="https://wa.me/2290198905311?text=Bonjour%20Skills%20Mentor%2C%20je%20souhaite%20commander%20le%20service%20%3A%20Abonnements%20IPTV%20Premium" target="_blank" class="mt-auto block text-center bg-orange-600/20 hover:bg-orange-600 text-orange-400 hover:text-white py-2 rounded-lg border border-orange-500/30 transition-all font-semibold">Commander</a>
+            </div>
+
+            <div class="glass-card p-8 rounded-2xl border border-white/5 hover:border-indigo-500/30 transition-all flex flex-col">
+                <div class="text-3xl text-indigo-400 mb-6"><i class="fas fa-shield-halved"></i></div>
+                <h3 class="text-xl font-bold mb-4">Services VPN Sécurisés</h3>
+                <p class="text-gray-400 text-sm leading-relaxed mb-6">Sécurisez votre connexion, changez de localisation (utile pour les comptes étrangers) ou contournez les restrictions.</p>
+                <a href="https://wa.me/2290198905311?text=Bonjour%20Skills%20Mentor%2C%20je%20souhaite%20commander%20le%20service%20%3A%20VPN%20Sécurisés" target="_blank" class="mt-auto block text-center bg-indigo-600/20 hover:bg-indigo-600 text-indigo-400 hover:text-white py-2 rounded-lg border border-indigo-500/30 transition-all font-semibold">Commander</a>
+            </div>
+
+            <div class="glass-card p-8 rounded-2xl border border-white/5 hover:border-teal-500/30 transition-all flex flex-col">
+                <div class="text-3xl text-teal-400 mb-6"><i class="fas fa-robot"></i></div>
+                <h3 class="text-xl font-bold mb-4">Création de Bots Clé en Main</h3>
+                <p class="text-gray-400 text-sm leading-relaxed mb-6">Proposez des bots WhatsApp ou Telegram automatisés pour gérer le service client ou automatiser les ventes.</p>
+                <a href="https://wa.me/2290198905311?text=Bonjour%20Skills%20Mentor%2C%20je%20souhaite%20commander%20le%20service%20%3A%20Bots%20Clé%20en%20Main" target="_blank" class="mt-auto block text-center bg-teal-600/20 hover:bg-teal-600 text-teal-400 hover:text-white py-2 rounded-lg border border-teal-500/30 transition-all font-semibold">Commander</a>
+            </div>
+
+            <div class="glass-card p-8 rounded-2xl border border-white/5 hover:border-red-500/30 transition-all flex flex-col">
+                <div class="text-3xl text-red-400 mb-6"><i class="fas fa-comment-sms"></i></div>
+                <h3 class="text-xl font-bold mb-4">Réception SMS / Vérification</h3>
+                <p class="text-gray-400 text-sm leading-relaxed mb-6">Location de numéros virtuels temporaires pour aider à valider et vérifier des comptes sur diverses plateformes.</p>
+                <a href="https://wa.me/2290198905311?text=Bonjour%20Skills%20Mentor%2C%20je%20souhaite%20commander%20le%20service%20%3A%20Réception%20SMS%20%2F%20Vérification" target="_blank" class="mt-auto block text-center bg-red-600/20 hover:bg-red-600 text-red-400 hover:text-white py-2 rounded-lg border border-red-500/30 transition-all font-semibold">Commander</a>
+            </div>
+
+            <div class="glass-card p-8 rounded-2xl border border-white/5 hover:border-pink-500/30 transition-all flex flex-col">
+                <div class="text-3xl text-pink-400 mb-6"><i class="fas fa-layer-group"></i></div>
+                <h3 class="text-xl font-bold mb-4">Des Packs Combinés</h3>
+                <p class="text-gray-400 text-sm leading-relaxed mb-6">Pack Lancement (1 compte TikTok monétisable + 5 000 vues + 1 accès VPN pour gérer le compte).</p>
+                <a href="https://wa.me/2290198905311?text=Bonjour%20Skills%20Mentor%2C%20je%20souhaite%20commander%20un%20Pack%20Combiné" target="_blank" class="mt-auto block text-center bg-pink-600/20 hover:bg-pink-600 text-pink-400 hover:text-white py-2 rounded-lg border border-pink-500/30 transition-all font-semibold">Commander</a>
+            </div>
+
+            <div class="glass-card p-8 rounded-2xl border border-white/5 hover:border-blue-400/30 transition-all flex flex-col">
+                <div class="text-3xl text-blue-300 mb-6"><i class="fas fa-users-gear"></i></div>
+                <h3 class="text-xl font-bold mb-4">Comptes "Chauffés" Pros</h3>
+                <p class="text-gray-400 text-sm leading-relaxed mb-6">Vente de pages Facebook, comptes Instagram ou chaînes YouTube déjà anciens pour éviter les blocages.</p>
+                <a href="https://wa.me/2290198905311?text=Bonjour%20Skills%20Mentor%2C%20je%20souhaite%20commander%20des%20Comptes%20Chauffés" target="_blank" class="mt-auto block text-center bg-blue-500/20 hover:bg-blue-500 text-blue-300 hover:text-white py-2 rounded-lg border border-blue-400/30 transition-all font-semibold">Commander</a>
+            </div>
+
+            <div class="glass-card p-8 rounded-2xl border border-white/5 hover:border-purple-400/30 transition-all flex flex-col">
+                <div class="text-3xl text-purple-300 mb-6"><i class="fab fa-tiktok"></i></div>
+                <h3 class="text-xl font-bold mb-4">TikTok Monétisables (EU/USA)</h3>
+                <p class="text-gray-400 text-sm leading-relaxed mb-6">Comptes créés en zone éligible avec le programme de monétisation (Beta) déjà accessible.</p>
+                <a href="https://wa.me/2290198905311?text=Bonjour%20Skills%20Mentor%2C%20je%20souhaite%20commander%20un%20Compte%20TikTok%20Monétisable" target="_blank" class="mt-auto block text-center bg-purple-500/20 hover:bg-purple-500 text-purple-300 hover:text-white py-2 rounded-lg border border-purple-400/30 transition-all font-semibold">Commander</a>
+            </div>
+
+            <div class="glass-card p-8 rounded-2xl border border-white/5 hover:border-white/20 transition-all flex flex-col">
+                <div class="text-3xl text-white mb-6"><i class="fas fa-wand-magic-sparkles"></i></div>
+                <h3 class="text-xl font-bold mb-4">Un site moderne</h3>
+                <p class="text-gray-400 text-sm leading-relaxed mb-6">Interface épurée, visuelle (Glassmorphism) et mode sombre impeccable qui inspire confiance.</p>
+                <a href="https://wa.me/2290198905311?text=Bonjour%20Skills%20Mentor%2C%20je%20souhaite%20commander%20la%20création%20d'un%20Site%20Moderne" target="_blank" class="mt-auto block text-center bg-white/10 hover:bg-white/20 text-white py-2 rounded-lg border border-white/20 transition-all font-semibold">Commander</a>
+            </div>
+        </div>
+    </section>
+
+    <section id="formations" class="page-section pt-32 pb-20 px-6 max-w-7xl mx-auto border-t border-white/5">
+        <div class="flex flex-col md:flex-row justify-between items-start md:items-end mb-14 gap-4">
+            <div>
+                <h2 class="text-3xl font-bold mb-3">Formations à la Une</h2>
+                <p class="text-gray-400">Rejoignez nos sessions les plus demandées et commencez à coder immédiatement.</p>
+            </div>
+            <a href="#" class="text-sm font-semibold text-purple-400 hover:text-purple-300 transition-colors flex items-center gap-2 group">
+                Voir tout le catalogue <i class="fas fa-arrow-right text-xs group-hover:translate-x-1 transition-transform"></i>
+            </a>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
+            <div class="glass-card rounded-2xl overflow-hidden flex flex-col">
+                <div class="h-48 bg-gradient-to-br from-orange-600/30 to-purple-900/40 relative flex items-center justify-center border-b border-white/5">
+                    <i class="fab fa-html5 text-7xl text-orange-500/40"></i>
+                    <span class="absolute top-4 left-4 bg-orange-500 text-xs font-bold uppercase px-3 py-1 rounded-md">Débutant</span>
+                </div>
+                <div class="p-6 flex-1 flex flex-col">
+                    <h4 class="text-lg font-bold mb-2 hover:text-purple-400 cursor-pointer transition-colors">HTML5 Ultime : De Zéro à Expert</h4>
+                    <p class="text-gray-400 text-xs mb-4 line-clamp-2">Bâtissez des sites web modernes et découvrez les secrets du référencement naturel et de la structure sémantique.</p>
+                    <div class="mt-auto flex justify-between items-center pt-4 border-t border-white/5">
+                        <span class="text-xl font-bold text-white">13 000 FCFA</span>
+                        <button class="bg-black hover:bg-white/10 text-white px-4 py-2 rounded-lg text-xs font-semibold border border-white/10 transition-colors">
+                            Acheter
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="glass-card rounded-2xl overflow-hidden flex flex-col">
+                <div class="h-48 bg-gradient-to-br from-blue-600/30 to-purple-900/40 relative flex items-center justify-center border-b border-white/5">
+                    <i class="fab fa-css3-alt text-7xl text-blue-500/40"></i>
+                    <span class="absolute top-4 left-4 bg-blue-500 text-xs font-bold uppercase px-3 py-1 rounded-md">Intermédiaire</span>
+                </div>
+                <div class="p-6 flex-1 flex flex-col">
+                    <h4 class="text-lg font-bold mb-2 hover:text-purple-400 cursor-pointer transition-colors">Tailwind CSS & Glassmorphism Masterclass</h4>
+                    <p class="text-gray-400 text-xs mb-4 line-clamp-2">Créez des interfaces au design futuriste, totalement responsives et hautement personnalisées.</p>
+                    <div class="mt-auto flex justify-between items-center pt-4 border-t border-white/5">
+                        <span class="text-xl font-bold text-white">20 000 FCFA</span>
+                        <button class="bg-black hover:bg-white/10 text-white px-4 py-2 rounded-lg text-xs font-semibold border border-white/10 transition-colors">
+                            Acheter
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="glass-card rounded-2xl overflow-hidden flex flex-col">
+                <div class="h-48 bg-gradient-to-br from-red-600/30 to-purple-900/40 relative flex items-center justify-center border-b border-white/5">
+                    <i class="fab fa-java text-7xl text-red-500/40"></i>
+                    <span class="absolute top-4 left-4 bg-red-500 text-xs font-bold uppercase px-3 py-1 rounded-md">Avancé</span>
+                </div>
+                <div class="p-6 flex-1 flex flex-col">
+                    <h4 class="text-lg font-bold mb-2 hover:text-purple-400 cursor-pointer transition-colors">Java POO : Architecture & Algorithmes</h4>
+                    <p class="text-gray-400 text-xs mb-4 line-clamp-2">Maîtrisez la logique de programmation orientée objet, la gestion des bases de données et la création d'apps complexes.</p>
+                    <div class="mt-auto flex justify-between items-center pt-4 border-t border-white/5">
+                        <span class="text-xl font-bold text-white">33 000 FCFA</span>
+                        <button class="bg-black hover:bg-white/10 text-white px-4 py-2 rounded-lg text-xs font-semibold border border-white/10 transition-colors">
+                            Acheter
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Nouvelles Formations -->
+            <div class="glass-card rounded-2xl overflow-hidden flex flex-col border border-green-500/20">
+                <div class="h-48 bg-gradient-to-br from-green-600/30 to-purple-900/40 relative flex items-center justify-center border-b border-white/5">
+                    <i class="fab fa-tiktok text-7xl text-green-500/40"></i>
+                    <span class="absolute top-4 left-4 bg-green-500 text-xs font-bold uppercase px-3 py-1 rounded-md">Business</span>
+                </div>
+                <div class="p-6 flex-1 flex flex-col">
+                    <h4 class="text-lg font-bold mb-2 hover:text-green-400 cursor-pointer transition-colors">Tiktok : Création & Monétisation</h4>
+                    <p class="text-gray-400 text-xs mb-4 line-clamp-2">Apprenez à créer un compte éligible et maîtrisez les stratégies pour monétiser votre contenu rapidement.</p>
+                    <div class="mt-auto flex justify-between items-center pt-4 border-t border-white/5">
+                        <span class="text-xl font-bold text-white">10 000 FCFA</span>
+                        <button class="bg-black hover:bg-white/10 text-white px-4 py-2 rounded-lg text-xs font-semibold border border-white/10 transition-colors">
+                            Acheter
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="glass-card rounded-2xl overflow-hidden flex flex-col border border-green-500/20">
+                <div class="h-48 bg-gradient-to-br from-blue-600/30 to-purple-900/40 relative flex items-center justify-center border-b border-white/5">
+                    <i class="fab fa-facebook text-7xl text-blue-500/40"></i>
+                    <span class="absolute top-4 left-4 bg-green-500 text-xs font-bold uppercase px-3 py-1 rounded-md">Business</span>
+                </div>
+                <div class="p-6 flex-1 flex flex-col">
+                    <h4 class="text-lg font-bold mb-2 hover:text-green-400 cursor-pointer transition-colors">Facebook : Compte Pro & Monétisation</h4>
+                    <p class="text-gray-400 text-xs mb-4 line-clamp-2">Guide complet pour configurer un compte Facebook prêt pour la monétisation et générer des revenus.</p>
+                    <div class="mt-auto flex justify-between items-center pt-4 border-t border-white/5">
+                        <span class="text-xl font-bold text-white">10 000 FCFA</span>
+                        <button class="bg-black hover:bg-white/10 text-white px-4 py-2 rounded-lg text-xs font-semibold border border-white/10 transition-colors">
+                            Acheter
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="glass-card rounded-2xl overflow-hidden flex flex-col border border-green-500/20">
+                <div class="h-48 bg-gradient-to-br from-indigo-600/30 to-purple-900/40 relative flex items-center justify-center border-b border-white/5">
+                    <i class="fab fa-paypal text-7xl text-indigo-500/40"></i>
+                    <span class="absolute top-4 left-4 bg-green-500 text-xs font-bold uppercase px-3 py-1 rounded-md">Finances</span>
+                </div>
+                <div class="p-6 flex-1 flex flex-col">
+                    <h4 class="text-lg font-bold mb-2 hover:text-green-400 cursor-pointer transition-colors">Paypal en Afrique : Création & Utilisation</h4>
+                    <p class="text-gray-400 text-xs mb-4 line-clamp-2">Découvrez comment créer et valider un compte Paypal fonctionnel en Afrique pour recevoir vos paiements.</p>
+                    <div class="mt-auto flex justify-between items-center pt-4 border-t border-white/5">
+                        <span class="text-xl font-bold text-white">13 000 FCFA</span>
+                        <button class="bg-black hover:bg-white/10 text-white px-4 py-2 rounded-lg text-xs font-semibold border border-white/10 transition-colors">
+                            Acheter
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- IA & Nouvelles Formations -->
+            <div class="glass-card rounded-2xl overflow-hidden flex flex-col border border-purple-500/20">
+                <div class="h-48 bg-gradient-to-br from-purple-600/30 to-indigo-900/40 relative flex items-center justify-center border-b border-white/5">
+                    <i class="fas fa-terminal text-7xl text-purple-500/40"></i>
+                    <span class="absolute top-4 left-4 bg-purple-500 text-xs font-bold uppercase px-3 py-1 rounded-md">Masterclass</span>
+                </div>
+                <div class="p-6 flex-1 flex flex-col">
+                    <h4 class="text-lg font-bold mb-2 hover:text-purple-400 cursor-pointer transition-colors">Masterclass Gemini CLI</h4>
+                    <p class="text-gray-400 text-xs mb-4 line-clamp-2">Devancez le marché et maîtrisez la nouvelle ère de l'IA en pilotant Gemini directement depuis votre terminal.</p>
+                    <div class="mt-auto flex justify-between items-center pt-4 border-t border-white/5">
+                        <span class="text-xl font-bold text-white">23 000 FCFA</span>
+                        <button class="bg-black hover:bg-white/10 text-white px-4 py-2 rounded-lg text-xs font-semibold border border-white/10 transition-colors">Acheter</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="glass-card rounded-2xl overflow-hidden flex flex-col border border-purple-500/20">
+                <div class="h-48 bg-gradient-to-br from-red-600/30 to-purple-900/40 relative flex items-center justify-center border-b border-white/5">
+                    <i class="fas fa-unlock text-7xl text-red-500/40"></i>
+                    <span class="absolute top-4 left-4 bg-red-500 text-xs font-bold uppercase px-3 py-1 rounded-md">Expert</span>
+                </div>
+                <div class="p-6 flex-1 flex flex-col">
+                    <h4 class="text-lg font-bold mb-2 hover:text-purple-400 cursor-pointer transition-colors">IA Sans Limites</h4>
+                    <p class="text-gray-400 text-xs mb-4 line-clamp-2">Libérez la puissance totale de la création sans censure. Maîtrisez les modèles open-source sans restrictions.</p>
+                    <div class="mt-auto flex justify-between items-center pt-4 border-t border-white/5">
+                        <span class="text-xl font-bold text-white">30 000 FCFA</span>
+                        <button class="bg-black hover:bg-white/10 text-white px-4 py-2 rounded-lg text-xs font-semibold border border-white/10 transition-colors">Acheter</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="glass-card rounded-2xl overflow-hidden flex flex-col border border-green-500/20">
+                <div class="h-48 bg-gradient-to-br from-green-600/30 to-purple-900/40 relative flex items-center justify-center border-b border-white/5">
+                    <i class="fas fa-handshake text-7xl text-green-500/40"></i>
+                    <span class="absolute top-4 left-4 bg-green-500 text-xs font-bold uppercase px-3 py-1 rounded-md">Business</span>
+                </div>
+                <div class="p-6 flex-1 flex flex-col">
+                    <h4 class="text-lg font-bold mb-2 hover:text-green-400 cursor-pointer transition-colors">Feed Rentable : A à Z</h4>
+                    <p class="text-gray-400 text-xs mb-4 line-clamp-2">La formation complète pour monétiser tes réseaux et signer tes premiers partenariats lucratifs.</p>
+                    <div class="mt-auto flex justify-between items-center pt-4 border-t border-white/5">
+                        <span class="text-xl font-bold text-white">20 000 FCFA</span>
+                        <button class="bg-black hover:bg-white/10 text-white px-4 py-2 rounded-lg text-xs font-semibold border border-white/10 transition-colors">Acheter</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="glass-card rounded-2xl overflow-hidden flex flex-col border border-green-500/20">
+                <div class="h-48 bg-gradient-to-br from-pink-600/30 to-purple-900/40 relative flex items-center justify-center border-b border-white/5">
+                    <i class="fab fa-tiktok text-7xl text-pink-500/40"></i>
+                    <span class="absolute top-4 left-4 bg-pink-500 text-xs font-bold uppercase px-3 py-1 rounded-md">Viral</span>
+                </div>
+                <div class="p-6 flex-1 flex flex-col">
+                    <h4 class="text-lg font-bold mb-2 hover:text-pink-400 cursor-pointer transition-colors">Dominer l'Algorithme TikTok</h4>
+                    <p class="text-gray-400 text-xs mb-4 line-clamp-2">Les stratégies pros pour exploser le compteur de vues et devenir viral de manière prédictible.</p>
+                    <div class="mt-auto flex justify-between items-center pt-4 border-t border-white/5">
+                        <span class="text-xl font-bold text-white">16 500 FCFA</span>
+                        <button class="bg-black hover:bg-white/10 text-white px-4 py-2 rounded-lg text-xs font-semibold border border-white/10 transition-colors">Acheter</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="glass-card rounded-2xl overflow-hidden flex flex-col border border-indigo-500/20">
+                <div class="h-48 bg-gradient-to-br from-indigo-600/30 to-purple-900/40 relative flex items-center justify-center border-b border-white/5">
+                    <i class="fas fa-credit-card text-7xl text-indigo-500/40"></i>
+                    <span class="absolute top-4 left-4 bg-indigo-500 text-xs font-bold uppercase px-3 py-1 rounded-md">International</span>
+                </div>
+                <div class="p-6 flex-1 flex flex-col">
+                    <h4 class="text-lg font-bold mb-2 hover:text-indigo-400 cursor-pointer transition-colors">Cartes Virtuelles & Paiements</h4>
+                    <p class="text-gray-400 text-xs mb-4 line-clamp-2">Le guide pour débloquer votre business international et payer partout sans blocages.</p>
+                    <div class="mt-auto flex justify-between items-center pt-4 border-t border-white/5">
+                        <span class="text-xl font-bold text-white">13 000 FCFA</span>
+                        <button class="bg-black hover:bg-white/10 text-white px-4 py-2 rounded-lg text-xs font-semibold border border-white/10 transition-colors">Acheter</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="glass-card rounded-2xl overflow-hidden flex flex-col border border-purple-500/20">
+                <div class="h-48 bg-gradient-to-br from-blue-600/30 to-purple-900/40 relative flex items-center justify-center border-b border-white/5">
+                    <i class="fas fa-video text-7xl text-blue-500/40"></i>
+                    <span class="absolute top-4 left-4 bg-blue-500 text-xs font-bold uppercase px-3 py-1 rounded-md">Vidéo</span>
+                </div>
+                <div class="p-6 flex-1 flex flex-col">
+                    <h4 class="text-lg font-bold mb-2 hover:text-purple-400 cursor-pointer transition-colors">Mentor Vidéo IA</h4>
+                    <p class="text-gray-400 text-xs mb-4 line-clamp-2">Générez du contenu professionnel et gratuit en illimité grâce aux derniers outils d'IA vidéo.</p>
+                    <div class="mt-auto flex justify-between items-center pt-4 border-t border-white/5">
+                        <span class="text-xl font-bold text-white">26 000 FCFA</span>
+                        <button class="bg-black hover:bg-white/10 text-white px-4 py-2 rounded-lg text-xs font-semibold border border-white/10 transition-colors">Acheter</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="glass-card rounded-2xl overflow-hidden flex flex-col border border-green-500/20">
+                <div class="h-48 bg-gradient-to-br from-teal-600/30 to-purple-900/40 relative flex items-center justify-center border-b border-white/5">
+                    <i class="fab fa-tiktok text-7xl text-teal-500/40"></i>
+                    <span class="absolute top-4 left-4 bg-teal-500 text-xs font-bold uppercase px-3 py-1 rounded-md">Automatisé</span>
+                </div>
+                <div class="p-6 flex-1 flex flex-col">
+                    <h4 class="text-lg font-bold mb-2 hover:text-green-400 cursor-pointer transition-colors">TikTok Partenaire : La Méthode</h4>
+                    <p class="text-gray-400 text-xs mb-4 line-clamp-2">La méthode exacte pour générer des revenus sans aucune audience et sans montrer son visage.</p>
+                    <div class="mt-auto flex justify-between items-center pt-4 border-t border-white/5">
+                        <span class="text-xl font-bold text-white">33 000 FCFA</span>
+                        <button class="bg-black hover:bg-white/10 text-white px-4 py-2 rounded-lg text-xs font-semibold border border-white/10 transition-colors">Acheter</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="glass-card rounded-2xl overflow-hidden flex flex-col border border-purple-500/20">
+                <div class="h-48 bg-gradient-to-br from-yellow-600/30 to-purple-900/40 relative flex items-center justify-center border-b border-white/5">
+                    <i class="fas fa-clapperboard text-7xl text-yellow-500/40"></i>
+                    <span class="absolute top-4 left-4 bg-yellow-500 text-xs font-bold uppercase px-3 py-1 rounded-md">Cinéma</span>
+                </div>
+                <div class="p-6 flex-1 flex flex-col">
+                    <h4 class="text-lg font-bold mb-2 hover:text-purple-400 cursor-pointer transition-colors">Cinéma & IA : Claude Vidéo</h4>
+                    <p class="text-gray-400 text-xs mb-4 line-clamp-2">Maîtrisez Claude pour générer des vidéos professionnelles prêtes à l'emploi avec une esthétique cinématographique.</p>
+                    <div class="mt-auto flex justify-between items-center pt-4 border-t border-white/5">
+                        <span class="text-xl font-bold text-white">40 000 FCFA</span>
+                        <button class="bg-black hover:bg-white/10 text-white px-4 py-2 rounded-lg text-xs font-semibold border border-white/10 transition-colors">Acheter</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="glass-card rounded-2xl overflow-hidden flex flex-col border border-purple-500/20">
+                <div class="h-48 bg-gradient-to-br from-orange-600/30 to-purple-900/40 relative flex items-center justify-center border-b border-white/5">
+                    <i class="fas fa-bolt text-7xl text-orange-500/40"></i>
+                    <span class="absolute top-4 left-4 bg-orange-500 text-xs font-bold uppercase px-3 py-1 rounded-md">Productivité</span>
+                </div>
+                <div class="p-6 flex-1 flex flex-col">
+                    <h4 class="text-lg font-bold mb-2 hover:text-purple-400 cursor-pointer transition-colors">L'Arsenal Secret de ChatGPT</h4>
+                    <p class="text-gray-400 text-xs mb-4 line-clamp-2">Maîtrisez les invites (prompts) puissantes pour décupler votre productivité et automatiser vos tâches.</p>
+                    <div class="mt-auto flex justify-between items-center pt-4 border-t border-white/5">
+                        <span class="text-xl font-bold text-white">13 000 FCFA</span>
+                        <button class="bg-black hover:bg-white/10 text-white px-4 py-2 rounded-lg text-xs font-semibold border border-white/10 transition-colors">Acheter</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="glass-card rounded-2xl overflow-hidden flex flex-col border border-purple-500/20">
+                <div class="h-48 bg-gradient-to-br from-pink-600/30 to-purple-900/40 relative flex items-center justify-center border-b border-white/5">
+                    <i class="fas fa-pen-nib text-7xl text-pink-500/40"></i>
+                    <span class="absolute top-4 left-4 bg-pink-500 text-xs font-bold uppercase px-3 py-1 rounded-md">Branding</span>
+                </div>
+                <div class="p-6 flex-1 flex flex-col">
+                    <h4 class="text-lg font-bold mb-2 hover:text-purple-400 cursor-pointer transition-colors">Copywriting & Personal Branding</h4>
+                    <p class="text-gray-400 text-xs mb-4 line-clamp-2">Humanisez l'IA pour dominer vos réseaux, captiver votre audience et construire une réussite personnelle.</p>
+                    <div class="mt-auto flex justify-between items-center pt-4 border-t border-white/5">
+                        <span class="text-xl font-bold text-white">33 000 FCFA</span>
+                        <button class="bg-black hover:bg-white/10 text-white px-4 py-2 rounded-lg text-xs font-semibold border border-white/10 transition-colors">Acheter</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="glass-card rounded-2xl overflow-hidden flex flex-col border border-blue-500/20">
+                <div class="h-48 bg-gradient-to-br from-blue-600/30 to-indigo-900/40 relative flex items-center justify-center border-b border-white/5">
+                    <i class="fas fa-code text-7xl text-blue-500/40"></i>
+                    <span class="absolute top-4 left-4 bg-blue-500 text-xs font-bold uppercase px-3 py-1 rounded-md">Développement</span>
+                </div>
+                <div class="p-6 flex-1 flex flex-col">
+                    <h4 class="text-lg font-bold mb-2 hover:text-blue-400 cursor-pointer transition-colors">OpenCode Remplace Claude</h4>
+                    <p class="text-gray-400 text-xs mb-4 line-clamp-2">Arrêtez d'être l'ouvrier. Laissez votre Allié IA porter le code pendant que vous gardez le pilotage.</p>
+                    <div class="mt-auto flex justify-between items-center pt-4 border-t border-white/5">
+                        <span class="text-xl font-bold text-white">46 000 FCFA</span>
+                        <button class="bg-black hover:bg-white/10 text-white px-4 py-2 rounded-lg text-xs font-semibold border border-white/10 transition-colors">Acheter</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="glass-card rounded-2xl overflow-hidden flex flex-col border border-red-500/20">
+                <div class="h-48 bg-gradient-to-br from-red-600/30 to-purple-900/40 relative flex items-center justify-center border-b border-white/5">
+                    <i class="fas fa-bezier-curve text-7xl text-red-500/40"></i>
+                    <span class="absolute top-4 left-4 bg-red-500 text-xs font-bold uppercase px-3 py-1 rounded-md">Design</span>
+                </div>
+                <div class="p-6 flex-1 flex flex-col">
+                    <h4 class="text-lg font-bold mb-2 hover:text-red-400 cursor-pointer transition-colors">L’IA Tue Ton Design</h4>
+                    <p class="text-gray-400 text-xs mb-4 line-clamp-2">L'IA pose les blocs, mais c'est à vous de fixer le standard. Restez l'architecte du design futuriste.</p>
+                    <div class="mt-auto flex justify-between items-center pt-4 border-t border-white/5">
+                        <span class="text-xl font-bold text-white">20 000 FCFA</span>
+                        <button class="bg-black hover:bg-white/10 text-white px-4 py-2 rounded-lg text-xs font-semibold border border-white/10 transition-colors">Acheter</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="glass-card rounded-2xl overflow-hidden flex flex-col border border-green-500/20">
+                <div class="h-48 bg-gradient-to-br from-green-600/30 to-indigo-900/40 relative flex items-center justify-center border-b border-white/5">
+                    <i class="fab fa-whatsapp text-7xl text-green-500/40"></i>
+                    <span class="absolute top-4 left-4 bg-green-500 text-xs font-bold uppercase px-3 py-1 rounded-md">Automate</span>
+                </div>
+                <div class="p-6 flex-1 flex flex-col">
+                    <h4 class="text-lg font-bold mb-2 hover:text-green-400 cursor-pointer transition-colors">Agent IA WhatsApp</h4>
+                    <p class="text-gray-400 text-xs mb-4 line-clamp-2">Restez le cerveau sans être l'ouvrier. Automatisez votre business sur WhatsApp avec des agents IA autonomes.</p>
+                    <div class="mt-auto flex justify-between items-center pt-4 border-t border-white/5">
+                        <span class="text-xl font-bold text-white">60 000 FCFA</span>
+                        <button class="bg-black hover:bg-white/10 text-white px-4 py-2 rounded-lg text-xs font-semibold border border-white/10 transition-colors">Acheter</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="glass-card rounded-2xl overflow-hidden flex flex-col border border-blue-500/20">
+                <div class="h-48 bg-gradient-to-br from-blue-600/30 to-purple-900/40 relative flex items-center justify-center border-b border-white/5">
+                    <i class="fab fa-meta text-7xl text-blue-500/40"></i>
+                    <span class="absolute top-4 left-4 bg-blue-500 text-xs font-bold uppercase px-3 py-1 rounded-md">Ads</span>
+                </div>
+                <div class="p-6 flex-1 flex flex-col">
+                    <h4 class="text-lg font-bold mb-2 hover:text-blue-400 cursor-pointer transition-colors">4 Pubs Meta en 1 Minute</h4>
+                    <p class="text-gray-400 text-xs mb-4 line-clamp-2">Générez des pubs qui cartonnent en 1 minute. Un prompt, des visuels prêts, l'IA fait tout le job.</p>
+                    <div class="mt-auto flex justify-between items-center pt-4 border-t border-white/5">
+                        <span class="text-xl font-bold text-white">16 500 FCFA</span>
+                        <button class="bg-black hover:bg-white/10 text-white px-4 py-2 rounded-lg text-xs font-semibold border border-white/10 transition-colors">Acheter</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="glass-card rounded-2xl overflow-hidden flex flex-col border border-purple-500/20">
+                <div class="h-48 bg-gradient-to-br from-orange-600/30 to-purple-900/40 relative flex items-center justify-center border-b border-white/5">
+                    <i class="fas fa-users text-7xl text-orange-500/40"></i>
+                    <span class="absolute top-4 left-4 bg-purple-500 text-xs font-bold uppercase px-3 py-1 rounded-md">Social</span>
+                </div>
+                <div class="p-6 flex-1 flex flex-col">
+                    <h4 class="text-lg font-bold mb-2 hover:text-purple-400 cursor-pointer transition-colors">Réseau Social des IA</h4>
+                    <p class="text-gray-400 text-xs mb-4 line-clamp-2">Découvrez Moltbook, le réseau social réservé aux agents IA, et générez des leads grâce au buzz.</p>
+                    <div class="mt-auto flex justify-between items-center pt-4 border-t border-white/5">
+                        <span class="text-xl font-bold text-white">13 000 FCFA</span>
+                        <button class="bg-black hover:bg-white/10 text-white px-4 py-2 rounded-lg text-xs font-semibold border border-white/10 transition-colors">Acheter</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="glass-card rounded-2xl overflow-hidden flex flex-col border border-blue-500/20">
+                <div class="h-48 bg-gradient-to-br from-indigo-600/30 to-purple-900/40 relative flex items-center justify-center border-b border-white/5">
+                    <i class="fas fa-microchip text-7xl text-indigo-500/40"></i>
+                    <span class="absolute top-4 left-4 bg-blue-500 text-xs font-bold uppercase px-3 py-1 rounded-md">Dev</span>
+                </div>
+                <div class="p-6 flex-1 flex flex-col">
+                    <h4 class="text-lg font-bold mb-2 hover:text-blue-400 cursor-pointer transition-colors">IA Code & Teste Seule</h4>
+                    <p class="text-gray-400 text-xs mb-4 line-clamp-2">Faites coder et tester votre application par plusieurs IA en simultané avec Antigravity.</p>
+                    <div class="mt-auto flex justify-between items-center pt-4 border-t border-white/5">
+                        <span class="text-xl font-bold text-white">66 000 FCFA</span>
+                        <button class="bg-black hover:bg-white/10 text-white px-4 py-2 rounded-lg text-xs font-semibold border border-white/10 transition-colors">Acheter</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="comptes" class="page-section pt-32 pb-20 px-6 max-w-7xl mx-auto">
+        <div class="text-center mb-14">
+            <h2 class="text-3xl font-bold mb-4">Achat de Comptes Certifiés</h2>
+            <p class="text-gray-400">Boostez votre présence immédiatement avec des comptes pré-chauffés et sécurisés.</p>
+        </div>
+
+        <!-- Platform Selector -->
+        <div class="max-w-xs mx-auto mb-12">
+            <select id="platform-filter" class="w-full bg-black border border-white/10 rounded-xl px-4 py-3 focus:outline-none focus:border-purple-500 transition-all text-sm appearance-none cursor-pointer">
+                <option value="instagram" class="bg-black">Instagram</option>
+                <option value="facebook" class="bg-black">Facebook</option>
+                <option value="tiktok" class="bg-black">TikTok</option>
+            </select>
+        </div>
+
+        <div id="accounts-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+            <!-- Les comptes seront injectés ici via JS -->
+        </div>
+    </section>
+
+    <section id="formateur" class="page-section pt-32 pb-20 px-6 max-w-4xl mx-auto">
+        <div class="glass-card rounded-3xl p-8 md:p-12 border border-white/10">
+            <div class="text-center mb-10">
+                <h2 class="text-3xl font-bold mb-4">Rejoignez Skills Mentor en tant que Formateur</h2>
+                <p class="text-gray-400">Partagez votre expertise et monétisez vos connaissances avec notre communauté mondiale.</p>
+            </div>
+
+            <form id="formateur-form" class="space-y-6">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div>
+                        <label class="block text-xs font-semibold text-purple-400 uppercase mb-2">Nom</label>
+                        <input type="text" name="nom" required class="w-full bg-black border border-white/10 rounded-xl px-4 py-3 focus:outline-none focus:border-purple-500 transition-colors text-sm">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-semibold text-purple-400 uppercase mb-2">Prénom</label>
+                        <input type="text" name="prenom" required class="w-full bg-black border border-white/10 rounded-xl px-4 py-3 focus:outline-none focus:border-purple-500 transition-colors text-sm">
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div>
+                        <label class="block text-xs font-semibold text-purple-400 uppercase mb-2">Numéro WhatsApp</label>
+                        <input type="tel" name="whatsapp" required placeholder="+229..." class="w-full bg-black border border-white/10 rounded-xl px-4 py-3 focus:outline-none focus:border-purple-500 transition-colors text-sm">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-semibold text-purple-400 uppercase mb-2">Email</label>
+                        <input type="email" name="email" required class="w-full bg-black border border-white/10 rounded-xl px-4 py-3 focus:outline-none focus:border-purple-500 transition-colors text-sm">
+                    </div>
+                </div>
+
+                <div>
+                    <label class="block text-xs font-semibold text-purple-400 uppercase mb-2">Domaine d'activité</label>
+                    <input type="text" name="domaine" required placeholder="Ex: Développement Web, IA, Trading..." class="w-full bg-black border border-white/10 rounded-xl px-4 py-3 focus:outline-none focus:border-purple-500 transition-colors text-sm">
+                </div>
+
+                <div>
+                    <label class="block text-xs font-semibold text-purple-400 uppercase mb-2">Niveau d'expertise</label>
+                    <div class="grid grid-cols-3 gap-4">
+                        <label class="cursor-pointer">
+                            <input type="radio" name="niveau" value="Débutant" checked class="hidden peer">
+                            <div class="bg-black border border-white/10 rounded-xl py-3 text-center text-sm peer-checked:bg-purple-600 peer-checked:border-purple-500 transition-all hover:bg-white/10">Débutant</div>
+                        </label>
+                        <label class="cursor-pointer">
+                            <input type="radio" name="niveau" value="Moyen" class="hidden peer">
+                            <div class="bg-black border border-white/10 rounded-xl py-3 text-center text-sm peer-checked:bg-purple-600 peer-checked:border-purple-500 transition-all hover:bg-white/10">Moyen</div>
+                        </label>
+                        <label class="cursor-pointer">
+                            <input type="radio" name="niveau" value="Professionnel" class="hidden peer">
+                            <div class="bg-black border border-white/10 rounded-xl py-3 text-center text-sm peer-checked:bg-purple-600 peer-checked:border-purple-500 transition-all hover:bg-white/10">Professionnel</div>
+                        </label>
+                    </div>
+                </div>
+
+                <div>
+                    <label class="block text-xs font-semibold text-purple-400 uppercase mb-2">Ce que vous souhaitez apporter</label>
+                    <textarea name="apport" required rows="4" placeholder="Décrivez les formations ou tutoriels que vous souhaitez proposer..." class="w-full bg-black border border-white/10 rounded-xl px-4 py-3 focus:outline-none focus:border-purple-500 transition-colors text-sm"></textarea>
+                </div>
+
+                <button type="submit" class="w-full bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-500 hover:to-indigo-500 text-white font-bold py-4 rounded-xl shadow-lg shadow-purple-600/20 transition-all transform hover:-translate-y-1">
+                    Soumettre ma candidature via WhatsApp
+                </button>
+            </form>
+        </div>
+    </section>
+
+    <section id="contact" class="page-section pt-32 pb-20 px-6 max-w-7xl mx-auto">
+        <div class="glass-card rounded-2xl p-12 flex flex-col md:flex-row justify-between items-center gap-6">
+            <div class="text-center md:text-left">
+                <h3 class="text-xl font-bold tracking-wider text-white mb-2">Skills Mentor</h3>
+                <p class="text-gray-400 text-xs">L'excellence de l'apprentissage du code à portée de main.</p>
+            </div>
+            <div class="flex space-x-6 text-gray-400 text-lg">
+                <a href="#" class="hover:text-purple-400 transition-colors"><i class="fab fa-youtube"></i></a>
+                <a href="#" class="hover:text-purple-400 transition-colors"><i class="fab fa-facebook"></i></a>
+                <a href="#" class="hover:text-purple-400 transition-colors"><i class="fab fa-telegram"></i></a>
+                <a href="#" class="hover:text-purple-400 transition-colors"><i class="fab fa-whatsapp"></i></a>
+            </div>
+            <p class="text-gray-500 text-xs">&copy; 2026 Skills Mentor. Tous droits réservés.</p>
+        </div>
+    </section>
+    </main>
+
+    <!-- Chatbot Widget -->
+    <button id="chatbot-toggle" class="fixed bottom-6 right-6 w-14 h-14 bg-purple-600 rounded-full shadow-2xl flex items-center justify-center text-white text-2xl hover:bg-purple-500 transition-all z-[1001] active:scale-95">
+        <i class="fas fa-comment-dots"></i>
+    </button>
+
+    <div id="chatbot-window" class="fixed glass-card rounded-2xl flex-col shadow-2xl overflow-hidden border border-white/10">
+        <div class="bg-purple-600/20 px-4 py-3 border-b border-white/5 flex justify-between items-center">
+            <div class="flex items-center gap-2">
+                <div class="w-2 h-2 bg-green-500 rounded-full animate-pulse"></div>
+                <span class="text-sm font-semibold">Assistant Skills Mentor</span>
+            </div>
+            <button id="close-chat" class="text-gray-400 hover:text-white"><i class="fas fa-times"></i></button>
+        </div>
+        <div id="chat-content" class="flex-1 p-4 overflow-y-auto flex flex-col gap-2">
+            <div class="chat-message bot-msg">Bonjour ! Je suis l'assistant de Skills Mentor. Comment puis-je vous aider aujourd'hui ?</div>
+        </div>
+        <div class="p-4 border-t border-white/5 flex gap-2">
+            <input type="text" id="chat-input" placeholder="Posez votre question..." class="flex-1 bg-black border border-white/10 rounded-lg px-3 py-2 text-xs focus:outline-none focus:border-purple-500 transition-colors">
+            <button id="send-chat" class="bg-purple-600 px-3 py-2 rounded-lg text-xs hover:bg-purple-500 transition-colors"><i class="fas fa-paper-plane"></i></button>
+        </div>
+    </div>
+
+    <script>
+        // --- GSAP Registration ---
+        gsap.registerPlugin(ScrollTrigger);
+
+        // --- Audio Logic (v2.0) ---
+        let audioCtx = null;
+        const playClickSound = () => {
+            try {
+                if (!audioCtx) {
+                    audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+                }
+                const oscillator = audioCtx.createOscillator();
+                const gainNode = audioCtx.createGain();
+
+                oscillator.type = 'sine';
+                oscillator.frequency.setValueAtTime(800, audioCtx.currentTime);
+                oscillator.frequency.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + 0.1);
+
+                gainNode.gain.setValueAtTime(0.05, audioCtx.currentTime);
+                gainNode.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + 0.1);
+
+                oscillator.connect(gainNode);
+                gainNode.connect(audioCtx.destination);
+
+                oscillator.start();
+                oscillator.stop(audioCtx.currentTime + 0.1);
+            } catch (e) {
+                console.log("Audio non supporté ou bloqué");
+            }
+        };
+
+        document.addEventListener('click', (e) => {
+            const target = e.target.closest('a, button, select, input[type="submit"], .cursor-pointer');
+            if (target) {
+                playClickSound();
+            }
+        });
+
+        // Router SPA simple
+        function navigate() {
+            const hash = window.location.hash || '#/accueil';
+            const route = hash.replace('#/', '');
+
+            // Masquer toutes les sections
+            document.querySelectorAll('.page-section').forEach(section => {
+                section.classList.remove('active');
+                gsap.set(section, { display: 'none', opacity: 0 });
+            });
+
+            // Afficher la section correspondante
+            const target = document.getElementById(route);
+            if (target) {
+                target.classList.add('active');
+                gsap.set(target, { display: 'block' });
+
+                // Entrance Animation
+                gsap.fromTo(target,
+                    { opacity: 0, y: 30 },
+                    { opacity: 1, y: 0, duration: 0.8, ease: "power3.out" }
+                );
+
+                // Section specific animations
+                animateSection(route);
+            }
+
+            // Mettre à jour l'état actif du menu
+            document.querySelectorAll('.nav-link').forEach(link => {
+                if (link.getAttribute('href') === hash) {
+                    link.classList.add('active-capsule');
+                    link.classList.remove('hover:text-purple-400');
+                } else {
+                    link.classList.remove('active-capsule');
+                    link.classList.add('hover:text-purple-400');
+                }
+            });
+
+            // Fermer le menu mobile lors de la navigation
+            document.getElementById('mobile-menu').classList.add('hidden');
+        }
+
+        window.addEventListener('hashchange', navigate);
+        window.addEventListener('load', navigate);
+
+        function animateSection(route) {
+            // Cards stagger animation
+            const cards = document.querySelectorAll(`#${route} .glass-card`);
+            if (cards.length > 0) {
+                gsap.from(cards, {
+                    y: 50,
+                    opacity: 0,
+                    duration: 0.8,
+                    stagger: 0.1,
+                    ease: "back.out(1.7)",
+                    scrollTrigger: {
+                        trigger: `#${route}`,
+                        start: "top 80%"
+                    }
+                });
+            }
+
+            // Hero content specific
+            if (route === 'accueil') {
+                gsap.from(".hero-title", { y: 30, opacity: 0, duration: 1, ease: "power4.out", delay: 0.2 });
+                gsap.from("#accueil p", { y: 20, opacity: 0, duration: 0.8, stagger: 0.2, delay: 0.6 });
+            }
+        }
+
+        // Menu Mobile
+        document.getElementById('menu-toggle').addEventListener('click', () => {
+            document.getElementById('mobile-menu').classList.toggle('hidden');
+        });
+
+        // Chatbot Logic
+        const chatbotToggle = document.getElementById('chatbot-toggle');
+        const chatbotWindow = document.getElementById('chatbot-window');
+        const closeChat = document.getElementById('close-chat');
+        const chatInput = document.getElementById('chat-input');
+        const sendChat = document.getElementById('send-chat');
+        const chatContent = document.getElementById('chat-content');
+
+        chatbotToggle.addEventListener('click', () => {
+            chatbotWindow.classList.toggle('active');
+        });
+
+        closeChat.addEventListener('click', () => {
+            chatbotWindow.classList.remove('active');
+        });
+
+        const API_KEY = "YOUR_API_KEY_HERE"; // Remplacez par votre clé API
+
+        function addMessage(text, type) {
+            const msg = document.createElement('div');
+            msg.className = `chat-message ${type === 'bot' ? 'bot-msg' : 'user-msg'} ${type === 'loading' ? 'animate-pulse opacity-50' : ''}`;
+            msg.textContent = text;
+            chatContent.appendChild(msg);
+            chatContent.scrollTop = chatContent.scrollHeight;
+            return msg;
+        }
+
+        async function handleChat() {
+            const text = chatInput.value.trim();
+            if (!text) return;
+
+            addMessage(text, 'user');
+            chatInput.value = '';
+
+            const loadingMsg = addMessage("Skills Mentor réfléchit...", "loading");
+
+            try {
+                // Si la clé API est configurée
+                if (API_KEY !== "YOUR_API_KEY_HERE") {
+                    const response = await fetch('https://api.openai.com/v1/chat/completions', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'Authorization': `Bearer ${API_KEY}`
+                        },
+                        body: JSON.stringify({
+                            model: "gpt-3.5-turbo",
+                            messages: [
+                                { role: "system", content: "Tu es l'assistant de Skills Mentor, une plateforme de formation tech, IA et business. Réponds de manière professionnelle et concise en français." },
+                                { role: "user", content: text }
+                            ]
+                        })
+                    });
+                    const data = await response.json();
+                    loadingMsg.remove();
+                    addMessage(data.choices[0].message.content, 'bot');
+                } else {
+                    // Fallback sur la logique mock si pas de clé
+                    setTimeout(() => {
+                        loadingMsg.remove();
+                        let response = "Désolé, je n'ai pas compris votre demande. Pourriez-vous préciser ?";
+                        const input = text.toLowerCase();
+
+                        if (input.includes('prix') || input.includes('tarif')) {
+                            response = "Nos formations commencent à partir de 10 000 FCFA. Vous pouvez consulter le détail dans la section 'Formations'.";
+                        } else if (input.includes('html')) {
+                            response = "Notre formation HTML5 Ultime est parfaite pour débuter. Elle coûte 13 000 FCFA.";
+                        } else if (input.includes('java')) {
+                            response = "Nous proposons un cours Java POO Avancé pour 33 000 FCFA.";
+                        } else if (input.includes('tiktok') || input.includes('monétiser')) {
+                            response = "Nous avons des formations pour monétiser Tiktok et Facebook à partir de 10 000 FCFA !";
+                        } else if (input.includes('paypal')) {
+                            response = "Le guide pour créer un compte Paypal en Afrique est disponible pour 13 000 FCFA.";
+                        } else if (input.includes('ia') || input.includes('ai') || input.includes('chatgpt') || input.includes('gemini')) {
+                            response = "Nous sommes leaders sur l'IA ! Découvrez nos Masterclass Gemini, IA Sans Limites, ou nos agents WhatsApp IA.";
+                        } else if (input.includes('claude') || input.includes('opencode')) {
+                            response = "Découvrez comment OpenCode et Claude peuvent révolutionner votre manière de coder.";
+                        } else if (input.includes('salut') || input.includes('bonjour')) {
+                            response = "Bonjour ! Quel domaine vous intéresse : Développement, Business/Monétisation ou Intelligence Artificielle ?";
+                        }
+
+                        addMessage(response, 'bot');
+                    }, 800);
+                }
+            } catch (error) {
+                loadingMsg.remove();
+                addMessage("Une erreur est survenue lors de la connexion à l'IA. Veuillez réessayer plus tard.", "bot");
+            }
+        }
+
+        sendChat.addEventListener('click', handleChat);
+        chatInput.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') handleChat();
+        });
+
+        // Boost Page Logic
+        const boostData = {
+            facebook: [
+                { name: "Likes de Page (Haute Qualité)", price: 15 },
+                { name: "Followers de Profil", price: 12 },
+                { name: "Vues de Vidéo", price: 5 }
+            ],
+            tiktok: [
+                { name: "Abonnés TikTok (Réels)", price: 10 },
+                { name: "Vues TikTok (Viral)", price: 2 },
+                { name: "Likes TikTok", price: 5 }
+            ],
+            instagram: [
+                { name: "Followers Instagram (Garantis)", price: 8 },
+                { name: "Likes Instagram", price: 4 },
+                { name: "Vues Reels", price: 3 }
+            ],
+            youtube: [
+                { name: "Vues YouTube (Monétisables)", price: 20 },
+                { name: "Abonnés YouTube", price: 50 },
+                { name: "Watchtime 4000h (Pack)", price: 25000, isFixed: true }
+            ]
+        };
+
+        const boostType = document.getElementById('boost-type');
+        const boostOffer = document.getElementById('boost-offer');
+        const boostQuantity = document.getElementById('boost-quantity');
+        const boostTotal = document.getElementById('boost-total');
+        const boostForm = document.getElementById('boost-form');
+
+        boostType.addEventListener('change', () => {
+            const selected = boostType.value;
+            boostOffer.innerHTML = '<option value="">Choisir une offre...</option>';
+
+            if (selected && boostData[selected]) {
+                boostData[selected].forEach((offer, index) => {
+                    const opt = document.createElement('option');
+                    opt.value = index;
+                    opt.textContent = `${offer.name} - ${offer.isFixed ? offer.price : offer.price + ' FCFA / unité'}`;
+                    opt.className = "bg-black";
+                    boostOffer.appendChild(opt);
+                });
+            }
+            calculateBoostTotal();
+        });
+
+        function calculateBoostTotal() {
+            const type = boostType.value;
+            const offerIndex = boostOffer.value;
+            const qty = parseInt(boostQuantity.value) || 0;
+
+            if (type && offerIndex !== "" && boostData[type][offerIndex]) {
+                const offer = boostData[type][offerIndex];
+                const total = offer.isFixed ? offer.price : offer.price * qty;
+                boostTotal.textContent = `${total.toLocaleString()} FCFA`;
+            } else {
+                boostTotal.textContent = "0 FCFA";
+            }
+        }
+
+        boostOffer.addEventListener('change', calculateBoostTotal);
+        boostQuantity.addEventListener('input', calculateBoostTotal);
+
+        if (boostForm) {
+            boostForm.addEventListener('submit', (e) => {
+                e.preventDefault();
+                const type = boostType.options[boostType.selectedIndex].text;
+                const offer = boostOffer.options[boostOffer.selectedIndex].text;
+                const link = document.getElementById('boost-link').value;
+                const qty = boostQuantity.value;
+                const total = boostTotal.textContent;
+
+                const message = `*Nouvelle Commande Boost - Skills Mentor*\n\n` +
+                                `*Réseau:* ${type}\n` +
+                                `*Offre:* ${offer}\n` +
+                                `*Lien:* ${link}\n` +
+                                `*Quantité:* ${qty}\n` +
+                                `*Total:* ${total}`;
+
+                window.open(`https://wa.me/2290198905311?text=${encodeURIComponent(message)}`, '_blank');
+            });
+        }
+
+        // Accounts Logic
+        const instagramAccounts = [
+            { desc: "Comptes Instagram anciens (2011-2020) | Accès email inclus | Profils variés | Adresses IP variées", price: 5.99 },
+            { desc: "Comptes Instagram créés manuellement | Adresses IP européennes | Adresse e-mail vérifiée + accès à l'e-mail", price: 1.1 },
+            { desc: "Compte Instagram avec 1000 abonnés | Changement complet des données | Garanti", price: 4.38 },
+            { desc: "Compte pour un démarrage rapide | Inscription manuelle | Haute qualité | avec e-mail", price: 1.1 },
+            { desc: "Comptes Instagram | Adresse IP américaine | Adresse e-mail vérifiée", price: 4.4 },
+            { desc: "Comptes Instagram | 1 000 abonnés | Publications authentiques | Adresse IP américaine", price: 25.3 },
+            { desc: "Anciens comptes Instagram | Enregistrés en 2013 | Changement complet des données | Garanti", price: 11.0 },
+            { desc: "Ancien compte Instagram (2021-2024) avec accès à la messagerie", price: 2.2 },
+            { desc: "Ancien compte Instagram (2016-2020) avec accès à la messagerie", price: 2.31 },
+            { desc: "Compte Instagram bleu vérifié | Accès complet | Nom au choix | Compte personnel", price: 200.2 },
+            { desc: "Compte Instagram créé il y a quelques années | Livraison rapide", price: 19.8 },
+            { desc: "Compte Instagram avec 50 000 abonnés | Données entièrement modifiées", price: 52.8 },
+            { desc: "Compte Instagram avec 20 000 abonnés | Changement complet des données | Garanti", price: 22.0 },
+            { desc: "Compte Instagram 500 abonnés | 2024 | Accès complet", price: 7.7 },
+            { desc: "Instagram USA 2024 (Ancien) | Données entièrement mises à jour", price: 25.96 },
+            { desc: "Compte Instagram ancien | Enregistré en 2012-2013 | Accès complet | 12-14 ans", price: 7.25 },
+            { desc: "Compte Instagram ancien | Enregistré en 2014-2015 | Accès complet | 10-12 ans", price: 7.25 },
+            { desc: "Comptes Instagram | Adresse e-mail incluse | Vérification SMS | IP US", price: 6.93 },
+            { desc: "Comptes Instagram | 250+ abonnés | Email inclus | GMX original", price: 6.6 },
+            { desc: "Compte Instagram 1k | 1000 abonnés | Accès complet | Données modifiables", price: 4.4 },
+            { desc: "Compte Instagram 500+ abonnés | Accès complet | Données modifiables", price: 3.3 },
+            { desc: "5K Compte Instagram 2020-2025 | 5 000 abonnés | Email inclus", price: 55.0 },
+            { desc: "10K Compte Instagram 2020-2025 | 10 000 abonnés | Email inclus", price: 110.0 },
+            { desc: "Comptes Instagram | Enregistrés en 2017 | Email Outlook/Hotmail", price: 13.2 },
+            { desc: "Comptes Instagram | Enregistrés en 2016 | Email Outlook/Hotmail", price: 14.3 },
+            { desc: "Femme Instagram Ac | 2FA MIX IP | Haute Qualité", price: 1.1 },
+            { desc: "USA Instagram Ac (2FA) | Livraison rapide", price: 1.1 },
+            { desc: "Anciens Comptes Instagram | 2005-2013 | Courriel accessible | Garanti", price: 10.89 },
+            { desc: "Ancien compte Instagram 2013 | 1000+ vrais abonnés | Accès complet", price: 20.9 },
+            { desc: "Compte Instagram + 1000 abonnés | Rapide et sécurisé | Garanti", price: 7.7 },
+            { desc: "Compte Instagram 14 800 abonnés | Croissance organique | Vrais abonnés", price: 95.7 },
+            { desc: "Compte Instagram 2026 | 2FA inclus | Livraison instantanée", price: 2.2 },
+            { desc: "Compte Instagram 173 abonnés | 2016 | USA | 2FA inclus", price: 6.93 },
+            { desc: "Compte Instagram USA HQ Handmade | Vérifié par email", price: 3.28 },
+            { desc: "Instagram Account (1000+) Followers | Full Data Change | Guaranteed", price: 13.09 },
+            { desc: "Instagram USA | 100 subscribers | Confirmed by SMS", price: 1.58 },
+            { desc: "Instagram Account | 1K Followers | Random Posts (2FA)", price: 8.8 },
+            { desc: "Instagram Account | 1K Followers | Email/2FA Access | High Quality", price: 7.7 },
+            { desc: "Meta Verified Account | Blue Badge | High Security | Trusted", price: 38.5 },
+            { desc: "Instagram Account (1K+ Followers) | 70% OFF", price: 22.0 }
+        ];
+
+        function renderAccounts() {
+            const grid = document.getElementById('accounts-grid');
+            const platform = document.getElementById('platform-filter').value;
+            grid.innerHTML = '';
+
+            if (platform === 'instagram') {
+                instagramAccounts.forEach(acc => {
+                    const priceFCFA = Math.round((acc.price + 2) * 655);
+                    const card = document.createElement('div');
+                    card.className = "glass-card p-6 rounded-2xl border border-white/5 flex flex-col hover:border-purple-500/30 transition-all";
+                    card.innerHTML = `
+                        <div class="flex items-center gap-3 mb-4">
+                            <div class="w-10 h-10 bg-gradient-to-tr from-purple-600 to-pink-600 rounded-lg flex items-center justify-center text-xl">
+                                <i class="fab fa-instagram"></i>
+                            </div>
+                            <span class="text-[10px] font-bold uppercase tracking-wider text-gray-400">Instagram</span>
+                        </div>
+                        <p class="text-xs text-gray-300 leading-relaxed mb-6 flex-1">${acc.desc}</p>
+                        <div class="pt-4 border-t border-white/5 flex items-center justify-between">
+                            <span class="text-lg font-bold text-white">${priceFCFA.toLocaleString()} FCFA</span>
+                            <a href="https://wa.me/2290198905311?text=${encodeURIComponent('Bonjour Skills Mentor, je souhaite acheter ce compte Instagram : ' + acc.desc)}" target="_blank" class="bg-purple-600 hover:bg-purple-500 text-white text-[10px] font-bold px-4 py-2 rounded-lg transition-colors">Commander</a>
+                        </div>
+                    `;
+                    grid.appendChild(card);
+                });
+            } else {
+                grid.innerHTML = '<div class="col-span-full text-center py-20 text-gray-500 italic">Bientôt disponible...</div>';
+            }
+        }
+
+        document.getElementById('platform-filter').addEventListener('change', renderAccounts);
+        window.addEventListener('load', renderAccounts);
+
+        // Multi-language Logic
+        const translations = {
+            fr: {
+                welcome: "Maîtrisez le Développement avec",
+                start: "Passez à la vitesse supérieure",
+                nav: ["Accueil", "Formations", "Code Dev", "Boost", "Comptes", "Services", "Devenir Formateur", "Contact"],
+                cta_courses: "Découvrir les cours",
+                cta_cats: "Découvrir les cours"
+            },
+            wo: {
+                welcome: "Maitriser xarala ak",
+                start: "Duggal ci biir xarala yu bees",
+                nav: ["Kër", "Njàng", "Xarala Dev", "Boost", "Kónt", "Sarwiis", "Nekk Jàngalekat", "Jokko"],
+                cta_courses: "Xool njàng mi",
+                cta_cats: "Xool njàng mi"
+            },
+            sw: {
+                welcome: "Bobea Maendeleo na",
+                start: "Nenda kwenye kiwango kinachofuata",
+                nav: ["Nyumbani", "Mafunzo", "Code Dev", "Boost", "Akaunti", "Huduma", "Kuwa Mkufunzi", "Wasiliana"],
+                cta_courses: "Gundua kozi",
+                cta_cats: "Gundua kozi"
+            },
+            ln: {
+                welcome: "Koma mayele na botongi na",
+                start: "Kende na nivo ya sika",
+                nav: ["Ndako", "Formasyo", "Code Dev", "Boost", "Bakónti", "Misala", "Koma Moteyi", "Contact"],
+                cta_courses: "Luka bakonzi",
+                cta_cats: "Luka bakonzi"
+            },
+            yo: {
+                welcome: "Gba idagbasoke pẹlu",
+                start: "Lọ si ipele ti n bọ",
+                nav: ["Ile", "Ikẹkọ", "Code Dev", "Boost", "Awọn iroyin", "Awọn iṣẹ", "Di Olukọni", "Olubasọrọ"],
+                cta_courses: "Ṣawari awọn ikẹkọ",
+                cta_cats: "Ṣawari awọn ikẹkọ"
+            },
+            zu: {
+                welcome: "Yiba yingcweti ekuthuthukisweni nge",
+                start: "Iya ezingeni elilandelayo",
+                nav: ["Ikhaya", "Izifundo", "Code Dev", "Boost", "Ama-akhawunti", "Izinsizakalo", "Yiba ngumfundisi", "Oxhumana naye"],
+                cta_courses: "Thola izifundo",
+                cta_cats: "Thola izifundo"
+            },
+            bm: {
+                welcome: "Yiriwali kulu ni",
+                start: "Taga n'yɛ gbe kura la",
+                nav: ["So", "Kalan", "Code Dev", "Boost", "Kóntiw", "Baara", "Kalanmogo", "Jumu"],
+                cta_courses: "Kalanw fɛsɛfɛsɛ",
+                cta_cats: "Kalanw fɛsɛfɛsɛ"
+            },
+            ha: {
+                welcome: "Kware a fannin ci gaba tare da",
+                start: "Je zuwa mataki na gaba",
+                nav: ["Gida", "Horaswa", "Code Dev", "Boost", "Asusu", "Ayyuka", "Zama Mai Koyarwa", "Tuntuɓi"],
+                cta_courses: "Gano darussa",
+                cta_cats: "Gano darussa"
+            },
+            ar: {
+                welcome: "أتقن التطوير مع",
+                start: "انتقل إلى المستوى التالي",
+                nav: ["الرئيسية", "الدورات", "كود ديف", "تعزيز", "الحسابات", "الخدمات", "كن مدرباً", "اتصل بنا"],
+                cta_courses: "اكتشف الدورات",
+                cta_cats: "اكتشف الدورات"
+            }
+        };
+
+        function changeLanguage(lang) {
+            const welcomePrefix = document.getElementById('welcome-prefix');
+            const eventBadge = document.getElementById('event-badge');
+            const startBadge = document.querySelector('#accueil p.tracking-\\[0\\.3em\\]');
+            const ctaCourses = document.querySelector('a[href="#/formations"]');
+
+            if (translations[lang]) {
+                if (welcomePrefix) welcomePrefix.textContent = translations[lang].welcome;
+                if (eventBadge) eventBadge.textContent = translations[lang].start;
+                if (ctaCourses && ctaCourses.closest('#accueil')) {
+                    // Update all buttons in hero
+                    document.querySelectorAll('#accueil a').forEach(btn => {
+                        if (btn.textContent.includes('cours')) {
+                            btn.textContent = translations[lang].cta_courses;
+                        }
+                    });
+                }
+
+                // Mettre à jour le menu
+                const navLinks = document.querySelectorAll('.nav-link');
+                navLinks.forEach((link, index) => {
+                    const transIndex = index % translations[lang].nav.length;
+                    const icon = link.querySelector('i');
+                    if (icon) {
+                        link.innerHTML = '';
+                        link.appendChild(icon);
+                        link.appendChild(document.createTextNode(" " + translations[lang].nav[transIndex]));
+                    } else {
+                        link.textContent = translations[lang].nav[transIndex];
+                    }
+                });
+            }
+        }
+
+        document.getElementById('lang-selector').addEventListener('change', (e) => changeLanguage(e.target.value));
+        document.getElementById('lang-selector-mobile').addEventListener('change', (e) => changeLanguage(e.target.value));
+
+        // Form Submission to WhatsApp
+        const formateurForm = document.getElementById('formateur-form');
+        if (formateurForm) {
+            formateurForm.addEventListener('submit', (e) => {
+                e.preventDefault();
+                const formData = new FormData(formateurForm);
+                const data = Object.fromEntries(formData.entries());
+
+                const message = `*Nouvelle Candidature Formateur - Skills Mentor*\n\n` +
+                                `*Nom:* ${data.nom}\n` +
+                                `*Prénom:* ${data.prenom}\n` +
+                                `*WhatsApp:* ${data.whatsapp}\n` +
+                                `*Email:* ${data.email}\n` +
+                                `*Domaine:* ${data.domaine}\n` +
+                                `*Niveau:* ${data.niveau}\n\n` +
+                                `*Message:* ${data.apport}`;
+
+                const encodedMessage = encodeURIComponent(message);
+                const whatsappUrl = `https://wa.me/2290198905311?text=${encodedMessage}`;
+
+                window.open(whatsappUrl, '_blank');
+            });
+        }
+    </script>
 </body>
 </html>
-
-
-Comment ça marche ?
-- Accueil : fil d'actualité (posts).
-- Chat 🐱 : messages courts.
-- Les pseudos sont aléatoires.
-- Pas de sauvegarde (reset si rafraîchissement).
-
-Tu veux :
-- Sauvegarder les posts (localStorage) ?
-- Ajouter des réponses aux posts ?
-- Un truc pour voir les nouveaux messages en temps réel ?
-
-Prêt à tester sur ZeroNet ! 😊
